@@ -120,8 +120,14 @@ export function HeroBlock({
         // Vertical padding scales with viewport so it doesn't swallow the
         // screen on phones; side padding follows suit. The clamp mins keep
         // things readable on tiny devices, the maxes match the desktop spec.
-        padding:
-          "clamp(96px, 18vh, 174px) clamp(16px, 5vw, 24px) clamp(56px, 10vh, 96px)",
+        // Bottom adds env(safe-area-inset-bottom) so the CTA clears iOS
+        // Safari's bottom tab bar now that viewport-fit=cover lets the hero
+        // extend behind it.
+        paddingTop: "clamp(96px, 18vh, 174px)",
+        paddingRight: "clamp(16px, 5vw, 24px)",
+        paddingBottom:
+          "calc(clamp(56px, 10vh, 96px) + env(safe-area-inset-bottom))",
+        paddingLeft: "clamp(16px, 5vw, 24px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

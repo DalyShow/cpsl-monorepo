@@ -1,7 +1,17 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
 import { sanityFetch } from "@/lib/sanity/client";
+
+// Opts the page into the device's safe area — lets the hero background
+// render behind iOS Safari's top URL bar and bottom tab bar. Pair with
+// env(safe-area-inset-*) on any interactive content so it stays tappable.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#041124",
+};
 
 const barlowCondensed = Barlow_Condensed({
   variable: "--font-display",
