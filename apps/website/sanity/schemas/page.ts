@@ -28,6 +28,20 @@ export const page = defineType({
         "Optional. Set a parent to nest this page in the hierarchy — e.g. a parent of 'League Information' makes this page live at /league-information/this-page.",
     }),
     defineField({
+      name: "navOrder",
+      title: "Sub-nav Order",
+      type: "number",
+      description:
+        "Controls where this page appears in the auto-generated sub navigation relative to its siblings. Lower numbers come first. Leave blank to fall back to alphabetical.",
+    }),
+    defineField({
+      name: "navLabel",
+      title: "Sub-nav Label",
+      type: "string",
+      description:
+        "Optional short label shown in the sub navigation. Falls back to the page title when blank.",
+    }),
+    defineField({
       name: "sections",
       title: "Sections",
       type: "array",

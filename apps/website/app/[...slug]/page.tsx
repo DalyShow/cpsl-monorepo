@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { TopNav } from "@cpsl/ui";
+import { TopNav, SubNav } from "@cpsl/ui";
 import { BlockRenderer } from "@/components/blocks/BlockRenderer";
 import { sanityFetch } from "@/lib/sanity/client";
 
@@ -14,9 +14,16 @@ type NavSettings = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Section = { _type: string; _key: string; [key: string]: any };
 
+type SubNavEntry = {
+  label: string;
+  slug: string;
+  parentSlug?: string | null;
+};
+
 type PageData = {
   title: string;
   sections?: Section[];
+  subNavItems?: SubNavEntry[];
 };
 
 export default async function DynamicPage({
@@ -43,7 +50,18 @@ export default async function DynamicPage({
             ($parentSlug != "" && parent->slug.current == $parentSlug)
           )
         ][0]{
+          _id,
           title,
+          "subNavItems": *[_type == "page"
+            && (
+              (defined(^.parent) && parent._ref == ^.parent._ref)
+              || (!defined(^.parent) && parent._ref == ^._id)
+            )
+          ] | order(coalesce(navOrder, 9999) asc, title asc) {
+            "label": coalesce(navLabel, title),
+            "slug": slug.current,
+            "parentSlug": parent->slug.current
+          },
           sections[]{
             ...,
             backgroundImage{ ..., asset->{ url } },
@@ -61,6 +79,14 @@ export default async function DynamicPage({
 
   if (!page) notFound();
 
+  const subNavItems =
+    (page.subNavItems ?? [])
+      .filter((i) => i.label && i.slug)
+      .map((i) => ({
+        label: i.label,
+        href: i.parentSlug ? `/${i.parentSlug}/${i.slug}` : `/${i.slug}`,
+      }));
+
   return (
     <>
       <TopNav
@@ -70,6 +96,7 @@ export default async function DynamicPage({
         showLive={false}
       />
       <main className="pt-20">
+        {subNavItems.length > 1 && <SubNav items={subNavItems} />}
         {page.sections?.map((block) => (
           <BlockRenderer key={block._key} block={block} />
         ))}
