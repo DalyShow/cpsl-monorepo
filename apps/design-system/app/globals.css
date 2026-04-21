@@ -1,0 +1,278 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* ── CPSL Steel scale (secondary — midpoint #697279) ── */
+  --cpsl-steel-50:  #F2F4F5;
+  --cpsl-steel-100: #E3E7E9;
+  --cpsl-steel-200: #C8CED2;
+  --cpsl-steel-300: #A7AFB5;
+  --cpsl-steel-400: #8A9299;
+  --cpsl-steel-500: #697279;
+  --cpsl-steel-600: #505960;
+  --cpsl-steel-700: #3A4248;
+  --cpsl-steel-800: #262D32;
+  --cpsl-steel-900: #161B1E;
+
+  /* ── CPSL Crimson scale (accent — midpoint #BF1D2D) ── */
+  --cpsl-crimson-50:  #FEF0F1;
+  --cpsl-crimson-100: #FDDCDE;
+  --cpsl-crimson-200: #FAB3B8;
+  --cpsl-crimson-300: #F47D85;
+  --cpsl-crimson-400: #E74552;
+  --cpsl-crimson-500: #BF1D2D;
+  --cpsl-crimson-600: #96161E;
+  --cpsl-crimson-700: #6E1017;
+  --cpsl-crimson-800: #480B0F;
+  --cpsl-crimson-900: #250508;
+
+  /* ── CPSL Gold scale (approved championship accent) ── */
+  --cpsl-gold-300: #E5C97A;
+  --cpsl-gold-400: #D8B85E;
+  --cpsl-gold-500: #C9A74C;
+  --cpsl-gold-600: #B08A34;
+  --cpsl-gold-700: #8C6E24;
+
+  /* ── CPSL Cream (warm premium surface, approved) ── */
+  --cpsl-cream:      #F4EFE6;
+  --cpsl-cream-dark: #EBE3D0;
+
+  /* ── CPSL Navy (approved brand darks) ── */
+  --cpsl-navy-deep:     #091628;
+  --cpsl-navy-midnight: #0D1B3E;
+
+  /* ── CPSL Neutral scale ── */
+  --cpsl-neutral-50:  #F4F6FA;
+  --cpsl-neutral-100: #EEF1F7;
+  --cpsl-neutral-200: #E2E8F0;
+  --cpsl-neutral-300: #CBD5E1;
+  --cpsl-neutral-400: #94A3B8;
+  --cpsl-neutral-500: #64748B;
+  --cpsl-neutral-600: #475569;
+  --cpsl-neutral-700: #334155;
+  --cpsl-neutral-800: #1E293B;
+  --cpsl-neutral-900: #091628;
+
+  --cpsl-success: #00C853;
+  --cpsl-warning: #FFB300;
+  --cpsl-error:   #FF1744;
+  --cpsl-info:    #697279;
+
+  --surface-1:    #FFFFFF;
+  --surface-2:    #F4F6FA;
+  --surface-3:    #E2E8F0;
+  --surface-warm: #F4EFE6;
+  --text-primary:   #091628;
+  --text-secondary: #475569;
+  --text-muted:     #94A3B8;
+  --border: oklch(0.922 0 0);
+
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-pill: 100px;
+
+  /* ── Responsive type scale ── */
+  /* Barlow Condensed display — hero & scoreboard sizes */
+  --text-display-xl:  clamp(52px, 10vw, 104px); /* Magazine / super-display hero */
+  --text-display-lg:  clamp(40px, 8vw,  88px);  /* Full-width image hero */
+  --text-display:     clamp(36px, 7vw,  76px);  /* Cinematic / standard display */
+  --text-display-sm:  clamp(28px, 5vw,  56px);  /* Split hero, CTA banner, stats bar */
+  --text-score:       clamp(48px, 10vw, 80px);  /* Live scoreboard numbers */
+
+  /* Barlow Condensed heading levels */
+  --text-h1:          clamp(28px, 4.5vw, 48px);
+  --text-h2:          clamp(20px, 3.5vw, 36px);
+
+  /* Inter UI levels — fixed (fluid scaling not needed below 24px) */
+  --text-h3:      24px;
+  --text-h4:      20px;
+  --text-body-l:  18px;
+  --text-body:    15px;
+  --text-small:   13px;
+  --text-caption: 11px;
+
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-heading: 'Barlow Condensed', sans-serif;
+  --font-body:    'Inter', sans-serif;
+
+  /* ── shadcn semantic tokens → CPSL brand values ── */
+  --radius: 0.625rem;
+  --background: #F4F6FA;
+  --foreground: #091628;
+  --card: #FFFFFF;
+  --card-foreground: #091628;
+  --popover: #FFFFFF;
+  --popover-foreground: #091628;
+  --primary: #C9A74C;
+  --primary-foreground: #091628;
+  --secondary: #EEF1F7;
+  --secondary-foreground: #091628;
+  --muted: #EEF1F7;
+  --muted-foreground: #64748B;
+  --accent: #BF1D2D;
+  --accent-foreground: #FFFFFF;
+  --destructive: #FF1744;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #C9A74C;
+
+  /* ── Chart colors → CPSL palette ── */
+  --chart-1: #C9A74C;
+  --chart-2: #697279;
+  --chart-3: #BF1D2D;
+  --chart-4: #00C853;
+  --chart-5: #8A9299;
+
+  /* ── Sidebar (deep navy) ── */
+  --sidebar: #091628;
+  --sidebar-foreground: #F4F6FA;
+  --sidebar-primary: #C9A74C;
+  --sidebar-primary-foreground: #091628;
+  --sidebar-accent: #0D1B3E;
+  --sidebar-accent-foreground: #F4F6FA;
+  --sidebar-border: #0D1B3E;
+  --sidebar-ring: #C9A74C;
+}
+
+* { box-sizing: border-box; }
+body { font-family: var(--font-body); color: var(--text-primary); background: var(--surface-2); }
+pre { overflow-x: auto; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #1E2D45; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+@theme inline {
+  /* ── CPSL brand colors as Tailwind utilities ── */
+  --color-cpsl-steel-50:  var(--cpsl-steel-50);
+  --color-cpsl-steel-100: var(--cpsl-steel-100);
+  --color-cpsl-steel-200: var(--cpsl-steel-200);
+  --color-cpsl-steel-300: var(--cpsl-steel-300);
+  --color-cpsl-steel-400: var(--cpsl-steel-400);
+  --color-cpsl-steel-500: var(--cpsl-steel-500);
+  --color-cpsl-steel-600: var(--cpsl-steel-600);
+  --color-cpsl-steel-700: var(--cpsl-steel-700);
+  --color-cpsl-steel-800: var(--cpsl-steel-800);
+  --color-cpsl-steel-900: var(--cpsl-steel-900);
+  --color-cpsl-crimson-50:  var(--cpsl-crimson-50);
+  --color-cpsl-crimson-100: var(--cpsl-crimson-100);
+  --color-cpsl-crimson-200: var(--cpsl-crimson-200);
+  --color-cpsl-crimson-300: var(--cpsl-crimson-300);
+  --color-cpsl-crimson-400: var(--cpsl-crimson-400);
+  --color-cpsl-crimson-500: var(--cpsl-crimson-500);
+  --color-cpsl-crimson-600: var(--cpsl-crimson-600);
+  --color-cpsl-crimson-700: var(--cpsl-crimson-700);
+  --color-cpsl-crimson-800: var(--cpsl-crimson-800);
+  --color-cpsl-crimson-900: var(--cpsl-crimson-900);
+  --color-cpsl-gold-300: var(--cpsl-gold-300);
+  --color-cpsl-gold-400: var(--cpsl-gold-400);
+  --color-cpsl-gold-500: var(--cpsl-gold-500);
+  --color-cpsl-gold-600: var(--cpsl-gold-600);
+  --color-cpsl-gold-700: var(--cpsl-gold-700);
+  --color-cpsl-cream:      var(--cpsl-cream);
+  --color-cpsl-cream-dark: var(--cpsl-cream-dark);
+  --color-cpsl-navy-deep:     var(--cpsl-navy-deep);
+  --color-cpsl-navy-midnight: var(--cpsl-navy-midnight);
+  --color-cpsl-success: var(--cpsl-success);
+  --color-cpsl-warning: var(--cpsl-warning);
+  --color-cpsl-error:   var(--cpsl-error);
+  --color-cpsl-info:    var(--cpsl-info);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-heading);
+  --font-body:    var(--font-body);
+
+  --radius-sm:  calc(var(--radius) - 4px);
+  --radius-md:  calc(var(--radius) - 2px);
+  --radius-lg:  var(--radius);
+  --radius-xl:  calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+.dark {
+  /* ── CPSL dark mode ── */
+  --background: #091628;
+  --foreground: #F4F6FA;
+  --card: #0D1B3E;
+  --card-foreground: #F4F6FA;
+  --popover: #0D1B3E;
+  --popover-foreground: #F4F6FA;
+  --primary: #D8B85E;
+  --primary-foreground: #091628;
+  --secondary: #0D1B3E;
+  --secondary-foreground: #F4F6FA;
+  --muted: #0D1B3E;
+  --muted-foreground: #94A3B8;
+  --accent: #E74552;
+  --accent-foreground: #FFFFFF;
+  --destructive: #FF1744;
+  --border: #0D1B3E;
+  --input: #0D1B3E;
+  --ring: #D8B85E;
+  --chart-1: #D8B85E;
+  --chart-2: #8A9299;
+  --chart-3: #E74552;
+  --chart-4: #00C853;
+  --chart-5: #A7AFB5;
+  --sidebar: #091628;
+  --sidebar-foreground: #F4F6FA;
+  --sidebar-primary: #D8B85E;
+  --sidebar-primary-foreground: #091628;
+  --sidebar-accent: #0D1B3E;
+  --sidebar-accent-foreground: #F4F6FA;
+  --sidebar-border: #0D1B3E;
+  --sidebar-ring: #D8B85E;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
