@@ -322,13 +322,16 @@ export default function NavigationPage() {
               },
               {
                 title: "TopNav",
-                code: `<TopNav
-  items={[{ label: "Standings" }, ...]}
-  logoText="CPSL"
-  userInitials="JD"
+                code: `// Canonical source: @cpsl/ui (packages/ui)
+import { TopNav } from "@cpsl/ui"
+
+<TopNav
+  items={[{ label: "Standings", href: "/standings" }, ...]}
+  logoSrc="/cpsl-horizontal.svg"
+  ctaLabel="Join Our League"
+  ctaHref="/apply"
   showLive={true}
-  defaultActive={0}
-  variant="card"   // or "full"
+  position="fixed"   // "fixed" (prod) | "static" (inline)
 />`,
               },
               {

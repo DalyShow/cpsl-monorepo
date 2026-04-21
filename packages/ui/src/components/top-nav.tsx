@@ -17,6 +17,9 @@ export interface TopNavProps {
   ctaLabel?: string;
   ctaHref?: string;
   showLive?: boolean;
+  /** "fixed" pins the bar to the viewport (production default).
+   *  "static" renders inline for showcase/catalog contexts. */
+  position?: "fixed" | "static";
 }
 
 export function TopNav({
@@ -32,6 +35,7 @@ export function TopNav({
   ctaLabel = "Join Our League",
   ctaHref  = "/apply",
   showLive = false,
+  position = "fixed",
 }: TopNavProps) {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,9 +47,14 @@ export function TopNav({
     return () => window.removeEventListener("resize", close);
   }, []);
 
+  const isFixed = position === "fixed";
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 h-20"
+      className={
+        isFixed
+          ? "fixed top-0 left-0 right-0 z-50 h-20"
+          : "relative w-full h-20"
+      }
       style={{ background: "#041124", borderBottom: "1px solid #1E2D45" }}
     >
       <div className="max-w-7xl mx-auto h-full grid grid-cols-[auto_1fr_auto] items-center px-4 sm:px-6">
