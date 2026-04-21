@@ -2,17 +2,16 @@ import { TopNav } from "@cpsl/ui";
 import { ClubDirectory } from "@/components/ds/ClubDirectory";
 import { fetchClubs } from "@/lib/clubs";
 import { sanityFetch } from "@/lib/sanity/client";
-
-type NavSettings = {
-  navItems?: { label: string; href: string }[];
-  ctaLabel?: string;
-  ctaHref?: string;
-};
+import {
+  NAV_ITEMS_GROQ,
+  resolveTopNavItems,
+  type SiteNavSettings,
+} from "@/lib/nav-items";
 
 export default async function ClubsPage() {
   const [settings, clubs] = await Promise.all([
-    sanityFetch<NavSettings>(
-      `*[_type == "siteSettings"][0]{ navItems, ctaLabel, ctaHref }`
+    sanityFetch<SiteNavSettings>(
+      `*[_type == "siteSettings"][0]{ ${NAV_ITEMS_GROQ}, ctaLabel, ctaHref }`
     ),
     fetchClubs(),
   ]);
@@ -20,7 +19,7 @@ export default async function ClubsPage() {
   return (
     <>
       <TopNav
-        items={settings?.navItems ?? undefined}
+        items={resolveTopNavItems(settings?.navItems)}
         ctaLabel={settings?.ctaLabel ?? "Join Our League"}
         ctaHref={settings?.ctaHref ?? "/apply"}
         showLive={false}

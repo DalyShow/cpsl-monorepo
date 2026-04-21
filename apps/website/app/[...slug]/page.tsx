@@ -2,14 +2,11 @@ import { notFound } from "next/navigation";
 import { TopNav, SubNav } from "@cpsl/ui";
 import { BlockRenderer } from "@/components/blocks/BlockRenderer";
 import { sanityFetch } from "@/lib/sanity/client";
-
-export const dynamic = "force-dynamic";
-
-type NavSettings = {
-  navItems?: { label: string; href: string }[];
-  ctaLabel?: string;
-  ctaHref?: string;
-};
+import {
+  NAV_ITEMS_GROQ,
+  resolveTopNavItems,
+  type SiteNavSettings,
+} from "@/lib/nav-items";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Section = { _type: string; _key: string; [key: string]: any };
@@ -38,8 +35,8 @@ export default async function DynamicPage({
   const parentSlug = segments.length > 1 ? segments[segments.length - 2] : "";
 
   const [settings, page] = await Promise.all([
-    sanityFetch<NavSettings>(
-      `*[_type == "siteSettings"][0]{ navItems, ctaLabel, ctaHref }`
+    sanityFetch<SiteNavSettings>(
+      `*[_type == "siteSettings"][0]{ ${NAV_ITEMS_GROQ}, ctaLabel, ctaHref }`
     ),
     sanityFetch<PageData>(
       `*[_type == "page"
@@ -90,7 +87,7 @@ export default async function DynamicPage({
   return (
     <>
       <TopNav
-        items={settings?.navItems ?? undefined}
+        items={resolveTopNavItems(settings?.navItems)}
         ctaLabel={settings?.ctaLabel ?? "Join Our League"}
         ctaHref={settings?.ctaHref ?? "/apply"}
         showLive={false}

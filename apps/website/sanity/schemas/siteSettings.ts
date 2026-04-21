@@ -22,18 +22,12 @@ export const siteSettings = defineType({
     defineField({
       name: "navItems",
       title: "Navigation Items",
+      description:
+        "Add a Simple Link for items that go straight to a page, or a Flyout Menu for items that open a dropdown panel with icons and descriptions.",
       type: "array",
       of: [
-        {
-          type: "object",
-          fields: [
-            defineField({ name: "label", title: "Label", type: "string" }),
-            defineField({ name: "href", title: "Link", type: "string" }),
-          ],
-          preview: {
-            select: { title: "label", subtitle: "href" },
-          },
-        },
+        { type: "topNavLink" },
+        { type: "topNavFlyout" },
       ],
     }),
     defineField({

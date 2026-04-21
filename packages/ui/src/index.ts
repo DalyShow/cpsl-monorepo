@@ -13,3 +13,10 @@ export type { SubNavProps, SubNavItem } from "./components/sub-nav";
 
 export { LogoTicker } from "./components/logo-ticker";
 export type { LogoTickerProps, LogoTickerLogo } from "./components/logo-ticker";
+
+export { FlyoutMenu } from "./components/flyout-menu";
+export type {
+  FlyoutMenuProps,
+  FlyoutItem,
+  FlyoutAction,
+} from "./components/flyout-menu";

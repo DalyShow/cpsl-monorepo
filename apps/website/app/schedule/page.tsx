@@ -2,25 +2,24 @@ import { TopNav } from "@cpsl/ui";
 import { SectionHeader } from "@/components/blocks/SectionHeader";
 import { MatchdayBlock } from "@/components/blocks/ScheduleByConferenceBlock";
 import { sanityFetch } from "@/lib/sanity/client";
-
-type NavSettings = {
-  navItems?: { label: string; href: string }[];
-  ctaLabel?: string;
-  ctaHref?: string;
-};
+import {
+  NAV_ITEMS_GROQ,
+  resolveTopNavItems,
+  type SiteNavSettings,
+} from "@/lib/nav-items";
 
 export default async function SchedulePage() {
-  let settings: NavSettings | null = null;
+  let settings: SiteNavSettings | null = null;
   try {
-    settings = await sanityFetch<NavSettings>(
-      `*[_type == "siteSettings"][0]{ navItems, ctaLabel, ctaHref }`
+    settings = await sanityFetch<SiteNavSettings>(
+      `*[_type == "siteSettings"][0]{ ${NAV_ITEMS_GROQ}, ctaLabel, ctaHref }`
     );
   } catch { /* use defaults */ }
 
   return (
     <>
       <TopNav
-        items={settings?.navItems ?? undefined}
+        items={resolveTopNavItems(settings?.navItems)}
         ctaLabel={settings?.ctaLabel ?? "Join Our League"}
         ctaHref={settings?.ctaHref ?? "/apply"}
         showLive={false}

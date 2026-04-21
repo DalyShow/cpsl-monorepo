@@ -2,6 +2,12 @@ import { siteSettings }        from "./siteSettings";
 import { homePage }            from "./homePage";
 import { brandPage }           from "./brandPage";
 import { page }                from "./page";
+import { topNavLink }          from "./navItems/topNavLink";
+import {
+  topNavFlyout,
+  flyoutItem,
+  flyoutAction,
+}                              from "./navItems/topNavFlyout";
 import { heroBlock }            from "./blocks/heroBlock";
 import { contentSectionBlock }  from "./blocks/contentSectionBlock";
 import { ctaBannerBlock }       from "./blocks/ctaBannerBlock";
@@ -19,6 +25,11 @@ export const schemaTypes = [
   homePage,
   brandPage,
   page,
+  // Nav items
+  topNavLink,
+  topNavFlyout,
+  flyoutItem,
+  flyoutAction,
   // Blocks
   heroBlock,
   sectionHeaderBlock,

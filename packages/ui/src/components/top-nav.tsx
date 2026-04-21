@@ -3,10 +3,26 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { FlyoutMenu, type FlyoutItem, type FlyoutAction } from "./flyout-menu";
 
-export interface TopNavItem {
+export interface TopNavLinkItem {
   label: string;
   href: string;
+}
+
+export interface TopNavFlyoutItem {
+  label: string;
+  flyout: {
+    size?: "sm" | "md" | "lg";
+    items: FlyoutItem[];
+    actions?: FlyoutAction[];
+  };
+}
+
+export type TopNavItem = TopNavLinkItem | TopNavFlyoutItem;
+
+function isFlyoutItem(item: TopNavItem): item is TopNavFlyoutItem {
+  return "flyout" in item && !!item.flyout;
 }
 
 export interface TopNavProps {
@@ -76,26 +92,41 @@ export function TopNav({
         </Link>
 
         {/* Centered nav */}
-        <nav className="hidden md:flex gap-1 justify-self-center">
-          {items.map((item, i) => (
-            <Link
-              key={item.label}
-              href={item.href || "#"}
-              onClick={() => setActiveIndex(i)}
-              className="px-4 py-4 border-b-2 transition-colors text-[#7A9BAA] hover:text-[#F4EFE6]"
-              style={{
-                color: i === activeIndex ? "white" : undefined,
-                borderColor: i === activeIndex ? "#D4B949" : "transparent",
-                fontFamily: "'Barlow Condensed', sans-serif",
-                fontWeight: 600,
-                fontSize: "14px",
-                textTransform: "uppercase",
-                letterSpacing: "0.11em",
-              }}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav className="hidden md:flex gap-1 justify-self-center items-center">
+          {items.map((item, i) =>
+            isFlyoutItem(item) ? (
+              <div
+                key={item.label}
+                className="px-4 py-4 border-b-2"
+                style={{ borderColor: "transparent" }}
+              >
+                <FlyoutMenu
+                  label={item.label}
+                  size={item.flyout.size}
+                  items={item.flyout.items}
+                  actions={item.flyout.actions}
+                />
+              </div>
+            ) : (
+              <Link
+                key={item.label}
+                href={item.href || "#"}
+                onClick={() => setActiveIndex(i)}
+                className="px-4 py-4 border-b-2 transition-colors text-[#7A9BAA] hover:text-[#F4EFE6]"
+                style={{
+                  color: i === activeIndex ? "white" : undefined,
+                  borderColor: i === activeIndex ? "#D4B949" : "transparent",
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.11em",
+                }}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         {/* Right slot */}
@@ -168,27 +199,62 @@ export function TopNav({
           style={{ background: "#041124", borderBottom: "1px solid #1E2D45" }}
         >
           <nav className="flex flex-col p-4 gap-1">
-            {items.map((item, i) => (
-              <Link
-                key={item.label}
-                href={item.href || "#"}
-                onClick={() => {
-                  setActiveIndex(i);
-                  setMenuOpen(false);
-                }}
-                className="px-3 py-3"
-                style={{
-                  color: i === activeIndex ? "white" : "#7A9BAA",
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontWeight: 600,
-                  fontSize: "14px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.11em",
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {items.map((item, i) =>
+              isFlyoutItem(item) ? (
+                <div key={item.label} className="py-2">
+                  <div
+                    className="px-3 pt-2 pb-1"
+                    style={{
+                      color: "#7A9BAA",
+                      fontFamily: "'Barlow Condensed', sans-serif",
+                      fontWeight: 600,
+                      fontSize: "12px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                      opacity: 0.7,
+                    }}
+                  >
+                    {item.label}
+                  </div>
+                  {item.flyout.items.map((sub) => (
+                    <Link
+                      key={sub.label}
+                      href={sub.href || "#"}
+                      onClick={() => setMenuOpen(false)}
+                      className="block px-3 py-2.5"
+                      style={{
+                        color: "white",
+                        fontFamily: "'Barlow Condensed', sans-serif",
+                        fontWeight: 600,
+                        fontSize: "15px",
+                      }}
+                    >
+                      {sub.label}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href || "#"}
+                  onClick={() => {
+                    setActiveIndex(i);
+                    setMenuOpen(false);
+                  }}
+                  className="px-3 py-3"
+                  style={{
+                    color: i === activeIndex ? "white" : "#7A9BAA",
+                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontWeight: 600,
+                    fontSize: "14px",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.11em",
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
             {ctaLabel && (
               <Link
                 href={ctaHref || "#"}

@@ -151,7 +151,7 @@ export { CPSLInput } from "@/components/cpsl/CPSLInput"
 export type { CPSLInputProps } from "@/components/cpsl/CPSLInput"
 
 export { LogoTicker } from "@/components/cpsl/modules/LogoTicker"
-export type { LogoTickerProps, LogoTickerItem } from "@/components/cpsl/modules/LogoTicker"
+export type { LogoTickerProps, LogoTickerLogo } from "@/components/cpsl/modules/LogoTicker"
 
 // ── Utility ───────────────────────────────────────────────────────────────────
 export { cn } from "@/lib/utils"

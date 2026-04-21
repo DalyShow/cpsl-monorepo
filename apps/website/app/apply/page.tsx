@@ -1,14 +1,13 @@
 import { TopNav } from "@cpsl/ui";
 import { ApplicationForm } from "./ApplicationForm";
 import { sanityFetch } from "@/lib/sanity/client";
+import {
+  NAV_ITEMS_GROQ,
+  resolveTopNavItems,
+  type SiteNavSettings,
+} from "@/lib/nav-items";
 
 export const dynamic = "force-dynamic";
-
-type NavSettings = {
-  navItems?: { label: string; href: string }[];
-  ctaLabel?: string;
-  ctaHref?: string;
-};
 
 export const metadata = {
   title: "Apply to Join — CPSL",
@@ -17,10 +16,10 @@ export const metadata = {
 };
 
 export default async function ApplyPage() {
-  let settings: NavSettings | null = null;
+  let settings: SiteNavSettings | null = null;
   try {
-    settings = await sanityFetch<NavSettings>(
-      `*[_type == "siteSettings"][0]{ navItems, ctaLabel, ctaHref }`
+    settings = await sanityFetch<SiteNavSettings>(
+      `*[_type == "siteSettings"][0]{ ${NAV_ITEMS_GROQ}, ctaLabel, ctaHref }`
     );
   } catch {
     // Sanity unavailable — render without nav items
@@ -29,7 +28,7 @@ export default async function ApplyPage() {
   return (
     <>
       <TopNav
-        items={settings?.navItems ?? undefined}
+        items={resolveTopNavItems(settings?.navItems)}
         ctaLabel={settings?.ctaLabel ?? "Join Our League"}
         ctaHref={settings?.ctaHref ?? "/apply"}
         showLive={false}

@@ -2,32 +2,36 @@ import PageHeader from "@/components/PageHeader";
 import Section from "@/components/Section";
 import CodeBlock from "@/components/CodeBlock";
 import { LogoTicker } from "@/components/cpsl/modules/LogoTicker";
-import type { LogoTickerItem } from "@/components/cpsl/modules/LogoTicker";
+import type { LogoTickerLogo } from "@/components/cpsl/modules/LogoTicker";
 
 // ─── Sample data ────────────────────────────────────────────────────────────
+// Uses the same SVGs the website serves from /public/logos. In production
+// the logo URLs come from Sanity image assets — here we point at the static
+// files so the showcase renders standalone.
 
-const logos: LogoTickerItem[] = [
-  { slug: "asheville-fc",       name: "Asheville FC" },
-  { slug: "charleston-fc",      name: "Charleston FC" },
-  { slug: "charlotte-fc",       name: "Charlotte FC" },
-  { slug: "coastal-sc",         name: "Coastal SC" },
-  { slug: "columbia-united",    name: "Columbia United" },
-  { slug: "durham-united",      name: "Durham United" },
-  { slug: "greensboro-fc",      name: "Greensboro FC" },
-  { slug: "raleigh-athletic",   name: "Raleigh Athletic" },
-  { slug: "triangle-fc",        name: "Triangle FC" },
-  { slug: "winston-salem-sc",   name: "Winston-Salem SC" },
+const logos: LogoTickerLogo[] = [
+  { key: "asheville-fc",     url: "/logos/asheville-fc.svg",     alt: "Asheville FC" },
+  { key: "charleston-fc",    url: "/logos/charleston-fc.svg",    alt: "Charleston FC" },
+  { key: "charlotte-fc",     url: "/logos/charlotte-fc.svg",     alt: "Charlotte FC" },
+  { key: "coastal-sc",       url: "/logos/coastal-sc.svg",       alt: "Coastal SC" },
+  { key: "columbia-united",  url: "/logos/columbia-united.svg",  alt: "Columbia United" },
+  { key: "durham-united",    url: "/logos/durham-united.svg",    alt: "Durham United" },
+  { key: "greensboro-fc",    url: "/logos/greensboro-fc.svg",    alt: "Greensboro FC" },
+  { key: "raleigh-athletic", url: "/logos/raleigh-athletic.svg", alt: "Raleigh Athletic" },
+  { key: "triangle-fc",      url: "/logos/triangle-fc.svg",      alt: "Triangle FC" },
+  { key: "winston-salem-sc", url: "/logos/winston-salem-sc.svg", alt: "Winston-Salem SC" },
 ];
 
-const sampleCode = `import { LogoTicker } from "@/components/cpsl/modules/LogoTicker"
+const sampleCode = `import { LogoTicker } from "@cpsl/ui"
 
 <LogoTicker
   logos={[
-    { slug: "charlotte-fc",     name: "Charlotte FC" },
-    { slug: "raleigh-athletic", name: "Raleigh Athletic" },
-    // ...
+    { url: "/logos/charlotte-fc.svg",     alt: "Charlotte FC" },
+    { url: "/logos/raleigh-athletic.svg", alt: "Raleigh Athletic" },
+    // …
   ]}
-  durationSeconds={40}
+  heading="Member Clubs"
+  durationSeconds={80}
   pauseOnHover
   edgeFade
 />`;
@@ -40,7 +44,7 @@ export default function TickerPage() {
       <PageHeader
         section="16 — Components"
         title="Logo Ticker"
-        description="Horizontal marquee of club crests — seamless infinite scroll with pause-on-hover and soft edge fades. Each tile is a fixed 115 × 115 px container with a 30 px gap between tiles. Pure CSS animation; respects prefers-reduced-motion."
+        description="Horizontal marquee of club crests — seamless infinite scroll with pause-on-hover and soft edge fades. 37 px tiles with a 30 px gap; crests wear a soft drop shadow so they read on cream, navy, or image backgrounds. Pure CSS animation; respects prefers-reduced-motion. Only scrolls when the content actually overflows the container."
       />
 
       <div className="px-12 py-12">
@@ -48,13 +52,13 @@ export default function TickerPage() {
         {/* ── 1. Default — on Light ── */}
         <Section title="1 — Default — on Light">
           <p className="text-xs text-muted-foreground mb-4">
-            Forty-second loop, pause on hover, soft edge fade. 115 × 115 tiles with 30 px gap — the canonical spec.
+            Eighty-second loop, pause on hover, soft edge fade. Default canvas is transparent so the drop-shadowed crests sit directly on whatever surface is below.
           </p>
           <div
             className="rounded-2xl p-10 border"
             style={{ background: "white", borderColor: "#E2E8F0" }}
           >
-            <LogoTicker logos={logos} />
+            <LogoTicker logos={logos} sectionBackground="white" />
           </div>
           <div className="mt-4">
             <CodeBlock code={sampleCode} language="tsx" />
@@ -64,22 +68,31 @@ export default function TickerPage() {
         {/* ── 2. On Dark Navy ── */}
         <Section title="2 — On Dark Navy">
           <p className="text-xs text-muted-foreground mb-4">
-            Same component with darker tile background for use on the navy surface — crests retain contrast against the dark panel.
+            Same component on the navy surface. The drop shadow softens but keeps the crests lifted off the background — pass the container color via <code className="bg-secondary px-1.5 py-0.5 rounded">sectionBackground</code> so the edge fade matches.
           </p>
           <div
             className="rounded-2xl p-10 border"
             style={{ background: "#091628", borderColor: "#1E2D45" }}
           >
-            <LogoTicker
-              logos={logos}
-              tileBackground="#0D1B3E"
-              tileBorderColor="#1E2D45"
-            />
+            <LogoTicker logos={logos} sectionBackground="#091628" />
           </div>
         </Section>
 
-        {/* ── 3. Reversed — Faster ── */}
-        <Section title="3 — Reversed · Faster">
+        {/* ── 3. With heading ── */}
+        <Section title="3 — With heading">
+          <p className="text-xs text-muted-foreground mb-4">
+            Optional eyebrow rendered above the marquee in Barlow Condensed, uppercase, 20 px. Inherits text colour from the parent section.
+          </p>
+          <div
+            className="rounded-2xl p-10 border"
+            style={{ background: "white", borderColor: "#E2E8F0", color: "#091628" }}
+          >
+            <LogoTicker logos={logos} heading="Member Clubs" sectionBackground="white" />
+          </div>
+        </Section>
+
+        {/* ── 4. Reversed — Faster ── */}
+        <Section title="4 — Reversed · Faster">
           <p className="text-xs text-muted-foreground mb-4">
             Reverse direction with a shorter duration — useful for stacking two tickers travelling in opposite directions.
           </p>
@@ -87,12 +100,12 @@ export default function TickerPage() {
             className="rounded-2xl p-10 border flex flex-col gap-4"
             style={{ background: "white", borderColor: "#E2E8F0" }}
           >
-            <LogoTicker logos={logos} durationSeconds={25} />
-            <LogoTicker logos={logos} durationSeconds={25} reverse />
+            <LogoTicker logos={logos} sectionBackground="white" durationSeconds={40} />
+            <LogoTicker logos={logos} sectionBackground="white" durationSeconds={40} reverse />
           </div>
         </Section>
 
-        {/* ── 4. Props ── */}
+        {/* ── 5. Props ── */}
         <Section title="Props">
           <div className="rounded-2xl border overflow-hidden" style={{ borderColor: "#E2E8F0" }}>
             <div className="px-6 py-3 border-b" style={{ background: "#091628", borderColor: "#1E2D45" }}>
@@ -100,15 +113,15 @@ export default function TickerPage() {
             </div>
             <div className="bg-white divide-y" style={{ borderColor: "#F1F5F9" }}>
               {[
-                { name: "logos",           type: "LogoTickerItem[]", def: "—",          desc: "Array of { slug, name }. Slug must match a file in /public/logos/{slug}.svg." },
-                { name: "durationSeconds", type: "number",           def: "40",         desc: "Full loop time. Lower is faster." },
-                { name: "reverse",         type: "boolean",          def: "false",      desc: "Reverse the scroll direction." },
-                { name: "pauseOnHover",    type: "boolean",          def: "true",       desc: "Pause the animation while the pointer is over the ticker." },
-                { name: "edgeFade",        type: "boolean",          def: "true",       desc: "Apply a soft CSS mask fade on the left and right edges." },
-                { name: "tileBackground",  type: "string",           def: "'#FFFFFF'",  desc: "Background color of each 115 × 115 tile." },
-                { name: "tileBorderColor", type: "string",           def: "'#E2E8F0'",  desc: "Border color of each 115 × 115 tile." },
+                { name: "logos",             type: "LogoTickerLogo[]", def: "—",            desc: "Array of { url, alt, key }. Typically Sanity image asset URLs in production." },
+                { name: "heading",           type: "string",           def: "undefined",    desc: "Optional uppercase eyebrow above the marquee." },
+                { name: "durationSeconds",   type: "number",           def: "80",           desc: "Full loop time when content overflows. Lower is faster." },
+                { name: "reverse",           type: "boolean",          def: "false",        desc: "Reverse the scroll direction." },
+                { name: "pauseOnHover",      type: "boolean",          def: "true",         desc: "Pause the animation while the pointer is over the ticker." },
+                { name: "edgeFade",          type: "boolean",          def: "true",         desc: "Soft gradient fade on the left/right edges. Only rendered when the ticker is actually scrolling." },
+                { name: "sectionBackground", type: "string",           def: "'transparent'", desc: "Background color of the wrapping section; also drives the edge fade colour." },
               ].map((p) => (
-                <div key={p.name} className="grid grid-cols-[180px_180px_120px_1fr] gap-4 px-6 py-3 text-xs">
+                <div key={p.name} className="grid grid-cols-[180px_180px_140px_1fr] gap-4 px-6 py-3 text-xs">
                   <span className="font-mono font-semibold" style={{ color: "#091628" }}>{p.name}</span>
                   <span className="font-mono"             style={{ color: "#475569" }}>{p.type}</span>
                   <span className="font-mono"             style={{ color: "#94A3B8" }}>{p.def}</span>
