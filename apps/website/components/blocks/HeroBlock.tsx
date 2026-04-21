@@ -136,20 +136,22 @@ export function HeroBlock({
         overflow: "hidden",
       }}
     >
-      {/* Viewport-height math. svh is the "small" viewport (visible area
-          when all browser chrome is showing), which still stops short of
-          the bottom safe area even with viewport-fit=cover. Adding
-          env(safe-area-inset-bottom) pushes the section into the chrome
-          overlay so iOS Safari's tab bar sits on top of the hero image
-          instead of a navy gutter below it. The vh declaration is a
-          fallback for browsers without svh support. */}
+      {/* Viewport-height math. lvh is the "large" viewport — the height
+          when the browser chrome (Safari's address bar) is collapsed. On
+          iOS when the chrome is expanded, 100lvh is TALLER than what's
+          currently visible, so the hero extends behind Safari's address
+          bar — exactly the effect we want so the image reads continuously
+          under the tab bar instead of stopping above it.
+
+          env(safe-area-inset-bottom) covers the home indicator gutter.
+          The vh declaration is a fallback for browsers without lvh. */}
       <style>{`
         .cpsl-hero {
           min-height: calc(100vh - 80px + env(safe-area-inset-bottom, 0px));
         }
-        @supports (min-height: 100svh) {
+        @supports (min-height: 100lvh) {
           .cpsl-hero {
-            min-height: calc(100svh - 80px + env(safe-area-inset-bottom, 0px));
+            min-height: calc(100lvh - 80px + env(safe-area-inset-bottom, 0px));
           }
         }
       `}</style>
