@@ -1,4 +1,4 @@
-import { TopNav } from "@/components/ds/TopNav";
+import { TopNav } from "@cpsl/ui";
 import { ApplicationForm } from "./ApplicationForm";
 import { sanityFetch } from "@/lib/sanity/client";
 

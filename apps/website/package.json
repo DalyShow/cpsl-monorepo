@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@cpsl/ui": "*",
     "@lottiefiles/dotlottie-react": "^0.18.3",
     "@sanity/image-url": "^2.0.3",
     "next": "16.1.6",

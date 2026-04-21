@@ -1,4 +1,4 @@
-import { TopNav } from "@/components/ds/TopNav";
+import { TopNav } from "@cpsl/ui";
 import { SectionHeader } from "@/components/blocks/SectionHeader";
 import { MatchdayBlock } from "@/components/blocks/ScheduleByConferenceBlock";
 import { sanityFetch } from "@/lib/sanity/client";

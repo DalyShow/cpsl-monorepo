@@ -1,4 +1,4 @@
-import { TopNav } from "@/components/ds/TopNav";
+import { TopNav } from "@cpsl/ui";
 import { BlockRenderer } from "@/components/blocks/BlockRenderer";
 import { sanityFetch } from "@/lib/sanity/client";
 

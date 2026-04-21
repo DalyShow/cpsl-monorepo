@@ -1,4 +1,4 @@
-import { TopNav } from "@/components/ds/TopNav";
+import { TopNav } from "@cpsl/ui";
 import { ClubDirectory } from "@/components/ds/ClubDirectory";
 import { fetchClubs } from "@/lib/clubs";
 import { sanityFetch } from "@/lib/sanity/client";
