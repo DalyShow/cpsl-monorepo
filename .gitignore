@@ -1,0 +1,26 @@
+# dependencies
+node_modules/
+.pnpm-debug.log*
+
+# next.js
+.next/
+out/
+dist/
+
+# env / secrets
+.env
+.env.local
+.env.*.local
+
+# vercel
+.vercel
+
+# sanity studio cache
+.sanity/
+
+# typescript build info
+*.tsbuildinfo
+
+# misc
+.DS_Store
+*.log

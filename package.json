@@ -1,0 +1,15 @@
+{
+  "name": "cpsl-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:design-system": "npm run dev --workspace apps/design-system",
+    "dev:website": "npm run dev --workspace apps/website",
+    "build:design-system": "npm run build --workspace apps/design-system",
+    "build:website": "npm run build --workspace apps/website"
+  }
+}
