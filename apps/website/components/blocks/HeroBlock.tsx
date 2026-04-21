@@ -162,7 +162,12 @@ export function HeroBlock({
               style={{
                 position: "absolute",
                 inset: 0,
-                background: `linear-gradient(to bottom, rgba(9,22,40,0.72) 0%, rgba(9,22,40,0.55) 60%, rgba(9,22,40,0.80) 100%), url(${url}) center/cover no-repeat`,
+                // Scrim darkens the top for contrast against the nav + ticker
+                // and the middle behind the headline, then FADES OUT at the
+                // bottom so the image reads clearly behind iOS Safari's tab
+                // bar. Previously peaked back to 0.8 at 100% which painted an
+                // opaque navy strip along the bottom edge.
+                background: `linear-gradient(to bottom, rgba(9,22,40,0.72) 0%, rgba(9,22,40,0.50) 55%, rgba(9,22,40,0.20) 100%), url(${url}) center/cover no-repeat`,
                 backgroundBlendMode: backgroundBlendMode,
                 opacity: i === activeLayer ? backgroundOpacity : 0,
                 transition: `opacity ${backgroundTransition}s ease-in-out`,
