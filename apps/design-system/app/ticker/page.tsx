@@ -3,13 +3,14 @@ import Section from "@/components/Section";
 import CodeBlock from "@/components/CodeBlock";
 import { LogoTicker } from "@/components/cpsl/modules/LogoTicker";
 import type { LogoTickerLogo } from "@/components/cpsl/modules/LogoTicker";
+import { sanityFetch } from "@/lib/sanity";
 
 // ─── Sample data ────────────────────────────────────────────────────────────
-// Uses the same SVGs the website serves from /public/logos. In production
-// the logo URLs come from Sanity image assets — here we point at the static
-// files so the showcase renders standalone.
+// Live-pulls logos from the website's Sanity-driven homepage LogoTickerBlock
+// so the showcase stays in sync with whatever editors upload. Falls back to
+// placeholder shields in /public/logos if Sanity is unreachable.
 
-const logos: LogoTickerLogo[] = [
+const fallbackLogos: LogoTickerLogo[] = [
   { key: "asheville-fc",     url: "/logos/asheville-fc.svg",     alt: "Asheville FC" },
   { key: "charleston-fc",    url: "/logos/charleston-fc.svg",    alt: "Charleston FC" },
   { key: "charlotte-fc",     url: "/logos/charlotte-fc.svg",     alt: "Charlotte FC" },
@@ -21,6 +22,31 @@ const logos: LogoTickerLogo[] = [
   { key: "triangle-fc",      url: "/logos/triangle-fc.svg",      alt: "Triangle FC" },
   { key: "winston-salem-sc", url: "/logos/winston-salem-sc.svg", alt: "Winston-Salem SC" },
 ];
+
+type SanityLogo = {
+  _key?: string;
+  asset?: { url?: string };
+  alt?: string;
+};
+
+async function fetchLogos(): Promise<LogoTickerLogo[]> {
+  const result = await sanityFetch<SanityLogo[]>(
+    `*[_type == "homePage"][0].sections[_type == "logoTickerBlock"][0].logos[]{
+      _key,
+      "alt": asset->altText,
+      asset->{ url }
+    }`,
+  );
+  if (!result || result.length === 0) return fallbackLogos;
+  const mapped = result
+    .filter((l): l is SanityLogo & { asset: { url: string } } => !!l?.asset?.url)
+    .map((l, i) => ({
+      key: l._key ?? String(i),
+      url: l.asset.url,
+      alt: l.alt ?? "",
+    }));
+  return mapped.length > 0 ? mapped : fallbackLogos;
+}
 
 const sampleCode = `import { LogoTicker } from "@cpsl/ui"
 
@@ -38,7 +64,8 @@ const sampleCode = `import { LogoTicker } from "@cpsl/ui"
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
-export default function TickerPage() {
+export default async function TickerPage() {
+  const logos = await fetchLogos();
   return (
     <div style={{ background: "#F4F6FA", minHeight: "100vh" }}>
       <PageHeader
