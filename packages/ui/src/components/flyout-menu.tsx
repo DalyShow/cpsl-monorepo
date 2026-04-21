@@ -57,6 +57,8 @@ function renderIcon(
   return null;
 }
 
+const HOVER_CLOSE_DELAY = 200;
+
 export function FlyoutMenu({
   label,
   items,
@@ -67,6 +69,29 @@ export function FlyoutMenu({
   const [alignRight, setAlignRight] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const closeTimerRef = useRef<number | null>(null);
+
+  const cancelClose = useCallback(() => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const openNow = useCallback(() => {
+    cancelClose();
+    setOpen(true);
+  }, [cancelClose]);
+
+  const scheduleClose = useCallback(() => {
+    cancelClose();
+    closeTimerRef.current = window.setTimeout(() => {
+      setOpen(false);
+      closeTimerRef.current = null;
+    }, HOVER_CLOSE_DELAY);
+  }, [cancelClose]);
+
+  useEffect(() => () => cancelClose(), [cancelClose]);
 
   const checkAlignment = useCallback(() => {
     if (!containerRef.current || !panelRef.current) return;
@@ -98,7 +123,12 @@ export function FlyoutMenu({
   }, [open]);
 
   return (
-    <div ref={containerRef} className="relative inline-block">
+    <div
+      ref={containerRef}
+      className="relative inline-block"
+      onMouseEnter={openNow}
+      onMouseLeave={scheduleClose}
+    >
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
