@@ -136,13 +136,21 @@ export function HeroBlock({
         overflow: "hidden",
       }}
     >
-      {/* Dynamic viewport height with a VH fallback for older browsers.
-          Inline <style> so we can stack the two declarations — React inline
-          styles can't express a CSS fallback pair. */}
+      {/* Viewport-height math. svh is the "small" viewport (visible area
+          when all browser chrome is showing), which still stops short of
+          the bottom safe area even with viewport-fit=cover. Adding
+          env(safe-area-inset-bottom) pushes the section into the chrome
+          overlay so iOS Safari's tab bar sits on top of the hero image
+          instead of a navy gutter below it. The vh declaration is a
+          fallback for browsers without svh support. */}
       <style>{`
-        .cpsl-hero { min-height: calc(100vh - 80px); }
+        .cpsl-hero {
+          min-height: calc(100vh - 80px + env(safe-area-inset-bottom, 0px));
+        }
         @supports (min-height: 100svh) {
-          .cpsl-hero { min-height: calc(100svh - 80px); }
+          .cpsl-hero {
+            min-height: calc(100svh - 80px + env(safe-area-inset-bottom, 0px));
+          }
         }
       `}</style>
       {hasBg &&
