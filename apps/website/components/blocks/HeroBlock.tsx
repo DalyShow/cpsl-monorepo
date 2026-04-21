@@ -148,9 +148,6 @@ export function HeroBlock({
       <style>{`
         .cpsl-hero {
           min-height: calc(100vh - 80px + env(safe-area-inset-bottom, 0px));
-          /* DEBUG: 4px magenta bar at section bottom so we can see exactly
-             where the hero ends on mobile. Remove once the layout is sorted. */
-          box-shadow: inset 0 -4px 0 #FF00FF;
         }
         @supports (min-height: 100lvh) {
           .cpsl-hero {
