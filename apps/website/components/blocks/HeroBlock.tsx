@@ -169,7 +169,12 @@ export function HeroBlock({
                 // bottom so the image reads clearly behind iOS Safari's tab
                 // bar. Previously peaked back to 0.8 at 100% which painted an
                 // opaque navy strip along the bottom edge.
-                background: `linear-gradient(to bottom, rgba(9,22,40,0.72) 0%, rgba(9,22,40,0.50) 55%, rgba(9,22,40,0.20) 100%), url(${url}) center/cover no-repeat`,
+                // `center 35%` biases the background image upward so the
+                // middle of each frame (usually the subject's torso/head)
+                // lands in the visible viewport, and the darker ground
+                // portions get cropped behind Safari's tab bar instead of
+                // reading as a navy strip.
+                background: `linear-gradient(to bottom, rgba(9,22,40,0.72) 0%, rgba(9,22,40,0.50) 55%, rgba(9,22,40,0.20) 100%), url(${url}) center 35% / cover no-repeat`,
                 backgroundBlendMode: backgroundBlendMode,
                 opacity: i === activeLayer ? backgroundOpacity : 0,
                 transition: `opacity ${backgroundTransition}s ease-in-out`,
