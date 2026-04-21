@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+/* ── CPSL Brand Tokens ──────────────────────────────────────────────── */
+:root {
+  /* Navy / Dark surfaces */
+  --navy-950:  #041124;
+  --navy-900:  #041124;
+  --navy-800:  #0F1624;
+  --navy-700:  #1A2438;
+  --navy-600:  #1E2D45;
+  --navy-500:  #243352;
+
+  /* Championship Gold (primary) */
+  --gold-300:  #EDD47A;
+  --gold-400:  #E0C95E;
+  --gold-500:  #D4B949;
+  --gold-600:  #B09830;
+  --gold-700:  #8A761E;
+
+  /* CPSL Steel (secondary — midpoint #697279) */
+  --steel-50:  #F2F4F5;
+  --steel-100: #E3E7E9;
+  --steel-200: #C8CED2;
+  --steel-300: #A7AFB5;
+  --steel-400: #8A9299;
+  --steel-500: #697279;
+  --steel-600: #505960;
+  --steel-700: #3A4248;
+  --steel-800: #262D32;
+  --steel-900: #161B1E;
+
+  /* Accents */
+  --crimson:   #BF1D2D;
+  --live-red:  #FF1744;
+  --green:     #00C853;
+
+  /* Surfaces */
+  --warm-white: #F4EFE6;
+  --surface:    #F4F6FA;
+
+  /* Semantic */
+  --primary:   #D4B949;
+  --text-dark: #041124;
+  --text-mid:  #475569;
+  --text-muted:#94A3B8;
+  --border:    #E2E8F0;
+
+  /* ── Light theme (default) — cream background ── */
+  --eyebrow-color: #D4B949;   /* gold — eyebrow label on light bg    */
+  --bg-page:       #F4EFE6;   /* cream — main page background        */
+  --bg-card:       #FFFFFF;   /* card / panel surfaces               */
+  --bg-card-alt:   #EBE3D0;   /* cream-dark — elevated / secondary   */
+  --bg-inset:      #F4EFE6;   /* inset wells, recessed areas         */
+  --fg-primary:    #041124;   /* deep navy — headlines, body text    */
+  --fg-secondary:  #475569;   /* mid-grey — supporting copy          */
+  --fg-muted:      #94A3B8;   /* muted — captions, placeholders      */
+  --ui-border:     #D9CEBF;   /* warm-toned divider on cream         */
+  --ui-divider:    #EBE3D0;   /* subtle section separator            */
+}
+
+/* ── Dark theme — nav navy background ── */
+[data-theme="dark"] {
+  --eyebrow-color: #E74552;   /* crimson-400 — eyebrow on dark bg    */
+  --bg-page:       #041124;   /* deep navy — mirrors TopNav          */
+  --bg-card:       #131B2D;   /* charcoal — card surfaces            */
+  --bg-card-alt:   #1E2D45;   /* elevated / border-level surfaces    */
+  --bg-inset:      #0A1628;   /* inset wells on dark                 */
+  --fg-primary:    #F4EFE6;   /* warm white — headlines, body text   */
+  --fg-secondary:  #94A3B8;   /* cool grey — supporting copy         */
+  --fg-muted:      #475569;   /* muted — captions, placeholders      */
+  --ui-border:     #1E2D45;   /* dark border                         */
+  --ui-divider:    #1E2D45;   /* dark section separator              */
+}
+
+@theme inline {
+  --color-navy-950:  var(--navy-950);
+  --color-navy-900:  var(--navy-900);
+  --color-navy-800:  var(--navy-800);
+  --color-navy-700:  var(--navy-700);
+  --color-navy-600:  var(--navy-600);
+  --color-steel-50:  var(--steel-50);
+  --color-steel-100: var(--steel-100);
+  --color-steel-200: var(--steel-200);
+  --color-steel-300: var(--steel-300);
+  --color-steel-400: var(--steel-400);
+  --color-steel-500: var(--steel-500);
+  --color-steel-600: var(--steel-600);
+  --color-steel-700: var(--steel-700);
+  --color-steel-800: var(--steel-800);
+  --color-steel-900: var(--steel-900);
+  --color-gold-500:  var(--gold-500);
+  --color-gold-400:  var(--gold-400);
+  --color-crimson:   var(--crimson);
+  --color-warm-white: var(--warm-white);
+  --color-surface:   var(--surface);
+  --font-display:    "Barlow Condensed", sans-serif;
+  --font-body:       "Inter", sans-serif;
+  /* Theme-aware utilities */
+  --color-bg-page:      var(--bg-page);
+  --color-bg-card:      var(--bg-card);
+  --color-bg-card-alt:  var(--bg-card-alt);
+  --color-bg-inset:     var(--bg-inset);
+  --color-fg-primary:   var(--fg-primary);
+  --color-fg-secondary: var(--fg-secondary);
+  --color-fg-muted:     var(--fg-muted);
+  --color-ui-border:    var(--ui-border);
+  --color-ui-divider:   var(--ui-divider);
+}
+
+/* ── Base ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg-page);
+  color: var(--fg-primary);
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
