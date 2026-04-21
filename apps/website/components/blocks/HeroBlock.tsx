@@ -110,14 +110,18 @@ export function HeroBlock({
 
   return (
     <section
+      className="cpsl-hero"
       style={{
         position: "relative",
         // Pull up behind the logo ticker (≈78 px tall) so the background
         // image extends under it. Extra top padding keeps the content
         // positioned as if the hero started below the ticker.
         marginTop: "-78px",
-        padding: "174px 24px 96px",
-        minHeight: "calc(100vh - 80px)",
+        // Vertical padding scales with viewport so it doesn't swallow the
+        // screen on phones; side padding follows suit. The clamp mins keep
+        // things readable on tiny devices, the maxes match the desktop spec.
+        padding:
+          "clamp(96px, 18vh, 174px) clamp(16px, 5vw, 24px) clamp(56px, 10vh, 96px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -126,6 +130,15 @@ export function HeroBlock({
         overflow: "hidden",
       }}
     >
+      {/* Dynamic viewport height with a VH fallback for older browsers.
+          Inline <style> so we can stack the two declarations — React inline
+          styles can't express a CSS fallback pair. */}
+      <style>{`
+        .cpsl-hero { min-height: calc(100vh - 80px); }
+        @supports (min-height: 100svh) {
+          .cpsl-hero { min-height: calc(100svh - 80px); }
+        }
+      `}</style>
       {hasBg &&
         layers.map((url, i) =>
           url ? (
