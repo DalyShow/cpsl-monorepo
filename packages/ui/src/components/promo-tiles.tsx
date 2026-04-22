@@ -632,12 +632,18 @@ export function PromoHero({
           PromoReveal) is on the page. Duplicate rules across
           heroes are harmless. */}
       <style>{`
+        /* Fill the visible viewport below the nav + logo ticker.
+           80 px = TopNav (h-20), 80 px ≈ logo-ticker section (16 px
+           top/bottom padding + 48 px tile + 30 px gap breathing
+           room). Keeps the hero within viewport so no scrollbar
+           appears from the hero alone, regardless of whether the
+           browser chrome is expanded or retracted. */
         .cpsl-promo-hero--full {
-          min-height: calc(100vh - 80px + env(safe-area-inset-bottom, 0px));
+          min-height: calc(100vh - 160px);
         }
         @supports (min-height: 100dvh) {
           .cpsl-promo-hero--full {
-            min-height: calc(100dvh - 80px + env(safe-area-inset-bottom, 0px));
+            min-height: calc(100dvh - 160px);
           }
         }
         @keyframes cpsl-hero-timer-fill {
