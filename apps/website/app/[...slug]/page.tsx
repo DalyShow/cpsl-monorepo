@@ -67,7 +67,11 @@ export default async function DynamicPage({
             bottomImage{ ..., asset->{ url } },
             lottie{ ..., asset->{ url } },
             bottomLottie{ ..., asset->{ url } },
-            logos[]{ ..., asset->{ url } }
+            logos[]{ ..., asset->{ url } },
+            tiles[]{
+              ...,
+              image{ ..., asset->{ url }, "alt": asset->altText }
+            }
           }
         }`,
       { slug: pageSlug, parentSlug }
