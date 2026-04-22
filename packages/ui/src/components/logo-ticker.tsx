@@ -65,7 +65,7 @@ export function LogoTicker({
 
   return (
     <section style={{ background: sectionBackground, padding: "16px 0", position: "relative", zIndex: 2 }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div style={{ paddingLeft: 30, paddingRight: 30 }}>
         {heading && (
           <h2
             style={{

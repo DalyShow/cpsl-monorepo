@@ -73,7 +73,10 @@ export function TopNav({
       }
       style={{ background: "#041124", borderBottom: "1px solid #1E2D45" }}
     >
-      <div className="max-w-7xl mx-auto h-full grid grid-cols-[auto_1fr_auto] items-center px-4 sm:px-6">
+      <div
+        className="h-full grid grid-cols-[auto_1fr_auto] items-center"
+        style={{ paddingLeft: 30, paddingRight: 30 }}
+      >
 
         {/* Logo */}
         <Link
@@ -196,9 +199,14 @@ export function TopNav({
       {menuOpen && (
         <div
           className="md:hidden absolute left-0 right-0 top-20"
-          style={{ background: "#041124", borderBottom: "1px solid #1E2D45" }}
+          style={{
+            background: "#041124",
+            borderBottom: "1px solid #1E2D45",
+            paddingLeft: 30,
+            paddingRight: 30,
+          }}
         >
-          <nav className="flex flex-col p-4 gap-1">
+          <nav className="flex flex-col py-4 gap-1">
             {items.map((item, i) =>
               isFlyoutItem(item) ? (
                 <div key={item.label} className="py-2">

@@ -82,15 +82,18 @@ export function DualPanel({ left, right }: DualPanelProps) {
   return (
     <>
       <style>{`
+        /* Fit below the 80 px nav + ~80 px logo ticker so the
+           component fills the visible viewport without triggering
+           page scroll. Same math the PromoHero's Fill Viewport uses. */
         .cpsl-dual-panel {
           display: grid;
           grid-template-columns: 2fr 1fr;
           gap: 30px;
           padding: 30px;
-          height: calc(100vh - 80px);
+          height: calc(100vh - 160px);
         }
         @supports (height: 100dvh) {
-          .cpsl-dual-panel { height: calc(100dvh - 80px); }
+          .cpsl-dual-panel { height: calc(100dvh - 160px); }
         }
 
         .cpsl-panel {
@@ -212,7 +215,7 @@ export function DualPanel({ left, right }: DualPanelProps) {
             gap: 16px;
             padding: 16px;
             height: auto;
-            min-height: calc(100vh - 80px);
+            min-height: calc(100vh - 160px);
           }
           .cpsl-panel {
             display: flex;
