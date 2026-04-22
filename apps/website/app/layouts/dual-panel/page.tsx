@@ -148,13 +148,13 @@ export default function DualPanelPreview() {
           }
 
           /* ── Reveal choreography ──────────────────────────────────────
-             1. Image wipes in left-to-right over 1.2 s (second panel
-                delayed 150 ms so they feel like a run of the baton).
-             2. Scrim fades in alongside the image so the bottom of
-                the photo reads cleanly the moment it lands.
-             3. Copy + CTA rise into view with a slight upward travel,
-                staggered every 100 ms: eyebrow → headline → sub →
-                button. ────────────────────────────────────────────── */
+             1. Left panel first: image wipes in left-to-right on a
+                luxurious 1.6 s smooth-tail ease, with the copy rising
+                alongside it starting at 0 ms (staggered 100 ms each).
+             2. Right panel begins once the left's wipe is basically
+                done (1.6 s offset) — so the two feel like a clear
+                sequence instead of a simultaneous pair.
+             ─────────────────────────────────────────────────────── */
           @keyframes cpsl-panel-wipe {
             from { clip-path: inset(0 100% 0 0); }
             to   { clip-path: inset(0 0 0 0);    }
@@ -169,10 +169,10 @@ export default function DualPanelPreview() {
           }
 
           .cpsl-panel__img {
-            animation: cpsl-panel-wipe 1.2s cubic-bezier(.19, 1, .22, 1) both;
+            animation: cpsl-panel-wipe 1.6s cubic-bezier(.16, 1, .3, 1) both;
           }
           .cpsl-panel__scrim {
-            animation: cpsl-fade-in 1.2s cubic-bezier(.19, 1, .22, 1) both;
+            animation: cpsl-fade-in 1.6s cubic-bezier(.16, 1, .3, 1) both;
           }
           .cpsl-panel__eyebrow,
           .cpsl-panel__headline,
@@ -180,20 +180,22 @@ export default function DualPanelPreview() {
           .cpsl-panel__cta {
             animation: cpsl-content-in 700ms cubic-bezier(.2, .8, .2, 1) both;
           }
-          .cpsl-panel__eyebrow     { animation-delay: 600ms; }
-          .cpsl-panel__headline    { animation-delay: 700ms; }
-          .cpsl-panel__subheadline { animation-delay: 800ms; }
-          .cpsl-panel__cta         { animation-delay: 900ms; }
+          /* Text starts with the wipe and staggers in 100 ms steps. */
+          .cpsl-panel__eyebrow     { animation-delay: 0ms;   }
+          .cpsl-panel__headline    { animation-delay: 100ms; }
+          .cpsl-panel__subheadline { animation-delay: 200ms; }
+          .cpsl-panel__cta         { animation-delay: 300ms; }
 
-          /* Second panel: the whole sequence is offset by 150 ms. */
+          /* Right panel is fully sequential — kicks off once the
+             left panel's 1.6 s wipe has finished. */
           .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__img,
           .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__scrim {
-            animation-delay: 150ms;
+            animation-delay: 1600ms;
           }
-          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__eyebrow     { animation-delay: 750ms; }
-          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__headline    { animation-delay: 850ms; }
-          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__subheadline { animation-delay: 950ms; }
-          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__cta         { animation-delay: 1050ms; }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__eyebrow     { animation-delay: 1600ms; }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__headline    { animation-delay: 1700ms; }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__subheadline { animation-delay: 1800ms; }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__cta         { animation-delay: 1900ms; }
 
           @media (prefers-reduced-motion: reduce) {
             .cpsl-panel__img,
