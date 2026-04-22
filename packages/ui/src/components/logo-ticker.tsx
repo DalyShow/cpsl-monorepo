@@ -64,7 +64,18 @@ export function LogoTicker({
       : sectionBackground;
 
   return (
-    <section style={{ background: sectionBackground, padding: "16px 0", position: "relative", zIndex: 2 }}>
+    <section
+      style={{
+        background: sectionBackground,
+        // 30 px top so the gap between the nav and the ticker matches
+        // the 30 px gap between the ticker and the next module (which
+        // contributes its own 30 px top padding). Equal breathing room
+        // on both sides of the ticker.
+        padding: "30px 0 0 0",
+        position: "relative",
+        zIndex: 2,
+      }}
+    >
       <div style={{ paddingLeft: 30, paddingRight: 30 }}>
         {heading && (
           <h2
