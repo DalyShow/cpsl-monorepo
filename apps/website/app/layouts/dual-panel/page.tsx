@@ -229,7 +229,7 @@ export default function DualPanelPreview() {
             .cpsl-panel__img {
               position: relative;
               inset: auto;
-              aspect-ratio: 16 / 10;
+              aspect-ratio: 4 / 3;
               width: 100%;
             }
             .cpsl-panel__scrim { display: none; }
