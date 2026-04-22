@@ -660,12 +660,12 @@ export function PromoHero({
             min-height: calc(100dvh - 160px);
           }
         }
-        @keyframes cpsl-hero-timer-fill {
-          from { stroke-dashoffset: 106.8; }
-          to   { stroke-dashoffset: 0;     }
+        @keyframes cpsl-hero-timer-bar {
+          from { transform: scaleX(0); }
+          to   { transform: scaleX(1); }
         }
         @media (prefers-reduced-motion: reduce) {
-          .cpsl-hero-timer-ring { animation: none !important; stroke-dashoffset: 0 !important; }
+          .cpsl-hero-timer-fill { animation: none !important; transform: scaleX(1) !important; }
         }
       `}</style>
     <section
@@ -845,43 +845,31 @@ export function PromoHero({
           >
             <div
               style={{
-                width: 40,
-                height: 40,
                 position: "relative",
+                width: "clamp(100px, 18vw, 220px)",
+                height: 3,
+                background: "rgba(244,239,230,0.22)",
+                overflow: "hidden",
                 pointerEvents: "auto",
               }}
+              role="progressbar"
               aria-label={`Slide ${activeIdx + 1} of ${effectiveSlides.length}`}
             >
-              <svg
-                viewBox="0 0 40 40"
-                style={{ width: "100%", height: "100%", transform: "rotate(-90deg)" }}
-                aria-hidden="true"
-              >
-                <circle
-                  cx="20"
-                  cy="20"
-                  r="17"
-                  fill="none"
-                  stroke="rgba(244,239,230,0.22)"
-                  strokeWidth="2"
-                />
-                <circle
-                  key={activeIdx}
-                  className="cpsl-hero-timer-ring"
-                  cx="20"
-                  cy="20"
-                  r="17"
-                  fill="none"
-                  stroke="#D4B949"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeDasharray="106.8"
-                  strokeDashoffset="106.8"
-                  style={{
-                    animation: `cpsl-hero-timer-fill ${dur}s linear forwards`,
-                  }}
-                />
-              </svg>
+              <div
+                key={activeIdx}
+                className="cpsl-hero-timer-fill"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: "#D4B949",
+                  transformOrigin: "left center",
+                  transform: "scaleX(0)",
+                  animation: `cpsl-hero-timer-bar ${dur}s linear forwards`,
+                }}
+              />
             </div>
           </div>
         </div>
