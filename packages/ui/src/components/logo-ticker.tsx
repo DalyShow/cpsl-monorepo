@@ -99,7 +99,13 @@ export function LogoTicker({
             style={{
               display: "flex",
               flexDirection: "row",
-              gap: GAP,
+              // When the logos don't fill the viewport yet, spread
+              // them edge-to-edge (no fixed gap) so the row feels
+              // deliberately sized to the container. Once there are
+              // enough to overflow, fall back to a fixed gap and
+              // marquee scroll.
+              justifyContent: shouldScroll ? "flex-start" : "space-between",
+              gap: shouldScroll ? GAP : 0,
               width: shouldScroll ? "max-content" : "100%",
               animationName: shouldScroll ? "cpsl-ticker-scroll" : "none",
               animationDuration: shouldScroll ? `${durationSeconds}s` : undefined,
