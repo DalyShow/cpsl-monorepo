@@ -42,7 +42,7 @@ function PanelBox({ panel }: { panel: Panel }) {
         position: "relative",
         overflow: "hidden",
         borderRadius: 4,
-        background: `linear-gradient(180deg, rgba(4,17,36,0.2) 0%, rgba(4,17,36,0.75) 100%), url(${panel.src}) center/cover no-repeat`,
+        background: `linear-gradient(180deg, rgba(4,17,36,0) 0%, rgba(4,17,36,0) 40%, rgba(4,17,36,0.55) 100%), url(${panel.src}) center/cover no-repeat`,
         color: "#F4EFE6",
       }}
     >
