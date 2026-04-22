@@ -29,6 +29,9 @@ export {
   PromoHero,
   PromoReveal,
 } from "./components/promo-tiles";
+
+export { DualPanel } from "./components/dual-panel";
+export type { DualPanelProps, DualPanelItem } from "./components/dual-panel";
 export type {
   PhotoTileProps,
   PromoTileProps,

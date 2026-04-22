@@ -58,6 +58,7 @@ export const page = defineType({
         { type: "subNavBlock" },
         { type: "promoHeroBlock" },
         { type: "promoGridBlock" },
+        { type: "dualPanelBlock" },
       ],
     }),
   ],

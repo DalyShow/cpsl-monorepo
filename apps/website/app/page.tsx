@@ -33,6 +33,16 @@ export default async function Home() {
             video{ ..., asset->{ url } },
             graphic{ ..., asset->{ url } }
           },
+          leftPanel{
+            ...,
+            image{ ..., asset->{ url } },
+            video{ ..., asset->{ url } }
+          },
+          rightPanel{
+            ...,
+            image{ ..., asset->{ url } },
+            video{ ..., asset->{ url } }
+          },
           image{ ..., asset->{ url } },
           bottomImage{ ..., asset->{ url } },
           lottie{ ..., asset->{ url } },

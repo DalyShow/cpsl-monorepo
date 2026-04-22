@@ -20,6 +20,7 @@ export const homePage = defineType({
         { type: "subNavBlock" },
         { type: "promoHeroBlock" },
         { type: "promoGridBlock" },
+        { type: "dualPanelBlock" },
       ],
     }),
   ],

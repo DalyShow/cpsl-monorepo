@@ -21,6 +21,8 @@ import { subNavBlock }         from "./blocks/subNavBlock";
 import { promoHeroBlock }      from "./blocks/promoHeroBlock";
 import { heroSlide }           from "./blocks/heroSlide";
 import { promoGridBlock }      from "./blocks/promoGridBlock";
+import { dualPanelBlock }      from "./blocks/dualPanelBlock";
+import { dualPanelItem }       from "./blocks/dualPanelItem";
 import { photoTile }           from "./blocks/tiles/photoTile";
 import { promoTile }           from "./blocks/tiles/promoTile";
 import { graphicTile }         from "./blocks/tiles/graphicTile";
@@ -50,6 +52,8 @@ export const schemaTypes = [
   promoHeroBlock,
   heroSlide,
   promoGridBlock,
+  dualPanelBlock,
+  dualPanelItem,
   photoTile,
   promoTile,
   graphicTile,
