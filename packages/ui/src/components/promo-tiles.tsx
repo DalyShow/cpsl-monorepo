@@ -162,11 +162,11 @@ export function PhotoTile({
               style={{
                 fontFamily: "'Barlow Condensed', sans-serif",
                 fontWeight: 600,
-                fontSize: 11,
+                fontSize: 13,
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
                 color: "#D4B949",
-                marginBottom: 6,
+                marginBottom: 8,
               }}
             >
               {eyebrow}
@@ -177,10 +177,11 @@ export function PhotoTile({
               style={{
                 fontFamily: "'Barlow Condensed', sans-serif",
                 fontWeight: 800,
-                fontSize: "clamp(22px, 2.6vw, 34px)",
+                fontSize: "clamp(28px, 3.2vw, 44px)",
                 lineHeight: 1.05,
                 letterSpacing: "-0.01em",
                 textTransform: "uppercase",
+                textWrap: "balance",
               }}
             >
               {title}
@@ -332,11 +333,11 @@ export function PromoTile({
             style={{
               fontFamily: "'Barlow Condensed', sans-serif",
               fontWeight: 700,
-              fontSize: 11,
+              fontSize: 13,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
               color: t.eyebrow,
-              marginBottom: 10,
+              marginBottom: 12,
             }}
           >
             {eyebrow}
@@ -346,11 +347,12 @@ export function PromoTile({
           style={{
             fontFamily: "'Barlow Condensed', sans-serif",
             fontWeight: 900,
-            fontSize: "clamp(26px, 3vw, 42px)",
+            fontSize: "clamp(32px, 3.6vw, 52px)",
             lineHeight: 1.0,
             letterSpacing: "-0.02em",
             textTransform: "uppercase",
             marginBottom: body ? 12 : 0,
+            textWrap: "balance",
           }}
         >
           {title}
@@ -465,10 +467,10 @@ export function GraphicTile({
           style={{
             fontFamily: "'Barlow Condensed', sans-serif",
             fontWeight: 900,
-            fontSize: "clamp(48px, 5.6vw, 88px)",
+            fontSize: "clamp(60px, 6.4vw, 112px)",
             lineHeight: 0.95,
             letterSpacing: "-0.03em",
-            marginBottom: 6,
+            marginBottom: 8,
             position: "relative",
             zIndex: 1,
           }}
@@ -481,7 +483,7 @@ export function GraphicTile({
           style={{
             fontFamily: "'Barlow Condensed', sans-serif",
             fontWeight: 700,
-            fontSize: 13,
+            fontSize: 15,
             letterSpacing: "0.16em",
             textTransform: "uppercase",
             color: labelColor,
@@ -744,7 +746,7 @@ export function PromoHero({
                   style={{
                     fontFamily: "'Barlow Condensed', sans-serif",
                     fontWeight: 600,
-                    fontSize: isLeft ? 12 : 13,
+                    fontSize: isLeft ? 14 : 15,
                     letterSpacing: "0.16em",
                     textTransform: "uppercase",
                     color: "#D4B949",
@@ -776,8 +778,8 @@ export function PromoHero({
                     fontFamily: "'Barlow Condensed', sans-serif",
                     fontWeight: 900,
                     fontSize: isLeft
-                      ? "clamp(32px, 5vw, 60px)"
-                      : "clamp(44px, 8vw, 88px)",
+                      ? "clamp(40px, 6vw, 72px)"
+                      : "clamp(54px, 9vw, 112px)",
                     lineHeight: 1.0,
                     letterSpacing: "-0.02em",
                     textTransform: "uppercase",

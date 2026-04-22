@@ -138,20 +138,20 @@ export function DualPanel({ left, right }: DualPanelProps) {
         .cpsl-panel__eyebrow {
           font-family: 'Barlow Condensed', sans-serif;
           font-weight: 600;
-          font-size: 12px;
+          font-size: 14px;
           letter-spacing: 0.18em;
           text-transform: uppercase;
           color: #D4B949;
-          margin: 0 0 12px;
+          margin: 0 0 14px;
         }
         .cpsl-panel__headline {
           font-family: 'Barlow Condensed', sans-serif;
           font-weight: 900;
-          font-size: clamp(26px, 2.8vw, 40px);
+          font-size: clamp(32px, 3.4vw, 52px);
           line-height: 1.05;
           letter-spacing: -0.01em;
           text-transform: uppercase;
-          margin: 0 0 14px;
+          margin: 0 0 16px;
           text-wrap: balance;
         }
         .cpsl-panel__subheadline {
