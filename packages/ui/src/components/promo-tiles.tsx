@@ -577,6 +577,21 @@ export function PromoHero({
 }: PromoHeroProps) {
   const isLeft = layout === "left";
   return (
+    <>
+      {/* Fill-viewport CSS ships with every PromoHero so it works
+          regardless of whether a promoGridBlock (which also loads
+          this rule via PromoReveal) is on the page. Duplicate rules
+          across multiple heroes / grids are harmless. */}
+      <style>{`
+        .cpsl-promo-hero--full {
+          min-height: calc(100vh - 80px + env(safe-area-inset-bottom, 0px));
+        }
+        @supports (min-height: 100dvh) {
+          .cpsl-promo-hero--full {
+            min-height: calc(100dvh - 80px + env(safe-area-inset-bottom, 0px));
+          }
+        }
+      `}</style>
     <section
       className={fullHeight ? "cpsl-promo-hero--full" : undefined}
       style={{
@@ -693,6 +708,7 @@ export function PromoHero({
         }}
       />
     </section>
+    </>
   );
 }
 
