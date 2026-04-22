@@ -550,8 +550,17 @@ export interface PromoHeroProps {
   /** Optional background video. Autoplays muted + looped; falls back
    *  to backgroundUrl while loading. */
   videoUrl?: string;
-  /** Hero section height — defaults to "70vh" */
+  /** Hero section height — defaults to "70vh". Ignored when
+   *  fullHeight is true. */
   height?: string;
+  /** When true, the hero fills the viewport below the 80 px fixed
+   *  nav (via 100dvh with safe-area handling). Overrides `height`. */
+  fullHeight?: boolean;
+  /** Content alignment:
+   *   - "center" (default): large centered headline, centered CTA.
+   *   - "left":   smaller headline, left-aligned, content pinned to
+   *              the left edge of the hero. */
+  layout?: "center" | "left";
 }
 
 export function PromoHero({
@@ -563,18 +572,24 @@ export function PromoHero({
   backgroundUrl,
   videoUrl,
   height = "70vh",
+  fullHeight = false,
+  layout = "center",
 }: PromoHeroProps) {
+  const isLeft = layout === "left";
   return (
     <section
+      className={fullHeight ? "cpsl-promo-hero--full" : undefined}
       style={{
         position: "relative",
-        height,
-        minHeight: 520,
+        height: fullHeight ? undefined : height,
+        minHeight: fullHeight ? undefined : 520,
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        padding: "0 24px",
+        justifyContent: isLeft ? "flex-start" : "center",
+        textAlign: isLeft ? "left" : "center",
+        padding: isLeft
+          ? "0 clamp(24px, 6vw, 96px)"
+          : "0 24px",
         overflow: "hidden",
         background: "#041124",
       }}
@@ -604,17 +619,23 @@ export function PromoHero({
           }}
         />
       )}
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 860 }}>
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: isLeft ? 560 : 860,
+        }}
+      >
         {eyebrow && (
           <p
             style={{
               fontFamily: "'Barlow Condensed', sans-serif",
               fontWeight: 600,
-              fontSize: 13,
+              fontSize: isLeft ? 12 : 13,
               letterSpacing: "0.16em",
               textTransform: "uppercase",
               color: "#D4B949",
-              marginBottom: 20,
+              marginBottom: isLeft ? 16 : 20,
             }}
           >
             {eyebrow}
@@ -624,12 +645,14 @@ export function PromoHero({
           style={{
             fontFamily: "'Barlow Condensed', sans-serif",
             fontWeight: 900,
-            fontSize: "clamp(44px, 8vw, 88px)",
+            fontSize: isLeft
+              ? "clamp(32px, 5vw, 60px)"
+              : "clamp(44px, 8vw, 88px)",
             lineHeight: 1.0,
             letterSpacing: "-0.02em",
             textTransform: "uppercase",
             color: "#F4EFE6",
-            margin: "0 0 24px",
+            margin: isLeft ? "0 0 18px" : "0 0 24px",
           }}
         >
           {headline}
@@ -638,18 +661,20 @@ export function PromoHero({
           <p
             style={{
               fontFamily: "Inter, sans-serif",
-              fontSize: "clamp(16px, 2vw, 19px)",
+              fontSize: isLeft
+                ? "clamp(14px, 1.4vw, 17px)"
+                : "clamp(16px, 2vw, 19px)",
               lineHeight: 1.6,
               color: "#94A3B8",
-              maxWidth: 620,
-              margin: "0 auto 36px",
+              maxWidth: isLeft ? 480 : 620,
+              margin: isLeft ? "0 0 28px" : "0 auto 36px",
             }}
           >
             {subheadline}
           </p>
         )}
         {ctaLabel && (
-          <Button asChild variant="cpsl-gold" size="lg">
+          <Button asChild variant="cpsl-gold" size={isLeft ? "default" : "lg"}>
             <a href={ctaHref}>{ctaLabel}</a>
           </Button>
         )}
@@ -796,6 +821,18 @@ export function PromoReveal() {
          immediate tile children so they read as a seamless mosaic. */
       [data-cpsl-grid="fullbleed"] > * {
         border-radius: 0 !important;
+      }
+
+      /* Full-height PromoHero: fills the viewport below the 80 px
+         fixed nav. Uses dvh for modern browsers (grows as iOS
+         Safari's chrome collapses on scroll), falls back to vh. */
+      .cpsl-promo-hero--full {
+        min-height: calc(100vh - 80px + env(safe-area-inset-bottom, 0px));
+      }
+      @supports (min-height: 100dvh) {
+        .cpsl-promo-hero--full {
+          min-height: calc(100dvh - 80px + env(safe-area-inset-bottom, 0px));
+        }
       }
 
       /* Mobile: collapse every promo grid to a single stacked column

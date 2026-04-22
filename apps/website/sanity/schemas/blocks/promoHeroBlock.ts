@@ -51,11 +51,36 @@ export const promoHeroBlock = defineType({
       description: "Optional looping video. MP4 or WebM, muted + autoplay, inline. Keep under ~8 MB for iOS.",
     }),
     defineField({
+      name: "fullHeight",
+      title: "Fill Viewport",
+      type: "boolean",
+      description:
+        "When on, the hero fills the visible viewport below the nav (100dvh with safe-area handling). Overrides the Height field below.",
+      initialValue: false,
+    }),
+    defineField({
       name: "height",
-      title: "Height",
+      title: "Height (manual)",
       type: "string",
-      description: "Hero section height. Default '70vh'. Use '100vh' for full viewport, '60vh' for shorter, etc.",
+      description:
+        "Hero section height when Fill Viewport is off. Default '70vh'. Use '60vh' for shorter, '80vh' for taller, etc.",
       initialValue: "70vh",
+      hidden: ({ parent }) => !!parent?.fullHeight,
+    }),
+    defineField({
+      name: "layout",
+      title: "Content Layout",
+      type: "string",
+      description:
+        "'Center' = large centered headline (default). 'Left' = smaller headline + copy pinned to the left edge — good as an alternate hero style for secondary pages.",
+      initialValue: "center",
+      options: {
+        list: [
+          { title: "Center",         value: "center" },
+          { title: "Left (smaller)", value: "left"   },
+        ],
+        layout: "radio",
+      },
     }),
   ],
   preview: {

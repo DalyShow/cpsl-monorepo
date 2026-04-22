@@ -9,11 +9,14 @@ export interface PromoHeroBlockProps {
   backgroundImage?: { asset?: { url?: string } };
   backgroundVideo?: { asset?: { url?: string } };
   height?: string;
+  fullHeight?: boolean;
+  layout?: "center" | "left";
 }
 
 /**
  * Sanity wrapper around the @cpsl/ui PromoHero component. Renders
- * the full-bleed 70vh hero with an optional image + video background.
+ * the full-bleed hero with an optional image + video background,
+ * configurable height and layout.
  */
 export function PromoHeroBlock({
   eyebrow,
@@ -24,6 +27,8 @@ export function PromoHeroBlock({
   backgroundImage,
   backgroundVideo,
   height,
+  fullHeight,
+  layout,
 }: PromoHeroBlockProps) {
   if (!headline) return null;
   return (
@@ -36,6 +41,8 @@ export function PromoHeroBlock({
       backgroundUrl={backgroundImage?.asset?.url}
       videoUrl={backgroundVideo?.asset?.url}
       height={height}
+      fullHeight={fullHeight}
+      layout={layout}
     />
   );
 }
