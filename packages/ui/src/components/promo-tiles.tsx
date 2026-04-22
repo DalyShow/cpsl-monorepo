@@ -542,10 +542,21 @@ export function PromoGrid({
 export interface HeroSlide {
   imageUrl?: string;
   videoUrl?: string;
+  /** Per-slide copy — each optional, falls back to the hero's
+   *  top-level field when blank. Lets every slide carry its own
+   *  eyebrow, headline, subheadline, and CTA. */
+  eyebrow?: string;
+  headline?: string;
+  subheadline?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
 }
 
 export interface PromoHeroProps {
-  headline: string;
+  /** Default headline used when no slides override it. Strongly
+   *  recommended — a hero without a headline on any slide or the
+   *  parent renders with no copy. */
+  headline?: string;
   subheadline?: string;
   eyebrow?: string;
   ctaLabel?: string;
@@ -643,34 +654,41 @@ export function PromoHero({
         position: "relative",
         height: fullHeight ? undefined : height,
         minHeight: fullHeight ? undefined : 520,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: isLeft ? "flex-start" : "center",
-        textAlign: isLeft ? "left" : "center",
-        padding: isLeft
-          ? "0 clamp(24px, 6vw, 96px)"
-          : "0 24px",
         overflow: "hidden",
         background: "#041124",
       }}
     >
-      {/* Slide stack — each slide crossfades in/out based on activeIdx.
-          Image (if any) is the visible layer + poster for the video. */}
+      {/* Slide stack — each slide is a full layer (media + content)
+          so the image AND the text crossfade together per slide. */}
       {effectiveSlides.map((slide, i) => {
         const isActive = i === activeIdx;
+        // Merge slide copy with hero-level defaults.
+        const slideEyebrow     = slide.eyebrow     ?? eyebrow;
+        const slideHeadline    = slide.headline    ?? headline;
+        const slideSubheadline = slide.subheadline ?? subheadline;
+        const slideCtaLabel    = slide.ctaLabel    ?? ctaLabel;
+        const slideCtaHref     = slide.ctaHref     ?? ctaHref;
         return (
           <div
             key={i}
-            aria-hidden="true"
             style={{
               position: "absolute",
               inset: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: isLeft ? "flex-start" : "center",
+              textAlign: isLeft ? "left" : "center",
+              padding: isLeft ? "0 clamp(24px, 6vw, 96px)" : "0 24px",
               opacity: isActive ? 1 : 0,
               transition: "opacity 800ms ease-in-out",
+              pointerEvents: isActive ? "auto" : "none",
             }}
+            aria-hidden={!isActive}
           >
+            {/* Image */}
             {slide.imageUrl && (
               <div
+                aria-hidden
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -678,24 +696,86 @@ export function PromoHero({
                 }}
               />
             )}
+            {/* Video (only rendered for the active slide to save bandwidth) */}
             {slide.videoUrl && isActive && (
               <TileVideo src={slide.videoUrl} poster={slide.imageUrl} />
             )}
+            {/* Scrim */}
+            <div
+              aria-hidden
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(to bottom, rgba(9,22,40,0.65) 0%, rgba(9,22,40,0.40) 50%, rgba(4,17,36,0.95) 100%)",
+              }}
+            />
+            {/* Content */}
+            <div
+              style={{
+                position: "relative",
+                zIndex: 1,
+                maxWidth: isLeft ? 560 : 860,
+              }}
+            >
+              {slideEyebrow && (
+                <p
+                  style={{
+                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontWeight: 600,
+                    fontSize: isLeft ? 12 : 13,
+                    letterSpacing: "0.16em",
+                    textTransform: "uppercase",
+                    color: "#D4B949",
+                    marginBottom: isLeft ? 16 : 20,
+                  }}
+                >
+                  {slideEyebrow}
+                </p>
+              )}
+              {slideHeadline && (
+                <h1
+                  style={{
+                    fontFamily: "'Barlow Condensed', sans-serif",
+                    fontWeight: 900,
+                    fontSize: isLeft
+                      ? "clamp(32px, 5vw, 60px)"
+                      : "clamp(44px, 8vw, 88px)",
+                    lineHeight: 1.0,
+                    letterSpacing: "-0.02em",
+                    textTransform: "uppercase",
+                    color: "#F4EFE6",
+                    margin: isLeft ? "0 0 18px" : "0 0 24px",
+                  }}
+                >
+                  {slideHeadline}
+                </h1>
+              )}
+              {slideSubheadline && (
+                <p
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: isLeft
+                      ? "clamp(14px, 1.4vw, 17px)"
+                      : "clamp(16px, 2vw, 19px)",
+                    lineHeight: 1.6,
+                    color: "#94A3B8",
+                    maxWidth: isLeft ? 480 : 620,
+                    margin: isLeft ? "0 0 28px" : "0 auto 36px",
+                  }}
+                >
+                  {slideSubheadline}
+                </p>
+              )}
+              {slideCtaLabel && (
+                <Button asChild variant="cpsl-gold" size={isLeft ? "default" : "lg"}>
+                  <a href={slideCtaHref}>{slideCtaLabel}</a>
+                </Button>
+              )}
+            </div>
           </div>
         );
       })}
-      {/* Scrim on top of whichever slide is showing. */}
-      {effectiveSlides.length > 0 && (
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to bottom, rgba(9,22,40,0.65) 0%, rgba(9,22,40,0.40) 50%, rgba(4,17,36,0.95) 100%)",
-          }}
-        />
-      )}
 
       {/* Circular progress timer on the far left — only when there's
           more than one slide. Re-keys on activeIdx so the stroke-
@@ -709,7 +789,7 @@ export function PromoHero({
             transform: "translateY(-50%)",
             width: 56,
             height: 56,
-            zIndex: 2,
+            zIndex: 3,
           }}
           aria-label={`Slide ${activeIdx + 1} of ${effectiveSlides.length}`}
         >
@@ -718,7 +798,6 @@ export function PromoHero({
             style={{ width: "100%", height: "100%", transform: "rotate(-90deg)" }}
             aria-hidden="true"
           >
-            {/* Track */}
             <circle
               cx="28"
               cy="28"
@@ -727,7 +806,6 @@ export function PromoHero({
               stroke="rgba(244,239,230,0.22)"
               strokeWidth="2"
             />
-            {/* Progress — circumference = 2π·24 ≈ 150.8 */}
             <circle
               key={activeIdx}
               className="cpsl-hero-timer-ring"
@@ -764,66 +842,7 @@ export function PromoHero({
           </div>
         </div>
       )}
-      <div
-        style={{
-          position: "relative",
-          zIndex: 1,
-          maxWidth: isLeft ? 560 : 860,
-        }}
-      >
-        {eyebrow && (
-          <p
-            style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontWeight: 600,
-              fontSize: isLeft ? 12 : 13,
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
-              color: "#D4B949",
-              marginBottom: isLeft ? 16 : 20,
-            }}
-          >
-            {eyebrow}
-          </p>
-        )}
-        <h1
-          style={{
-            fontFamily: "'Barlow Condensed', sans-serif",
-            fontWeight: 900,
-            fontSize: isLeft
-              ? "clamp(32px, 5vw, 60px)"
-              : "clamp(44px, 8vw, 88px)",
-            lineHeight: 1.0,
-            letterSpacing: "-0.02em",
-            textTransform: "uppercase",
-            color: "#F4EFE6",
-            margin: isLeft ? "0 0 18px" : "0 0 24px",
-          }}
-        >
-          {headline}
-        </h1>
-        {subheadline && (
-          <p
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: isLeft
-                ? "clamp(14px, 1.4vw, 17px)"
-                : "clamp(16px, 2vw, 19px)",
-              lineHeight: 1.6,
-              color: "#94A3B8",
-              maxWidth: isLeft ? 480 : 620,
-              margin: isLeft ? "0 0 28px" : "0 auto 36px",
-            }}
-          >
-            {subheadline}
-          </p>
-        )}
-        {ctaLabel && (
-          <Button asChild variant="cpsl-gold" size={isLeft ? "default" : "lg"}>
-            <a href={ctaHref}>{ctaLabel}</a>
-          </Button>
-        )}
-      </div>
+
       {/* Bottom fade into grid background */}
       <div
         aria-hidden
@@ -835,6 +854,7 @@ export function PromoHero({
           height: "20%",
           background: "linear-gradient(to bottom, rgba(4,17,36,0), rgba(4,17,36,1))",
           pointerEvents: "none",
+          zIndex: 2,
         }}
       />
     </section>

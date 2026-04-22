@@ -4,6 +4,11 @@ interface SanitySlide {
   _key?: string;
   image?: { asset?: { url?: string } };
   video?: { asset?: { url?: string } };
+  eyebrow?: string;
+  headline?: string;
+  subheadline?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
 }
 
 export interface PromoHeroBlockProps {
@@ -40,13 +45,30 @@ export function PromoHeroBlock({
   fullHeight,
   layout,
 }: PromoHeroBlockProps) {
-  if (!headline) return null;
   const mappedSlides = (slides ?? [])
     .map((s) => ({
       imageUrl: s.image?.asset?.url,
       videoUrl: s.video?.asset?.url,
+      eyebrow: s.eyebrow,
+      headline: s.headline,
+      subheadline: s.subheadline,
+      ctaLabel: s.ctaLabel,
+      ctaHref: s.ctaHref,
     }))
-    .filter((s) => s.imageUrl || s.videoUrl);
+    // A slide is useful if it has either media OR its own copy.
+    .filter(
+      (s) =>
+        s.imageUrl ||
+        s.videoUrl ||
+        s.eyebrow ||
+        s.headline ||
+        s.subheadline ||
+        s.ctaLabel,
+    );
+
+  // Only bail if there's literally nothing to show: no top-level
+  // headline AND no slides with content or media.
+  if (!headline && mappedSlides.length === 0) return null;
 
   return (
     <PromoHero
