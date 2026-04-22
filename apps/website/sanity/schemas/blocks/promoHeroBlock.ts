@@ -16,7 +16,8 @@ export const promoHeroBlock = defineType({
       name: "headline",
       title: "Headline",
       type: "string",
-      validation: (R) => R.required(),
+      description:
+        "Main hero headline. Optional when every slide below carries its own headline — this value is used as the fallback for slides that leave the Headline field blank.",
     }),
     defineField({
       name: "subheadline",
