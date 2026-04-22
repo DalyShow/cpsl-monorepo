@@ -147,15 +147,17 @@ export function HeroBlock({
           The vh declaration is a fallback for browsers without lvh. */}
       <style>{`
         .cpsl-hero {
-          min-height: calc(100vh - 80px);
+          min-height: calc(100vh - 80px + env(safe-area-inset-bottom, 0px));
         }
-        @supports (min-height: 100dvh) {
+        @supports (min-height: 100lvh) {
           .cpsl-hero {
-            /* dvh tracks the currently-visible viewport so the hero
-               always exactly fills the screen — no scrollbar, and as
-               Safari's chrome collapses on scroll the hero grows to
-               match. */
-            min-height: calc(100dvh - 80px);
+            /* lvh is the "large" viewport (height when browser chrome
+               is collapsed). Using it means the hero is as tall as the
+               full display, so the image extends behind Safari's tab
+               bar instead of stopping above it. A small scrollbar on
+               initial load is the tradeoff — the hero is slightly
+               taller than svh so iOS flags a bit of overflow. */
+            min-height: calc(100lvh - 80px + env(safe-area-inset-bottom, 0px));
           }
         }
       `}</style>
