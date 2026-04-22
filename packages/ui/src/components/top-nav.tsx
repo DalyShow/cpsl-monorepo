@@ -87,8 +87,8 @@ export function TopNav({
           <Image
             src={logoSrc}
             alt={logoAlt}
-            width={148}
-            height={54}
+            width={240}
+            height={40}
             unoptimized
             priority
           />
