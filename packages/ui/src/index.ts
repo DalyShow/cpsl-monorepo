@@ -20,3 +20,20 @@ export type {
   FlyoutItem,
   FlyoutAction,
 } from "./components/flyout-menu";
+
+export {
+  PhotoTile,
+  PromoTile,
+  GraphicTile,
+  PromoGrid,
+  PromoHero,
+  PromoReveal,
+} from "./components/promo-tiles";
+export type {
+  PhotoTileProps,
+  PromoTileProps,
+  GraphicTileProps,
+  PromoGridProps,
+  PromoHeroProps,
+  RevealVariant,
+} from "./components/promo-tiles";
