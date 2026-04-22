@@ -155,7 +155,7 @@ export function HeroBlock({
                Safari because lvh is the height WHEN chrome is
                collapsed — it doesn't include the rest of the tab bar
                overlay region when chrome is actually showing.
-               Dropping the `-80px` nav subtraction and adding the
+               Dropping the -80px nav subtraction and adding the
                safe-area inset lets the hero reach all the way to the
                device edge, with the fixed TopNav covering its own
                80 px top region. */
