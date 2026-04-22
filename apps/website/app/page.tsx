@@ -27,6 +27,11 @@ export default async function Home() {
           backgroundImage{ ..., asset->{ url } },
           backgroundVideo{ ..., asset->{ url } },
           backgroundImages[]{ ..., asset->{ url } },
+          slides[]{
+            ...,
+            image{ ..., asset->{ url } },
+            video{ ..., asset->{ url } }
+          },
           image{ ..., asset->{ url } },
           bottomImage{ ..., asset->{ url } },
           lottie{ ..., asset->{ url } },

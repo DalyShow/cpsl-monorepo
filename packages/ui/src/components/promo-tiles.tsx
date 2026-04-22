@@ -1,6 +1,6 @@
 "use client";
 
-import type { CSSProperties, ReactNode } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { Button } from "./button";
 
 /**
@@ -539,6 +539,11 @@ export function PromoGrid({
 
 // ── PromoHero (full-bleed 70vh hero) ────────────────────────────────────────
 
+export interface HeroSlide {
+  imageUrl?: string;
+  videoUrl?: string;
+}
+
 export interface PromoHeroProps {
   headline: string;
   subheadline?: string;
@@ -550,6 +555,12 @@ export interface PromoHeroProps {
   /** Optional background video. Autoplays muted + looped; falls back
    *  to backgroundUrl while loading. */
   videoUrl?: string;
+  /** Optional slideshow. When provided (and has ≥1 slide), takes
+   *  precedence over backgroundUrl/videoUrl. Slides crossfade on a
+   *  timer with a circular progress indicator on the far left. */
+  slides?: HeroSlide[];
+  /** Seconds per slide. Default 6. */
+  slideDuration?: number;
   /** Hero section height — defaults to "70vh". Ignored when
    *  fullHeight is true. */
   height?: string;
@@ -571,17 +582,44 @@ export function PromoHero({
   ctaHref = "#apply",
   backgroundUrl,
   videoUrl,
+  slides,
+  slideDuration = 6,
   height = "70vh",
   fullHeight = false,
   layout = "center",
 }: PromoHeroProps) {
   const isLeft = layout === "left";
+
+  // Resolve the effective slide set. If explicit slides are passed,
+  // use them; otherwise fall back to the single-image/video fields.
+  const effectiveSlides: HeroSlide[] =
+    slides && slides.length > 0
+      ? slides
+      : backgroundUrl || videoUrl
+      ? [{ imageUrl: backgroundUrl, videoUrl }]
+      : [];
+  const hasSlideshow = effectiveSlides.length > 1;
+  const dur = Math.max(1, slideDuration);
+
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  // Auto-advance the slideshow. Reset whenever the slide count or
+  // duration changes so we don't leak timers between edits.
+  useEffect(() => {
+    if (!hasSlideshow) return;
+    const t = window.setTimeout(() => {
+      setActiveIdx((i) => (i + 1) % effectiveSlides.length);
+    }, dur * 1000);
+    return () => window.clearTimeout(t);
+  }, [activeIdx, hasSlideshow, effectiveSlides.length, dur]);
+
   return (
     <>
-      {/* Fill-viewport CSS ships with every PromoHero so it works
-          regardless of whether a promoGridBlock (which also loads
-          this rule via PromoReveal) is on the page. Duplicate rules
-          across multiple heroes / grids are harmless. */}
+      {/* Fill-viewport CSS + timer ring keyframes ship with every
+          PromoHero so they work regardless of whether a
+          promoGridBlock (which also loads these rules via
+          PromoReveal) is on the page. Duplicate rules across
+          heroes are harmless. */}
       <style>{`
         .cpsl-promo-hero--full {
           min-height: calc(100vh - 80px + env(safe-area-inset-bottom, 0px));
@@ -590,6 +628,13 @@ export function PromoHero({
           .cpsl-promo-hero--full {
             min-height: calc(100dvh - 80px + env(safe-area-inset-bottom, 0px));
           }
+        }
+        @keyframes cpsl-hero-timer-fill {
+          from { stroke-dashoffset: 150.8; }
+          to   { stroke-dashoffset: 0;     }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .cpsl-hero-timer-ring { animation: none !important; stroke-dashoffset: 0 !important; }
         }
       `}</style>
     <section
@@ -609,21 +654,38 @@ export function PromoHero({
         background: "#041124",
       }}
     >
-      {/* Image layer (and video poster). */}
-      {backgroundUrl && (
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: `url(${backgroundUrl}) center/cover no-repeat`,
-          }}
-        />
-      )}
-      {/* Video layer on top of image. */}
-      {videoUrl && <TileVideo src={videoUrl} poster={backgroundUrl} />}
-      {/* Scrim on top of whichever media is showing. */}
-      {(backgroundUrl || videoUrl) && (
+      {/* Slide stack — each slide crossfades in/out based on activeIdx.
+          Image (if any) is the visible layer + poster for the video. */}
+      {effectiveSlides.map((slide, i) => {
+        const isActive = i === activeIdx;
+        return (
+          <div
+            key={i}
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              opacity: isActive ? 1 : 0,
+              transition: "opacity 800ms ease-in-out",
+            }}
+          >
+            {slide.imageUrl && (
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: `url(${slide.imageUrl}) center/cover no-repeat`,
+                }}
+              />
+            )}
+            {slide.videoUrl && isActive && (
+              <TileVideo src={slide.videoUrl} poster={slide.imageUrl} />
+            )}
+          </div>
+        );
+      })}
+      {/* Scrim on top of whichever slide is showing. */}
+      {effectiveSlides.length > 0 && (
         <div
           aria-hidden
           style={{
@@ -633,6 +695,74 @@ export function PromoHero({
               "linear-gradient(to bottom, rgba(9,22,40,0.65) 0%, rgba(9,22,40,0.40) 50%, rgba(4,17,36,0.95) 100%)",
           }}
         />
+      )}
+
+      {/* Circular progress timer on the far left — only when there's
+          more than one slide. Re-keys on activeIdx so the stroke-
+          dashoffset animation restarts cleanly every slide change. */}
+      {hasSlideshow && (
+        <div
+          style={{
+            position: "absolute",
+            left: "clamp(20px, 3vw, 40px)",
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: 56,
+            height: 56,
+            zIndex: 2,
+          }}
+          aria-label={`Slide ${activeIdx + 1} of ${effectiveSlides.length}`}
+        >
+          <svg
+            viewBox="0 0 56 56"
+            style={{ width: "100%", height: "100%", transform: "rotate(-90deg)" }}
+            aria-hidden="true"
+          >
+            {/* Track */}
+            <circle
+              cx="28"
+              cy="28"
+              r="24"
+              fill="none"
+              stroke="rgba(244,239,230,0.22)"
+              strokeWidth="2"
+            />
+            {/* Progress — circumference = 2π·24 ≈ 150.8 */}
+            <circle
+              key={activeIdx}
+              className="cpsl-hero-timer-ring"
+              cx="28"
+              cy="28"
+              r="24"
+              fill="none"
+              stroke="#D4B949"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeDasharray="150.8"
+              strokeDashoffset="150.8"
+              style={{
+                animation: `cpsl-hero-timer-fill ${dur}s linear forwards`,
+              }}
+            />
+          </svg>
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontWeight: 700,
+              fontSize: 13,
+              letterSpacing: "0.06em",
+              color: "#F4EFE6",
+              pointerEvents: "none",
+            }}
+          >
+            {activeIdx + 1}/{effectiveSlides.length}
+          </div>
+        </div>
       )}
       <div
         style={{

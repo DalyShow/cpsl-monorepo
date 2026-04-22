@@ -41,14 +41,32 @@ export const promoHeroBlock = defineType({
       title: "Background Image",
       type: "image",
       options: { hotspot: true },
-      description: "Full-bleed hero background. Also acts as the poster for the optional looping video.",
+      description:
+        "Full-bleed hero background. Also acts as the poster for the optional looping video. Ignored if Slides are set below.",
     }),
     defineField({
       name: "backgroundVideo",
       title: "Background Video",
       type: "file",
       options: { accept: "video/mp4,video/webm,video/quicktime" },
-      description: "Optional looping video. MP4 or WebM, muted + autoplay, inline. Keep under ~8 MB for iOS.",
+      description:
+        "Optional looping video. MP4 or WebM, muted + autoplay, inline. Keep under ~8 MB for iOS. Ignored if Slides are set below.",
+    }),
+    defineField({
+      name: "slides",
+      title: "Slides",
+      type: "array",
+      description:
+        "Optional slideshow. When ≥1 slide is set, this overrides the single Background Image / Video above. Slides crossfade on a timer with a circular progress ring on the far left.",
+      of: [{ type: "heroSlide" }],
+    }),
+    defineField({
+      name: "slideDuration",
+      title: "Seconds per slide",
+      type: "number",
+      description: "Timer length for each slide. Default 6. Only applies when Slides is set.",
+      initialValue: 6,
+      validation: (R) => R.min(1).max(30),
     }),
     defineField({
       name: "fullHeight",
