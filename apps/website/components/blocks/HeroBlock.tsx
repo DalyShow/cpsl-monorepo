@@ -186,6 +186,27 @@ export function HeroBlock({
             />
           ) : null
         )}
+
+      {/* Bottom blend: fades the image into solid navy at the bottom so
+          the transition into Safari's tab bar region reads as an
+          intentional design element regardless of photo content. Navy
+          stop matches the section's #041124 base. */}
+      {hasBg && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: "35%",
+            background:
+              "linear-gradient(to bottom, rgba(4,17,36,0) 0%, rgba(4,17,36,1) 100%)",
+            pointerEvents: "none",
+          }}
+        />
+      )}
+
       <div
         style={{
           position: "relative",
