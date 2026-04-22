@@ -48,9 +48,11 @@ function PanelBox({ panel }: { panel: Panel }) {
         {panel.subheadline && (
           <p className="cpsl-panel__subheadline">{panel.subheadline}</p>
         )}
-        <Button asChild variant="cpsl-gold" size="default">
-          <a href={panel.ctaHref}>{panel.ctaLabel}</a>
-        </Button>
+        <div className="cpsl-panel__cta">
+          <Button asChild variant="cpsl-gold" size="default">
+            <a href={panel.ctaHref}>{panel.ctaLabel}</a>
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -143,6 +145,68 @@ export default function DualPanelPreview() {
             margin: 0 0 22px;
             max-width: 440px;
             text-wrap: pretty;
+          }
+
+          /* ── Reveal choreography ──────────────────────────────────────
+             1. Image wipes in left-to-right over 1.2 s (second panel
+                delayed 150 ms so they feel like a run of the baton).
+             2. Scrim fades in alongside the image so the bottom of
+                the photo reads cleanly the moment it lands.
+             3. Copy + CTA rise into view with a slight upward travel,
+                staggered every 100 ms: eyebrow → headline → sub →
+                button. ────────────────────────────────────────────── */
+          @keyframes cpsl-panel-wipe {
+            from { clip-path: inset(0 100% 0 0); }
+            to   { clip-path: inset(0 0 0 0);    }
+          }
+          @keyframes cpsl-fade-in {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+          }
+          @keyframes cpsl-content-in {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0);    }
+          }
+
+          .cpsl-panel__img {
+            animation: cpsl-panel-wipe 1.2s cubic-bezier(.19, 1, .22, 1) both;
+          }
+          .cpsl-panel__scrim {
+            animation: cpsl-fade-in 1.2s cubic-bezier(.19, 1, .22, 1) both;
+          }
+          .cpsl-panel__eyebrow,
+          .cpsl-panel__headline,
+          .cpsl-panel__subheadline,
+          .cpsl-panel__cta {
+            animation: cpsl-content-in 700ms cubic-bezier(.2, .8, .2, 1) both;
+          }
+          .cpsl-panel__eyebrow     { animation-delay: 600ms; }
+          .cpsl-panel__headline    { animation-delay: 700ms; }
+          .cpsl-panel__subheadline { animation-delay: 800ms; }
+          .cpsl-panel__cta         { animation-delay: 900ms; }
+
+          /* Second panel: the whole sequence is offset by 150 ms. */
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__img,
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__scrim {
+            animation-delay: 150ms;
+          }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__eyebrow     { animation-delay: 750ms; }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__headline    { animation-delay: 850ms; }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__subheadline { animation-delay: 950ms; }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__cta         { animation-delay: 1050ms; }
+
+          @media (prefers-reduced-motion: reduce) {
+            .cpsl-panel__img,
+            .cpsl-panel__scrim,
+            .cpsl-panel__eyebrow,
+            .cpsl-panel__headline,
+            .cpsl-panel__subheadline,
+            .cpsl-panel__cta {
+              animation: none !important;
+              clip-path: none !important;
+              opacity: 1 !important;
+              transform: none !important;
+            }
           }
 
           /* ── Mobile: stack panels, content sits BELOW the image so
