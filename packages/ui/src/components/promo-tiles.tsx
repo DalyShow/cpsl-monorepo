@@ -777,22 +777,38 @@ export function PromoHero({
         );
       })}
 
-      {/* Circular progress timer on the far left — only when there's
-          more than one slide. Re-keys on activeIdx so the stroke-
-          dashoffset animation restarts cleanly every slide change. */}
+      {/* Circular progress timer — positioned near the top of the hero
+          and left-aligned with the nav's logo (matches the TopNav's
+          max-w-7xl + px-4/sm:px-6 container). Only rendered when there
+          are 2+ slides. Re-keys on activeIdx so the stroke-dashoffset
+          animation restarts cleanly every slide change. */}
       {hasSlideshow && (
         <div
           style={{
             position: "absolute",
-            left: "clamp(20px, 3vw, 40px)",
-            top: "50%",
-            transform: "translateY(-50%)",
-            width: 56,
-            height: 56,
+            top: "clamp(28px, 4vh, 56px)",
+            left: 0,
+            right: 0,
             zIndex: 3,
+            pointerEvents: "none",
           }}
-          aria-label={`Slide ${activeIdx + 1} of ${effectiveSlides.length}`}
         >
+          <div
+            style={{
+              maxWidth: "80rem", // 1280px — matches TopNav's max-w-7xl
+              margin: "0 auto",
+              padding: "0 clamp(16px, 2vw, 24px)", // matches px-4 sm:px-6
+            }}
+          >
+            <div
+              style={{
+                width: 56,
+                height: 56,
+                position: "relative",
+                pointerEvents: "auto",
+              }}
+              aria-label={`Slide ${activeIdx + 1} of ${effectiveSlides.length}`}
+            >
           <svg
             viewBox="0 0 56 56"
             style={{ width: "100%", height: "100%", transform: "rotate(-90deg)" }}
@@ -839,6 +855,8 @@ export function PromoHero({
             }}
           >
             {activeIdx + 1}/{effectiveSlides.length}
+          </div>
+            </div>
           </div>
         </div>
       )}
