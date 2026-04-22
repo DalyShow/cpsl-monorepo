@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid meet">
+  <!-- CPSL navy base -->
+  <rect width="1600" height="1000" fill="#041124"/>
+
+  <!-- Field markings — warm white, semi-opaque so it reads as a field but keeps the navy identity. -->
+  <g fill="none" stroke="#F4EFE6" stroke-opacity="0.38" stroke-width="3">
+    <!-- Pitch boundary -->
+    <rect x="60" y="60" width="1480" height="880"/>
+
+    <!-- Halfway line -->
+    <line x1="800" y1="60" x2="800" y2="940"/>
+
+    <!-- Centre circle -->
+    <circle cx="800" cy="500" r="130"/>
+
+    <!-- LEFT — penalty area -->
+    <rect x="60" y="250" width="220" height="500"/>
+    <!-- LEFT — goal area -->
+    <rect x="60" y="380" width="80" height="240"/>
+    <!-- LEFT — penalty arc (D bulging into the field) -->
+    <path d="M 280 420 A 100 100 0 0 1 280 580"/>
+
+    <!-- RIGHT — penalty area -->
+    <rect x="1320" y="250" width="220" height="500"/>
+    <!-- RIGHT — goal area -->
+    <rect x="1460" y="380" width="80" height="240"/>
+    <!-- RIGHT — penalty arc -->
+    <path d="M 1320 420 A 100 100 0 0 0 1320 580"/>
+
+    <!-- Corner arcs -->
+    <path d="M 60 85 A 25 25 0 0 1 85 60"/>
+    <path d="M 1540 85 A 25 25 0 0 0 1515 60"/>
+    <path d="M 60 915 A 25 25 0 0 0 85 940"/>
+    <path d="M 1540 915 A 25 25 0 0 1 1515 940"/>
+  </g>
+
+  <!-- Solid dots (center + penalty spots) -->
+  <g fill="#F4EFE6" fill-opacity="0.50">
+    <circle cx="800" cy="500" r="5"/>
+    <circle cx="220" cy="500" r="5"/>
+    <circle cx="1380" cy="500" r="5"/>
+  </g>
+</svg>
