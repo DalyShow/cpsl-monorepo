@@ -92,8 +92,12 @@ export function PromoGridBlock({
           };
 
           if (t._type === "photoTile") {
-            const src = t.image?.asset?.url;
-            if (!src) return null;
+            // Navy placeholder so the layout still reads right before
+            // the editor uploads the real photo. Inlined SVG data URI
+            // keeps the fallback dependency-free.
+            const src =
+              t.image?.asset?.url ??
+              "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%230A1628'/%3E%3C/svg%3E";
             return (
               <PhotoTile
                 {...common}

@@ -12,8 +12,7 @@ export const photoTile = defineType({
       type: "image",
       options: { hotspot: true },
       description:
-        "Required. Used as the tile background — and as the poster for the looping video while it loads.",
-      validation: (R) => R.required(),
+        "Used as the tile background — and as the poster for the looping video while it loads. Optional; without it the tile renders a navy placeholder so layout isn't broken before you upload.",
     }),
     defineField({
       name: "video",
