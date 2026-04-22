@@ -4,6 +4,7 @@ interface SanitySlide {
   _key?: string;
   image?: { asset?: { url?: string } };
   video?: { asset?: { url?: string } };
+  graphic?: { asset?: { url?: string } };
   eyebrow?: string;
   headline?: string;
   subheadline?: string;
@@ -49,6 +50,7 @@ export function PromoHeroBlock({
     .map((s) => ({
       imageUrl: s.image?.asset?.url,
       videoUrl: s.video?.asset?.url,
+      graphicUrl: s.graphic?.asset?.url,
       eyebrow: s.eyebrow,
       headline: s.headline,
       subheadline: s.subheadline,
@@ -60,6 +62,7 @@ export function PromoHeroBlock({
       (s) =>
         s.imageUrl ||
         s.videoUrl ||
+        s.graphicUrl ||
         s.eyebrow ||
         s.headline ||
         s.subheadline ||

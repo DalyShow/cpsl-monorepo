@@ -542,9 +542,11 @@ export function PromoGrid({
 export interface HeroSlide {
   imageUrl?: string;
   videoUrl?: string;
-  /** Per-slide copy — each optional, falls back to the hero's
-   *  top-level field when blank. Lets every slide carry its own
-   *  eyebrow, headline, subheadline, and CTA. */
+  /** Optional 200×200 graphic (logo/crest) shown above the headline. */
+  graphicUrl?: string;
+  /** Per-slide copy — each optional. Renders literally; blank
+   *  stays blank (no inheritance from the previous slide or the
+   *  hero's top-level fields). */
   eyebrow?: string;
   headline?: string;
   subheadline?: string;
@@ -601,14 +603,26 @@ export function PromoHero({
 }: PromoHeroProps) {
   const isLeft = layout === "left";
 
-  // Resolve the effective slide set. If explicit slides are passed,
-  // use them; otherwise fall back to the single-image/video fields.
+  // Resolve the effective slide set. When the editor has entered
+  // explicit slides, use them VERBATIM — each slide shows only its
+  // own copy so blank fields read as blank (not inherited from the
+  // hero or the previous slide). Otherwise synthesize a single-slide
+  // carrying the hero-level content + background as a fallback for
+  // documents that haven't opted into slides yet.
   const effectiveSlides: HeroSlide[] =
     slides && slides.length > 0
       ? slides
-      : backgroundUrl || videoUrl
-      ? [{ imageUrl: backgroundUrl, videoUrl }]
-      : [];
+      : [
+          {
+            imageUrl: backgroundUrl,
+            videoUrl,
+            eyebrow,
+            headline,
+            subheadline,
+            ctaLabel,
+            ctaHref,
+          },
+        ];
   const hasSlideshow = effectiveSlides.length > 1;
   const dur = Math.max(1, slideDuration);
 
@@ -647,7 +661,7 @@ export function PromoHero({
           }
         }
         @keyframes cpsl-hero-timer-fill {
-          from { stroke-dashoffset: 150.8; }
+          from { stroke-dashoffset: 106.8; }
           to   { stroke-dashoffset: 0;     }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -668,12 +682,13 @@ export function PromoHero({
           so the image AND the text crossfade together per slide. */}
       {effectiveSlides.map((slide, i) => {
         const isActive = i === activeIdx;
-        // Merge slide copy with hero-level defaults.
-        const slideEyebrow     = slide.eyebrow     ?? eyebrow;
-        const slideHeadline    = slide.headline    ?? headline;
-        const slideSubheadline = slide.subheadline ?? subheadline;
-        const slideCtaLabel    = slide.ctaLabel    ?? ctaLabel;
-        const slideCtaHref     = slide.ctaHref     ?? ctaHref;
+        // Use ONLY the slide's own copy — no fallback to the hero's
+        // top-level fields or the previous slide. Blank stays blank.
+        const slideEyebrow     = slide.eyebrow;
+        const slideHeadline    = slide.headline;
+        const slideSubheadline = slide.subheadline;
+        const slideCtaLabel    = slide.ctaLabel;
+        const slideCtaHref     = slide.ctaHref;
         return (
           <div
             key={i}
@@ -739,6 +754,22 @@ export function PromoHero({
                   {slideEyebrow}
                 </p>
               )}
+              {slide.graphicUrl && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={slide.graphicUrl}
+                  alt=""
+                  aria-hidden="true"
+                  style={{
+                    display: "block",
+                    width: "min(200px, 40vw)",
+                    height: "auto",
+                    aspectRatio: "1 / 1",
+                    objectFit: "contain",
+                    margin: isLeft ? "0 0 18px" : "0 auto 20px",
+                  }}
+                />
+              )}
               {slideHeadline && (
                 <h1
                   style={{
@@ -752,6 +783,9 @@ export function PromoHero({
                     textTransform: "uppercase",
                     color: "#F4EFE6",
                     margin: isLeft ? "0 0 18px" : "0 0 24px",
+                    // Prevents widows: browser balances lines so the
+                    // last line isn't a single-word orphan.
+                    textWrap: "balance",
                   }}
                 >
                   {slideHeadline}
@@ -768,6 +802,9 @@ export function PromoHero({
                     color: "#94A3B8",
                     maxWidth: isLeft ? 480 : 620,
                     margin: isLeft ? "0 0 28px" : "0 auto 36px",
+                    // Same intent — balance short subheads so the
+                    // last word doesn't orphan on its own line.
+                    textWrap: "pretty",
                   }}
                 >
                   {slideSubheadline}
@@ -808,60 +845,43 @@ export function PromoHero({
           >
             <div
               style={{
-                width: 56,
-                height: 56,
+                width: 40,
+                height: 40,
                 position: "relative",
                 pointerEvents: "auto",
               }}
               aria-label={`Slide ${activeIdx + 1} of ${effectiveSlides.length}`}
             >
-          <svg
-            viewBox="0 0 56 56"
-            style={{ width: "100%", height: "100%", transform: "rotate(-90deg)" }}
-            aria-hidden="true"
-          >
-            <circle
-              cx="28"
-              cy="28"
-              r="24"
-              fill="none"
-              stroke="rgba(244,239,230,0.22)"
-              strokeWidth="2"
-            />
-            <circle
-              key={activeIdx}
-              className="cpsl-hero-timer-ring"
-              cx="28"
-              cy="28"
-              r="24"
-              fill="none"
-              stroke="#D4B949"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeDasharray="150.8"
-              strokeDashoffset="150.8"
-              style={{
-                animation: `cpsl-hero-timer-fill ${dur}s linear forwards`,
-              }}
-            />
-          </svg>
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontWeight: 700,
-              fontSize: 13,
-              letterSpacing: "0.06em",
-              color: "#F4EFE6",
-              pointerEvents: "none",
-            }}
-          >
-            {activeIdx + 1}/{effectiveSlides.length}
-          </div>
+              <svg
+                viewBox="0 0 40 40"
+                style={{ width: "100%", height: "100%", transform: "rotate(-90deg)" }}
+                aria-hidden="true"
+              >
+                <circle
+                  cx="20"
+                  cy="20"
+                  r="17"
+                  fill="none"
+                  stroke="rgba(244,239,230,0.22)"
+                  strokeWidth="2"
+                />
+                <circle
+                  key={activeIdx}
+                  className="cpsl-hero-timer-ring"
+                  cx="20"
+                  cy="20"
+                  r="17"
+                  fill="none"
+                  stroke="#D4B949"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeDasharray="106.8"
+                  strokeDashoffset="106.8"
+                  style={{
+                    animation: `cpsl-hero-timer-fill ${dur}s linear forwards`,
+                  }}
+                />
+              </svg>
             </div>
           </div>
         </div>

@@ -30,7 +30,8 @@ export default async function Home() {
           slides[]{
             ...,
             image{ ..., asset->{ url } },
-            video{ ..., asset->{ url } }
+            video{ ..., asset->{ url } },
+            graphic{ ..., asset->{ url } }
           },
           image{ ..., asset->{ url } },
           bottomImage{ ..., asset->{ url } },

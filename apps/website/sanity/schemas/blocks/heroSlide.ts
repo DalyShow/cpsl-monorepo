@@ -3,9 +3,9 @@ import { defineField, defineType } from "sanity";
 /**
  * One slide inside a promoHeroBlock's slideshow. Carries both the
  * background (image/video) AND its own copy — so each slide can
- * have a unique headline, sub, eyebrow, and CTA. Any slide field
- * left blank falls back to the hero's top-level value for that
- * field on the parent promoHeroBlock.
+ * have a unique headline, sub, eyebrow, and CTA. Fields left blank
+ * render as blank on that slide; they do NOT inherit from the
+ * parent hero or the previous slide.
  */
 export const heroSlide = defineType({
   name: "heroSlide",
@@ -13,35 +13,42 @@ export const heroSlide = defineType({
   type: "object",
   fields: [
     defineField({
+      name: "graphic",
+      title: "Graphic (above headline)",
+      type: "image",
+      description:
+        "Optional logo, crest, or emblem shown directly above the headline. Recommended 200 × 200 px (scales down responsively).",
+    }),
+    defineField({
       name: "eyebrow",
       title: "Eyebrow",
       type: "string",
-      description: "Leave blank to use the hero's default eyebrow.",
+      description: "Leave blank to render no eyebrow on this slide.",
     }),
     defineField({
       name: "headline",
       title: "Headline",
       type: "string",
-      description: "Leave blank to use the hero's default headline.",
+      description: "Leave blank to render no headline on this slide.",
     }),
     defineField({
       name: "subheadline",
       title: "Subheadline",
       type: "text",
       rows: 2,
-      description: "Leave blank to use the hero's default subheadline.",
+      description: "Leave blank to render no subheadline on this slide.",
     }),
     defineField({
       name: "ctaLabel",
       title: "CTA Label",
       type: "string",
-      description: "Leave blank to use the hero's default CTA label.",
+      description: "Leave blank to render no CTA on this slide.",
     }),
     defineField({
       name: "ctaHref",
       title: "CTA Link",
       type: "string",
-      description: "Leave blank to use the hero's default CTA link.",
+      description: "Leave blank to render no CTA on this slide.",
     }),
     defineField({
       name: "image",
