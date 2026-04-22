@@ -160,7 +160,7 @@ export default function DualPanelPreview() {
             .cpsl-panel {
               display: flex;
               flex-direction: column;
-              background: #0A1628;
+              background: transparent;
             }
             .cpsl-panel__img {
               position: relative;
