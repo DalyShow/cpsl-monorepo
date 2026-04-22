@@ -820,58 +820,38 @@ export function PromoHero({
         );
       })}
 
-      {/* Circular progress timer — positioned near the top of the hero
-          and left-aligned with the nav's logo (matches the TopNav's
-          max-w-7xl + px-4/sm:px-6 container). Only rendered when there
-          are 2+ slides. Re-keys on activeIdx so the stroke-dashoffset
+      {/* Full-width slide progress bar — thin 1.5 px line pinned to
+          the top of the hero, layered above the slides. Only rendered
+          when there are 2+ slides. Re-keys on activeIdx so the scaleX
           animation restarts cleanly every slide change. */}
       {hasSlideshow && (
         <div
           style={{
             position: "absolute",
-            top: "clamp(28px, 4vh, 56px)",
+            top: 0,
             left: 0,
             right: 0,
+            height: 1.5,
+            background: "rgba(244,239,230,0.22)",
+            overflow: "hidden",
             zIndex: 3,
             pointerEvents: "none",
           }}
+          role="progressbar"
+          aria-label={`Slide ${activeIdx + 1} of ${effectiveSlides.length}`}
         >
           <div
+            key={activeIdx}
+            className="cpsl-hero-timer-fill"
             style={{
-              maxWidth: "80rem", // 1280px — matches TopNav's max-w-7xl
-              margin: "0 auto",
-              padding: "0 clamp(16px, 2vw, 24px)", // matches px-4 sm:px-6
+              position: "absolute",
+              inset: 0,
+              background: "#D4B949",
+              transformOrigin: "left center",
+              transform: "scaleX(0)",
+              animation: `cpsl-hero-timer-bar ${dur}s linear forwards`,
             }}
-          >
-            <div
-              style={{
-                position: "relative",
-                width: "clamp(100px, 18vw, 220px)",
-                height: 3,
-                background: "rgba(244,239,230,0.22)",
-                overflow: "hidden",
-                pointerEvents: "auto",
-              }}
-              role="progressbar"
-              aria-label={`Slide ${activeIdx + 1} of ${effectiveSlides.length}`}
-            >
-              <div
-                key={activeIdx}
-                className="cpsl-hero-timer-fill"
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  background: "#D4B949",
-                  transformOrigin: "left center",
-                  transform: "scaleX(0)",
-                  animation: `cpsl-hero-timer-bar ${dur}s linear forwards`,
-                }}
-              />
-            </div>
-          </div>
+          />
         </div>
       )}
 
