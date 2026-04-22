@@ -519,7 +519,7 @@ export function PromoGrid({
 }: PromoGridProps) {
   return (
     <div
-      className={className}
+      className={[className, "cpsl-promo-grid"].filter(Boolean).join(" ")}
       data-cpsl-grid={fullBleed ? "fullbleed" : undefined}
       style={{
         display: "grid",
@@ -777,6 +777,20 @@ export function PromoReveal() {
          immediate tile children so they read as a seamless mosaic. */
       [data-cpsl-grid="fullbleed"] > * {
         border-radius: 0 !important;
+      }
+
+      /* Mobile: collapse every promo grid to a single stacked column
+         so 7-column-wide tiles don't become illegible slivers. Resets
+         each tile's col-/row-span to auto so they flow naturally. */
+      @media (max-width: 767px) {
+        .cpsl-promo-grid {
+          grid-template-columns: 1fr !important;
+          grid-auto-rows: auto !important;
+        }
+        .cpsl-promo-grid > * {
+          grid-column: auto !important;
+          grid-row: auto !important;
+        }
       }
 
       /* Soccer-field markings — halfway line + centre circle. Both
