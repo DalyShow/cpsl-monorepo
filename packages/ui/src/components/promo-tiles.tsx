@@ -64,10 +64,42 @@ function revealClass(v: RevealVariant | undefined, loadOnMount?: boolean): strin
   return loadOnMount ? `${base} cpsl-reveal--load` : base;
 }
 
+/**
+ * Full-bleed looping background video. Shared across tiles.
+ * autoplay + muted + loop + playsInline so it plays on every browser
+ * (including iOS Safari) without user interaction. `poster` is
+ * recommended — it's the first thing visible while the video loads.
+ */
+function TileVideo({ src, poster }: { src: string; poster?: string }) {
+  return (
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      poster={poster}
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        pointerEvents: "none",
+      }}
+    >
+      <source src={src} />
+    </video>
+  );
+}
+
 // ── PhotoTile ────────────────────────────────────────────────────────────────
 
 export interface PhotoTileProps extends TileBaseProps {
-  /** Image URL — picsum/seed, Sanity CDN, anywhere. */
+  /** Image URL — used as background (and as video poster when videoUrl
+   *  is set). Required so tiles always have something to show while a
+   *  video is loading. */
   src: string;
   alt?: string;
   eyebrow?: string;
@@ -75,6 +107,9 @@ export interface PhotoTileProps extends TileBaseProps {
   href?: string;
   /** Overlay darkness at bottom — 0.3 subtle → 0.75 heavy. Default 0.55. */
   scrim?: number;
+  /** Optional background video. Autoplays muted + looped. Image in
+   *  `src` is used as the poster. */
+  videoUrl?: string;
 }
 
 export function PhotoTile({
@@ -84,6 +119,7 @@ export function PhotoTile({
   title,
   href,
   scrim = 0.55,
+  videoUrl,
   className,
   reveal,
   loadOnMount,
@@ -91,12 +127,24 @@ export function PhotoTile({
 }: PhotoTileProps) {
   const body = (
     <>
+      {/* Image (always rendered — also doubles as the video poster). */}
       <div
         aria-hidden
         style={{
           position: "absolute",
           inset: 0,
-          background: `linear-gradient(180deg, rgba(4,17,36,${scrim * 0.35}) 0%, rgba(4,17,36,${scrim}) 100%), url(${src}) center/cover no-repeat`,
+          background: `url(${src}) center/cover no-repeat`,
+        }}
+      />
+      {/* Video on top of the image when supplied. */}
+      {videoUrl && <TileVideo src={videoUrl} poster={src} />}
+      {/* Scrim on top of whichever media is showing. */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `linear-gradient(180deg, rgba(4,17,36,${scrim * 0.35}) 0%, rgba(4,17,36,${scrim}) 100%)`,
         }}
       />
       {(eyebrow || title) && (
@@ -168,6 +216,14 @@ export interface PromoTileProps extends TileBaseProps {
   body?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  /** Optional background image (tinted by the tone). */
+  imageUrl?: string;
+  /** Optional background video. Autoplays muted + looped, `imageUrl`
+   *  is used as the poster when both are provided. */
+  videoUrl?: string;
+  /** When media is set, the solid tone colour becomes a translucent
+   *  overlay at this alpha so the media shows through. Default 0.75. */
+  mediaOverlay?: number;
 }
 
 const PROMO_TOKENS: Record<
@@ -203,6 +259,15 @@ const PROMO_TOKENS: Record<
   },
 };
 
+function toneOverlay(bg: string, alpha: number): string {
+  // Convert "#RRGGBB" to "rgba(r, g, b, alpha)" so we can scrim media
+  // under the tone without losing the tone identity.
+  const r = parseInt(bg.slice(1, 3), 16);
+  const g = parseInt(bg.slice(3, 5), 16);
+  const b = parseInt(bg.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 export function PromoTile({
   tone,
   eyebrow,
@@ -210,17 +275,23 @@ export function PromoTile({
   body,
   ctaLabel,
   ctaHref,
+  imageUrl,
+  videoUrl,
+  mediaOverlay = 0.75,
   className,
   reveal,
   loadOnMount,
   ...rest
 }: PromoTileProps) {
   const t = PROMO_TOKENS[tone];
+  const hasMedia = !!(imageUrl || videoUrl);
   return (
     <div
       className={[revealClass(reveal, loadOnMount), className].filter(Boolean).join(" ")}
       style={tileStyle(
         {
+          // If media is present, keep the tone colour as a base so
+          // text contrast is preserved while the video/image loads.
           background: t.bg,
           color: t.fg,
           padding: 28,
@@ -232,7 +303,30 @@ export function PromoTile({
         rest,
       )}
     >
-      <div>
+      {/* Background media layer (below tone overlay + content). */}
+      {hasMedia && imageUrl && (
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `url(${imageUrl}) center/cover no-repeat`,
+          }}
+        />
+      )}
+      {hasMedia && videoUrl && <TileVideo src={videoUrl} poster={imageUrl} />}
+      {/* Tone as a translucent scrim so text stays legible over media. */}
+      {hasMedia && (
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: toneOverlay(t.bg, mediaOverlay),
+          }}
+        />
+      )}
+      <div style={{ position: "relative", zIndex: 1 }}>
         {eyebrow && (
           <div
             style={{
@@ -276,9 +370,11 @@ export function PromoTile({
         )}
       </div>
       {ctaLabel && (
-        <Button asChild variant={t.buttonVariant} size="sm">
-          <a href={ctaHref || "#"}>{ctaLabel} →</a>
-        </Button>
+        <div style={{ position: "relative", zIndex: 1, alignSelf: "flex-start" }}>
+          <Button asChild variant={t.buttonVariant} size="sm">
+            <a href={ctaHref || "#"}>{ctaLabel} →</a>
+          </Button>
+        </div>
       )}
     </div>
   );
@@ -291,6 +387,14 @@ export interface GraphicTileProps extends TileBaseProps {
   tone?: "navy" | "crimson" | "gold";
   label?: string;
   stat?: string;
+  /** Optional background image behind the pattern + tone scrim. */
+  imageUrl?: string;
+  /** Optional background video. Autoplays muted + looped; imageUrl
+   *  is used as the poster. */
+  videoUrl?: string;
+  /** Tone-coloured scrim alpha over media so the pattern + stat stay
+   *  legible. Default 0.70. */
+  mediaOverlay?: number;
 }
 
 export function GraphicTile({
@@ -298,6 +402,9 @@ export function GraphicTile({
   tone = "navy",
   label,
   stat,
+  imageUrl,
+  videoUrl,
+  mediaOverlay = 0.70,
   className,
   reveal,
   loadOnMount,
@@ -306,6 +413,7 @@ export function GraphicTile({
   const bg = tone === "navy" ? "#0A1628" : tone === "crimson" ? "#BF1D2D" : "#D4B949";
   const fg = tone === "gold" ? "#041124" : tone === "crimson" ? "#F4EFE6" : "#D4B949";
   const labelColor = tone === "navy" ? "#7A9BAA" : tone === "gold" ? "#041124" : "#F4EFE6";
+  const hasMedia = !!(imageUrl || videoUrl);
   return (
     <div
       className={[revealClass(reveal, loadOnMount), className].filter(Boolean).join(" ")}
@@ -321,6 +429,28 @@ export function GraphicTile({
         rest,
       )}
     >
+      {/* Background media (layered below the pattern + tone scrim). */}
+      {hasMedia && imageUrl && (
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `url(${imageUrl}) center/cover no-repeat`,
+          }}
+        />
+      )}
+      {hasMedia && videoUrl && <TileVideo src={videoUrl} poster={imageUrl} />}
+      {hasMedia && (
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: toneOverlay(bg, mediaOverlay),
+          }}
+        />
+      )}
       <div
         aria-hidden
         className={pattern === "hex" ? "cpsl-pattern-hex" : "cpsl-pattern-stripes"}

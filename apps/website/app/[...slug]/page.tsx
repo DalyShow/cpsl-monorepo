@@ -70,7 +70,10 @@ export default async function DynamicPage({
             logos[]{ ..., asset->{ url } },
             tiles[]{
               ...,
-              image{ ..., asset->{ url }, "alt": asset->altText }
+              image{ ..., asset->{ url }, "alt": asset->altText },
+              video{ ..., asset->{ url } },
+              backgroundImage{ ..., asset->{ url } },
+              backgroundVideo{ ..., asset->{ url } }
             }
           }
         }`,

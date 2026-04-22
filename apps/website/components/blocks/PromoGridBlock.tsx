@@ -21,6 +21,7 @@ type TileShared = {
 type SanityPhotoTile = TileShared & {
   _type: "photoTile";
   image?: { asset?: { url?: string }; alt?: string };
+  video?: { asset?: { url?: string } };
   eyebrow?: string;
   title?: string;
   href?: string;
@@ -35,6 +36,9 @@ type SanityPromoTile = TileShared & {
   body?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  backgroundImage?: { asset?: { url?: string } };
+  backgroundVideo?: { asset?: { url?: string } };
+  mediaOverlay?: number;
 };
 
 type SanityGraphicTile = TileShared & {
@@ -43,6 +47,9 @@ type SanityGraphicTile = TileShared & {
   pattern?: "hex" | "stripes";
   stat?: string;
   label?: string;
+  backgroundImage?: { asset?: { url?: string } };
+  backgroundVideo?: { asset?: { url?: string } };
+  mediaOverlay?: number;
 };
 
 type AnyTile = SanityPhotoTile | SanityPromoTile | SanityGraphicTile;
@@ -96,6 +103,7 @@ export function PromoGridBlock({
                 title={t.title}
                 href={t.href}
                 scrim={t.scrim ?? 0.55}
+                videoUrl={t.video?.asset?.url}
               />
             );
           }
@@ -110,6 +118,9 @@ export function PromoGridBlock({
                 body={t.body}
                 ctaLabel={t.ctaLabel}
                 ctaHref={t.ctaHref}
+                imageUrl={t.backgroundImage?.asset?.url}
+                videoUrl={t.backgroundVideo?.asset?.url}
+                mediaOverlay={t.mediaOverlay}
               />
             );
           }
@@ -122,6 +133,9 @@ export function PromoGridBlock({
                 pattern={t.pattern ?? "hex"}
                 stat={t.stat}
                 label={t.label}
+                imageUrl={t.backgroundImage?.asset?.url}
+                videoUrl={t.backgroundVideo?.asset?.url}
+                mediaOverlay={t.mediaOverlay}
               />
             );
           }

@@ -11,7 +11,17 @@ export const photoTile = defineType({
       title: "Background Image",
       type: "image",
       options: { hotspot: true },
+      description:
+        "Required. Used as the tile background — and as the poster for the looping video while it loads.",
       validation: (R) => R.required(),
+    }),
+    defineField({
+      name: "video",
+      title: "Background Video",
+      type: "file",
+      options: { accept: "video/mp4,video/webm,video/quicktime" },
+      description:
+        "Optional. MP4 or WebM. Plays muted, looped, autoplay, inline. Keep it under ~8 MB — iOS Safari gets picky above that.",
     }),
     defineField({
       name: "eyebrow",

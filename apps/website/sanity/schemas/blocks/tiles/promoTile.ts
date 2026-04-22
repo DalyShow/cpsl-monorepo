@@ -49,6 +49,31 @@ export const promoTile = defineType({
       title: "CTA Link",
       type: "string",
     }),
+    defineField({
+      name: "backgroundImage",
+      title: "Background Image (optional)",
+      type: "image",
+      options: { hotspot: true },
+      description:
+        "Adds a photo behind the tile. The tone colour becomes a translucent scrim over it so the text stays legible.",
+    }),
+    defineField({
+      name: "backgroundVideo",
+      title: "Background Video (optional)",
+      type: "file",
+      options: { accept: "video/mp4,video/webm,video/quicktime" },
+      description:
+        "Adds a looping video behind the tile. MP4 or WebM, muted + autoplay. If you also add a background image, the video uses it as its poster.",
+    }),
+    defineField({
+      name: "mediaOverlay",
+      title: "Media Overlay Opacity",
+      type: "number",
+      description:
+        "Alpha of the tone colour over media. 0 = media full-strength, 1 = tone fully opaque. Default 0.75.",
+      initialValue: 0.75,
+      validation: (R) => R.min(0).max(1),
+    }),
     ...tileBaseFields,
   ],
   preview: {
