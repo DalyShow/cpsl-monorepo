@@ -2,12 +2,54 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./sanity/schemas";
 
+/**
+ * Builds the draft-preview URL Studio uses when an editor clicks
+ * "Open preview" on a document. Hits our /api/draft/enable route,
+ * which validates the shared secret, flips Next.js draftMode on,
+ * and redirects to the live slug so the draft renders in place of
+ * the published version.
+ */
+function buildPreviewUrl(pathname: string): string | undefined {
+  const secret = process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET;
+  if (!secret) return undefined;
+  const safe = pathname.startsWith("/") ? pathname : `/${pathname}`;
+  const params = new URLSearchParams({ secret, slug: safe });
+  return `/api/draft/enable?${params.toString()}`;
+}
+
+function resolvePreviewPath(doc: unknown): string | undefined {
+  if (!doc || typeof doc !== "object") return undefined;
+  const d = doc as {
+    _type?: string;
+    slug?: { current?: string };
+    parent?: { _ref?: string };
+  };
+  if (d._type === "homePage") return "/";
+  if (d._type === "brandPage") return "/brand";
+  if (d._type === "page") {
+    const slug = d.slug?.current;
+    if (!slug) return undefined;
+    // Two-level paths (/parent/child) resolve on the site via the
+    // [...slug] route — Studio only knows the child slug here, which
+    // is enough to preview a published + parented draft together.
+    return `/${slug}`;
+  }
+  return undefined;
+}
+
 export default defineConfig({
   name: "cpsl",
   title: "CPSL",
   basePath: "/studio",
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
+  document: {
+    productionUrl: async (prev, context) => {
+      const path = resolvePreviewPath(context.document);
+      if (!path) return prev;
+      return buildPreviewUrl(path) ?? prev;
+    },
+  },
   plugins: [
     structureTool({
       structure: (S) =>

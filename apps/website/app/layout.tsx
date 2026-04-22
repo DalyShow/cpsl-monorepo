@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import "./globals.css";
 import { sanityFetch } from "@/lib/sanity/client";
+import { DraftPreviewBanner } from "@/components/DraftPreviewBanner";
 
 // Opts the page into the device's safe area — lets the hero background
 // render behind iOS Safari's top URL bar and bottom tab bar. Pair with
@@ -78,7 +79,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" data-theme="dark" className={`${barlowCondensed.variable} ${inter.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <DraftPreviewBanner />
+        {children}
+      </body>
     </html>
   );
 }
