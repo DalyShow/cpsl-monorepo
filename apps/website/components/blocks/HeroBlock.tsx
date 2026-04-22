@@ -175,13 +175,7 @@ export function HeroBlock({
                 // bottom so the image reads clearly behind iOS Safari's tab
                 // bar. Previously peaked back to 0.8 at 100% which painted an
                 // opaque navy strip along the bottom edge.
-                // `auto 150%` scales the image to 150% of the section's
-                // height (width computed from aspect ratio). Combined
-                // with `background-position: center top`, the top of
-                // the image is pinned and the bottom third is cropped
-                // off the viewport — so dark ground portions don't
-                // read as a navy strip even on tall mobile viewports.
-                background: `linear-gradient(to bottom, rgba(9,22,40,0.72) 0%, rgba(9,22,40,0.50) 55%, rgba(9,22,40,0.20) 100%), url(${url}) center top / auto 150% no-repeat`,
+                background: `linear-gradient(to bottom, rgba(9,22,40,0.72) 0%, rgba(9,22,40,0.50) 55%, rgba(9,22,40,0.20) 100%), url(${url}) center/cover no-repeat`,
                 backgroundBlendMode: backgroundBlendMode,
                 opacity: i === activeLayer ? backgroundOpacity : 0,
                 transition: `opacity ${backgroundTransition}s ease-in-out`,
