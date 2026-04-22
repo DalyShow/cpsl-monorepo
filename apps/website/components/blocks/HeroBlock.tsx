@@ -147,17 +147,19 @@ export function HeroBlock({
           The vh declaration is a fallback for browsers without lvh. */}
       <style>{`
         .cpsl-hero {
-          min-height: calc(100vh - 80px + env(safe-area-inset-bottom, 0px));
+          min-height: calc(100vh + env(safe-area-inset-bottom, 0px));
         }
         @supports (min-height: 100lvh) {
           .cpsl-hero {
-            /* lvh is the "large" viewport (height when browser chrome
-               is collapsed). Using it means the hero is as tall as the
-               full display, so the image extends behind Safari's tab
-               bar instead of stopping above it. A small scrollbar on
-               initial load is the tradeoff — the hero is slightly
-               taller than svh so iOS flags a bit of overflow. */
-            min-height: calc(100lvh - 80px + env(safe-area-inset-bottom, 0px));
+            /* 100lvh alone stops just short of the bottom edge on iOS
+               Safari because lvh is the height WHEN chrome is
+               collapsed — it doesn't include the rest of the tab bar
+               overlay region when chrome is actually showing.
+               Dropping the `-80px` nav subtraction and adding the
+               safe-area inset lets the hero reach all the way to the
+               device edge, with the fixed TopNav covering its own
+               80 px top region. */
+            min-height: calc(100lvh + env(safe-area-inset-bottom, 0px));
           }
         }
       `}</style>
