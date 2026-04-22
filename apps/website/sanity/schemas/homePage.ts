@@ -18,6 +18,7 @@ export const homePage = defineType({
         { type: "calendarDayViewBlock" },
         { type: "logoTickerBlock" },
         { type: "subNavBlock" },
+        { type: "promoHeroBlock" },
         { type: "promoGridBlock" },
       ],
     }),

@@ -25,6 +25,7 @@ export default async function Home() {
         sections[]{
           ...,
           backgroundImage{ ..., asset->{ url } },
+          backgroundVideo{ ..., asset->{ url } },
           backgroundImages[]{ ..., asset->{ url } },
           image{ ..., asset->{ url } },
           bottomImage{ ..., asset->{ url } },

@@ -18,6 +18,7 @@ import { standingsBlock }      from "./blocks/standingsBlock";
 import { matchdayBlock }       from "./blocks/matchdayBlock";
 import { logoTickerBlock }     from "./blocks/logoTickerBlock";
 import { subNavBlock }         from "./blocks/subNavBlock";
+import { promoHeroBlock }      from "./blocks/promoHeroBlock";
 import { promoGridBlock }      from "./blocks/promoGridBlock";
 import { photoTile }           from "./blocks/tiles/photoTile";
 import { promoTile }           from "./blocks/tiles/promoTile";
@@ -45,6 +46,7 @@ export const schemaTypes = [
   matchdayBlock,
   logoTickerBlock,
   subNavBlock,
+  promoHeroBlock,
   promoGridBlock,
   photoTile,
   promoTile,

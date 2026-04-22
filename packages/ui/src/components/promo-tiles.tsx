@@ -545,8 +545,11 @@ export interface PromoHeroProps {
   eyebrow?: string;
   ctaLabel?: string;
   ctaHref?: string;
-  /** Background image URL (full-bleed, cover) */
+  /** Background image URL — also used as the poster for videoUrl. */
   backgroundUrl?: string;
+  /** Optional background video. Autoplays muted + looped; falls back
+   *  to backgroundUrl while loading. */
+  videoUrl?: string;
   /** Hero section height — defaults to "70vh" */
   height?: string;
 }
@@ -558,6 +561,7 @@ export function PromoHero({
   ctaLabel = "Apply for Admission",
   ctaHref = "#apply",
   backgroundUrl,
+  videoUrl,
   height = "70vh",
 }: PromoHeroProps) {
   return (
@@ -575,13 +579,28 @@ export function PromoHero({
         background: "#041124",
       }}
     >
+      {/* Image layer (and video poster). */}
       {backgroundUrl && (
         <div
           aria-hidden
           style={{
             position: "absolute",
             inset: 0,
-            background: `linear-gradient(to bottom, rgba(9,22,40,0.65) 0%, rgba(9,22,40,0.40) 50%, rgba(4,17,36,0.95) 100%), url(${backgroundUrl}) center/cover no-repeat`,
+            background: `url(${backgroundUrl}) center/cover no-repeat`,
+          }}
+        />
+      )}
+      {/* Video layer on top of image. */}
+      {videoUrl && <TileVideo src={videoUrl} poster={backgroundUrl} />}
+      {/* Scrim on top of whichever media is showing. */}
+      {(backgroundUrl || videoUrl) && (
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to bottom, rgba(9,22,40,0.65) 0%, rgba(9,22,40,0.40) 50%, rgba(4,17,36,0.95) 100%)",
           }}
         />
       )}

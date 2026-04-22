@@ -62,6 +62,7 @@ export default async function DynamicPage({
           sections[]{
             ...,
             backgroundImage{ ..., asset->{ url } },
+            backgroundVideo{ ..., asset->{ url } },
             backgroundImages[]{ ..., asset->{ url } },
             image{ ..., asset->{ url } },
             bottomImage{ ..., asset->{ url } },

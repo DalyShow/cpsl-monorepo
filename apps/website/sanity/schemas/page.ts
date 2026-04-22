@@ -56,6 +56,7 @@ export const page = defineType({
         { type: "matchdayBlock" },
         { type: "logoTickerBlock" },
         { type: "subNavBlock" },
+        { type: "promoHeroBlock" },
         { type: "promoGridBlock" },
       ],
     }),
