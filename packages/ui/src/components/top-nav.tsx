@@ -45,7 +45,7 @@ export function TopNav({
     { label: "For Coaches/Managers", href: "#coaches" },
     { label: "Contact",              href: "#contact" },
   ],
-  logoSrc  = "/cpsl-horizontal.svg",
+  logoSrc  = "/cpsl-horizontal.svg?v=2026-04-23",
   logoAlt  = "CPSL",
   homeHref = "/",
   ctaLabel = "Join Our League",
