@@ -153,20 +153,6 @@ function AccordionGroup({ item }: { item: NavItem }) {
 
       {open && (
         <div className="flex flex-col gap-0.5 mt-0.5 mb-1">
-          <Link
-            href={item.href}
-            className={linkBase}
-            style={{
-              padding:     "5px 10px",
-              paddingLeft: 32,
-              fontSize:    12,
-              fontStyle:   "italic",
-              background:  selfActive ? "#0916281A" : "transparent",
-              color:       selfActive ? "#091628" : "#697279",
-            }}
-          >
-            <span className="flex-1 truncate">All {item.label}</span>
-          </Link>
           {item.children?.map((c) => (
             <LeafLink key={c.href} item={c} depth={1} />
           ))}
