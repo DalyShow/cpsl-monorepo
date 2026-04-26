@@ -146,14 +146,11 @@ export function TopNav({
           )}
 
           {ctaLabel && (
-            <ArrowPillButton
-              href={ctaHref || "#"}
-              tone="dark"
-              size="sm"
-              className="hidden md:inline-flex"
-            >
-              {ctaLabel}
-            </ArrowPillButton>
+            <span className="hidden md:inline-flex">
+              <ArrowPillButton href={ctaHref || "#"} tone="dark" size="sm">
+                {ctaLabel}
+              </ArrowPillButton>
+            </span>
           )}
 
           {/* Mobile hamburger */}
