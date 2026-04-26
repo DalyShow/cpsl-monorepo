@@ -139,7 +139,7 @@ export function FAQAccordion({
     "--faq-icon-border":  c.iconBorder,
     "--faq-hover":        c.hover,
     background:           bg,
-    padding:              "clamp(56px, 9vw, 96px) clamp(20px, 5vw, 30px) clamp(72px, 11vw, 112px)",
+    padding:              "clamp(28px, 4vw, 48px) clamp(20px, 5vw, 30px) clamp(56px, 8vw, 88px)",
   } as React.CSSProperties
 
   return (

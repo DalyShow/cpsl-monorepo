@@ -73,7 +73,7 @@ export function HeroBento({
           gap: clamp(12px, 2vw, 20px);
           grid-template-columns: repeat(12, 1fr);
           grid-template-rows:    1fr 1fr;
-          height: min(476px, calc((100vh - 160px) * 0.7));
+          height: min(540px, calc((100vh - 160px) * 0.78));
         }
 
         /* ── Tiles ───────────────────────────────────────────── */
@@ -202,7 +202,7 @@ export function HeroBento({
         /* ── Tablet: keep split, tighter ─────────────────────── */
         @media (max-width: 1023px) {
           .${id}__grid {
-            height: min(434px, calc((100vh - 140px) * 0.7));
+            height: min(490px, calc((100vh - 140px) * 0.78));
           }
         }
 
@@ -267,12 +267,11 @@ export function HeroBento({
           <div className={`${id}__copy`}>
             <h1 className={`${id}__headline`}>{headline}</h1>
             <p className={`${id}__description`}>{description}</p>
-          </div>
-
-          <div>
-            <ArrowPillButton href={ctaHref} tone="dark">
-              {ctaLabel}
-            </ArrowPillButton>
+            <div className={`${id}__cta`}>
+              <ArrowPillButton href={ctaHref} tone="dark">
+                {ctaLabel}
+              </ArrowPillButton>
+            </div>
           </div>
         </div>
 
