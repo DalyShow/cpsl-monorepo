@@ -265,9 +265,11 @@ export function HeroBento({
             <p className={`${id}__description`}>{description}</p>
           </div>
 
-          <ArrowPillButton href={ctaHref} tone="dark">
-            {ctaLabel}
-          </ArrowPillButton>
+          <div>
+            <ArrowPillButton href={ctaHref} tone="dark">
+              {ctaLabel}
+            </ArrowPillButton>
+          </div>
         </div>
 
         {/* Right hero photo (spans both rows when no sub photo is set) */}
