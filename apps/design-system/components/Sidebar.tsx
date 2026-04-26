@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Search, X } from "lucide-react";
+import { Search, X, ChevronRight } from "lucide-react";
 
 interface NavItem {
   label:    string;
@@ -80,49 +80,113 @@ function flattenForSearch(groups: { title: string; items: NavItem[] }[]) {
   return flat;
 }
 
-function NavLink({ item, depth = 0 }: { item: NavItem; depth?: number }) {
+const linkBase =
+  "flex items-center gap-2.5 rounded-md text-[13px] font-medium transition-all duration-150 hover:bg-slate-50";
+
+function LeafLink({ item, depth = 0 }: { item: NavItem; depth?: number }) {
   const pathname = usePathname();
   const active = pathname === item.href;
-  const childActive = item.children?.some((c) => pathname === c.href);
   return (
-    <>
-      <Link
-        href={item.href}
-        className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 hover:bg-black/5"
+    <Link
+      href={item.href}
+      className={linkBase}
+      style={{
+        background:  active ? "#091628" : "transparent",
+        color:       active ? "#F4EFE6" : "#475569",
+        padding:     "7px 10px",
+        paddingLeft: depth ? 32 : 10,
+        fontSize:    depth ? 12 : 13,
+      }}
+    >
+      {item.icon && (
+        <span className="text-[10px] font-mono w-4 flex-shrink-0 opacity-60">{item.icon}</span>
+      )}
+      <span className="flex-1 truncate">{item.label}</span>
+      {item.status === "new" && (
+        <span
+          className="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded"
+          style={{ background: "#10B98122", color: "#10B981", border: "1px solid #10B98144" }}
+        >
+          new
+        </span>
+      )}
+    </Link>
+  );
+}
+
+function AccordionGroup({ item }: { item: NavItem }) {
+  const pathname = usePathname();
+  const childActive = item.children?.some((c) => pathname === c.href) ?? false;
+  const selfActive  = pathname === item.href;
+  const [open, setOpen] = useState<boolean>(childActive || selfActive);
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className={linkBase}
         style={{
-          background: active ? "#091628" : "transparent",
-          color:      active ? "#F4EFE6" : "#475569",
-          paddingLeft: depth ? 36 : 12,
+          width:       "100%",
+          background:  selfActive ? "#091628" : "transparent",
+          color:       selfActive ? "#F4EFE6" : "#475569",
+          padding:     "7px 10px",
+          textAlign:   "left",
+          border:      0,
+          cursor:      "pointer",
         }}
       >
         {item.icon && (
-          <span className="text-xs font-mono w-5 flex-shrink-0 opacity-60">{item.icon}</span>
+          <span className="text-[10px] font-mono w-4 flex-shrink-0 opacity-60">{item.icon}</span>
         )}
         <span className="flex-1 truncate">{item.label}</span>
-        {item.status === "new" && (
-          <span
-            className="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded"
-            style={{ background: "#10B98122", color: "#10B981", border: "1px solid #10B98144" }}
-          >
-            new
-          </span>
-        )}
-      </Link>
-      {item.children && (active || childActive) && (
+        <ChevronRight
+          size={12}
+          style={{
+            transform:  open ? "rotate(90deg)" : "rotate(0deg)",
+            transition: "transform 200ms cubic-bezier(.2,.8,.2,1)",
+            opacity:    selfActive ? 0.7 : 0.5,
+          }}
+        />
+      </button>
+
+      {open && (
         <div className="flex flex-col gap-0.5 mt-0.5 mb-1">
-          {item.children.map((c) => (
-            <NavLink key={c.href} item={c} depth={1} />
+          <Link
+            href={item.href}
+            className={linkBase}
+            style={{
+              padding:     "5px 10px",
+              paddingLeft: 32,
+              fontSize:    12,
+              fontStyle:   "italic",
+              background:  selfActive ? "#0916281A" : "transparent",
+              color:       selfActive ? "#091628" : "#697279",
+            }}
+          >
+            <span className="flex-1 truncate">All {item.label}</span>
+          </Link>
+          {item.children?.map((c) => (
+            <LeafLink key={c.href} item={c} depth={1} />
           ))}
         </div>
       )}
-    </>
+    </div>
   );
+}
+
+function NavLink({ item }: { item: NavItem }) {
+  if (item.children && item.children.length > 0) {
+    return <AccordionGroup item={item} />;
+  }
+  return <LeafLink item={item} />;
 }
 
 function NavGroup({ title, items }: { title: string; items: NavItem[] }) {
   return (
-    <div className="mb-6">
-      <div className="text-xs font-semibold uppercase tracking-widest mb-2 px-3" style={{ color: "#697279" }}>
+    <div className="mb-5">
+      <div className="text-[10px] font-bold uppercase tracking-widest mb-1.5 px-2.5" style={{ color: "#94A3B8" }}>
         {title}
       </div>
       <div className="flex flex-col gap-0.5">
@@ -150,20 +214,20 @@ export default function Sidebar() {
   return (
     <aside
       className="fixed left-0 top-0 h-screen w-64 flex flex-col overflow-y-auto z-50"
-      style={{ background: "#F4EFE6", borderRight: "1px solid #E5DCC9" }}
+      style={{ background: "#FFFFFF", borderRight: "1px solid #E2E8F0" }}
     >
       {/* Logo */}
-      <div className="p-5 border-b" style={{ borderColor: "#E5DCC9" }}>
+      <div className="p-5 border-b" style={{ borderColor: "#E2E8F0" }}>
         <div className="mb-3">
           <Image src="/cpsl-horizontal-dark.svg" alt="CPSL" width={160} height={59} unoptimized priority />
         </div>
         <div className="flex items-center justify-between">
-          <div className="text-xs font-bold tracking-widest uppercase" style={{ color: "#697279" }}>
+          <div className="text-[10px] font-bold tracking-widest uppercase" style={{ color: "#94A3B8" }}>
             Design System
           </div>
           <span
-            className="text-xs font-semibold px-2 py-0.5 rounded-full inline-block"
-            style={{ background: "#FFFFFF", color: "#091628", border: "1px solid #E5DCC9" }}
+            className="text-[10px] font-semibold px-2 py-0.5 rounded-full inline-block"
+            style={{ background: "#F4F6FA", color: "#091628", border: "1px solid #E2E8F0" }}
           >
             v1.0
           </span>
@@ -171,11 +235,11 @@ export default function Sidebar() {
       </div>
 
       {/* Search */}
-      <div className="px-4 pt-4 pb-2">
+      <div className="px-3 pt-3 pb-2">
         <div className="relative">
           <Search
-            size={14}
-            className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+            size={13}
+            className="absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none"
             style={{ color: "#94A3B8" }}
           />
           <input
@@ -183,11 +247,11 @@ export default function Sidebar() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search docs…"
-            className="w-full rounded-lg pl-9 pr-8 py-2 text-sm focus:outline-none focus-visible:ring-2"
+            className="w-full rounded-md pl-8 pr-7 py-1.5 text-[12px] focus:outline-none focus-visible:ring-2"
             style={{
-              background: "#FFFFFF",
+              background: "#F4F6FA",
               color:      "#091628",
-              border:     "1px solid #E5DCC9",
+              border:     "1px solid #E2E8F0",
             }}
             aria-label="Search documentation"
           />
@@ -196,25 +260,25 @@ export default function Sidebar() {
               type="button"
               onClick={() => setQuery("")}
               aria-label="Clear search"
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-black/5"
+              className="absolute right-1.5 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-slate-100"
               style={{ color: "#94A3B8" }}
             >
-              <X size={12} />
+              <X size={11} />
             </button>
           )}
         </div>
       </div>
 
       {/* Nav or Search Results */}
-      <nav className="flex-1 p-4 pt-2">
+      <nav className="flex-1 p-3 pt-1">
         {results ? (
           results.length === 0 ? (
-            <div className="px-3 py-6 text-xs" style={{ color: "#697279" }}>
+            <div className="px-2.5 py-6 text-[12px]" style={{ color: "#94A3B8" }}>
               No matches for &quot;{query}&quot;.
             </div>
           ) : (
             <div className="flex flex-col gap-0.5">
-              <div className="text-xs font-semibold uppercase tracking-widest mb-2 px-3" style={{ color: "#697279" }}>
+              <div className="text-[10px] font-bold uppercase tracking-widest mb-1.5 px-2.5" style={{ color: "#94A3B8" }}>
                 {results.length} result{results.length === 1 ? "" : "s"}
               </div>
               {results.map((r) => (
@@ -222,11 +286,11 @@ export default function Sidebar() {
                   key={r.href}
                   href={r.href}
                   onClick={() => setQuery("")}
-                  className="flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium hover:bg-black/5"
+                  className="flex items-center justify-between gap-2 px-2.5 py-1.5 rounded-md text-[13px] font-medium hover:bg-slate-50"
                   style={{ color: "#475569" }}
                 >
                   <span className="truncate">{r.title}</span>
-                  <span className="text-[10px] font-mono opacity-50">{r.group}</span>
+                  <span className="text-[9px] font-mono opacity-50">{r.group}</span>
                 </Link>
               ))}
             </div>
@@ -241,9 +305,9 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t text-xs leading-relaxed" style={{ borderColor: "#E5DCC9", color: "#697279" }}>
+      <div className="p-4 border-t text-[11px] leading-relaxed" style={{ borderColor: "#E2E8F0", color: "#94A3B8" }}>
         Carolina Premier Soccer League<br />
-        <span style={{ color: "#94A3B8" }}>Design System · 2026</span>
+        <span style={{ color: "#CBD5E1" }}>Design System · 2026</span>
       </div>
     </aside>
   );

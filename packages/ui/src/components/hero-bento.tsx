@@ -19,15 +19,19 @@ export interface HeroBentoProps {
   badgeLabel?:  string;
 }
 
+const id = "hb"; // class prefix scope
+
 /**
- * HeroBento — contained bento-style hero (~640px tall).
+ * HeroBento — contained bento-style hero (~640px tall on desktop).
  *
- * Layout: cream text tile on the left (5/12), two stacked photo tiles
- * on the right (7/12). A floating gold badge anchors the top-right
- * corner of the upper photo for a single proof-point stat.
- *
- * Sized to fit roughly half the viewport — drop directly under a
- * navigation bar without taking the full screen.
+ * Layout:
+ *   • Desktop (≥1024px): 5/7 split. Cream text tile left, hero photo
+ *     top-right with floating gold badge, sub photo bottom-right.
+ *   • Tablet (640–1024px): same 5/7 split with reduced padding and
+ *     a slightly shorter overall height.
+ *   • Mobile (<640px): vertical stack — text tile, hero photo, sub
+ *     photo — auto height, tighter padding, smaller badge in the
+ *     bottom-right corner of the hero photo.
  */
 export function HeroBento({
   eyebrow     = "2026–2027 SEASON",
@@ -41,71 +45,171 @@ export function HeroBento({
   badgeLabel  = "College programs",
 }: HeroBentoProps) {
   return (
-    <section style={{ padding: 30, background: "#091628" }}>
-      <div
-        style={{
-          display:             "grid",
-          gridTemplateColumns: "repeat(12, 1fr)",
-          gridTemplateRows:    "1fr 1fr",
-          gap:                 20,
-          height:              "min(680px, calc(100vh - 160px))",
-        }}
-      >
+    <section className={`${id}__section`}>
+      <style>{`
+        .${id}__section {
+          padding: clamp(16px, 4vw, 30px);
+          background: #091628;
+        }
+
+        .${id}__grid {
+          display: grid;
+          gap: clamp(12px, 2vw, 20px);
+          grid-template-columns: repeat(12, 1fr);
+          grid-template-rows:    1fr 1fr;
+          height: min(680px, calc(100vh - 160px));
+        }
+
+        /* ── Tiles ───────────────────────────────────────────── */
+        .${id}__tile {
+          position:     relative;
+          overflow:     hidden;
+          border-radius: clamp(16px, 2vw, 24px);
+        }
+
+        .${id}__tile--text {
+          grid-column: span 5;
+          grid-row:    span 2;
+          background:  #F4EFE6;
+          color:       #091628;
+          display:     flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding:     clamp(24px, 3vw, 40px);
+        }
+
+        .${id}__tile--photo-main {
+          grid-column: span 7;
+          grid-row:    span 1;
+          background:  #0A1628;
+        }
+
+        .${id}__tile--photo-sub {
+          grid-column: span 7;
+          grid-row:    span 1;
+          background:  #0A1628;
+        }
+
+        .${id}__photo {
+          position:    absolute;
+          inset:       0;
+          width:       100%;
+          height:      100%;
+          object-fit:  cover;
+        }
+
+        .${id}__photo-scrim {
+          position:   absolute;
+          inset:      0;
+          background: linear-gradient(135deg, rgba(9,22,40,0) 50%, rgba(9,22,40,0.55) 100%);
+          pointer-events: none;
+        }
+
+        /* ── Text content ────────────────────────────────────── */
+        .${id}__eyebrow {
+          font-size:     11px;
+          font-weight:   700;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color:         #BF1D2D;
+          margin:        0;
+        }
+
+        .${id}__headline {
+          font-family:   'Barlow Condensed', sans-serif;
+          font-weight:   900;
+          font-size:     clamp(36px, 5.5vw, 80px);
+          line-height:   0.92;
+          letter-spacing: -0.018em;
+          text-transform: uppercase;
+          text-wrap:     balance;
+          margin:        0;
+        }
+
+        .${id}__description {
+          font-size:    clamp(14px, 1.05vw, 15px);
+          line-height:  1.6;
+          color:        #475569;
+          margin:       0 0 clamp(20px, 3vw, 28px);
+          max-width:    448px;
+        }
+
+        /* ── Floating gold badge ─────────────────────────────── */
+        .${id}__badge {
+          position:     absolute;
+          right:        clamp(16px, 2.5vw, 28px);
+          top:          clamp(16px, 2.5vw, 28px);
+          border-radius: clamp(12px, 1.5vw, 16px);
+          padding:      clamp(10px, 1.5vw, 16px) clamp(14px, 2vw, 20px);
+          background:   #C9A74C;
+          color:        #091628;
+          box-shadow:   0 12px 32px rgba(9,22,40,0.35);
+          display:      flex;
+          align-items:  center;
+          gap:          clamp(10px, 1.5vw, 16px);
+        }
+
+        .${id}__badge-value {
+          font-family:    'Barlow Condensed', sans-serif;
+          font-weight:    900;
+          font-size:      clamp(26px, 3vw, 38px);
+          line-height:    0.95;
+          letter-spacing: -0.01em;
+        }
+
+        .${id}__badge-label {
+          font-size:     10px;
+          font-weight:   700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          max-width:     80px;
+          line-height:   1.1;
+        }
+
+        /* ── Tablet: keep split, tighter ─────────────────────── */
+        @media (max-width: 1023px) {
+          .${id}__grid {
+            height: min(620px, calc(100vh - 140px));
+          }
+        }
+
+        /* ── Mobile: stack vertically ────────────────────────── */
+        @media (max-width: 639px) {
+          .${id}__grid {
+            grid-template-columns: 1fr;
+            grid-template-rows:    auto;
+            grid-auto-rows:        auto;
+            height:                auto;
+          }
+          .${id}__tile--text {
+            grid-column:    1 / -1;
+            grid-row:       auto;
+            min-height:     360px;
+          }
+          .${id}__tile--photo-main,
+          .${id}__tile--photo-sub {
+            grid-column:    1 / -1;
+            grid-row:       auto;
+            aspect-ratio:   16 / 9;
+          }
+          .${id}__badge {
+            right:  16px;
+            bottom: 16px;
+            top:    auto;
+          }
+          .${id}__badge-label {
+            display: none;
+          }
+        }
+      `}</style>
+
+      <div className={`${id}__grid`}>
         {/* Left text tile */}
-        <div
-          style={{
-            position:        "relative",
-            overflow:        "hidden",
-            borderRadius:    24,
-            background:      "#F4EFE6",
-            color:           "#091628",
-            gridColumn:      "span 5",
-            gridRow:         "span 2",
-            display:         "flex",
-            flexDirection:   "column",
-            justifyContent:  "space-between",
-            padding:         40,
-          }}
-        >
-          <div
-            style={{
-              fontSize:      11,
-              fontWeight:    700,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color:         "#BF1D2D",
-            }}
-          >
-            {eyebrow}
-          </div>
-
-          <h1
-            style={{
-              fontFamily:   "'Barlow Condensed', sans-serif",
-              fontWeight:   900,
-              fontSize:     "clamp(48px, 5.5vw, 80px)",
-              lineHeight:   0.92,
-              letterSpacing: "-0.018em",
-              textTransform: "uppercase",
-              textWrap:     "balance",
-              margin:       0,
-            }}
-          >
-            {headline}
-          </h1>
-
+        <div className={`${id}__tile ${id}__tile--text`}>
+          <p className={`${id}__eyebrow`}>{eyebrow}</p>
+          <h1 className={`${id}__headline`}>{headline}</h1>
           <div>
-            <p
-              style={{
-                fontSize:    15,
-                lineHeight:  1.6,
-                color:       "#475569",
-                margin:      "0 0 28px",
-                maxWidth:    448,
-              }}
-            >
-              {description}
-            </p>
+            <p className={`${id}__description`}>{description}</p>
             <ArrowPillButton href={ctaHref} tone="dark">
               {ctaLabel}
             </ArrowPillButton>
@@ -113,95 +217,21 @@ export function HeroBento({
         </div>
 
         {/* Top-right hero photo with floating gold badge */}
-        <div
-          style={{
-            position:    "relative",
-            overflow:    "hidden",
-            borderRadius: 24,
-            background:  "#0A1628",
-            gridColumn:  "span 7",
-            gridRow:     "span 1",
-          }}
-        >
-          {heroImage && (
-            <img
-              src={heroImage}
-              alt=""
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-            />
-          )}
-          <div
-            style={{
-              position:   "absolute",
-              inset:      0,
-              background: "linear-gradient(135deg, rgba(9,22,40,0) 50%, rgba(9,22,40,0.55) 100%)",
-            }}
-            aria-hidden
-          />
+        <div className={`${id}__tile ${id}__tile--photo-main`}>
+          {heroImage && <img src={heroImage} alt="" className={`${id}__photo`} />}
+          <div className={`${id}__photo-scrim`} aria-hidden />
 
           {badge && (
-            <div
-              style={{
-                position:     "absolute",
-                right:        28,
-                top:          28,
-                borderRadius: 16,
-                padding:      "16px 20px",
-                background:   "#C9A74C",
-                color:        "#091628",
-                boxShadow:    "0 12px 32px rgba(9,22,40,0.35)",
-                display:      "flex",
-                alignItems:   "center",
-                gap:          16,
-              }}
-            >
-              <div
-                style={{
-                  fontFamily:   "'Barlow Condensed', sans-serif",
-                  fontWeight:   900,
-                  fontSize:     38,
-                  lineHeight:   0.95,
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                {badge}
-              </div>
-              {badgeLabel && (
-                <div
-                  style={{
-                    fontSize:      10,
-                    fontWeight:    700,
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    maxWidth:      80,
-                    lineHeight:    1.1,
-                  }}
-                >
-                  {badgeLabel}
-                </div>
-              )}
+            <div className={`${id}__badge`}>
+              <div className={`${id}__badge-value`}>{badge}</div>
+              {badgeLabel && <div className={`${id}__badge-label`}>{badgeLabel}</div>}
             </div>
           )}
         </div>
 
         {/* Bottom-right secondary photo */}
-        <div
-          style={{
-            position:     "relative",
-            overflow:     "hidden",
-            borderRadius: 24,
-            background:   "#0A1628",
-            gridColumn:   "span 7",
-            gridRow:      "span 1",
-          }}
-        >
-          {subImage && (
-            <img
-              src={subImage}
-              alt=""
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
-            />
-          )}
+        <div className={`${id}__tile ${id}__tile--photo-sub`}>
+          {subImage && <img src={subImage} alt="" className={`${id}__photo`} />}
         </div>
       </div>
     </section>

@@ -139,7 +139,7 @@ export function FAQAccordion({
     "--faq-icon-border":  c.iconBorder,
     "--faq-hover":        c.hover,
     background:           bg,
-    padding:              "96px 24px 112px",
+    padding:              "clamp(56px, 9vw, 96px) clamp(20px, 5vw, 30px) clamp(72px, 11vw, 112px)",
   } as React.CSSProperties
 
   return (
@@ -149,7 +149,7 @@ export function FAQAccordion({
           max-width: 980px;
           margin: 0 auto;
         }
-        .${id}__header { margin-bottom: 56px; }
+        .${id}__header { margin-bottom: clamp(32px, 6vw, 56px); }
         .${id}__eyebrow {
           color: #E74552;
           font-size: 10px;
@@ -161,16 +161,16 @@ export function FAQAccordion({
         .${id}__headline {
           font-family: 'Barlow Condensed', sans-serif;
           font-weight: 800;
-          font-size: var(--text-display-sm, clamp(36px, 4.6vw, 56px));
+          font-size: var(--text-display-sm, clamp(32px, 5vw, 56px));
           line-height: 0.95;
-          letter-spacing: -1.5px;
+          letter-spacing: -0.02em;
           text-transform: uppercase;
           color: var(--faq-text);
-          margin: 0 0 18px;
+          margin: 0 0 14px;
           text-wrap: balance;
         }
         .${id}__intro {
-          font-size: 15px;
+          font-size: clamp(14px, 1.05vw, 15px);
           line-height: 1.65;
           color: var(--faq-muted);
           margin: 0;
@@ -186,8 +186,8 @@ export function FAQAccordion({
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 32px;
-          padding: 26px 4px;
+          gap: clamp(16px, 3vw, 32px);
+          padding: clamp(20px, 3vw, 26px) 4px;
           background: transparent;
           border: 0;
           cursor: pointer;
@@ -205,7 +205,7 @@ export function FAQAccordion({
         .${id}__question {
           font-family: 'Barlow Condensed', sans-serif;
           font-weight: 700;
-          font-size: clamp(20px, 1.6vw, 24px);
+          font-size: clamp(17px, 2.2vw, 24px);
           letter-spacing: 0;
           text-transform: uppercase;
           line-height: 1.15;
@@ -213,8 +213,8 @@ export function FAQAccordion({
 
         .${id}__icon {
           flex: 0 0 auto;
-          width: 36px;
-          height: 36px;
+          width: clamp(28px, 3.4vw, 36px);
+          height: clamp(28px, 3.4vw, 36px);
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -237,10 +237,10 @@ export function FAQAccordion({
         .${id}__panel { overflow: hidden; }
         .${id}__panel[hidden] { display: none; }
         .${id}__answer {
-          font-size: 15px;
+          font-size: clamp(14px, 1.05vw, 15px);
           line-height: 1.65;
           color: var(--faq-muted);
-          padding: 0 60px 30px 4px;
+          padding: 0 clamp(0px, 6vw, 60px) clamp(20px, 3.5vw, 30px) 4px;
           max-width: 760px;
           text-wrap: pretty;
           animation: ${id}-fade 320ms cubic-bezier(.2,.8,.2,1) both;
@@ -257,9 +257,9 @@ export function FAQAccordion({
             transform: none !important;
           }
         }
-        @media (max-width: 640px) {
-          .${id}__trigger { gap: 16px; padding: 22px 0; }
-          .${id}__answer  { padding: 0 0 24px 0; }
+        @media (max-width: 480px) {
+          .${id}__trigger { padding-left: 0; padding-right: 0; }
+          .${id}__answer  { padding-left: 0; padding-right: 0; }
         }
       `}</style>
 
