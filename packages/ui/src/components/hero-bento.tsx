@@ -73,7 +73,7 @@ export function HeroBento({
           gap: clamp(12px, 2vw, 20px);
           grid-template-columns: repeat(12, 1fr);
           grid-template-rows:    1fr 1fr;
-          height: min(680px, calc(100vh - 160px));
+          height: min(476px, calc((100vh - 160px) * 0.7));
         }
 
         /* ── Tiles ───────────────────────────────────────────── */
@@ -202,7 +202,7 @@ export function HeroBento({
         /* ── Tablet: keep split, tighter ─────────────────────── */
         @media (max-width: 1023px) {
           .${id}__grid {
-            height: min(620px, calc(100vh - 140px));
+            height: min(434px, calc((100vh - 140px) * 0.7));
           }
         }
 
