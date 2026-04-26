@@ -80,7 +80,7 @@ export function HeroBento({
         .${id}__tile {
           position:     relative;
           overflow:     hidden;
-          border-radius: clamp(16px, 2vw, 24px);
+          border-radius: 0;
         }
 
         .${id}__tile--text {
@@ -172,7 +172,7 @@ export function HeroBento({
         }
 
         .${id}__badge {
-          border-radius: clamp(12px, 1.5vw, 16px);
+          border-radius: 0;
           padding:       clamp(10px, 1.5vw, 16px) clamp(14px, 2vw, 20px);
           background:    #C9A74C;
           color:         #091628;
