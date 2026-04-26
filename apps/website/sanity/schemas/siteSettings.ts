@@ -52,6 +52,64 @@ export const siteSettings = defineType({
       type: "string",
       initialValue: "#contact",
     }),
+
+    defineField({
+      name: "logoTicker",
+      title: "Logo Ticker",
+      type: "object",
+      description:
+        "Site-wide logo ticker — appears wherever a Logo Ticker block is added to a page. Configure once here.",
+      fields: [
+        defineField({
+          name: "logos",
+          title: "Logos",
+          type: "array",
+          description:
+            "Drag and drop multiple files at once to bulk-upload. For accessibility, set the asset's alt text from the image details panel after upload.",
+          of: [
+            {
+              type: "image",
+              options: {
+                accept: "image/svg+xml,image/png,image/webp,image/jpeg",
+              },
+            },
+          ],
+        }),
+        defineField({
+          name: "durationSeconds",
+          title: "Loop Duration (seconds)",
+          type: "number",
+          initialValue: 80,
+          description: "Full loop time. Lower is faster.",
+          validation: (R) => R.positive(),
+        }),
+        defineField({
+          name: "reverse",
+          title: "Reverse Direction",
+          type: "boolean",
+          initialValue: false,
+        }),
+        defineField({
+          name: "pauseOnHover",
+          title: "Pause on Hover",
+          type: "boolean",
+          initialValue: true,
+        }),
+        defineField({
+          name: "edgeFade",
+          title: "Soft Edge Fade",
+          type: "boolean",
+          initialValue: false,
+        }),
+        defineField({
+          name: "sectionBackground",
+          title: "Section Background",
+          type: "string",
+          description:
+            "Hex value or CSS color name. Leave blank to inherit the page background.",
+        }),
+      ],
+    }),
   ],
   preview: {
     select: { title: "siteName" },
