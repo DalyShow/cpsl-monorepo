@@ -56,8 +56,8 @@ const toneMap: Record<ArrowPillTone, {
     pillBg:      "#FFFFFF",
     pillBorder:  "transparent",
     pillColor:   "#091628",
-    iconBg:      "#091628",
-    iconColor:   "#F4EFE6",
+    iconBg:      "#C9A74C",
+    iconColor:   "#091628",
     hoverShadow: "0 8px 24px rgba(9,22,40,0.18)",
   },
   light: {
