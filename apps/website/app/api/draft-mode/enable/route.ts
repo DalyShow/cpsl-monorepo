@@ -1,28 +1,40 @@
-import { defineEnableDraftMode } from "next-sanity/draft-mode";
+import { validatePreviewUrl } from "@sanity/preview-url-secret";
 import { createClient } from "next-sanity";
+import { draftMode } from "next/headers";
+import { redirect } from "next/navigation";
 
 /**
  * Presentation-tool draft-mode enable route.
  *
  * The Sanity Studio's Presentation tool calls this when an editor
- * opens a document, passing a Sanity-issued auth header that
- * `defineEnableDraftMode` validates against the project. On success
- * it flips Next.js draftMode on for the iframe session so all
- * subsequent sanityFetch calls return draft content with stega
- * encoding (the invisible chars that power click-to-edit overlays).
+ * opens a document. We validate the Sanity-issued preview secret,
+ * flip Next.js draftMode on, and redirect to the target slug so the
+ * iframe renders the draft with stega encoding.
  *
- * Distinct from the older /api/draft/enable route, which uses a
- * static SANITY_PREVIEW_SECRET for the legacy "Preview" button.
+ * NOTE: We're NOT using next-sanity's `defineEnableDraftMode` —
+ * its built-in cookie-rewriting hack (re-setting `__prerender_bypass`
+ * with sameSite=none) breaks on Next.js 16 because the cookie value
+ * is undefined on first call → "TypeError: Cannot convert undefined
+ * to string". Studio is embedded in this same Next.js app at
+ * /studio, so the iframe is same-origin and the default sameSite=lax
+ * cookie set by draftMode().enable() works fine.
  */
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "";
-const dataset   = process.env.NEXT_PUBLIC_SANITY_DATASET    || "production";
-
 const client = createClient({
-  projectId,
-  dataset,
+  projectId:  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
+  dataset:    process.env.NEXT_PUBLIC_SANITY_DATASET    || "production",
   apiVersion: "2024-01-01",
   useCdn:     false,
   token:      process.env.SANITY_API_READ_TOKEN,
 });
 
-export const { GET } = defineEnableDraftMode({ client });
+export async function GET(request: Request) {
+  const { isValid, redirectTo = "/" } = await validatePreviewUrl(
+    client,
+    request.url,
+  );
+  if (!isValid) {
+    return new Response("Invalid secret", { status: 401 });
+  }
+  (await draftMode()).enable();
+  redirect(redirectTo);
+}
