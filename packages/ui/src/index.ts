@@ -57,3 +57,6 @@ export type {
 
 export { HeroBento } from "./components/hero-bento";
 export type { HeroBentoProps, HeroBentoBadge } from "./components/hero-bento";
+
+export { ScrollReveal } from "./components/scroll-reveal";
+export type { ScrollRevealProps } from "./components/scroll-reveal";

@@ -1,3 +1,4 @@
+import { ScrollReveal } from "@cpsl/ui";
 import { HeroBlock } from "./HeroBlock";
 import { SectionHeader } from "./SectionHeader";
 import { ContentSectionCentered } from "./ContentSectionCentered";
@@ -18,7 +19,19 @@ import { HeroBentoBlock } from "./HeroBentoBlock";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Block = { _type: string; _key: string;[key: string]: any };
 
-export function BlockRenderer({ block }: { block: Block }) {
+/**
+ * Block types that ship their own reveal choreography or shouldn't
+ * be wrapped (e.g. nav strips). Skip the ScrollReveal wrapper for these.
+ */
+const NO_REVEAL = new Set([
+  "dualPanelBlock",
+  "subNavBlock",
+  "logoTickerBlock",
+  "heroBlock",
+  "promoHeroBlock",
+]);
+
+function renderInner(block: Block) {
   switch (block._type) {
     case "heroBlock":
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -91,4 +104,10 @@ export function BlockRenderer({ block }: { block: Block }) {
       }
       return null;
   }
+}
+
+export function BlockRenderer({ block }: { block: Block }) {
+  const inner = renderInner(block);
+  if (NO_REVEAL.has(block._type) || !inner) return inner;
+  return <ScrollReveal>{inner}</ScrollReveal>;
 }
