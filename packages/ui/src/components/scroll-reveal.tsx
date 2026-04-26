@@ -14,10 +14,15 @@ export interface ScrollRevealProps {
 
 /**
  * Wraps any block in the DualPanel-style left-to-right wipe reveal.
- * Uses IntersectionObserver — the wipe fires once when the wrapper
- * crosses ~15% into view, then unobserves so it never re-runs.
  *
- * Respects prefers-reduced-motion: reveals instantly without animation.
+ * Strategy: SSR renders fully open (no clip-path) so content is
+ * visible even before JS hydrates. After mount we measure the
+ * wrapper's position — sections already inside the viewport stay
+ * visible (no clip), sections below the fold get clipped and then
+ * uncliped via IntersectionObserver as the user scrolls them into
+ * view. This avoids the "blank page until JS loads" failure mode.
+ *
+ * Respects prefers-reduced-motion: skips the wipe entirely.
  */
 export function ScrollReveal({
   children,
@@ -26,47 +31,44 @@ export function ScrollReveal({
   disabled = false,
 }: ScrollRevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [revealed, setRevealed] = React.useState(false);
-  const [reducedMotion, setReducedMotion] = React.useState(false);
+  const [hidden, setHidden] = React.useState(false);
 
   React.useEffect(() => {
+    if (disabled) return;
     if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (typeof IntersectionObserver === "undefined") return;
+    if (!ref.current) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setReducedMotion(true);
-      return;
-    }
+    const rect = ref.current.getBoundingClientRect();
+    const initiallyInView = rect.top < window.innerHeight - 80;
 
-    if (typeof IntersectionObserver === "undefined") {
-      setRevealed(true);
-      return;
-    }
+    // If the section is already on screen at mount, leave it visible —
+    // an instant wipe over content the user is staring at is jarring.
+    if (initiallyInView) return;
+
+    setHidden(true);
 
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setRevealed(true);
+          setHidden(false);
           obs.disconnect();
         }
       },
       { threshold: 0.15, rootMargin: "0px 0px -80px 0px" },
     );
 
-    const el = ref.current;
-    if (el) obs.observe(el);
+    obs.observe(ref.current);
     return () => obs.disconnect();
-  }, []);
-
-  const isOpen = disabled || reducedMotion || revealed;
+  }, [disabled]);
 
   return (
     <div
       ref={ref}
       style={{
-        clipPath: isOpen ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
-        transition: reducedMotion
-          ? "none"
-          : `clip-path ${duration}ms cubic-bezier(.16, 1, .3, 1) ${delay}ms`,
+        clipPath: hidden ? "inset(0 100% 0 0)" : "inset(0 0 0 0)",
+        transition: `clip-path ${duration}ms cubic-bezier(.16, 1, .3, 1) ${delay}ms`,
         willChange: "clip-path",
       }}
     >
