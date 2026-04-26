@@ -31,6 +31,10 @@ export interface HeroBentoProps {
 const id = "hb"; // class prefix scope
 const MAX_BADGES = 3;
 
+const DEFAULT_BADGES: HeroBentoBadge[] = [
+  { value: "180+", label: "College programs" },
+];
+
 /**
  * HeroBento — contained bento-style hero (~640px tall on desktop).
  *
@@ -51,7 +55,7 @@ export function HeroBento({
   ctaHref     = "/showcases",
   heroImage   = "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=1400&q=85",
   subImage,
-  badges,
+  badges      = DEFAULT_BADGES,
 }: HeroBentoProps) {
   const visibleBadges = (badges ?? []).slice(0, MAX_BADGES);
   const heroSpansFull = !subImage;
