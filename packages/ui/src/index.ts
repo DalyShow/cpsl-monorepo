@@ -56,4 +56,4 @@ export type {
 } from "./components/arrow-pill-button";
 
 export { HeroBento } from "./components/hero-bento";
-export type { HeroBentoProps } from "./components/hero-bento";
+export type { HeroBentoProps, HeroBentoBadge } from "./components/hero-bento";

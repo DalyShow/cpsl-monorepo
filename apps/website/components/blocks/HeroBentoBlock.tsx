@@ -1,7 +1,13 @@
-import { HeroBento } from "@cpsl/ui";
+import { HeroBento, type HeroBentoBadge } from "@cpsl/ui";
 
 interface SanityImage {
   asset?: { url?: string };
+}
+
+interface SanityBadge {
+  _key?: string;
+  value?: string;
+  label?: string;
 }
 
 interface HeroBentoBlockProps {
@@ -12,8 +18,7 @@ interface HeroBentoBlockProps {
   ctaHref?:     string;
   heroImage?:   SanityImage;
   subImage?:    SanityImage;
-  badge?:       string;
-  badgeLabel?:  string;
+  badges?:      SanityBadge[];
 }
 
 export function HeroBentoBlock({
@@ -24,9 +29,13 @@ export function HeroBentoBlock({
   ctaHref,
   heroImage,
   subImage,
-  badge,
-  badgeLabel,
+  badges,
 }: HeroBentoBlockProps) {
+  const mappedBadges: HeroBentoBadge[] = (badges ?? [])
+    .filter((b) => !!b?.value)
+    .slice(0, 3)
+    .map((b) => ({ value: b.value!, label: b.label }));
+
   return (
     <HeroBento
       eyebrow={eyebrow}
@@ -36,8 +45,7 @@ export function HeroBentoBlock({
       ctaHref={ctaHref}
       heroImage={heroImage?.asset?.url}
       subImage={subImage?.asset?.url}
-      badge={badge}
-      badgeLabel={badgeLabel}
+      badges={mappedBadges.length > 0 ? mappedBadges : undefined}
     />
   );
 }

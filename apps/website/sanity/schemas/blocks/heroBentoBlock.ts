@@ -23,6 +23,7 @@ export const heroBentoBlock = defineType({
       title: "Description",
       type: "text",
       rows: 3,
+      description: "Sits 32px below the headline.",
       initialValue:
         "Three showcases per year. NCSA-published feeds for every fixture. 180+ college programs in attendance last cycle.",
     }),
@@ -43,30 +44,32 @@ export const heroBentoBlock = defineType({
 
     defineField({
       name: "heroImage",
-      title: "Hero Image (large, top-right)",
+      title: "Hero Image (right column)",
       type: "image",
       options: { hotspot: true },
+      description:
+        "The large photo on the right. When no Sub Image is set, this spans the full right column.",
     }),
     defineField({
       name: "subImage",
-      title: "Sub Image (smaller, bottom-right)",
+      title: "Sub Image (optional)",
       type: "image",
       options: { hotspot: true },
+      description:
+        "Optional second photo stacked below the hero. Leave blank to render a single full-height hero image.",
     }),
 
     defineField({
-      name: "badge",
-      title: "Badge Value",
-      type: "string",
-      description: 'Optional gold proof-point — short value like "180+" or "14 clubs". Leave blank to hide the badge.',
-      initialValue: "180+",
-    }),
-    defineField({
-      name: "badgeLabel",
-      title: "Badge Label",
-      type: "string",
-      description: 'Small uppercase line under the badge value, e.g. "College programs".',
-      initialValue: "College programs",
+      name: "badges",
+      title: "Badges",
+      type: "array",
+      description:
+        "Up to 3 gold proof-point badges anchored top-right of the hero photo. On mobile they reflow into a full-width grid strip across the bottom of the photo.",
+      of: [{ type: "heroBentoBadge" }],
+      validation: (R) => R.max(3),
+      initialValue: [
+        { _type: "heroBentoBadge", value: "180+", label: "College programs" },
+      ],
     }),
   ],
   preview: {

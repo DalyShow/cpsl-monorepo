@@ -3,6 +3,13 @@
 import * as React from "react";
 import { ArrowPillButton } from "./arrow-pill-button";
 
+export interface HeroBentoBadge {
+  /** Number or short string, e.g. "180+" or "14". */
+  value: string;
+  /** Small uppercase label beneath the value. Optional. */
+  label?: string;
+}
+
 export interface HeroBentoProps {
   eyebrow?:     string;
   headline?:    string;
@@ -11,27 +18,30 @@ export interface HeroBentoProps {
   ctaHref?:     string;
   /** URL of the large top-right photo. */
   heroImage?:   string;
-  /** URL of the smaller bottom-right photo. */
+  /** Optional URL for a stacked second photo. When omitted the hero photo spans the full right column. */
   subImage?:    string;
-  /** Optional gold proof-point badge — number or short string. */
-  badge?:       string;
-  /** Small uppercase label beneath the badge value. */
-  badgeLabel?:  string;
+  /**
+   * Up to three badges anchored top-right of the hero photo. Arrange in a
+   * horizontal row on desktop and a 1× equal-column grid across the bottom
+   * of the photo on mobile.
+   */
+  badges?:      HeroBentoBadge[];
 }
 
 const id = "hb"; // class prefix scope
+const MAX_BADGES = 3;
 
 /**
  * HeroBento — contained bento-style hero (~640px tall on desktop).
  *
  * Layout:
  *   • Desktop (≥1024px): 5/7 split. Cream text tile left, hero photo
- *     top-right with floating gold badge, sub photo bottom-right.
- *   • Tablet (640–1024px): same 5/7 split with reduced padding and
- *     a slightly shorter overall height.
- *   • Mobile (<640px): vertical stack — text tile, hero photo, sub
- *     photo — auto height, tighter padding, smaller badge in the
- *     bottom-right corner of the hero photo.
+ *     top-right with floating gold badges, optional sub photo bottom-right.
+ *   • Tablet (640–1024px): same 5/7 split with reduced padding and a
+ *     slightly shorter overall height.
+ *   • Mobile (<640px): vertical stack — text tile, hero photo, sub photo —
+ *     auto height. Badges shift to a full-width grid strip across the
+ *     bottom of the hero photo, each badge in its own equal column.
  */
 export function HeroBento({
   eyebrow     = "2026–2027 SEASON",
@@ -40,10 +50,12 @@ export function HeroBento({
   ctaLabel    = "View showcases",
   ctaHref     = "/showcases",
   heroImage   = "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=1400&q=85",
-  subImage    = "https://images.unsplash.com/photo-1577223625816-7546f13df25d?w=800&q=85",
-  badge       = "180+",
-  badgeLabel  = "College programs",
+  subImage,
+  badges,
 }: HeroBentoProps) {
+  const visibleBadges = (badges ?? []).slice(0, MAX_BADGES);
+  const heroSpansFull = !subImage;
+
   return (
     <section className={`${id}__section`}>
       <style>{`
@@ -78,10 +90,20 @@ export function HeroBento({
           padding:     clamp(24px, 3vw, 40px);
         }
 
+        /* Group headline + description so they sit close together. */
+        .${id}__copy {
+          display:        flex;
+          flex-direction: column;
+          gap:            32px;
+        }
+
         .${id}__tile--photo-main {
           grid-column: span 7;
           grid-row:    span 1;
           background:  #0A1628;
+        }
+        .${id}__tile--photo-main.is-full {
+          grid-row: span 2;
         }
 
         .${id}__tile--photo-sub {
@@ -107,46 +129,53 @@ export function HeroBento({
 
         /* ── Text content ────────────────────────────────────── */
         .${id}__eyebrow {
-          font-size:     11px;
-          font-weight:   700;
+          font-size:      11px;
+          font-weight:    700;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          color:         #BF1D2D;
-          margin:        0;
+          color:          #BF1D2D;
+          margin:         0;
         }
 
         .${id}__headline {
-          font-family:   'Barlow Condensed', sans-serif;
-          font-weight:   900;
-          font-size:     clamp(36px, 5.5vw, 80px);
-          line-height:   0.92;
+          font-family:    'Barlow Condensed', sans-serif;
+          font-weight:    900;
+          font-size:      clamp(36px, 5.5vw, 80px);
+          line-height:    0.92;
           letter-spacing: -0.018em;
           text-transform: uppercase;
-          text-wrap:     balance;
-          margin:        0;
+          text-wrap:      balance;
+          margin:         0;
         }
 
         .${id}__description {
-          font-size:    clamp(14px, 1.05vw, 15px);
-          line-height:  1.6;
-          color:        #475569;
-          margin:       0 0 clamp(20px, 3vw, 28px);
-          max-width:    448px;
+          font-size:   clamp(14px, 1.05vw, 15px);
+          line-height: 1.6;
+          color:       #475569;
+          margin:      0;
+          max-width:   448px;
         }
 
-        /* ── Floating gold badge ─────────────────────────────── */
-        .${id}__badge {
+        /* ── Badges row anchored top-right of hero photo ────── */
+        .${id}__badges {
           position:     absolute;
           right:        clamp(16px, 2.5vw, 28px);
           top:          clamp(16px, 2.5vw, 28px);
-          border-radius: clamp(12px, 1.5vw, 16px);
-          padding:      clamp(10px, 1.5vw, 16px) clamp(14px, 2vw, 20px);
-          background:   #C9A74C;
-          color:        #091628;
-          box-shadow:   0 12px 32px rgba(9,22,40,0.35);
           display:      flex;
-          align-items:  center;
-          gap:          clamp(10px, 1.5vw, 16px);
+          flex-direction: row;
+          gap:          clamp(10px, 1.5vw, 14px);
+          z-index:      2;
+        }
+
+        .${id}__badge {
+          border-radius: clamp(12px, 1.5vw, 16px);
+          padding:       clamp(10px, 1.5vw, 16px) clamp(14px, 2vw, 20px);
+          background:    #C9A74C;
+          color:         #091628;
+          box-shadow:    0 12px 32px rgba(9,22,40,0.35);
+          display:       flex;
+          align-items:   center;
+          gap:           clamp(10px, 1.5vw, 14px);
         }
 
         .${id}__badge-value {
@@ -158,12 +187,12 @@ export function HeroBento({
         }
 
         .${id}__badge-label {
-          font-size:     10px;
-          font-weight:   700;
+          font-size:      10px;
+          font-weight:    700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          max-width:     80px;
-          line-height:   1.1;
+          max-width:      80px;
+          line-height:    1.1;
         }
 
         /* ── Tablet: keep split, tighter ─────────────────────── */
@@ -173,7 +202,7 @@ export function HeroBento({
           }
         }
 
-        /* ── Mobile: stack vertically ────────────────────────── */
+        /* ── Mobile: stack vertically; badges become a grid strip ── */
         @media (max-width: 639px) {
           .${id}__grid {
             grid-template-columns: 1fr;
@@ -182,23 +211,46 @@ export function HeroBento({
             height:                auto;
           }
           .${id}__tile--text {
-            grid-column:    1 / -1;
-            grid-row:       auto;
-            min-height:     360px;
+            grid-column: 1 / -1;
+            grid-row:    auto;
+            min-height:  360px;
           }
           .${id}__tile--photo-main,
           .${id}__tile--photo-sub {
-            grid-column:    1 / -1;
-            grid-row:       auto;
-            aspect-ratio:   16 / 9;
+            grid-column:  1 / -1;
+            grid-row:     auto;
+            aspect-ratio: 16 / 9;
+          }
+          .${id}__tile--photo-main.is-full {
+            aspect-ratio: 4 / 5;
+          }
+
+          /* Badges become a full-width grid strip at the bottom of the photo,
+             each badge in its own equal column. */
+          .${id}__badges {
+            top:                   auto;
+            right:                 0;
+            left:                  0;
+            bottom:                0;
+            padding:               12px;
+            display:               grid;
+            grid-template-columns: repeat(var(--hb-badge-count, 1), 1fr);
+            gap:                   8px;
+            background:            linear-gradient(180deg, rgba(9,22,40,0) 0%, rgba(9,22,40,0.6) 100%);
           }
           .${id}__badge {
-            right:  16px;
-            bottom: 16px;
-            top:    auto;
+            padding:        10px 12px;
+            justify-content: center;
+            text-align:     center;
+            flex-direction: column;
+            gap:            2px;
+          }
+          .${id}__badge-value {
+            font-size: 22px;
           }
           .${id}__badge-label {
-            display: none;
+            font-size: 9px;
+            max-width: none;
           }
         }
       `}</style>
@@ -207,32 +259,43 @@ export function HeroBento({
         {/* Left text tile */}
         <div className={`${id}__tile ${id}__tile--text`}>
           <p className={`${id}__eyebrow`}>{eyebrow}</p>
-          <h1 className={`${id}__headline`}>{headline}</h1>
-          <div>
+
+          <div className={`${id}__copy`}>
+            <h1 className={`${id}__headline`}>{headline}</h1>
             <p className={`${id}__description`}>{description}</p>
-            <ArrowPillButton href={ctaHref} tone="dark">
-              {ctaLabel}
-            </ArrowPillButton>
           </div>
+
+          <ArrowPillButton href={ctaHref} tone="dark">
+            {ctaLabel}
+          </ArrowPillButton>
         </div>
 
-        {/* Top-right hero photo with floating gold badge */}
-        <div className={`${id}__tile ${id}__tile--photo-main`}>
+        {/* Right hero photo (spans both rows when no sub photo is set) */}
+        <div className={`${id}__tile ${id}__tile--photo-main ${heroSpansFull ? "is-full" : ""}`}>
           {heroImage && <img src={heroImage} alt="" className={`${id}__photo`} />}
           <div className={`${id}__photo-scrim`} aria-hidden />
 
-          {badge && (
-            <div className={`${id}__badge`}>
-              <div className={`${id}__badge-value`}>{badge}</div>
-              {badgeLabel && <div className={`${id}__badge-label`}>{badgeLabel}</div>}
+          {visibleBadges.length > 0 && (
+            <div
+              className={`${id}__badges`}
+              style={{ ["--hb-badge-count" as never]: visibleBadges.length }}
+            >
+              {visibleBadges.map((b, i) => (
+                <div className={`${id}__badge`} key={i}>
+                  <div className={`${id}__badge-value`}>{b.value}</div>
+                  {b.label && <div className={`${id}__badge-label`}>{b.label}</div>}
+                </div>
+              ))}
             </div>
           )}
         </div>
 
-        {/* Bottom-right secondary photo */}
-        <div className={`${id}__tile ${id}__tile--photo-sub`}>
-          {subImage && <img src={subImage} alt="" className={`${id}__photo`} />}
-        </div>
+        {/* Bottom-right secondary photo — only when subImage is set */}
+        {subImage && (
+          <div className={`${id}__tile ${id}__tile--photo-sub`}>
+            <img src={subImage} alt="" className={`${id}__photo`} />
+          </div>
+        )}
       </div>
     </section>
   );
