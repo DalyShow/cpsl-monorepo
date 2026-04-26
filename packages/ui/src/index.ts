@@ -47,3 +47,13 @@ export type {
   FAQAccordionBackground,
   FAQItem,
 } from "./components/faq-accordion";
+
+export { ArrowPillButton } from "./components/arrow-pill-button";
+export type {
+  ArrowPillButtonProps,
+  ArrowPillTone,
+  ArrowPillSize,
+} from "./components/arrow-pill-button";
+
+export { HeroBento } from "./components/hero-bento";
+export type { HeroBentoProps } from "./components/hero-bento";

@@ -4,6 +4,7 @@ import PageHeader from "@/components/PageHeader"
 import Section from "@/components/Section"
 import CodeBlock from "@/components/CodeBlock"
 import { Button } from "@/components/ui/button"
+import { ArrowPillButton } from "@cpsl/ui"
 
 // ── Exact token values used by each state ──────────────────────────────────
 // Derived from buttonVariants in components/ui/button.tsx
@@ -197,6 +198,41 @@ export default function ButtonsPage() {
               <Button variant="destructive">Destructive</Button>
               <Button variant="cpsl-success">Success</Button>
               <Button variant="cpsl-live">Live</Button>
+            </div>
+          </div>
+        </Section>
+
+        {/* ── Arrow Pill Button ── */}
+        <Section title="Arrow Pill Button — Hero CTA">
+          <p className="text-xs text-muted-foreground mb-4">
+            Pill-shaped CTA with a circular icon disc on the right end. Designed for hero modules and prominent calls-to-action.
+            Two tones: <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">dark</code> for light/photo surfaces,
+            {" "}<code className="bg-secondary px-1.5 py-0.5 rounded text-xs">light</code> for dark/navy surfaces.
+            Three sizes: <code className="bg-secondary px-1.5 py-0.5 rounded text-xs">sm</code> /
+            {" "}<code className="bg-secondary px-1.5 py-0.5 rounded text-xs">md</code> (default) /
+            {" "}<code className="bg-secondary px-1.5 py-0.5 rounded text-xs">lg</code>. Imported from
+            {" "}<code className="bg-secondary px-1.5 py-0.5 rounded text-xs">@cpsl/ui</code>.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="rounded-2xl p-8 border bg-white border-[#E2E8F0]">
+              <div className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#697279" }}>
+                Tone: dark — on light surface
+              </div>
+              <div className="flex flex-wrap gap-4 items-center">
+                <ArrowPillButton size="sm" href="#">Small</ArrowPillButton>
+                <ArrowPillButton size="md" href="#">View showcases</ArrowPillButton>
+                <ArrowPillButton size="lg" href="#">Apply now</ArrowPillButton>
+              </div>
+            </div>
+            <div className="rounded-2xl p-8 border" style={{ background: "#091628", borderColor: "#1E2D45" }}>
+              <div className="text-[10px] font-bold tracking-widest uppercase mb-4" style={{ color: "#94A3B8" }}>
+                Tone: light — on dark surface
+              </div>
+              <div className="flex flex-wrap gap-4 items-center">
+                <ArrowPillButton size="sm" tone="light" href="#">Small</ArrowPillButton>
+                <ArrowPillButton size="md" tone="light" href="#">View showcases</ArrowPillButton>
+                <ArrowPillButton size="lg" tone="light" href="#">Apply now</ArrowPillButton>
+              </div>
             </div>
           </div>
         </Section>

@@ -27,6 +27,8 @@ export default async function Home() {
           backgroundImage{ ..., asset->{ url } },
           backgroundVideo{ ..., asset->{ url } },
           backgroundImages[]{ ..., asset->{ url } },
+          heroImage{ ..., asset->{ url } },
+          subImage{ ..., asset->{ url } },
           slides[]{
             ...,
             image{ ..., asset->{ url } },

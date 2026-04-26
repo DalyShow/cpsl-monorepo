@@ -27,7 +27,14 @@ const components: NavItem[] = [
   { label: "Navigation",           href: "/navigation",   icon: "07" },
   { label: "Feedback & Overlays",  href: "/feedback",     icon: "08" },
   { label: "Data Display",         href: "/data-display", icon: "09" },
-  { label: "Hero Sections",        href: "/heroes",       icon: "12" },
+  {
+    label: "Hero Sections",
+    href:  "/heroes",
+    icon:  "12",
+    children: [
+      { label: "Hero Bento", href: "/heroes/hero-bento", status: "new" },
+    ],
+  },
   {
     label: "Body Modules",
     href:  "/modules",
