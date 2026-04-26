@@ -1,6 +1,8 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
+import { presentationTool } from "sanity/presentation";
 import { schemaTypes } from "./sanity/schemas";
+import { resolve as presentationResolve } from "./sanity/presentation/resolve";
 
 /**
  * Builds the draft-preview URL Studio uses when an editor clicks
@@ -79,6 +81,30 @@ export default defineConfig({
                   .defaultOrdering([{ field: "title", direction: "asc" }])
               ),
           ]),
+    }),
+
+    /**
+     * Presentation tool — the Framer-style visual editor.
+     *
+     * Loads the live website inside an iframe alongside the document
+     * form. With stega encoding active in draft mode (see
+     * lib/sanity/client.ts), every editable text element on the page
+     * is wrapped in a click-to-edit overlay; clicking any element
+     * jumps the form to the matching field.
+     *
+     * The iframe origin is the same Next.js app (Studio is embedded
+     * at /studio), so we resolve it from NEXT_PUBLIC_SITE_URL with a
+     * localhost fallback for dev.
+     */
+    presentationTool({
+      resolve: presentationResolve,
+      previewUrl: {
+        origin:
+          process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+        previewMode: {
+          enable: "/api/draft-mode/enable",
+        },
+      },
     }),
   ],
   schema: {
