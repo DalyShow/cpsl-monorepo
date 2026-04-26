@@ -74,10 +74,7 @@ export function TopNav({
       }
       style={{ background: "#041124", borderBottom: "1px solid #1E2D45" }}
     >
-      <div
-        className="h-full grid grid-cols-[auto_1fr_auto] items-center"
-        style={{ paddingLeft: 30, paddingRight: 30 }}
-      >
+      <div className="h-full grid grid-cols-[auto_1fr_auto] items-center px-4 md:px-[30px]">
 
         {/* Logo */}
         <Link
@@ -155,7 +152,7 @@ export function TopNav({
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden flex flex-col justify-center gap-1.5 w-8 h-8"
+            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-8 h-8"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
@@ -188,12 +185,10 @@ export function TopNav({
       {/* Mobile menu */}
       {menuOpen && (
         <div
-          className="md:hidden absolute left-0 right-0 top-20"
+          className="md:hidden absolute left-0 right-0 top-20 px-4"
           style={{
             background: "#041124",
             borderBottom: "1px solid #1E2D45",
-            paddingLeft: 30,
-            paddingRight: 30,
           }}
         >
           <nav className="flex flex-col py-4 gap-1">
