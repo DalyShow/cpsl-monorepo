@@ -126,12 +126,27 @@ export function ArrowPillButton({
 
   const inner = (
     <>
+      <style>{`
+        .apb-arrow {
+          display: inline-flex;
+          transition: transform 320ms cubic-bezier(.2, .8, .2, 1);
+        }
+        .apb-root:hover .apb-arrow,
+        .apb-root:focus-visible .apb-arrow {
+          transform: translateX(3px);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .apb-arrow { transition: none; }
+        }
+      `}</style>
       <span>{children}</span>
       <span style={iconWrapperStyle} aria-hidden>
-        {icon}
+        <span className="apb-arrow">{icon}</span>
       </span>
     </>
   );
+
+  const rootClass = ["apb-root", className].filter(Boolean).join(" ");
 
   if (href) {
     return (
@@ -141,7 +156,7 @@ export function ArrowPillButton({
         onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        className={className}
+        className={rootClass}
         {...rest}
       >
         {inner}
@@ -156,7 +171,7 @@ export function ArrowPillButton({
       onClick={onClick as React.MouseEventHandler<HTMLButtonElement>}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={className}
+      className={rootClass}
       {...rest}
     >
       {inner}
