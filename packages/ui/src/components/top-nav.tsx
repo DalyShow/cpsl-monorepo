@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FlyoutMenu, type FlyoutItem, type FlyoutAction } from "./flyout-menu";
+import { ArrowPillButton } from "./arrow-pill-button";
 
 export interface TopNavLinkItem {
   label: string;
@@ -145,22 +146,14 @@ export function TopNav({
           )}
 
           {ctaLabel && (
-            <Link
+            <ArrowPillButton
               href={ctaHref || "#"}
-              className="hidden md:flex items-center px-4 py-2 transition-all hover:opacity-90"
-              style={{
-                background: "#D4B949",
-                color: "#041124",
-                fontFamily: "'Barlow Condensed', sans-serif",
-                fontWeight: 700,
-                fontSize: "14px",
-                letterSpacing: "0.04em",
-                borderRadius: "6px",
-                textTransform: "uppercase",
-              }}
+              tone="dark"
+              size="sm"
+              className="hidden md:inline-flex"
             >
               {ctaLabel}
-            </Link>
+            </ArrowPillButton>
           )}
 
           {/* Mobile hamburger */}
@@ -264,23 +257,16 @@ export function TopNav({
               ),
             )}
             {ctaLabel && (
-              <Link
-                href={ctaHref || "#"}
-                onClick={() => setMenuOpen(false)}
-                className="mt-2 px-4 py-2 text-center"
-                style={{
-                  background: "#D4B949",
-                  color: "#041124",
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontWeight: 700,
-                  fontSize: "14px",
-                  letterSpacing: "0.04em",
-                  borderRadius: "6px",
-                  textTransform: "uppercase",
-                }}
-              >
-                {ctaLabel}
-              </Link>
+              <div className="mt-2">
+                <ArrowPillButton
+                  href={ctaHref || "#"}
+                  tone="dark"
+                  size="md"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {ctaLabel}
+                </ArrowPillButton>
+              </div>
             )}
           </nav>
         </div>
