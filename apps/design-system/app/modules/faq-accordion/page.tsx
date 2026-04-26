@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { FAQAccordion, type FAQAccordionBackground } from "@/components/cpsl/modules/FAQAccordion"
+import { FAQAccordion, type FAQAccordionBackground } from "@cpsl/ui"
 import { DocsHeader } from "@/components/docs/DocsHeader"
 import { PreviewPane } from "@/components/docs/PreviewPane"
 import { ControlsPanel } from "@/components/docs/ControlsPanel"

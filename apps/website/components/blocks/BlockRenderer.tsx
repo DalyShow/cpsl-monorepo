@@ -11,6 +11,7 @@ import { SubNavBlock } from "./SubNavBlock";
 import { PromoGridBlock } from "./PromoGridBlock";
 import { PromoHeroBlock } from "./PromoHeroBlock";
 import { DualPanelBlock } from "./DualPanelBlock";
+import { FAQAccordionBlock } from "./FAQAccordionBlock";
 
 // Each block from Sanity has _type, _key, and its own fields
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -69,6 +70,10 @@ export function BlockRenderer({ block }: { block: Block }) {
     case "dualPanelBlock":
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return <DualPanelBlock {...(block as any)} />;
+
+    case "faqAccordionBlock":
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return <FAQAccordionBlock {...(block as any)} />;
 
     default:
       // Unknown block type — log in dev, render nothing in prod

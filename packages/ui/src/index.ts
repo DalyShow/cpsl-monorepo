@@ -40,3 +40,10 @@ export type {
   PromoHeroProps,
   RevealVariant,
 } from "./components/promo-tiles";
+
+export { FAQAccordion } from "./components/faq-accordion";
+export type {
+  FAQAccordionProps,
+  FAQAccordionBackground,
+  FAQItem,
+} from "./components/faq-accordion";

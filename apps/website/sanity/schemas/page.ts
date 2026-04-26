@@ -59,6 +59,7 @@ export const page = defineType({
         { type: "promoHeroBlock" },
         { type: "promoGridBlock" },
         { type: "dualPanelBlock" },
+        { type: "faqAccordionBlock" },
       ],
     }),
   ],
