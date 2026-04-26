@@ -5,19 +5,6 @@ const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "";
 const DATASET    = process.env.NEXT_PUBLIC_SANITY_DATASET    || "production";
 const API_VER    = "2024-01-01";
 
-/**
- * Where Sanity Studio is hosted, used by stega encoding so the
- * Presentation tool's click-to-edit overlays know where to send
- * the editor when they click an element. Studio is embedded in
- * this Next.js app at /studio, so we point at the same origin.
- *
- * Falls back to localhost in dev when NEXT_PUBLIC_SITE_URL is unset.
- */
-const STUDIO_URL =
-  process.env.NEXT_PUBLIC_SITE_URL
-    ? `${process.env.NEXT_PUBLIC_SITE_URL}/studio`
-    : "http://localhost:3000/studio";
-
 const publishedClient = createClient({
   projectId:  PROJECT_ID,
   dataset:    DATASET,
@@ -26,24 +13,23 @@ const publishedClient = createClient({
 });
 
 const previewClient = createClient({
-  projectId:  PROJECT_ID,
-  dataset:    DATASET,
-  apiVersion: API_VER,
-  useCdn:     false,
-  token:      process.env.SANITY_API_READ_TOKEN,
+  projectId:   PROJECT_ID,
+  dataset:     DATASET,
+  apiVersion:  API_VER,
+  useCdn:      false,
+  token:       process.env.SANITY_API_READ_TOKEN,
   perspective: "drafts",
-  stega: { studioUrl: STUDIO_URL },
 });
 
 /**
  * Fetch data from Sanity using a GROQ query.
  * Returns null if the project ID is missing or the request fails.
  *
- * In Next.js draftMode (after a Studio "Preview" or Presentation tool
- * open) and with SANITY_API_READ_TOKEN configured, this hits the
- * `drafts` perspective with stega encoding so click-to-edit overlays
- * can resolve back to the source document. Outside draft mode it uses
- * the public CDN with no auth — safe for static paths and edge caching.
+ * In Next.js draftMode (after a Studio "Preview" click hits
+ * /api/draft/enable) and with SANITY_API_READ_TOKEN configured,
+ * this hits the `drafts` perspective so unpublished changes surface
+ * in the live preview. Outside draft mode it uses the public CDN
+ * with no auth — safe for static paths and edge caching.
  */
 export async function sanityFetch<T = unknown>(
   query: string,
