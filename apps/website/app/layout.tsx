@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
 import "./globals.css";
 import { sanityFetch } from "@/lib/sanity/client";
 import { DraftPreviewBanner } from "@/components/DraftPreviewBanner";
@@ -74,14 +76,17 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const isDraft = (await draftMode()).isEnabled;
+
   return (
     <html lang="en" data-theme="dark" className={`${barlowCondensed.variable} ${inter.variable}`}>
       <body className="antialiased">
         <DraftPreviewBanner />
         {children}
+        {isDraft && <VisualEditing />}
       </body>
     </html>
   );

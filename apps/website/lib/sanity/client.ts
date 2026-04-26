@@ -1,29 +1,56 @@
 import { draftMode } from "next/headers";
+import { createClient } from "next-sanity";
 
 const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "";
 const DATASET    = process.env.NEXT_PUBLIC_SANITY_DATASET    || "production";
 const API_VER    = "2024-01-01";
 
 /**
- * Fetch data from Sanity's CDN using a GROQ query.
+ * Where Sanity Studio is hosted, used by stega encoding so the
+ * Presentation tool's click-to-edit overlays know where to send
+ * the editor when they click an element. Studio is embedded in
+ * this Next.js app at /studio, so we point at the same origin.
+ *
+ * Falls back to localhost in dev when NEXT_PUBLIC_SITE_URL is unset.
+ */
+const STUDIO_URL =
+  process.env.NEXT_PUBLIC_SITE_URL
+    ? `${process.env.NEXT_PUBLIC_SITE_URL}/studio`
+    : "http://localhost:3000/studio";
+
+const publishedClient = createClient({
+  projectId:  PROJECT_ID,
+  dataset:    DATASET,
+  apiVersion: API_VER,
+  useCdn:     true,
+});
+
+const previewClient = createClient({
+  projectId:  PROJECT_ID,
+  dataset:    DATASET,
+  apiVersion: API_VER,
+  useCdn:     false,
+  token:      process.env.SANITY_API_READ_TOKEN,
+  perspective: "drafts",
+  stega: { studioUrl: STUDIO_URL },
+});
+
+/**
+ * Fetch data from Sanity using a GROQ query.
  * Returns null if the project ID is missing or the request fails.
  *
- * When Next.js draftMode is enabled (via /api/draft/enable) and a
- * SANITY_API_READ_TOKEN is configured, this requests the
- * "previewDrafts" perspective so unpublished changes are included
- * in the response. Outside draft mode it uses the public "published"
- * perspective and no auth — safe for static paths and the CDN edge
- * cache.
+ * In Next.js draftMode (after a Studio "Preview" or Presentation tool
+ * open) and with SANITY_API_READ_TOKEN configured, this hits the
+ * `drafts` perspective with stega encoding so click-to-edit overlays
+ * can resolve back to the source document. Outside draft mode it uses
+ * the public CDN with no auth — safe for static paths and edge caching.
  */
 export async function sanityFetch<T = unknown>(
   query: string,
-  params?: Record<string, string>,
+  params?: Record<string, string | string[]>,
 ): Promise<T | null> {
   if (!PROJECT_ID) return null;
 
-  // Detect draft mode. `draftMode()` is only callable in server
-  // contexts; we guard with try/catch so this client can still run
-  // from non-request scopes (build-time static generation).
   let isDraft = false;
   try {
     isDraft = (await draftMode()).isEnabled;
@@ -31,32 +58,11 @@ export async function sanityFetch<T = unknown>(
     isDraft = false;
   }
 
-  const token = process.env.SANITY_API_READ_TOKEN;
-  const usePreview = isDraft && !!token;
+  const useDraft = isDraft && !!process.env.SANITY_API_READ_TOKEN;
+  const client   = useDraft ? previewClient : publishedClient;
 
   try {
-    let url =
-      `https://${PROJECT_ID}.api.sanity.io/v${API_VER}/data/query/${DATASET}` +
-      `?query=${encodeURIComponent(query)}`;
-
-    if (params) {
-      for (const [key, value] of Object.entries(params)) {
-        url += `&$${key}=${encodeURIComponent(JSON.stringify(value))}`;
-      }
-    }
-    if (usePreview) {
-      url += `&perspective=previewDrafts`;
-    }
-
-    const res = await fetch(url, {
-      cache: usePreview ? "no-store" : "no-store",
-      headers: usePreview
-        ? { Authorization: `Bearer ${token}` }
-        : undefined,
-    });
-    if (!res.ok) return null;
-    const json = (await res.json()) as { result: T };
-    return json.result ?? null;
+    return await client.fetch<T>(query, params ?? {});
   } catch {
     return null;
   }

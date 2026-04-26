@@ -32,7 +32,13 @@ const components: NavItem[] = [
     href:  "/heroes",
     icon:  "12",
     children: [
-      { label: "Hero Bento", href: "/heroes/hero-bento", status: "new" },
+      { label: "Hero Bento",          href: "/heroes/hero-bento", status: "new" },
+      { label: "Cinematic Gradient",  href: "/heroes/cinematic-gradient" },
+      { label: "Split Frame",         href: "/heroes/split-frame" },
+      { label: "Glass Card",          href: "/heroes/glass-card" },
+      { label: "Magazine Overlap",    href: "/heroes/magazine-overlap" },
+      { label: "Full Width Image",    href: "/heroes/full-width-image" },
+      { label: "Section Header",      href: "/heroes/section-header" },
     ],
   },
   {
