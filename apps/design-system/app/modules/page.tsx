@@ -12,6 +12,7 @@ import { PlayerSpotlight } from "@/components/cpsl/modules/PlayerSpotlight"
 import { CTABanner } from "@/components/cpsl/modules/CTABanner"
 import { SkeletonLoader } from "@/components/cpsl/modules/SkeletonLoader"
 import { ContentSectionCentered } from "@/components/cpsl/modules/ContentSectionCentered"
+import { FAQAccordion } from "@/components/cpsl/modules/FAQAccordion"
 import type { StandingRow } from "@/components/cpsl/modules/StandingsTable"
 import type { MatchResult, Fixture } from "@/components/cpsl/modules/ResultsFixturesTabs"
 import type { Club } from "@/components/cpsl/modules/ClubDirectory"
@@ -212,6 +213,24 @@ export default function ModulesPage() {
       <ContentSectionCentered background="surface" />
       <ContentSectionCentered background="gold" />
       <ContentSectionCentered background="navy" />
+
+      <div className="px-12 py-12">
+        <Section title="12 — FAQ Accordion">
+          <p className="text-xs text-muted-foreground mb-4">
+            Question/answer module with expand/collapse interaction. Single-open by default; pass{" "}
+            <code className="bg-secondary px-1.5 py-0.5 rounded">allowMultiple</code> to keep several panels open. Five{" "}
+            <code className="bg-secondary px-1.5 py-0.5 rounded">background</code> variants —
+            <code className="bg-secondary px-1.5 py-0.5 rounded mx-1">cream</code>
+            <code className="bg-secondary px-1.5 py-0.5 rounded mx-1">white</code>
+            <code className="bg-secondary px-1.5 py-0.5 rounded mx-1">surface</code>
+            <code className="bg-secondary px-1.5 py-0.5 rounded mx-1">navy</code>
+            <code className="bg-secondary px-1.5 py-0.5 rounded mx-1">gold</code>.
+          </p>
+        </Section>
+      </div>
+      <FAQAccordion background="cream" />
+      <FAQAccordion background="navy"  eyebrow="navy variant"  />
+      <FAQAccordion background="gold"  eyebrow="gold variant"  />
 
       <div className="px-12 py-12">
         <Section title="11 — Matchday">
