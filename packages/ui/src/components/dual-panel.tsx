@@ -99,7 +99,7 @@ export function DualPanel({ left, right }: DualPanelProps) {
         .cpsl-panel {
           position: relative;
           overflow: hidden;
-          border-radius: 4px;
+          border-radius: 0;
           color: #F4EFE6;
           background: #041124;
         }
