@@ -6,6 +6,7 @@ import {
   PromoReveal,
   type RevealVariant,
 } from "@cpsl/ui";
+import { enhanceImageUrl } from "@/lib/sanity/image";
 
 type TileShared = {
   _key?: string;
@@ -96,7 +97,7 @@ export function PromoGridBlock({
             // the editor uploads the real photo. Inlined SVG data URI
             // keeps the fallback dependency-free.
             const src =
-              t.image?.asset?.url ??
+              enhanceImageUrl(t.image?.asset?.url) ??
               "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%230A1628'/%3E%3C/svg%3E";
             return (
               <PhotoTile
@@ -122,7 +123,7 @@ export function PromoGridBlock({
                 body={t.body}
                 ctaLabel={t.ctaLabel}
                 ctaHref={t.ctaHref}
-                imageUrl={t.backgroundImage?.asset?.url}
+                imageUrl={enhanceImageUrl(t.backgroundImage?.asset?.url)}
                 videoUrl={t.backgroundVideo?.asset?.url}
                 mediaOverlay={t.mediaOverlay}
               />
@@ -137,7 +138,7 @@ export function PromoGridBlock({
                 pattern={t.pattern ?? "hex"}
                 stat={t.stat}
                 label={t.label}
-                imageUrl={t.backgroundImage?.asset?.url}
+                imageUrl={enhanceImageUrl(t.backgroundImage?.asset?.url)}
                 videoUrl={t.backgroundVideo?.asset?.url}
                 mediaOverlay={t.mediaOverlay}
               />

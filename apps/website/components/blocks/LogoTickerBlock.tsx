@@ -1,5 +1,6 @@
 import { LogoTicker } from "@cpsl/ui";
 import { sanityFetch } from "@/lib/sanity/client";
+import { enhanceImageUrl } from "@/lib/sanity/image";
 
 interface SanityLogo {
   _key?: string;
@@ -38,7 +39,9 @@ export async function LogoTickerBlock() {
     .filter((l) => !!l?.asset?.url)
     .map((l) => ({
       key: l._key,
-      url: l.asset!.url!,
+      // Logos are mostly flat vector-derived PNGs — sharp=8 keeps edges crisp
+      // without crunching the negative space.
+      url: enhanceImageUrl(l.asset!.url, { sharp: 8 })!,
       alt: l.asset!.altText,
     }));
 

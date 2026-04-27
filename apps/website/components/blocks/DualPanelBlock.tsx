@@ -1,4 +1,5 @@
 import { DualPanel, type DualPanelItem } from "@cpsl/ui";
+import { enhanceImageUrl } from "@/lib/sanity/image";
 
 interface SanityPanel {
   image?: { asset?: { url?: string } };
@@ -18,7 +19,7 @@ export interface DualPanelBlockProps {
 function mapPanel(p: SanityPanel | undefined): DualPanelItem | null {
   if (!p || !p.headline) return null;
   return {
-    imageUrl: p.image?.asset?.url,
+    imageUrl: enhanceImageUrl(p.image?.asset?.url),
     videoUrl: p.video?.asset?.url,
     eyebrow: p.eyebrow,
     headline: p.headline,

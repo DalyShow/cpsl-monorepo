@@ -1,4 +1,5 @@
 import { HeroBento, type HeroBentoBadge } from "@cpsl/ui";
+import { enhanceImageUrl } from "@/lib/sanity/image";
 
 interface SanityImage {
   asset?: { url?: string };
@@ -43,8 +44,8 @@ export function HeroBentoBlock({
       description={description}
       ctaLabel={ctaLabel}
       ctaHref={ctaHref}
-      heroImage={heroImage?.asset?.url}
-      subImage={subImage?.asset?.url}
+      heroImage={enhanceImageUrl(heroImage?.asset?.url)}
+      subImage={enhanceImageUrl(subImage?.asset?.url)}
       badges={mappedBadges.length > 0 ? mappedBadges : undefined}
     />
   );

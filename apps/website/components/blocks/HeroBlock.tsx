@@ -2,6 +2,7 @@
 
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useEffect, useState } from "react";
+import { enhanceImageUrl } from "@/lib/sanity/image";
 
 interface LottieField {
   asset?: { url?: string };
@@ -54,13 +55,14 @@ export function HeroBlock({
 }: HeroBlockProps) {
   // Prefer the array for slideshow; fall back to the single image.
   const slideshow = (backgroundImages ?? [])
-    .map((img) => img?.asset?.url)
+    .map((img) => enhanceImageUrl(img?.asset?.url))
     .filter((url): url is string => !!url);
+  const enhancedBg = enhanceImageUrl(backgroundImage?.asset?.url);
   const imageUrls =
     slideshow.length > 0
       ? slideshow
-      : backgroundImage?.asset?.url
-      ? [backgroundImage.asset.url]
+      : enhancedBg
+      ? [enhancedBg]
       : [];
   const hasBg = imageUrls.length > 0;
 
@@ -105,7 +107,7 @@ export function HeroBlock({
     };
   }, [imageUrls, currentIdx, activeLayer, backgroundInterval]);
   const lottieUrl  = lottie?.asset?.url;
-  const imageUrl   = image?.asset?.url;
+  const imageUrl   = enhanceImageUrl(image?.asset?.url);
   const hasMedia   = !!(lottieUrl || imageUrl);
 
   return (

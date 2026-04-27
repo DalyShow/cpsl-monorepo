@@ -7,6 +7,7 @@ const PATTERN_TILE = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height
 const patternBg = `url("data:image/svg+xml,${encodeURIComponent(PATTERN_TILE)}")`;
 
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { enhanceImageUrl } from "@/lib/sanity/image";
 
 interface LottieField {
   /** Sanity file asset — dereferenced via GROQ asset->{ url } */
@@ -59,8 +60,8 @@ export function ContentSectionCentered({
                   : background === "gold" ? "#4A2E00"
                   : "var(--fg-secondary)";
 
-  const imageUrl       = image?.asset?.url;
-  const bottomImageUrl = bottomImage?.asset?.url;
+  const imageUrl       = enhanceImageUrl(image?.asset?.url);
+  const bottomImageUrl = enhanceImageUrl(bottomImage?.asset?.url);
   const lottieUrl      = lottie?.asset?.url;
   const bottomLottieUrl = bottomLottie?.asset?.url;
   const hasTopMedia    = !!(lottieUrl || imageUrl);

@@ -1,4 +1,5 @@
 import { PromoHero } from "@cpsl/ui";
+import { enhanceImageUrl } from "@/lib/sanity/image";
 
 interface SanitySlide {
   _key?: string;
@@ -48,9 +49,9 @@ export function PromoHeroBlock({
 }: PromoHeroBlockProps) {
   const mappedSlides = (slides ?? [])
     .map((s) => ({
-      imageUrl: s.image?.asset?.url,
+      imageUrl: enhanceImageUrl(s.image?.asset?.url),
       videoUrl: s.video?.asset?.url,
-      graphicUrl: s.graphic?.asset?.url,
+      graphicUrl: enhanceImageUrl(s.graphic?.asset?.url, { sharp: 8 }),
       eyebrow: s.eyebrow,
       headline: s.headline,
       subheadline: s.subheadline,
@@ -80,7 +81,7 @@ export function PromoHeroBlock({
       subheadline={subheadline}
       ctaLabel={ctaLabel}
       ctaHref={ctaHref}
-      backgroundUrl={backgroundImage?.asset?.url}
+      backgroundUrl={enhanceImageUrl(backgroundImage?.asset?.url)}
       videoUrl={backgroundVideo?.asset?.url}
       slides={mappedSlides.length > 0 ? mappedSlides : undefined}
       slideDuration={slideDuration}
