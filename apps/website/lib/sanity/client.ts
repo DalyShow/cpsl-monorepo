@@ -67,9 +67,3 @@ export async function sanityFetch<T = unknown>(
     return null;
   }
 }
-
-// Legacy alias kept for image helper compatibility
-export const client = {
-  projectId: PROJECT_ID,
-  dataset:   DATASET,
-};

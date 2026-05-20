@@ -1,4 +1,5 @@
-import { client } from "./client";
+const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "";
+const DATASET    = process.env.NEXT_PUBLIC_SANITY_DATASET    || "production";
 
 /**
  * Build a Sanity CDN image URL from an image reference object.
@@ -9,7 +10,7 @@ export function urlFor(source: { asset?: { _ref?: string } }) {
   // Parse Sanity image ref format: image-<id>-<width>x<height>-<ext>
   const [, id, dimensions, ext] = ref.split("-");
   if (!id) return { url: () => "" };
-  const path = `images/${client.projectId}/${client.dataset}/${id}-${dimensions}.${ext}`;
+  const path = `images/${PROJECT_ID}/${DATASET}/${id}-${dimensions}.${ext}`;
   const url = `https://cdn.sanity.io/${path}`;
   return {
     url: () => url,
