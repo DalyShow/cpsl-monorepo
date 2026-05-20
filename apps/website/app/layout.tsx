@@ -56,16 +56,19 @@ export async function generateMetadata(): Promise<Metadata> {
     : [];
 
   return {
+    metadataBase: new URL("https://carolinapremiersoccerleague.com"),
     title,
     description,
     // Favicons are handled via file convention:
     //   app/favicon.ico → .ico fallback (all browsers)
     //   app/icon.svg    → SVG favicon (modern browsers, takes precedence)
     // No need to declare icons here — Next.js picks them up automatically.
+    alternates: { canonical: "/" },
     openGraph: {
       title,
       description,
       type:   "website",
+      url:    "/",
       images: ogImages,
     },
     twitter: {

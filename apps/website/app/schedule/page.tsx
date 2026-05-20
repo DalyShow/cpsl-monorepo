@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { TopNav } from "@cpsl/ui";
 import { SectionHeader } from "@/components/blocks/SectionHeader";
 import { MatchdayBlock } from "@/components/blocks/ScheduleByConferenceBlock";
@@ -7,6 +8,13 @@ import {
   resolveTopNavItems,
   type SiteNavSettings,
 } from "@/lib/nav-items";
+
+export const metadata: Metadata = {
+  title: "Schedule — Carolina Premier Soccer League",
+  description: "Match schedule, fixtures, and results for the Carolina Premier Soccer League 2026–2027 season.",
+  alternates: { canonical: "/schedule" },
+  openGraph: { url: "/schedule" },
+};
 
 export default async function SchedulePage() {
   let settings: SiteNavSettings | null = null;

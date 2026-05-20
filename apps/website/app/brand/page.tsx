@@ -5,6 +5,8 @@ import { sanityFetch } from "@/lib/sanity/client";
 export const metadata: Metadata = {
   title: "Brand — Carolina Premier Soccer League",
   description: "Official brand guidelines, logo downloads, and design system for the Carolina Premier Soccer League.",
+  alternates: { canonical: "/brand" },
+  openGraph: { url: "/brand" },
 };
 
 // ─── Types ────────────────────────────────────────────────────────────────────

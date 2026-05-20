@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { TopNav } from "@cpsl/ui";
 import { ClubDirectory } from "@/components/ds/ClubDirectory";
 import { fetchClubs } from "@/lib/clubs";
@@ -7,6 +8,13 @@ import {
   resolveTopNavItems,
   type SiteNavSettings,
 } from "@/lib/nav-items";
+
+export const metadata: Metadata = {
+  title: "Clubs — Carolina Premier Soccer League",
+  description: "Member clubs of the Carolina Premier Soccer League. Find teams across the National 1 division.",
+  alternates: { canonical: "/clubs" },
+  openGraph: { url: "/clubs" },
+};
 
 export default async function ClubsPage() {
   const [settings, clubs] = await Promise.all([

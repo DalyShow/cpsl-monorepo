@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { TopNav, SubNav } from "@cpsl/ui";
 import { BlockRenderer } from "@/components/blocks/BlockRenderer";
 import { sanityFetch } from "@/lib/sanity/client";
@@ -7,6 +8,35 @@ import {
   resolveTopNavItems,
   type SiteNavSettings,
 } from "@/lib/nav-items";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}): Promise<Metadata> {
+  const { slug: segments } = await params;
+  const pageSlug = segments[segments.length - 1];
+  const canonicalPath = "/" + segments.join("/");
+
+  let page: { title?: string; seoDescription?: string } | null = null;
+  try {
+    page = await sanityFetch<{ title?: string; seoDescription?: string }>(
+      `*[_type == "page" && slug.current == $slug][0]{ title, seoDescription }`,
+      { slug: pageSlug }
+    );
+  } catch { /* fall through to defaults */ }
+
+  const title = page?.title
+    ? `${page.title} — Carolina Premier Soccer League`
+    : "Carolina Premier Soccer League";
+
+  return {
+    title,
+    description: page?.seoDescription,
+    alternates: { canonical: canonicalPath },
+    openGraph: { url: canonicalPath, title },
+  };
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Section = { _type: string; _key: string; [key: string]: any };
