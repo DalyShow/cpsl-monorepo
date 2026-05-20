@@ -1,8 +1,34 @@
 "use server";
 
+import { headers } from "next/headers";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Best-effort IP rate limiting. In-memory, so each serverless instance has
+// its own counter — not airtight, but stops a single attacker hammering one
+// region. Upgrade to Upstash / Vercel KV if real flood traffic shows up.
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 3;
+const ipHits = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (ipHits.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT_MAX) {
+    ipHits.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  ipHits.set(ip, recent);
+  // Opportunistic cleanup so the map doesn't grow unbounded.
+  if (ipHits.size > 1000) {
+    for (const [k, v] of ipHits) {
+      if (!v.some((t) => now - t < RATE_LIMIT_WINDOW_MS)) ipHits.delete(k);
+    }
+  }
+  return false;
+}
 
 export type FormState = {
   success?: boolean;
@@ -13,6 +39,22 @@ export async function submitApplication(
   _prevState: FormState,
   formData: FormData
 ): Promise<FormState> {
+  // Honeypot — silently succeed so bots don't learn we're filtering them.
+  const honeypot = (formData.get("company_website") as string)?.trim();
+  if (honeypot) {
+    return { success: true };
+  }
+
+  // Rate limit by client IP. Vercel sets x-forwarded-for.
+  const h = await headers();
+  const ip =
+    h.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    h.get("x-real-ip") ||
+    "unknown";
+  if (isRateLimited(ip)) {
+    return { error: "Too many submissions. Please wait a moment and try again." };
+  }
+
   const clubName     = (formData.get("clubName")     as string)?.trim();
   const location     = (formData.get("location")     as string)?.trim();
   const contactName  = (formData.get("contactName")  as string)?.trim();

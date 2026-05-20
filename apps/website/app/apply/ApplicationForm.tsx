@@ -150,6 +150,22 @@ export function ApplicationForm() {
 
   return (
     <form action={action} noValidate>
+      {/* Honeypot — hidden from humans, bots fill it. If filled, server silently drops the request. */}
+      <div
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-10000px", width: "1px", height: "1px", overflow: "hidden" }}
+      >
+        <label htmlFor="company_website">Company website</label>
+        <input
+          id="company_website"
+          name="company_website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
+        />
+      </div>
+
       {/* ── Error banner ───────────────────────────────────────────────── */}
       {state.error && (
         <div style={{

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Inter } from "next/font/google";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { sanityFetch } from "@/lib/sanity/client";
 import { DraftPreviewBanner } from "@/components/DraftPreviewBanner";
@@ -87,6 +88,7 @@ export default async function RootLayout({
         <DraftPreviewBanner />
         {children}
         {isDraft && <VisualEditing />}
+        <Analytics />
       </body>
     </html>
   );
