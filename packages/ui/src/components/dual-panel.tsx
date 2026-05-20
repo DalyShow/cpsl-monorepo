@@ -33,9 +33,15 @@ export interface DualPanelItem {
 export interface DualPanelProps {
   left: DualPanelItem;
   right: DualPanelItem;
+  /**
+   * Heading level for the LEFT panel's headline. Set to "h1" on the
+   * page's primary hero so the document has a single, semantic top-level
+   * heading; defaults to "h2" elsewhere.
+   */
+  headingLevel?: "h1" | "h2";
 }
 
-function Panel({ item }: { item: DualPanelItem }) {
+function Panel({ item, headingTag: HeadingTag = "h2" }: { item: DualPanelItem; headingTag?: "h1" | "h2" }) {
   return (
     <div className="cpsl-panel">
       {item.imageUrl && (
@@ -62,7 +68,7 @@ function Panel({ item }: { item: DualPanelItem }) {
       <div className="cpsl-panel__scrim" aria-hidden />
       <div className="cpsl-panel__content">
         {item.eyebrow && <p className="cpsl-panel__eyebrow">{item.eyebrow}</p>}
-        <h2 className="cpsl-panel__headline">{item.headline}</h2>
+        <HeadingTag className="cpsl-panel__headline">{item.headline}</HeadingTag>
         {item.subheadline && (
           <p className="cpsl-panel__subheadline">{item.subheadline}</p>
         )}
@@ -78,7 +84,7 @@ function Panel({ item }: { item: DualPanelItem }) {
   );
 }
 
-export function DualPanel({ left, right }: DualPanelProps) {
+export function DualPanel({ left, right, headingLevel = "h2" }: DualPanelProps) {
   return (
     <>
       <style>{`
@@ -258,7 +264,7 @@ export function DualPanel({ left, right }: DualPanelProps) {
       `}</style>
 
       <section className="cpsl-dual-panel">
-        <Panel item={left} />
+        <Panel item={left} headingTag={headingLevel} />
         <Panel item={right} />
       </section>
     </>

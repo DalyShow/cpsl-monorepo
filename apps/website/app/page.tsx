@@ -73,9 +73,13 @@ export default async function Home() {
 
       {/* pt-20 = 80px — offsets the fixed nav height */}
       <main className="pt-20">
-        {page?.sections?.map((block) => (
-          <BlockRenderer key={block._key} block={block} />
-        ))}
+        {(() => {
+          const sections = page?.sections ?? [];
+          const primaryIdx = sections.findIndex((b) => b._type === "dualPanelBlock");
+          return sections.map((block, index) => (
+            <BlockRenderer key={block._key} block={block} isPrimary={index === primaryIdx} />
+          ));
+        })()}
       </main>
     </>
   );

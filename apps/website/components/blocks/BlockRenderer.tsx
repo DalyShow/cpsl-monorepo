@@ -31,7 +31,7 @@ const NO_REVEAL = new Set([
   "promoHeroBlock",
 ]);
 
-function renderInner(block: Block) {
+function renderInner(block: Block, isPrimary: boolean) {
   switch (block._type) {
     case "heroBlock":
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -83,7 +83,7 @@ function renderInner(block: Block) {
 
     case "dualPanelBlock":
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return <DualPanelBlock {...(block as any)} />;
+      return <DualPanelBlock {...(block as any)} headingLevel={isPrimary ? "h1" : "h2"} />;
 
     case "faqAccordionBlock":
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -106,8 +106,8 @@ function renderInner(block: Block) {
   }
 }
 
-export function BlockRenderer({ block }: { block: Block }) {
-  const inner = renderInner(block);
+export function BlockRenderer({ block, isPrimary = false }: { block: Block; isPrimary?: boolean }) {
+  const inner = renderInner(block, isPrimary);
   if (NO_REVEAL.has(block._type) || !inner) return inner;
   return <ScrollReveal>{inner}</ScrollReveal>;
 }

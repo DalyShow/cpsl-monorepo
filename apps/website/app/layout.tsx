@@ -85,6 +85,24 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const isDraft = (await draftMode()).isEnabled;
 
+  let settings: SiteSettings | null = null;
+  try {
+    settings = await sanityFetch<SiteSettings>(
+      `*[_type == "siteSettings"][0]{ siteName, siteDescription, ogImage{ ..., asset->{ url } } }`
+    );
+  } catch { /* fall through to defaults */ }
+
+  const orgJsonLd = {
+    "@context":   "https://schema.org",
+    "@type":      "SportsOrganization",
+    name:         settings?.siteName ?? "Carolina Premier Soccer League",
+    alternateName: "CPSL",
+    url:          "https://carolinapremiersoccerleague.com",
+    description:  settings?.siteDescription ?? undefined,
+    sport:        "Soccer",
+    logo:         settings?.ogImage?.asset?.url ?? undefined,
+  };
+
   return (
     <html lang="en" data-theme="dark" className={`${barlowCondensed.variable} ${inter.variable}`}>
       <body className="antialiased">
@@ -92,6 +110,10 @@ export default async function RootLayout({
         {children}
         {isDraft && <VisualEditing />}
         <Analytics />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
       </body>
     </html>
   );

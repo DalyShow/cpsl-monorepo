@@ -150,9 +150,13 @@ export default async function DynamicPage({
       />
       <main className="pt-20">
         {subNavItems.length > 1 && <SubNav items={subNavItems} />}
-        {page.sections?.map((block) => (
-          <BlockRenderer key={block._key} block={block} />
-        ))}
+        {(() => {
+          const sections = page.sections ?? [];
+          const primaryIdx = sections.findIndex((b) => b._type === "dualPanelBlock");
+          return sections.map((block, index) => (
+            <BlockRenderer key={block._key} block={block} isPrimary={index === primaryIdx} />
+          ));
+        })()}
       </main>
     </>
   );
