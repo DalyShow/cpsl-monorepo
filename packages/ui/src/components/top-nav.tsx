@@ -152,7 +152,7 @@ export function TopNav({
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-8 h-8"
+            className="md:hidden flex flex-col items-center justify-center gap-1.5 w-8 h-8 mr-1"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
@@ -161,7 +161,7 @@ export function TopNav({
               className="h-0.5 w-6 transition-transform"
               style={{
                 background: "#F4EFE6",
-                transform: menuOpen ? "rotate(45deg) translate(4px, 4px)" : undefined,
+                transform: menuOpen ? "translateY(8px) rotate(45deg)" : undefined,
               }}
             />
             <span
@@ -175,7 +175,7 @@ export function TopNav({
               className="h-0.5 w-6 transition-transform"
               style={{
                 background: "#F4EFE6",
-                transform: menuOpen ? "rotate(-45deg) translate(4px, -4px)" : undefined,
+                transform: menuOpen ? "translateY(-8px) rotate(-45deg)" : undefined,
               }}
             />
           </button>
