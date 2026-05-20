@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { Button } from "./button";
+import { ArrowPillButton } from "./arrow-pill-button";
 
 /**
  * CPSL promo tiles & grid — the visual vocabulary for Nike-inspired
@@ -813,9 +814,9 @@ export function PromoHero({
                 </p>
               )}
               {slideCtaLabel && (
-                <Button asChild variant="cpsl-gold" size={isLeft ? "default" : "lg"}>
-                  <a href={slideCtaHref}>{slideCtaLabel}</a>
-                </Button>
+                <ArrowPillButton href={slideCtaHref} tone="dark" size={isLeft ? "md" : "lg"}>
+                  {slideCtaLabel}
+                </ArrowPillButton>
               )}
             </div>
           </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "./button";
+import { ArrowPillButton } from "./arrow-pill-button";
 
 /**
  * DualPanel — a full-viewport two-up showcase.
@@ -74,9 +74,9 @@ function Panel({ item, headingTag: HeadingTag = "h2" }: { item: DualPanelItem; h
         )}
         {item.ctaLabel && (
           <div className="cpsl-panel__cta">
-            <Button asChild variant="cpsl-gold" size="default">
-              <a href={item.ctaHref ?? "#"}>{item.ctaLabel}</a>
-            </Button>
+            <ArrowPillButton href={item.ctaHref ?? "#"} tone="dark" size="md">
+              {item.ctaLabel}
+            </ArrowPillButton>
           </div>
         )}
       </div>
