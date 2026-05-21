@@ -374,9 +374,9 @@ export function PromoTile({
       </div>
       {ctaLabel && (
         <div style={{ position: "relative", zIndex: 1, alignSelf: "flex-start" }}>
-          <Button asChild variant={t.buttonVariant} size="sm">
-            <a href={ctaHref || "#"}>{ctaLabel} →</a>
-          </Button>
+          <ArrowPillButton href={ctaHref || "#"} tone="navy" size="sm">
+            {ctaLabel}
+          </ArrowPillButton>
         </div>
       )}
     </div>

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-export type ArrowPillTone = "dark" | "light";
+export type ArrowPillTone = "dark" | "light" | "navy";
 export type ArrowPillSize = "sm" | "md" | "lg";
 
 export interface ArrowPillButtonProps {
@@ -12,8 +12,9 @@ export interface ArrowPillButtonProps {
   href?:     string;
   /**
    * Color tone:
-   * - "dark"  → white pill with navy ink + navy icon disc (use on light/photo surfaces)
+   * - "dark"  → white pill with navy ink + gold icon disc (use on dark/photo surfaces)
    * - "light" → translucent cream pill with cream ink + cream icon disc (use on dark surfaces)
+   * - "navy"  → navy pill with cream ink + gold icon disc (use on light/coloured surfaces — gold, cream, crimson tiles)
    */
   tone?:     ArrowPillTone;
   /** Size preset. Default `md`. */
@@ -67,6 +68,14 @@ const toneMap: Record<ArrowPillTone, {
     iconBg:      "#F4EFE6",
     iconColor:   "#091628",
     hoverShadow: "0 8px 24px rgba(0,0,0,0.18)",
+  },
+  navy: {
+    pillBg:      "#091628",
+    pillBorder:  "transparent",
+    pillColor:   "#F4EFE6",
+    iconBg:      "#C9A74C",
+    iconColor:   "#091628",
+    hoverShadow: "0 8px 24px rgba(9,22,40,0.32)",
   },
 };
 
