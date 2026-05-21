@@ -39,10 +39,14 @@ const ARROW_ICON = (
   </svg>
 );
 
+// Right padding = (pillH - iconSize) / 2 - 1px border so the visual right
+// gap matches the disc's natural vertical centering inside the fixed pill.
+// (Top/bottom padding values are matched for clarity but don't affect the
+// fixed pill height — the disc overflows the content area and centers itself.)
 const sizeMap: Record<ArrowPillSize, { pillH: number; pad: string; gap: number; iconSize: number; fontSize: number }> = {
-  sm: { pillH: 36, pad: "0.375rem 0.375rem 0.375rem 1rem",   gap: 10, iconSize: 28, fontSize: 12 },
-  md: { pillH: 44, pad: "0.375rem 0.375rem 0.375rem 1.25rem", gap: 12, iconSize: 36, fontSize: 14 },
-  lg: { pillH: 52, pad: "0.5rem 0.5rem 0.5rem 1.5rem",        gap: 14, iconSize: 40, fontSize: 16 },
+  sm: { pillH: 36, pad: "3px 3px 3px 1rem",    gap: 10, iconSize: 28, fontSize: 12 },
+  md: { pillH: 44, pad: "3px 3px 3px 1.25rem", gap: 12, iconSize: 36, fontSize: 14 },
+  lg: { pillH: 52, pad: "5px 5px 5px 1.5rem",  gap: 14, iconSize: 40, fontSize: 16 },
 };
 
 const toneMap: Record<ArrowPillTone, {

@@ -1,5 +1,6 @@
 {
   "framework": "nextjs",
-  "alias": ["brand.carolinapremiersoccerleague.com"]
+  "alias": ["brand.carolinapremiersoccerleague.com"],
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- ../../apps/website ../../packages/ui ../../package.json ../../package-lock.json"
 }
 

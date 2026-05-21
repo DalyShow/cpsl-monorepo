@@ -1,0 +1,4 @@
+{
+  "framework": "nextjs",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- ../../apps/design-system ../../packages/ui ../../package.json ../../package-lock.json"
+}
