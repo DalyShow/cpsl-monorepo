@@ -21,17 +21,21 @@ export const resolve: PresentationPluginOptions["resolve"] = {
     }),
 
     page: defineLocations({
+      // Project only fields on the document itself — no parent->slug deref.
+      // The deref can hang for newly-created drafts whose parent reference
+      // points at another unsaved draft the server doesn't have yet, leaving
+      // the "Resolving locations..." spinner stuck. The [...slug] catch-all
+      // route resolves either /child or /parent/child to the same page, so
+      // dropping the prefix here is a cosmetic loss only.
       select: {
-        title:      "title",
-        slug:       "slug.current",
-        parentSlug: "parent->slug.current",
+        title: "title",
+        slug:  "slug.current",
       },
       resolve: (doc) => {
         if (!doc?.slug) return null;
-        const path = doc.parentSlug ? `/${doc.parentSlug}/${doc.slug}` : `/${doc.slug}`;
         return {
           locations: [
-            { title: doc.title || "Page", href: path },
+            { title: doc.title || "Page", href: `/${doc.slug}` },
           ],
         };
       },
