@@ -3,6 +3,12 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* Reserve gutter space for the scrollbar so navigating between
+   short and tall docs pages doesn't shift the fixed chrome. */
+html {
+  scrollbar-gutter: stable;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {

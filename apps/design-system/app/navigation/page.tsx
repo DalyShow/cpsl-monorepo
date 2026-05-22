@@ -24,9 +24,19 @@ export default function NavigationPage() {
         {/* 1. Top Navigation Bar — card */}
         <Section title="1 — Top Navigation Bar">
           <p className="text-xs text-muted-foreground mb-4">
-            Dark-navy bar with brand mark, interactive nav links, live badge, and user avatar. Nav links use <strong>Barlow Condensed SemiBold, 14 px, uppercase, 0.11 em letter-spacing</strong>. Click any link to switch the active state. Use <code className="bg-secondary px-1.5 py-0.5 rounded">variant="card"</code> (default) inside modals, drawers, or preview frames.
+            Dark-navy bar with brand mark, nav links, live badge, and CTA pill. Links use <strong>Barlow Condensed SemiBold, 14 px, uppercase, 0.11 em letter-spacing</strong>, cream <code className="bg-secondary px-1.5 py-0.5 rounded">#F4EFE6</code> at rest and muted steel <code className="bg-secondary px-1.5 py-0.5 rounded">#7A9BAA</code> on hover. The active link is derived from the current URL (via <code className="bg-secondary px-1.5 py-0.5 rounded">usePathname()</code>) and gets a gold <code className="bg-secondary px-1.5 py-0.5 rounded">#D4B949</code> underline plus <code className="bg-secondary px-1.5 py-0.5 rounded">aria-current="page"</code> — no click handlers, no flicker on route changes. Below, "Navigation" is highlighted because its href matches this page.
           </p>
-          <TopNav variant="card" showLive={true} />
+          <TopNav
+            variant="card"
+            showLive={true}
+            items={[
+              { label: "Standings",  href: "/standings"  },
+              { label: "Matches",    href: "/matches"    },
+              { label: "Navigation", href: "/navigation" },
+              { label: "Stats",      href: "/stats"      },
+              { label: "News",       href: "/news"       },
+            ]}
+          />
         </Section>
 
         {/* 1.5 Sub Navigation */}
