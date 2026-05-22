@@ -1,11 +1,4 @@
-import { TopNav } from "@cpsl/ui";
 import { ApplicationForm } from "./ApplicationForm";
-import { sanityFetch } from "@/lib/sanity/client";
-import {
-  NAV_ITEMS_GROQ,
-  resolveTopNavItems,
-  type SiteNavSettings,
-} from "@/lib/nav-items";
 
 export const dynamic = "force-dynamic";
 
@@ -16,25 +9,8 @@ export const metadata = {
 };
 
 export default async function ApplyPage() {
-  let settings: SiteNavSettings | null = null;
-  try {
-    settings = await sanityFetch<SiteNavSettings>(
-      `*[_type == "siteSettings"][0]{ ${NAV_ITEMS_GROQ}, ctaLabel, ctaHref }`
-    );
-  } catch {
-    // Sanity unavailable — render without nav items
-  }
-
   return (
-    <>
-      <TopNav
-        items={resolveTopNavItems(settings?.navItems)}
-        ctaLabel={settings?.ctaLabel ?? "Join Our League"}
-        ctaHref={settings?.ctaHref ?? "/apply"}
-        showLive={false}
-      />
-
-      <main className="pt-20">
+    <main>
         {/* ── Page header ───────────────────────────────────────────────── */}
         <div style={{
           background: "#041124",
@@ -98,7 +74,6 @@ export default async function ApplyPage() {
             <ApplicationForm />
           </div>
         </div>
-      </main>
-    </>
+    </main>
   );
 }

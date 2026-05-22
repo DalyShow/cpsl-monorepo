@@ -122,6 +122,12 @@ export function BlockRenderer({
    */
   animateOnMount?: boolean;
 }) {
+  // logoTickerBlock used to render per page as a section, but the
+  // marquee now lives in the (main) layout so it persists across
+  // navigation. If a page still has the placement marker in its
+  // sections array, skip it silently here.
+  if (block._type === "logoTickerBlock") return null;
+
   const inner = renderInner(block, isPrimary);
   if (NO_REVEAL.has(block._type) || !inner) return inner;
   return <ScrollReveal animateOnMount={animateOnMount}>{inner}</ScrollReveal>;

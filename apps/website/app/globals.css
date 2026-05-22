@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
 
+/* Reserve gutter space for the scrollbar on every page so navigating
+   between short pages (no scrollbar) and tall pages (scrollbar) doesn't
+   shift the fixed nav and content by ~15px. */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* ── CPSL Brand Tokens ──────────────────────────────────────────────── */
 :root {
   /* Navy / Dark surfaces */

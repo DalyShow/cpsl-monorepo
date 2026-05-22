@@ -1,13 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { TopNav, SubNav } from "@cpsl/ui";
+import { SubNav } from "@cpsl/ui";
 import { BlockRenderer, NO_REVEAL } from "@/components/blocks/BlockRenderer";
 import { sanityFetch } from "@/lib/sanity/client";
-import {
-  NAV_ITEMS_GROQ,
-  resolveTopNavItems,
-  type SiteNavSettings,
-} from "@/lib/nav-items";
 
 export async function generateMetadata({
   params,
@@ -64,11 +59,7 @@ export default async function DynamicPage({
   const pageSlug   = segments[segments.length - 1];
   const parentSlug = segments.length > 1 ? segments[segments.length - 2] : "";
 
-  const [settings, page] = await Promise.all([
-    sanityFetch<SiteNavSettings>(
-      `*[_type == "siteSettings"][0]{ ${NAV_ITEMS_GROQ}, ctaLabel, ctaHref }`
-    ),
-    sanityFetch<PageData>(
+  const page = await sanityFetch<PageData>(
       `*[_type == "page"
           && slug.current == $slug
           && (
@@ -127,8 +118,7 @@ export default async function DynamicPage({
           }
         }`,
       { slug: pageSlug, parentSlug }
-    ),
-  ]);
+    );
 
   if (!page) notFound();
 
@@ -140,33 +130,24 @@ export default async function DynamicPage({
         href: i.parentSlug ? `/${i.parentSlug}/${i.slug}` : `/${i.slug}`,
       }));
 
+  const sections = page.sections ?? [];
+  const primaryIdx = sections.findIndex((b) => b._type === "dualPanelBlock");
+  // Find the first block that actually gets a ScrollReveal wrapper
+  // — strips (logo ticker / sub-nav / etc.) are skipped so the
+  // page-entry wipe lands on the first real content block.
+  const firstRevealIdx = sections.findIndex((b) => !NO_REVEAL.has(b._type));
+
   return (
-    <>
-      <TopNav
-        items={resolveTopNavItems(settings?.navItems)}
-        ctaLabel={settings?.ctaLabel ?? "Join Our League"}
-        ctaHref={settings?.ctaHref ?? "/apply"}
-        showLive={false}
-      />
-      <main className="pt-20">
-        {subNavItems.length > 1 && <SubNav items={subNavItems} />}
-        {(() => {
-          const sections = page.sections ?? [];
-          const primaryIdx = sections.findIndex((b) => b._type === "dualPanelBlock");
-          // Find the first block that actually gets a ScrollReveal wrapper
-          // — strips (logo ticker / sub-nav / etc.) are skipped so the
-          // page-entry wipe lands on the first real content block.
-          const firstRevealIdx = sections.findIndex((b) => !NO_REVEAL.has(b._type));
-          return sections.map((block, index) => (
-            <BlockRenderer
-              key={block._key}
-              block={block}
-              isPrimary={index === primaryIdx}
-              animateOnMount={index === firstRevealIdx}
-            />
-          ));
-        })()}
-      </main>
-    </>
+    <main>
+      {subNavItems.length > 1 && <SubNav items={subNavItems} />}
+      {sections.map((block, index) => (
+        <BlockRenderer
+          key={block._key}
+          block={block}
+          isPrimary={index === primaryIdx}
+          animateOnMount={index === firstRevealIdx}
+        />
+      ))}
+    </main>
   );
 }

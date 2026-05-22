@@ -3,8 +3,21 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { FlyoutMenu, type FlyoutItem, type FlyoutAction } from "./flyout-menu";
 import { ArrowPillButton } from "./arrow-pill-button";
+
+/**
+ * Decide whether a nav link is the "active" one for the current path.
+ *  - Root (/) is only active when the path is exactly /
+ *  - Sub-pages match when the pathname starts with the link's href
+ *    (so /league-information AND /league-information/handbook both
+ *    light up the "League Info" link)
+ */
+function isActiveHref(pathname: string, href: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(href + "/");
+}
 
 export interface TopNavLinkItem {
   label: string;
@@ -54,11 +67,15 @@ export function TopNav({
   showLive = false,
   position = "fixed",
 }: TopNavProps) {
-  const [activeIndex, setActiveIndex] = useState(-1);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname() ?? "/";
 
   useEffect(() => {
-    // Close mobile menu on route change-adjacent interactions
+    // Close mobile menu on route change or viewport resize.
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     const close = () => setMenuOpen(false);
     window.addEventListener("resize", close);
     return () => window.removeEventListener("resize", close);
@@ -80,7 +97,6 @@ export function TopNav({
         <Link
           href={homeHref}
           className="flex items-center py-3 flex-shrink-0"
-          onClick={() => setActiveIndex(-1)}
         >
           <Image
             src={logoSrc}
@@ -94,7 +110,7 @@ export function TopNav({
 
         {/* Centered nav */}
         <nav className="hidden md:flex gap-1 justify-self-center items-center">
-          {items.map((item, i) =>
+          {items.map((item) =>
             isFlyoutItem(item) ? (
               <div
                 key={item.label}
@@ -109,23 +125,27 @@ export function TopNav({
                 />
               </div>
             ) : (
-              <Link
-                key={item.label}
-                href={item.href || "#"}
-                onClick={() => setActiveIndex(i)}
-                className="px-4 py-4 border-b-2 transition-colors text-[#7A9BAA] hover:text-[#F4EFE6]"
-                style={{
-                  color: i === activeIndex ? "white" : undefined,
-                  borderColor: i === activeIndex ? "#D4B949" : "transparent",
-                  fontFamily: "'Barlow Condensed', sans-serif",
-                  fontWeight: 600,
-                  fontSize: "14px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.11em",
-                }}
-              >
-                {item.label}
-              </Link>
+              (() => {
+                const active = isActiveHref(pathname, item.href || "");
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href || "#"}
+                    className="px-4 py-4 border-b-2 transition-colors text-[#F4EFE6] hover:text-[#7A9BAA]"
+                    style={{
+                      borderColor: active ? "#D4B949" : "transparent",
+                      fontFamily: "'Barlow Condensed', sans-serif",
+                      fontWeight: 600,
+                      fontSize: "14px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.11em",
+                    }}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })()
             ),
           )}
         </nav>
@@ -192,7 +212,7 @@ export function TopNav({
           }}
         >
           <nav className="flex flex-col py-4 gap-1">
-            {items.map((item, i) =>
+            {items.map((item) =>
               isFlyoutItem(item) ? (
                 <div key={item.label} className="py-2">
                   <div
@@ -230,13 +250,10 @@ export function TopNav({
                 <Link
                   key={item.label}
                   href={item.href || "#"}
-                  onClick={() => {
-                    setActiveIndex(i);
-                    setMenuOpen(false);
-                  }}
+                  onClick={() => setMenuOpen(false)}
                   className="px-3 py-3"
                   style={{
-                    color: i === activeIndex ? "white" : "#7A9BAA",
+                    color: isActiveHref(pathname, item.href || "") ? "#D4B949" : "#F4EFE6",
                     fontFamily: "'Barlow Condensed', sans-serif",
                     fontWeight: 600,
                     fontSize: "14px",

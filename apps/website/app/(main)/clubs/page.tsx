@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
-import { TopNav } from "@cpsl/ui";
 import { ClubDirectory } from "@/components/ds/ClubDirectory";
 import { fetchClubs } from "@/lib/clubs";
-import { sanityFetch } from "@/lib/sanity/client";
-import {
-  NAV_ITEMS_GROQ,
-  resolveTopNavItems,
-  type SiteNavSettings,
-} from "@/lib/nav-items";
 
 export const metadata: Metadata = {
   title: "Clubs — Carolina Premier Soccer League",
@@ -17,23 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ClubsPage() {
-  const [settings, clubs] = await Promise.all([
-    sanityFetch<SiteNavSettings>(
-      `*[_type == "siteSettings"][0]{ ${NAV_ITEMS_GROQ}, ctaLabel, ctaHref }`
-    ),
-    fetchClubs(),
-  ]);
+  const clubs = await fetchClubs();
 
   return (
-    <>
-      <TopNav
-        items={resolveTopNavItems(settings?.navItems)}
-        ctaLabel={settings?.ctaLabel ?? "Join Our League"}
-        ctaHref={settings?.ctaHref ?? "/apply"}
-        showLive={false}
-      />
-
-      <main className="pt-20" style={{ background: "#041124", minHeight: "100vh" }}>
+    <main style={{ background: "#041124", minHeight: "100vh" }}>
         {/* Page header */}
         <div style={{ borderBottom: "1px solid #1E2D45", padding: "48px 0 40px" }}>
           <div className="max-w-5xl mx-auto px-6">
@@ -86,7 +66,6 @@ export default async function ClubsPage() {
             <ClubDirectory clubs={clubs} />
           )}
         </div>
-      </main>
-    </>
+    </main>
   );
 }
