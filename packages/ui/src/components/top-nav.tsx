@@ -131,9 +131,8 @@ export function TopNav({
                   <Link
                     key={item.label}
                     href={item.href || "#"}
-                    className="px-4 py-4 border-b-2 transition-colors text-[#F4EFE6] hover:text-[#7A9BAA]"
+                    className="px-4 py-4 transition-colors text-[#F4EFE6] hover:text-[#7A9BAA]"
                     style={{
-                      borderColor: active ? "#D4B949" : "transparent",
                       fontFamily: "'Barlow Condensed', sans-serif",
                       fontWeight: 600,
                       fontSize: "14px",
@@ -142,7 +141,24 @@ export function TopNav({
                     }}
                     aria-current={active ? "page" : undefined}
                   >
-                    {item.label}
+                    <span className="relative inline-block">
+                      {item.label}
+                      {/* Active underline: matches the text width and sits
+                          4 px below the baseline so it reads as belonging
+                          to the link rather than floating in the padding. */}
+                      <span
+                        aria-hidden
+                        style={{
+                          position:    "absolute",
+                          left:        0,
+                          right:       0,
+                          bottom:      -6,
+                          height:      2,
+                          background:  active ? "#D4B949" : "transparent",
+                          transition:  "background 180ms ease",
+                        }}
+                      />
+                    </span>
                   </Link>
                 );
               })()
