@@ -20,26 +20,11 @@ export const resolve: PresentationPluginOptions["resolve"] = {
       locations: [{ title: "Brand", href: "/brand" }],
     }),
 
-    page: defineLocations({
-      // Project only fields on the document itself — no parent->slug deref.
-      // The deref can hang for newly-created drafts whose parent reference
-      // points at another unsaved draft the server doesn't have yet, leaving
-      // the "Resolving locations..." spinner stuck. The [...slug] catch-all
-      // route resolves either /child or /parent/child to the same page, so
-      // dropping the prefix here is a cosmetic loss only.
-      select: {
-        title: "title",
-        slug:  "slug.current",
-      },
-      resolve: (doc) => {
-        if (!doc?.slug) return null;
-        return {
-          locations: [
-            { title: doc.title || "Page", href: `/${doc.slug}` },
-          ],
-        };
-      },
-    }),
+    // page: deliberately omitted — the locations resolver hangs on
+    // newly-created pages (likely waiting on a Sanity API call that
+    // needs a SANITY_API_READ_TOKEN we don't have yet). Re-add once a
+    // Viewer token is in env. Site navigation isn't affected — only
+    // the "Used on" badge.
 
     siteSettings: defineLocations({
       message: "Site-wide settings — affect every page.",
