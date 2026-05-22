@@ -39,21 +39,26 @@ export function ScrollReveal({
   animateOnMount = false,
 }: ScrollRevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [hidden, setHidden] = React.useState(false);
+  // For animateOnMount, SSR + first paint already render the closed state
+  // (clip-path inset(0 100% 0 0)). useEffect then flips to open and the
+  // CSS transition runs from closed → open. The trade-off: the section
+  // is invisible until JS hydrates — only do this on routes where the
+  // entrance animation is the point.
+  const [hidden, setHidden] = React.useState(animateOnMount);
 
   React.useEffect(() => {
     if (disabled) return;
     if (typeof window === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setHidden(false);
+      return;
+    }
     if (!ref.current) return;
 
-    // Mount-time reveal: start hidden, then unclip on the next frame so
-    // the browser paints the closed state first and the transition runs.
     if (animateOnMount) {
-      setHidden(true);
-      const raf = requestAnimationFrame(() => {
-        requestAnimationFrame(() => setHidden(false));
-      });
+      // Initial state is already hidden — just open on the next frame so
+      // the browser commits the closed paint before the transition starts.
+      const raf = requestAnimationFrame(() => setHidden(false));
       return () => cancelAnimationFrame(raf);
     }
 

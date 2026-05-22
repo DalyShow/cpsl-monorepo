@@ -22,8 +22,10 @@ type Block = { _type: string; _key: string;[key: string]: any };
 /**
  * Block types that ship their own reveal choreography or shouldn't
  * be wrapped (e.g. nav strips). Skip the ScrollReveal wrapper for these.
+ * Exported so callers can find the first reveal-able block when
+ * applying mount-time animations.
  */
-const NO_REVEAL = new Set([
+export const NO_REVEAL = new Set([
   "dualPanelBlock",
   "subNavBlock",
   "logoTickerBlock",

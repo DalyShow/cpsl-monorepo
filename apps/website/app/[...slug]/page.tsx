@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { TopNav, SubNav } from "@cpsl/ui";
-import { BlockRenderer } from "@/components/blocks/BlockRenderer";
+import { BlockRenderer, NO_REVEAL } from "@/components/blocks/BlockRenderer";
 import { sanityFetch } from "@/lib/sanity/client";
 import {
   NAV_ITEMS_GROQ,
@@ -153,12 +153,16 @@ export default async function DynamicPage({
         {(() => {
           const sections = page.sections ?? [];
           const primaryIdx = sections.findIndex((b) => b._type === "dualPanelBlock");
+          // Find the first block that actually gets a ScrollReveal wrapper
+          // — strips (logo ticker / sub-nav / etc.) are skipped so the
+          // page-entry wipe lands on the first real content block.
+          const firstRevealIdx = sections.findIndex((b) => !NO_REVEAL.has(b._type));
           return sections.map((block, index) => (
             <BlockRenderer
               key={block._key}
               block={block}
               isPrimary={index === primaryIdx}
-              animateOnMount={index === 0}
+              animateOnMount={index === firstRevealIdx}
             />
           ));
         })()}
