@@ -10,6 +10,13 @@ export interface ScrollRevealProps {
   duration?: number;
   /** Disable the reveal — render children immediately. */
   disabled?: boolean;
+  /**
+   * Force the wipe even when the element is above the fold at mount.
+   * Use sparingly — only for sections that frame the entire page entry
+   * (e.g. the first block on a dynamic page route, where a clean
+   * left-to-right reveal sets the navigation transition tempo).
+   */
+  animateOnMount?: boolean;
 }
 
 /**
@@ -26,9 +33,10 @@ export interface ScrollRevealProps {
  */
 export function ScrollReveal({
   children,
-  delay    = 0,
-  duration = 1600,
-  disabled = false,
+  delay          = 0,
+  duration       = 1600,
+  disabled       = false,
+  animateOnMount = false,
 }: ScrollRevealProps) {
   const ref = React.useRef<HTMLDivElement>(null);
   const [hidden, setHidden] = React.useState(false);
@@ -37,8 +45,19 @@ export function ScrollReveal({
     if (disabled) return;
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (typeof IntersectionObserver === "undefined") return;
     if (!ref.current) return;
+
+    // Mount-time reveal: start hidden, then unclip on the next frame so
+    // the browser paints the closed state first and the transition runs.
+    if (animateOnMount) {
+      setHidden(true);
+      const raf = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setHidden(false));
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+
+    if (typeof IntersectionObserver === "undefined") return;
 
     const rect = ref.current.getBoundingClientRect();
     const initiallyInView = rect.top < window.innerHeight - 80;
@@ -61,7 +80,7 @@ export function ScrollReveal({
 
     obs.observe(ref.current);
     return () => obs.disconnect();
-  }, [disabled]);
+  }, [disabled, animateOnMount]);
 
   return (
     <div

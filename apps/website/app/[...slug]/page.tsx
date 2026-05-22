@@ -154,7 +154,12 @@ export default async function DynamicPage({
           const sections = page.sections ?? [];
           const primaryIdx = sections.findIndex((b) => b._type === "dualPanelBlock");
           return sections.map((block, index) => (
-            <BlockRenderer key={block._key} block={block} isPrimary={index === primaryIdx} />
+            <BlockRenderer
+              key={block._key}
+              block={block}
+              isPrimary={index === primaryIdx}
+              animateOnMount={index === 0}
+            />
           ));
         })()}
       </main>

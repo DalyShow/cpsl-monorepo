@@ -106,8 +106,21 @@ function renderInner(block: Block, isPrimary: boolean) {
   }
 }
 
-export function BlockRenderer({ block, isPrimary = false }: { block: Block; isPrimary?: boolean }) {
+export function BlockRenderer({
+  block,
+  isPrimary = false,
+  animateOnMount = false,
+}: {
+  block: Block;
+  isPrimary?: boolean;
+  /**
+   * Force the ScrollReveal wipe even if this block is above the fold at
+   * mount. Used on the first block of dynamic pages so the page-entry
+   * transition reads as a clean left-to-right reveal.
+   */
+  animateOnMount?: boolean;
+}) {
   const inner = renderInner(block, isPrimary);
   if (NO_REVEAL.has(block._type) || !inner) return inner;
-  return <ScrollReveal>{inner}</ScrollReveal>;
+  return <ScrollReveal animateOnMount={animateOnMount}>{inner}</ScrollReveal>;
 }
