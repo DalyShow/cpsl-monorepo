@@ -5,9 +5,9 @@ export const heroBlock = defineType({
   title: "Hero Section",
   type: "object",
   fields: [
-    defineField({ name: "eyebrow",    title: "Eyebrow Label", type: "string" }),
-    defineField({ name: "heading",    title: "Heading",       type: "string" }),
-    defineField({ name: "subheading", title: "Subheading",    type: "text", rows: 2 }),
+    defineField({ name: "eyebrow",    title: "Eyebrow Label", type: "string", initialValue: "A new era" }),
+    defineField({ name: "heading",    title: "Heading",       type: "string", initialValue: "Hero heading goes here" }),
+    defineField({ name: "subheading", title: "Subheading",    type: "text", rows: 2, initialValue: "Replace with a supporting line for this hero." }),
     defineField({ name: "ctaLabel",   title: "CTA Button Label", type: "string", initialValue: "Join Our League" }),
     defineField({ name: "ctaHref",    title: "CTA Button Link",  type: "string", initialValue: "#contact" }),
     defineField({

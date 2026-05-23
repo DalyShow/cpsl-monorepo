@@ -5,8 +5,8 @@ export const contentSectionBlock = defineType({
   title: "Content Section",
   type: "object",
   fields: [
-    defineField({ name: "eyebrow", title: "Eyebrow Label",  type: "string" }),
-    defineField({ name: "heading", title: "Heading",        type: "string" }),
+    defineField({ name: "eyebrow", title: "Eyebrow Label",  type: "string", initialValue: "About the league" }),
+    defineField({ name: "heading", title: "Heading",        type: "string", initialValue: "A new era for youth soccer in the Carolinas" }),
     defineField({
       name: "image",
       title: "Image (below heading)",
@@ -17,13 +17,24 @@ export const contentSectionBlock = defineType({
         defineField({ name: "alt", title: "Alt Text", type: "string" }),
       ],
     }),
-    defineField({ name: "lead",    title: "Lead Paragraph", type: "text", rows: 3 }),
+    defineField({
+      name: "lead",
+      title: "Lead Paragraph",
+      type: "text",
+      rows: 3,
+      initialValue:
+        "Replace with the lead paragraph for this section. Aim for two to three sentences that frame what follows.",
+    }),
     defineField({
       name: "paragraphs",
       title: "Body Paragraphs",
       description: "Each paragraph is a separate block of text.",
       type: "array",
       of: [{ type: "text" }],
+      initialValue: [
+        "Replace this body paragraph with content that supports the heading above. Edit, add, or remove paragraphs as needed.",
+        "Add a second supporting paragraph here to give editors a sense of the two-column body layout.",
+      ],
     }),
     defineField({
       name: "background",

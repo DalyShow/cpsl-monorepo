@@ -16,12 +16,26 @@ export const dualPanelBlock = defineType({
       title: "Left Panel (2/3 width)",
       type: "dualPanelItem",
       validation: (R) => R.required(),
+      initialValue: {
+        eyebrow:     "A new era",
+        headline:    "League operator for the new National 1 League",
+        subheadline: "Now accepting applications for the 2026 – 2027 season.",
+        ctaLabel:    "Apply for admission",
+        ctaHref:     "/apply",
+      },
     }),
     defineField({
       name: "rightPanel",
       title: "Right Panel (1/3 width)",
       type: "dualPanelItem",
       validation: (R) => R.required(),
+      initialValue: {
+        eyebrow:     "Know before we go",
+        headline:    "The new National 1 League explained",
+        subheadline: "Get to know the new league and what it means for the future of our sport.",
+        ctaLabel:    "Learn more",
+        ctaHref:     "/league-information",
+      },
     }),
   ],
   preview: {

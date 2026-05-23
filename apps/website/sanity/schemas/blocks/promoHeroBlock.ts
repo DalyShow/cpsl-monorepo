@@ -11,6 +11,7 @@ export const promoHeroBlock = defineType({
       title: "Eyebrow",
       type: "string",
       description: "Short uppercase label above the headline.",
+      initialValue: "A new era",
     }),
     defineField({
       name: "headline",
@@ -18,12 +19,14 @@ export const promoHeroBlock = defineType({
       type: "string",
       description:
         "Main hero headline. Optional when every slide below carries its own headline — this value is used as the fallback for slides that leave the Headline field blank.",
+      initialValue: "Hero headline goes here",
     }),
     defineField({
       name: "subheadline",
       title: "Subheadline",
       type: "text",
       rows: 2,
+      initialValue: "Supporting line that introduces the hero — replace with real copy.",
     }),
     defineField({
       name: "ctaLabel",

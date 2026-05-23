@@ -10,6 +10,7 @@ export const standingsBlock = defineType({
       title: "Season Label",
       type: "string",
       description: "Optional label shown in the footer — e.g. '2024–25 Season · Updated weekly'",
+      initialValue: "2026–2027 Season · Updated weekly",
     }),
   ],
   preview: {

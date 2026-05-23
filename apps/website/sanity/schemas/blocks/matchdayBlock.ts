@@ -10,6 +10,7 @@ export const matchdayBlock = defineType({
       title: "Season Label",
       type: "string",
       description: "Optional footer label — e.g. '2026–2027 SEASON · MATCHDAY 18'",
+      initialValue: "2026–2027 SEASON · MATCHDAY 1",
     }),
   ],
   preview: {

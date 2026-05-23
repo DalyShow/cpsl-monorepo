@@ -11,18 +11,21 @@ export const sectionHeaderBlock = defineType({
       type: "string",
       validation: (R) => R.required(),
       description: "The large headline — e.g. 'Standings'",
+      initialValue: "Section title",
     }),
     defineField({
       name: "badge",
       title: "Badge",
       type: "string",
       description: "Optional inline label shown in gold next to the title — e.g. '2024–25 Season'",
+      initialValue: "2026–2027 Season",
     }),
     defineField({
       name: "subtitle",
       title: "Subtitle",
       type: "string",
       description: "Optional muted description shown below the title",
+      initialValue: "Replace with a one-line description for this section.",
     }),
     defineField({
       name: "variant",

@@ -29,28 +29,33 @@ export const dualPanelItem = defineType({
       name: "eyebrow",
       title: "Eyebrow",
       type: "string",
+      initialValue: "A new era",
     }),
     defineField({
       name: "headline",
       title: "Headline",
       type: "string",
       validation: (R) => R.required(),
+      initialValue: "Headline goes here",
     }),
     defineField({
       name: "subheadline",
       title: "Subheadline",
       type: "text",
       rows: 2,
+      initialValue: "Replace with a short supporting line that fits in two rows.",
     }),
     defineField({
       name: "ctaLabel",
       title: "CTA Label",
       type: "string",
+      initialValue: "Learn more",
     }),
     defineField({
       name: "ctaHref",
       title: "CTA Link",
       type: "string",
+      initialValue: "/",
     }),
   ],
   preview: {

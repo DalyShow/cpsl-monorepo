@@ -11,6 +11,12 @@ export const subNavBlock = defineType({
       type: "array",
       description:
         "Child page links shown directly below the main nav. Usually added to the top of a parent section's pages.",
+      initialValue: [
+        { _type: "subNavLink", label: "Overview",  href: "/" },
+        { _type: "subNavLink", label: "Rules",     href: "/" },
+        { _type: "subNavLink", label: "Handbook",  href: "/" },
+        { _type: "subNavLink", label: "Contact",   href: "/" },
+      ],
       of: [
         {
           type: "object",

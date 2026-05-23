@@ -24,12 +24,14 @@ export const heroSlide = defineType({
       title: "Eyebrow",
       type: "string",
       description: "Leave blank to render no eyebrow on this slide.",
+      initialValue: "A new era",
     }),
     defineField({
       name: "headline",
       title: "Headline",
       type: "string",
       description: "Leave blank to render no headline on this slide.",
+      initialValue: "Slide headline goes here",
     }),
     defineField({
       name: "subheadline",
@@ -37,18 +39,21 @@ export const heroSlide = defineType({
       type: "text",
       rows: 2,
       description: "Leave blank to render no subheadline on this slide.",
+      initialValue: "Supporting line that introduces the slide content.",
     }),
     defineField({
       name: "ctaLabel",
       title: "CTA Label",
       type: "string",
       description: "Leave blank to render no CTA on this slide.",
+      initialValue: "Learn more",
     }),
     defineField({
       name: "ctaHref",
       title: "CTA Link",
       type: "string",
       description: "Leave blank to render no CTA on this slide.",
+      initialValue: "/",
     }),
     defineField({
       name: "image",
