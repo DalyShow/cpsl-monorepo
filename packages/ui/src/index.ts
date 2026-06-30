@@ -61,6 +61,7 @@ export type {
   HeroBentoProps,
   HeroBentoBadge,
   HeroBentoBadgeTone,
+  HeroBentoSectionBackground,
 } from "./components/hero-bento";
 
 export { ScrollReveal } from "./components/scroll-reveal";

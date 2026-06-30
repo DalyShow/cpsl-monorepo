@@ -1,4 +1,9 @@
-import { HeroBento, type HeroBentoBadge } from "@cpsl/ui";
+import {
+  HeroBento,
+  type HeroBentoBadge,
+  type HeroBentoBadgeTone,
+  type HeroBentoSectionBackground,
+} from "@cpsl/ui";
 import { enhanceImageUrl } from "@/lib/sanity/image";
 
 interface SanityImage {
@@ -9,17 +14,19 @@ interface SanityBadge {
   _key?: string;
   value?: string;
   label?: string;
+  tone?: HeroBentoBadgeTone;
 }
 
 interface HeroBentoBlockProps {
-  eyebrow?:     string;
-  headline?:    string;
-  description?: string;
-  ctaLabel?:    string;
-  ctaHref?:     string;
-  heroImage?:   SanityImage;
-  subImage?:    SanityImage;
-  badges?:      SanityBadge[];
+  eyebrow?:           string;
+  headline?:          string;
+  description?:       string;
+  ctaLabel?:          string;
+  ctaHref?:           string;
+  heroImage?:         SanityImage;
+  subImage?:          SanityImage;
+  badges?:            SanityBadge[];
+  sectionBackground?: HeroBentoSectionBackground;
 }
 
 export function HeroBentoBlock({
@@ -31,11 +38,12 @@ export function HeroBentoBlock({
   heroImage,
   subImage,
   badges,
+  sectionBackground,
 }: HeroBentoBlockProps) {
   const mappedBadges: HeroBentoBadge[] = (badges ?? [])
     .filter((b) => !!b?.value)
     .slice(0, 3)
-    .map((b) => ({ value: b.value!, label: b.label }));
+    .map((b) => ({ value: b.value!, label: b.label, tone: b.tone }));
 
   return (
     <HeroBento
@@ -47,6 +55,7 @@ export function HeroBentoBlock({
       heroImage={enhanceImageUrl(heroImage?.asset?.url)}
       subImage={enhanceImageUrl(subImage?.asset?.url)}
       badges={mappedBadges.length > 0 ? mappedBadges : undefined}
+      sectionBackground={sectionBackground}
     />
   );
 }

@@ -64,12 +64,26 @@ export const heroBentoBlock = defineType({
       title: "Badges",
       type: "array",
       description:
-        "Up to 3 gold proof-point badges anchored top-right of the hero photo. On mobile they reflow into a full-width grid strip across the bottom of the photo.",
+        "Optional. Up to 3 proof-point badges anchored top-right of the hero photo. On mobile they reflow into a full-width grid strip across the bottom of the photo. Leave empty for no badges.",
       of: [{ type: "heroBentoBadge" }],
       validation: (R) => R.max(3),
-      initialValue: [
-        { _type: "heroBentoBadge", value: "180+", label: "College programs" },
-      ],
+    }),
+    defineField({
+      name: "sectionBackground",
+      title: "Section Background",
+      type: "string",
+      description:
+        "Background colour around the bento card. Choose 'None' to make it transparent and let the page background show through.",
+      initialValue: "navy",
+      options: {
+        list: [
+          { title: "Navy (default)",     value: "navy"  },
+          { title: "Cream",              value: "cream" },
+          { title: "Gold",               value: "gold"  },
+          { title: "None (transparent)", value: "none"  },
+        ],
+        layout: "radio",
+      },
     }),
   ],
   preview: {

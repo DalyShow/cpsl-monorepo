@@ -22,6 +22,8 @@ const BADGE_TONES: Record<HeroBentoBadgeTone, { bg: string; fg: string; shadow: 
   none:  { bg: "transparent", fg: "#F4EFE6",   shadow: "none" },
 };
 
+export type HeroBentoSectionBackground = "navy" | "cream" | "gold" | "none";
+
 export interface HeroBentoProps {
   eyebrow?:     string;
   headline?:    string;
@@ -38,7 +40,19 @@ export interface HeroBentoProps {
    * of the photo on mobile.
    */
   badges?:      HeroBentoBadge[];
+  /**
+   * Outer wrap background — the area around the bento card. Defaults to
+   * "navy". "none" makes it transparent so the page background shows through.
+   */
+  sectionBackground?: HeroBentoSectionBackground;
 }
+
+const SECTION_BG: Record<HeroBentoSectionBackground, string> = {
+  navy:  "#091628",
+  cream: "#F4EFE6",
+  gold:  "#C9A74C",
+  none:  "transparent",
+};
 
 const id = "hb"; // class prefix scope
 const MAX_BADGES = 3;
@@ -64,17 +78,18 @@ export function HeroBento({
   heroImage   = "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=1400&q=85",
   subImage,
   badges,
+  sectionBackground = "navy",
 }: HeroBentoProps) {
   // No fallback: when the editor leaves badges empty, render none at all.
   const visibleBadges = (badges ?? []).slice(0, MAX_BADGES);
   const heroSpansFull = !subImage;
+  const wrapBg = SECTION_BG[sectionBackground] ?? SECTION_BG.navy;
 
   return (
-    <section className={`${id}__section`}>
+    <section className={`${id}__section`} style={{ background: wrapBg }}>
       <style>{`
         .${id}__section {
           padding: clamp(16px, 4vw, 30px);
-          background: #091628;
         }
 
         .${id}__grid {
