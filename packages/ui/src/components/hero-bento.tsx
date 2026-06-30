@@ -30,6 +30,7 @@ export interface HeroBentoProps {
   description?: string;
   ctaLabel?:    string;
   ctaHref?:     string;
+  ctaNewWindow?: boolean;
   /** URL of the large top-right photo. */
   heroImage?:   string;
   /** Optional URL for a stacked second photo. When omitted the hero photo spans the full right column. */
@@ -75,6 +76,7 @@ export function HeroBento({
   description = "Three showcases per year. NCSA-published feeds for every fixture. 180+ college programs in attendance last cycle.",
   ctaLabel    = "View showcases",
   ctaHref     = "/showcases",
+  ctaNewWindow,
   heroImage   = "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=1400&q=85",
   subImage,
   badges,
@@ -292,7 +294,7 @@ export function HeroBento({
             <h1 className={`${id}__headline`}>{headline}</h1>
             <p className={`${id}__description`}>{description}</p>
             <div className={`${id}__cta`}>
-              <ArrowPillButton href={ctaHref} tone="dark">
+              <ArrowPillButton href={ctaHref} newWindow={ctaNewWindow} tone="dark">
                 {ctaLabel}
               </ArrowPillButton>
             </div>

@@ -10,6 +10,9 @@ export interface ArrowPillButtonProps {
   children:  React.ReactNode;
   /** Render as `<a>` when set, otherwise renders a `<button>`. */
   href?:     string;
+  /** Open the link in a new tab. Adds `target="_blank"` and the standard
+   *  `rel="noopener noreferrer"` for security. */
+  newWindow?: boolean;
   /**
    * Color tone:
    * - "dark"  → white pill with navy ink + gold icon disc (use on dark/photo surfaces)
@@ -86,6 +89,7 @@ const toneMap: Record<ArrowPillTone, {
 export function ArrowPillButton({
   children,
   href,
+  newWindow,
   tone     = "dark",
   size     = "md",
   icon     = ARROW_ICON,
@@ -165,6 +169,8 @@ export function ArrowPillButton({
     return (
       <a
         href={href}
+        target={newWindow ? "_blank" : undefined}
+        rel={newWindow ? "noopener noreferrer" : undefined}
         style={style}
         onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
         onMouseEnter={onMouseEnter}

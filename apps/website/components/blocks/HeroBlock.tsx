@@ -16,6 +16,7 @@ interface HeroBlockProps {
   subheading?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  ctaNewWindow?: boolean;
   backgroundImage?: {
     asset?: { url?: string };
     alt?: string;
@@ -43,6 +44,7 @@ export function HeroBlock({
   subheading = "Competitive soccer for clubs and players across North and South Carolina — professionally run, community driven.",
   ctaLabel   = "Join Our League",
   ctaHref    = "#contact",
+  ctaNewWindow,
   backgroundImage,
   backgroundImages,
   backgroundInterval = 6,
@@ -304,6 +306,8 @@ export function HeroBlock({
         {ctaLabel && (
           <a
             href={ctaHref || "#"}
+            target={ctaNewWindow ? "_blank" : undefined}
+            rel={ctaNewWindow ? "noopener noreferrer" : undefined}
             style={{
               display: "inline-flex",
               alignItems: "center",

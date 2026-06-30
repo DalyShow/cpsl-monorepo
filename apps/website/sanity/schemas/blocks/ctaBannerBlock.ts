@@ -45,6 +45,12 @@ export const ctaBannerBlock = defineType({
       description:
         "Optional. If set, the button downloads this file (e.g. PDF) and the URL above is ignored.",
     }),
+    defineField({
+      name: "primaryCtaNewWindow",
+      title: "Open Primary Button in new window",
+      type: "boolean",
+      initialValue: false,
+    }),
 
     defineField({
       name: "showSecondaryButton",
@@ -66,6 +72,13 @@ export const ctaBannerBlock = defineType({
       to: [{ type: "documentAsset" }],
       description:
         "Optional. If set, the button downloads this file and the URL above is ignored.",
+      hidden: ({ parent }) => !parent?.showSecondaryButton,
+    }),
+    defineField({
+      name: "secondaryCtaNewWindow",
+      title: "Open Secondary Button in new window",
+      type: "boolean",
+      initialValue: false,
       hidden: ({ parent }) => !parent?.showSecondaryButton,
     }),
   ],

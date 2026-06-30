@@ -41,6 +41,12 @@ export const heroBentoBlock = defineType({
       validation: (R) => R.uri({ allowRelative: true }),
       initialValue: "/showcases",
     }),
+    defineField({
+      name: "ctaNewWindow",
+      title: "Open CTA in new window",
+      type: "boolean",
+      initialValue: false,
+    }),
 
     defineField({
       name: "heroImage",

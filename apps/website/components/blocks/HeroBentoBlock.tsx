@@ -23,6 +23,7 @@ interface HeroBentoBlockProps {
   description?:       string;
   ctaLabel?:          string;
   ctaHref?:           string;
+  ctaNewWindow?:      boolean;
   heroImage?:         SanityImage;
   subImage?:          SanityImage;
   badges?:            SanityBadge[];
@@ -35,6 +36,7 @@ export function HeroBentoBlock({
   description,
   ctaLabel,
   ctaHref,
+  ctaNewWindow,
   heroImage,
   subImage,
   badges,
@@ -52,6 +54,7 @@ export function HeroBentoBlock({
       description={description}
       ctaLabel={ctaLabel}
       ctaHref={ctaHref}
+      ctaNewWindow={ctaNewWindow}
       heroImage={enhanceImageUrl(heroImage?.asset?.url)}
       subImage={enhanceImageUrl(subImage?.asset?.url)}
       badges={mappedBadges.length > 0 ? mappedBadges : undefined}

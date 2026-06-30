@@ -10,6 +10,7 @@ export const heroBlock = defineType({
     defineField({ name: "subheading", title: "Subheading",    type: "text", rows: 2, initialValue: "Replace with a supporting line for this hero." }),
     defineField({ name: "ctaLabel",   title: "CTA Button Label", type: "string", initialValue: "Join Our League" }),
     defineField({ name: "ctaHref",    title: "CTA Button Link",  type: "string", initialValue: "#contact" }),
+    defineField({ name: "ctaNewWindow", title: "Open CTA in new window", type: "boolean", initialValue: false }),
     defineField({
       name: "backgroundImage",
       title: "Background Image (single)",

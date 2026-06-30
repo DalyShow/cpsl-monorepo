@@ -52,6 +52,12 @@ export const siteSettings = defineType({
       type: "string",
       initialValue: "#contact",
     }),
+    defineField({
+      name: "ctaNewWindow",
+      title: "Open CTA in new window",
+      type: "boolean",
+      initialValue: false,
+    }),
 
     defineField({
       name: "logoTicker",

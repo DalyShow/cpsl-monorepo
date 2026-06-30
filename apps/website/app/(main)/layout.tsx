@@ -25,7 +25,7 @@ export default async function MainLayout({
   let settings: SiteNavSettings | null = null;
   try {
     settings = await sanityFetch<SiteNavSettings>(
-      `*[_type == "siteSettings"][0]{ ${NAV_ITEMS_GROQ}, ctaLabel, ctaHref }`
+      `*[_type == "siteSettings"][0]{ ${NAV_ITEMS_GROQ}, ctaLabel, ctaHref, ctaNewWindow }`
     );
   } catch { /* fall through to TopNav defaults */ }
 
@@ -37,6 +37,7 @@ export default async function MainLayout({
         // editor deliberately removed the CTA — render no button.
         ctaLabel={settings?.ctaLabel || undefined}
         ctaHref={settings?.ctaHref || undefined}
+        ctaNewWindow={settings?.ctaNewWindow}
         showLive={false}
       />
       {/* pt-20 offsets the fixed nav (80 px). LogoTicker sits directly

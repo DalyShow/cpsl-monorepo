@@ -55,6 +55,7 @@ export type SiteNavSettings = {
   navItems?: RawNavItem[];
   ctaLabel?: string;
   ctaHref?: string;
+  ctaNewWindow?: boolean;
 };
 
 /**

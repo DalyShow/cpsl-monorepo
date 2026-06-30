@@ -46,6 +46,7 @@ export interface TopNavProps {
   homeHref?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  ctaNewWindow?: boolean;
   showLive?: boolean;
   /** "fixed" pins the bar to the viewport (production default).
    *  "static" renders inline for showcase/catalog contexts. */
@@ -66,6 +67,7 @@ export function TopNav({
   // When the CTA fields are cleared in Sanity, the button doesn't render.
   ctaLabel,
   ctaHref,
+  ctaNewWindow,
   showLive = false,
   position = "fixed",
 }: TopNavProps) {
@@ -182,7 +184,7 @@ export function TopNav({
 
           {ctaLabel && (
             <span className="hidden md:inline-flex">
-              <ArrowPillButton href={ctaHref || "#"} tone="dark" size="sm">
+              <ArrowPillButton href={ctaHref || "#"} newWindow={ctaNewWindow} tone="dark" size="sm">
                 {ctaLabel}
               </ArrowPillButton>
             </span>
@@ -287,6 +289,7 @@ export function TopNav({
               <div className="mt-2">
                 <ArrowPillButton
                   href={ctaHref || "#"}
+                  newWindow={ctaNewWindow}
                   tone="dark"
                   size="md"
                   onClick={() => setMenuOpen(false)}

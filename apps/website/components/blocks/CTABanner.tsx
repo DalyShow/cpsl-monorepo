@@ -11,41 +11,49 @@ interface LinkedDocument {
 }
 
 interface CTABannerProps {
-  eyebrow?:             string;
-  headline?:            string;
-  headlineAccent?:      string;
-  description?:         string;
-  primaryCtaLabel?:     string;
-  primaryCtaHref?:      string;
+  eyebrow?:               string;
+  headline?:              string;
+  headlineAccent?:        string;
+  description?:           string;
+  primaryCtaLabel?:       string;
+  primaryCtaHref?:        string;
   /** When set, the primary button downloads this file (CDN URL) instead of
    *  navigating to primaryCtaHref. */
-  primaryCtaDocument?:  LinkedDocument;
+  primaryCtaDocument?:    LinkedDocument;
+  /** Editor's explicit "open in new window" toggle for the primary button. */
+  primaryCtaNewWindow?:   boolean;
   /** When true, renders the secondary (ghost) button alongside the primary CTA */
-  showSecondaryButton?: boolean;
-  secondaryCtaLabel?:   string;
-  secondaryCtaHref?:    string;
+  showSecondaryButton?:   boolean;
+  secondaryCtaLabel?:     string;
+  secondaryCtaHref?:      string;
   /** Same pattern as primaryCtaDocument — overrides secondaryCtaHref when set. */
-  secondaryCtaDocument?: LinkedDocument;
-  background?:          Background;
+  secondaryCtaDocument?:  LinkedDocument;
+  secondaryCtaNewWindow?: boolean;
+  background?:            Background;
 }
 
-/** Resolve the button's href + download flag. A linked file takes
- *  precedence over the manual URL; we also annotate the anchor with the
- *  asset's original filename so browsers save it sensibly. */
+/** Resolve the button's href + download + open-in-new-window. A linked file
+ *  takes precedence over the manual URL; we also annotate the anchor with
+ *  the asset's original filename so browsers save it sensibly. The editor's
+ *  explicit `newWindow` toggle forces target="_blank" regardless of source. */
 function resolveCtaTarget(
-  href: string | undefined,
-  doc:  LinkedDocument | undefined,
-): { href: string; downloadName?: string; isExternal: boolean } {
+  href:      string | undefined,
+  doc:       LinkedDocument | undefined,
+  newWindow: boolean | undefined,
+): { href: string; downloadName?: string; openInNewWindow: boolean } {
   if (doc?.fileUrl) {
     return {
       href: doc.fileUrl,
       downloadName: doc.filename,
-      isExternal: true,
+      // Linked files default to opening in a new tab; editor can override.
+      openInNewWindow: newWindow ?? true,
     };
   }
   return {
     href: href ?? "#",
-    isExternal: /^https?:\/\//i.test(href ?? ""),
+    // External URLs default to opening in a new tab; editor toggle forces it
+    // for any link (including relative paths).
+    openInNewWindow: newWindow ?? /^https?:\/\//i.test(href ?? ""),
   };
 }
 
@@ -74,17 +82,19 @@ export function CTABanner({
   primaryCtaLabel      = "Apply Now",
   primaryCtaHref       = "#",
   primaryCtaDocument,
+  primaryCtaNewWindow,
   showSecondaryButton  = false,
   secondaryCtaLabel    = "Learn More",
   secondaryCtaHref     = "#",
   secondaryCtaDocument,
+  secondaryCtaNewWindow,
   background           = "cream",
 }: CTABannerProps) {
   const outerBg = outerBgMap[background] ?? outerBgMap.cream;
   const cardBg  = cardBgMap[background]  ?? cardBgMap.cream;
 
-  const primary   = resolveCtaTarget(primaryCtaHref,   primaryCtaDocument);
-  const secondary = resolveCtaTarget(secondaryCtaHref, secondaryCtaDocument);
+  const primary   = resolveCtaTarget(primaryCtaHref,   primaryCtaDocument,   primaryCtaNewWindow);
+  const secondary = resolveCtaTarget(secondaryCtaHref, secondaryCtaDocument, secondaryCtaNewWindow);
 
   const showPattern = false; // TODO: re-enable when ready — background !== "gold"
 
@@ -135,8 +145,8 @@ export function CTABanner({
             <a
               href={primary.href}
               download={primary.downloadName ?? undefined}
-              target={primary.isExternal ? "_blank" : undefined}
-              rel={primary.isExternal ? "noopener noreferrer" : undefined}
+              target={primary.openInNewWindow ? "_blank" : undefined}
+              rel={primary.openInNewWindow ? "noopener noreferrer" : undefined}
               style={{
                 display: "inline-block",
                 background: "#D4B949",
@@ -159,8 +169,8 @@ export function CTABanner({
               <a
                 href={secondary.href}
                 download={secondary.downloadName ?? undefined}
-                target={secondary.isExternal ? "_blank" : undefined}
-                rel={secondary.isExternal ? "noopener noreferrer" : undefined}
+                target={secondary.openInNewWindow ? "_blank" : undefined}
+                rel={secondary.openInNewWindow ? "noopener noreferrer" : undefined}
                 style={{
                   display: "inline-block",
                   background: "transparent",
