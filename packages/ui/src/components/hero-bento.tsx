@@ -3,12 +3,24 @@
 import * as React from "react";
 import { ArrowPillButton } from "./arrow-pill-button";
 
+export type HeroBentoBadgeTone = "gold" | "navy" | "cream" | "none";
+
 export interface HeroBentoBadge {
   /** Number or short string, e.g. "180+" or "14". */
   value: string;
   /** Small uppercase label beneath the value. Optional. */
   label?: string;
+  /** Visual tone. Defaults to "gold". Use "none" for a transparent badge
+   *  that lets the photo show through (no shadow, no fill). */
+  tone?: HeroBentoBadgeTone;
 }
+
+const BADGE_TONES: Record<HeroBentoBadgeTone, { bg: string; fg: string; shadow: string }> = {
+  gold:  { bg: "#C9A74C",     fg: "#091628",   shadow: "0 12px 32px rgba(9,22,40,0.35)" },
+  navy:  { bg: "#091628",     fg: "#F4EFE6",   shadow: "0 12px 32px rgba(9,22,40,0.35)" },
+  cream: { bg: "#F4EFE6",     fg: "#091628",   shadow: "0 12px 32px rgba(9,22,40,0.35)" },
+  none:  { bg: "transparent", fg: "#F4EFE6",   shadow: "none" },
+};
 
 export interface HeroBentoProps {
   eyebrow?:     string;
@@ -31,10 +43,6 @@ export interface HeroBentoProps {
 const id = "hb"; // class prefix scope
 const MAX_BADGES = 3;
 
-const DEFAULT_BADGES: HeroBentoBadge[] = [
-  { value: "180+", label: "College programs" },
-];
-
 /**
  * HeroBento — contained bento-style hero (~640px tall on desktop).
  *
@@ -55,8 +63,9 @@ export function HeroBento({
   ctaHref     = "/showcases",
   heroImage   = "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=1400&q=85",
   subImage,
-  badges      = DEFAULT_BADGES,
+  badges,
 }: HeroBentoProps) {
+  // No fallback: when the editor leaves badges empty, render none at all.
   const visibleBadges = (badges ?? []).slice(0, MAX_BADGES);
   const heroSpansFull = !subImage;
 
@@ -285,12 +294,23 @@ export function HeroBento({
               className={`${id}__badges`}
               style={{ ["--hb-badge-count" as never]: visibleBadges.length }}
             >
-              {visibleBadges.map((b, i) => (
-                <div className={`${id}__badge`} key={i}>
-                  <div className={`${id}__badge-value`}>{b.value}</div>
-                  {b.label && <div className={`${id}__badge-label`}>{b.label}</div>}
-                </div>
-              ))}
+              {visibleBadges.map((b, i) => {
+                const tone = BADGE_TONES[b.tone ?? "gold"] ?? BADGE_TONES.gold;
+                return (
+                  <div
+                    className={`${id}__badge`}
+                    key={i}
+                    style={{
+                      background: tone.bg,
+                      color:      tone.fg,
+                      boxShadow:  tone.shadow,
+                    }}
+                  >
+                    <div className={`${id}__badge-value`}>{b.value}</div>
+                    {b.label && <div className={`${id}__badge-label`}>{b.label}</div>}
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>

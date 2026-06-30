@@ -19,8 +19,30 @@ export const heroBentoBadge = defineType({
       description: 'Small uppercase line beneath the value, e.g. "College programs".',
       validation: (R) => R.max(40),
     }),
+    defineField({
+      name: "tone",
+      title: "Background",
+      type: "string",
+      initialValue: "gold",
+      options: {
+        list: [
+          { title: "Gold (default)",     value: "gold"  },
+          { title: "Navy",               value: "navy"  },
+          { title: "Cream",              value: "cream" },
+          { title: "None (transparent)", value: "none"  },
+        ],
+        layout: "radio",
+      },
+    }),
   ],
   preview: {
-    select: { title: "value", subtitle: "label" },
+    select: { title: "value", subtitle: "label", tone: "tone" },
+    prepare({ title, subtitle, tone }) {
+      const toneLabel = tone && tone !== "gold" ? ` · ${tone}` : "";
+      return {
+        title: title ?? "—",
+        subtitle: (subtitle ?? "") + toneLabel,
+      };
+    },
   },
 });
