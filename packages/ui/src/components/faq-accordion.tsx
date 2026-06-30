@@ -1,12 +1,46 @@
 "use client"
 
 import { useState } from "react"
+import {
+  PortableText,
+  type PortableTextBlock,
+  type PortableTextComponents,
+  type PortableTextMarkComponentProps,
+} from "@portabletext/react"
 
 export type FAQAccordionBackground = "white" | "cream" | "surface" | "navy" | "gold"
 
+/** Either a plain string (legacy / default copy) or Sanity Portable Text. */
+export type FAQAnswer = string | PortableTextBlock[]
+
 export interface FAQItem {
   question: string
-  answer:   string
+  answer:   FAQAnswer
+}
+
+/** Renderer for the `link` annotation on Portable Text answers. Falls back to
+ *  the URL itself if no children are present. Adds `target` + `rel` when the
+ *  editor checked "Open in new tab" in Sanity. */
+function PortableLink({
+  value,
+  children,
+}: PortableTextMarkComponentProps<{ _type: "link"; href?: string; newWindow?: boolean }>) {
+  const href = value?.href ?? "#"
+  const newWindow = !!value?.newWindow
+  return (
+    <a
+      href={href}
+      target={newWindow ? "_blank" : undefined}
+      rel={newWindow ? "noopener noreferrer" : undefined}
+      style={{ color: "currentColor", textDecoration: "underline", textUnderlineOffset: "3px" }}
+    >
+      {children}
+    </a>
+  )
+}
+
+const portableComponents: PortableTextComponents = {
+  marks: { link: PortableLink },
 }
 
 export interface FAQAccordionProps {
@@ -245,6 +279,18 @@ export function FAQAccordion({
           text-wrap: pretty;
           animation: ${id}-fade 320ms cubic-bezier(.2,.8,.2,1) both;
         }
+        /* Normalize spacing for rich-text answer children */
+        .${id}__answer > * + * { margin-top: 0.85em; }
+        .${id}__answer p       { margin: 0; }
+        .${id}__answer ul,
+        .${id}__answer ol      { margin: 0; padding-left: 1.25em; }
+        .${id}__answer li + li { margin-top: 0.4em; }
+        .${id}__answer a       {
+          color: currentColor;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+        .${id}__answer a:hover { opacity: 0.8; }
         @keyframes ${id}-fade {
           from { opacity: 0; transform: translateY(-4px); }
           to   { opacity: 1; transform: translateY(0);    }
@@ -300,7 +346,13 @@ export function FAQAccordion({
                   hidden={!isOpen}
                   className={`${id}__panel`}
                 >
-                  <div className={`${id}__answer`}>{item.answer}</div>
+                  <div className={`${id}__answer`}>
+                    {Array.isArray(item.answer) ? (
+                      <PortableText value={item.answer} components={portableComponents} />
+                    ) : (
+                      item.answer
+                    )}
+                  </div>
                 </div>
               </div>
             )

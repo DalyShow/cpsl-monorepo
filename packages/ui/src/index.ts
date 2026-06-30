@@ -46,6 +46,7 @@ export type {
   FAQAccordionProps,
   FAQAccordionBackground,
   FAQItem,
+  FAQAnswer,
 } from "./components/faq-accordion";
 
 export { ArrowPillButton } from "./components/arrow-pill-button";
