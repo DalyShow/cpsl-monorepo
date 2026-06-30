@@ -95,7 +95,10 @@ export function TopNav({
       }
       style={{ background: "#041124", borderBottom: "1px solid #1E2D45" }}
     >
-      <div className="h-full grid grid-cols-[auto_1fr_auto] items-center px-4 md:px-[30px]">
+      {/* 1fr | auto | 1fr keeps the centered nav anchored to the header's
+          true centre — independent of the logo width and whether the right
+          slot has a CTA / hamburger / nothing at all. */}
+      <div className="h-full grid grid-cols-[1fr_auto_1fr] items-center px-4 md:px-[30px]">
 
         {/* Logo */}
         <Link
