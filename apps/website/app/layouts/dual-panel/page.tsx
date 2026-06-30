@@ -16,7 +16,7 @@ interface Panel {
 
 // Pulled from the two hero slides currently published on cpsl-website/
 const LEFT: Panel = {
-  src: "https://cdn.sanity.io/images/6fq1zd6y/production/e66866990609f1b49b12098736556ee85643f0d4-3480x1952.jpg",
+  src: "https://cdn.sanity.io/images/rdb8n7qx/production/e66866990609f1b49b12098736556ee85643f0d4-3480x1952.jpg",
   eyebrow: "A new era has begun",
   headline: "League Operator for the National 1 League",
   subheadline: "Now accepting applications for the 2026-2027 league year",
@@ -25,7 +25,7 @@ const LEFT: Panel = {
 };
 
 const RIGHT: Panel = {
-  src: "https://cdn.sanity.io/images/6fq1zd6y/production/6954edad82ed9085b0fccacc8a23e94d797c80ad-1920x1080.jpg",
+  src: "https://cdn.sanity.io/images/rdb8n7qx/production/6954edad82ed9085b0fccacc8a23e94d797c80ad-1920x1080.jpg",
   headline: "What is the National 1 League",
   ctaLabel: "Learn more",
   ctaHref: "#n1l",

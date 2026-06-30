@@ -1,7 +1,7 @@
 // Thin read-only Sanity fetch for the design-system showcase.
 // Modelled after apps/website/lib/sanity/client.ts — no SDK, public dataset.
 
-const PROJECT_ID = "6fq1zd6y";
+const PROJECT_ID = "rdb8n7qx";
 const DATASET = "production";
 const API_VER = "2024-01-01";
 
