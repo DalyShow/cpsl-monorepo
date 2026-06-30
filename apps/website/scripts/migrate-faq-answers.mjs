@@ -93,7 +93,7 @@ function stringToPortableText(text) {
 // ── Query docs that have any FAQ block with a string-typed answer ────────────
 const QUERY = `*[
   _type in ["page", "homePage", "brandPage"]
-  && count(sections[_type == "faqAccordionBlock" && count(items[defined(answer) && !(answer match "_type")]) > 0]) > 0
+  && count(sections[_type == "faqAccordionBlock"]) > 0
 ]{
   _id,
   _type,

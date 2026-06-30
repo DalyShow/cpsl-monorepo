@@ -108,6 +108,8 @@ export default async function DynamicPage({
             lottie{ ..., asset->{ url } },
             bottomLottie{ ..., asset->{ url } },
             logos[]{ ..., asset->{ url } },
+            primaryCtaDocument->{ "fileUrl": file.asset->url, "filename": file.asset->originalFilename },
+            secondaryCtaDocument->{ "fileUrl": file.asset->url, "filename": file.asset->originalFilename },
             tiles[]{
               ...,
               image{ ..., asset->{ url }, "alt": asset->altText },

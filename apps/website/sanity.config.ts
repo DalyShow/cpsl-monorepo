@@ -80,6 +80,16 @@ export default defineConfig({
                   .title("Pages")
                   .defaultOrdering([{ field: "title", direction: "asc" }])
               ),
+            S.divider(),
+            S.listItem()
+              .title("Documents (PDFs)")
+              .id("documents")
+              .schemaType("documentAsset")
+              .child(
+                S.documentTypeList("documentAsset")
+                  .title("Documents")
+                  .defaultOrdering([{ field: "title", direction: "asc" }])
+              ),
           ]),
     }),
 

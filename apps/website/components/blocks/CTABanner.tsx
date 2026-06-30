@@ -5,6 +5,11 @@ const patternBg = `url("data:image/svg+xml,${encodeURIComponent(PATTERN_TILE)}")
 
 type Background = "white" | "cream" | "surface" | "navy" | "gold"
 
+interface LinkedDocument {
+  fileUrl?:  string;
+  filename?: string;
+}
+
 interface CTABannerProps {
   eyebrow?:             string;
   headline?:            string;
@@ -12,11 +17,36 @@ interface CTABannerProps {
   description?:         string;
   primaryCtaLabel?:     string;
   primaryCtaHref?:      string;
+  /** When set, the primary button downloads this file (CDN URL) instead of
+   *  navigating to primaryCtaHref. */
+  primaryCtaDocument?:  LinkedDocument;
   /** When true, renders the secondary (ghost) button alongside the primary CTA */
   showSecondaryButton?: boolean;
   secondaryCtaLabel?:   string;
   secondaryCtaHref?:    string;
+  /** Same pattern as primaryCtaDocument — overrides secondaryCtaHref when set. */
+  secondaryCtaDocument?: LinkedDocument;
   background?:          Background;
+}
+
+/** Resolve the button's href + download flag. A linked file takes
+ *  precedence over the manual URL; we also annotate the anchor with the
+ *  asset's original filename so browsers save it sensibly. */
+function resolveCtaTarget(
+  href: string | undefined,
+  doc:  LinkedDocument | undefined,
+): { href: string; downloadName?: string; isExternal: boolean } {
+  if (doc?.fileUrl) {
+    return {
+      href: doc.fileUrl,
+      downloadName: doc.filename,
+      isExternal: true,
+    };
+  }
+  return {
+    href: href ?? "#",
+    isExternal: /^https?:\/\//i.test(href ?? ""),
+  };
 }
 
 // Navy and gold are fixed editorial colours; light variants adapt to the active theme
@@ -37,19 +67,24 @@ const cardBgMap: Record<Background, string> = {
 };
 
 export function CTABanner({
-  eyebrow             = "2025–26 Season",
-  headline            = "REGISTER YOUR CLUB",
-  headlineAccent      = "BEFORE APRIL 30",
-  description         = "Applications for the 2025–26 CPSL Premiership and Development League are now open. Secure your spot for next season before the deadline closes.",
-  primaryCtaLabel     = "Apply Now",
-  primaryCtaHref      = "#",
-  showSecondaryButton = false,
-  secondaryCtaLabel   = "Learn More",
-  secondaryCtaHref    = "#",
-  background          = "cream",
+  eyebrow              = "2025–26 Season",
+  headline             = "REGISTER YOUR CLUB",
+  headlineAccent       = "BEFORE APRIL 30",
+  description          = "Applications for the 2025–26 CPSL Premiership and Development League are now open. Secure your spot for next season before the deadline closes.",
+  primaryCtaLabel      = "Apply Now",
+  primaryCtaHref       = "#",
+  primaryCtaDocument,
+  showSecondaryButton  = false,
+  secondaryCtaLabel    = "Learn More",
+  secondaryCtaHref     = "#",
+  secondaryCtaDocument,
+  background           = "cream",
 }: CTABannerProps) {
   const outerBg = outerBgMap[background] ?? outerBgMap.cream;
   const cardBg  = cardBgMap[background]  ?? cardBgMap.cream;
+
+  const primary   = resolveCtaTarget(primaryCtaHref,   primaryCtaDocument);
+  const secondary = resolveCtaTarget(secondaryCtaHref, secondaryCtaDocument);
 
   const showPattern = false; // TODO: re-enable when ready — background !== "gold"
 
@@ -98,7 +133,10 @@ export function CTABanner({
           {/* Right — CTAs */}
           <div className="flex flex-col sm:flex-row md:flex-col gap-3 w-full md:w-auto shrink-0">
             <a
-              href={primaryCtaHref}
+              href={primary.href}
+              download={primary.downloadName ?? undefined}
+              target={primary.isExternal ? "_blank" : undefined}
+              rel={primary.isExternal ? "noopener noreferrer" : undefined}
               style={{
                 display: "inline-block",
                 background: "#D4B949",
@@ -119,7 +157,10 @@ export function CTABanner({
 
             {showSecondaryButton && (
               <a
-                href={secondaryCtaHref}
+                href={secondary.href}
+                download={secondary.downloadName ?? undefined}
+                target={secondary.isExternal ? "_blank" : undefined}
+                rel={secondary.isExternal ? "noopener noreferrer" : undefined}
                 style={{
                   display: "inline-block",
                   background: "transparent",

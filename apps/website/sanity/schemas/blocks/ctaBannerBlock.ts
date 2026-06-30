@@ -34,8 +34,17 @@ export const ctaBannerBlock = defineType({
     defineField({ name: "primaryCtaLabel", title: "Primary Button Label", type: "string",
       initialValue: "Apply Now" }),
     defineField({ name: "primaryCtaHref",  title: "Primary Button URL",   type: "url",
+      description: "External link or relative path. Ignored when a Linked Document is set below.",
       validation: (R) => R.uri({ allowRelative: true }),
       initialValue: "/apply" }),
+    defineField({
+      name: "primaryCtaDocument",
+      title: "Primary Button — Linked Document",
+      type: "reference",
+      to: [{ type: "documentAsset" }],
+      description:
+        "Optional. If set, the button downloads this file (e.g. PDF) and the URL above is ignored.",
+    }),
 
     defineField({
       name: "showSecondaryButton",
@@ -47,8 +56,18 @@ export const ctaBannerBlock = defineType({
     defineField({ name: "secondaryCtaLabel", title: "Secondary Button Label", type: "string",
       hidden: ({ parent }) => !parent?.showSecondaryButton }),
     defineField({ name: "secondaryCtaHref",  title: "Secondary Button URL",   type: "url",
+      description: "External link or relative path. Ignored when a Linked Document is set below.",
       validation: (R) => R.uri({ allowRelative: true }),
       hidden: ({ parent }) => !parent?.showSecondaryButton }),
+    defineField({
+      name: "secondaryCtaDocument",
+      title: "Secondary Button — Linked Document",
+      type: "reference",
+      to: [{ type: "documentAsset" }],
+      description:
+        "Optional. If set, the button downloads this file and the URL above is ignored.",
+      hidden: ({ parent }) => !parent?.showSecondaryButton,
+    }),
   ],
   preview: {
     select: { title: "headline", accent: "headlineAccent", bg: "background" },

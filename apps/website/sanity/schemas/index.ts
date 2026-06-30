@@ -2,6 +2,7 @@ import { siteSettings }        from "./siteSettings";
 import { homePage }            from "./homePage";
 import { brandPage }           from "./brandPage";
 import { page }                from "./page";
+import { documentAsset }       from "./documentAsset";
 import { topNavLink }          from "./navItems/topNavLink";
 import {
   topNavFlyout,
@@ -37,6 +38,7 @@ export const schemaTypes = [
   homePage,
   brandPage,
   page,
+  documentAsset,
   // Nav items
   topNavLink,
   topNavFlyout,
