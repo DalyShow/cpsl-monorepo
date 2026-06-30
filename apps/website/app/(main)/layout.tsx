@@ -33,8 +33,10 @@ export default async function MainLayout({
     <>
       <TopNav
         items={resolveTopNavItems(settings?.navItems)}
-        ctaLabel={settings?.ctaLabel ?? "Join Our League"}
-        ctaHref={settings?.ctaHref ?? "/apply"}
+        // Pass siteSettings values through verbatim. Empty values mean the
+        // editor deliberately removed the CTA — render no button.
+        ctaLabel={settings?.ctaLabel || undefined}
+        ctaHref={settings?.ctaHref || undefined}
         showLive={false}
       />
       {/* pt-20 offsets the fixed nav (80 px). LogoTicker sits directly

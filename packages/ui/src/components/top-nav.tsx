@@ -62,8 +62,10 @@ export function TopNav({
   logoSrc  = "/cpsl-horizontal.svg?v=2026-04-23",
   logoAlt  = "CPSL",
   homeHref = "/",
-  ctaLabel = "Join Our League",
-  ctaHref  = "/apply",
+  // No defaults — consumers (e.g. siteSettings) are the source of truth.
+  // When the CTA fields are cleared in Sanity, the button doesn't render.
+  ctaLabel,
+  ctaHref,
   showLive = false,
   position = "fixed",
 }: TopNavProps) {
