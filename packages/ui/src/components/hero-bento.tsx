@@ -99,7 +99,12 @@ export function HeroBento({
           gap: clamp(12px, 2vw, 20px);
           grid-template-columns: repeat(12, 1fr);
           grid-template-rows:    1fr 1fr;
-          height: min(540px, calc((100vh - 160px) * 0.78));
+          /* `min-height` (not `height`) so the section grows when the cream
+             tile's copy stack — eyebrow + headline + description + CTA —
+             can't fit in the design's target 540 px. Without this, tiles'
+             `overflow: hidden` silently clipped the CTA on content-heavy
+             pages (e.g. /league-standards "Local Operator's Handbook"). */
+          min-height: min(540px, calc((100vh - 160px) * 0.78));
         }
 
         /* ── Tiles ───────────────────────────────────────────── */
@@ -228,7 +233,7 @@ export function HeroBento({
         /* ── Tablet: keep split, tighter ─────────────────────── */
         @media (max-width: 1023px) {
           .${id}__grid {
-            height: min(490px, calc((100vh - 140px) * 0.78));
+            min-height: min(490px, calc((100vh - 140px) * 0.78));
           }
         }
 
