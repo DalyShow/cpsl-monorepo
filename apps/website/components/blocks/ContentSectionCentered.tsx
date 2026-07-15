@@ -8,6 +8,12 @@ const patternBg = `url("data:image/svg+xml,${encodeURIComponent(PATTERN_TILE)}")
 
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { enhanceImageUrl } from "@/lib/sanity/image";
+import {
+  PortableText,
+  type PortableTextBlock,
+  type PortableTextComponents,
+  type PortableTextMarkComponentProps,
+} from "@portabletext/react";
 
 interface LottieField {
   /** Sanity file asset — dereferenced via GROQ asset->{ url } */
@@ -16,6 +22,11 @@ interface LottieField {
   autoplay?: boolean;
 }
 
+/** Legacy string or Portable Text — the schema was upgraded to rich text,
+ *  but existing content may still be a plain string until the migration
+ *  script runs. */
+type RichText = string | PortableTextBlock[];
+
 interface ContentSectionCenteredProps {
   eyebrow?:    string;
   heading?:    string;
@@ -23,8 +34,8 @@ interface ContentSectionCenteredProps {
   image?:      { asset?: { url?: string }; alt?: string };
   /** Optional Lottie animation — sits in same slot as image, takes precedence */
   lottie?:     LottieField;
-  lead?:       string;
-  paragraphs?: string[];
+  lead?:       RichText;
+  paragraphs?: RichText | string[];
   background?: "white" | "surface" | "cream" | "navy" | "gold";
   /** 1 = single centered column, 2 = two columns at lg (default) */
   columns?:    number;
@@ -32,6 +43,39 @@ interface ContentSectionCenteredProps {
   bottomImage?:  { asset?: { url?: string }; alt?: string };
   /** Optional Lottie animation at the bottom — takes precedence over bottomImage */
   bottomLottie?: LottieField;
+}
+
+/** Portable Text link mark — respects the schema's optional "Open in new tab" toggle. */
+function PortableLink({
+  value,
+  children,
+}: PortableTextMarkComponentProps<{ _type: "link"; href?: string; newWindow?: boolean }>) {
+  const href = value?.href ?? "#";
+  const newWindow = !!value?.newWindow;
+  return (
+    <a
+      href={href}
+      target={newWindow ? "_blank" : undefined}
+      rel={newWindow ? "noopener noreferrer" : undefined}
+      style={{ color: "currentColor", textDecoration: "underline", textUnderlineOffset: "3px" }}
+    >
+      {children}
+    </a>
+  );
+}
+
+const ptComponents: PortableTextComponents = {
+  marks: { link: PortableLink },
+};
+
+/** True when the input looks like a Portable Text array (has at least one
+ *  `_type` on an item). Handles both `lead` (block array) and `paragraphs`
+ *  arrays that were migrated in-place. */
+function isPortableText(value: unknown): value is PortableTextBlock[] {
+  return (
+    Array.isArray(value) &&
+    value.some((v) => v && typeof v === "object" && "_type" in v)
+  );
 }
 
 export function ContentSectionCentered({
@@ -66,14 +110,42 @@ export function ContentSectionCentered({
   const bottomLottieUrl = bottomLottie?.asset?.url;
   const hasTopMedia    = !!(lottieUrl || imageUrl);
   const hasBottomMedia = !!(bottomLottieUrl || bottomImageUrl);
-  const mid  = Math.ceil(paragraphs.length / 2);
-  const col1 = paragraphs.slice(0, mid);
-  const col2 = paragraphs.slice(mid);
+
+  // `paragraphs` is either legacy string[] or Portable Text blocks[].
+  // Split at midpoint either way so the 2-column layout stays deterministic.
+  const paragraphsIsPT = isPortableText(paragraphs);
+  const pArray: (string | PortableTextBlock)[] = Array.isArray(paragraphs) ? (paragraphs as (string | PortableTextBlock)[]) : [];
+  const pLen = pArray.length;
+  const mid  = Math.ceil(pLen / 2);
+  const col1 = pArray.slice(0, mid);
+  const col2 = pArray.slice(mid);
+  const hasBody = pLen > 0;
 
   const showPattern = false; // TODO: re-enable when ready — background !== "gold"
 
   return (
     <section style={{ backgroundColor: bgColor, position: "relative", overflow: "hidden" }}>
+      <style>{`
+        /* Portable Text output inside the lead + body panels */
+        .cs-lead p { margin: 0 0 0.6em; }
+        .cs-lead p:last-child { margin-bottom: 0; }
+        .cs-body > * { font-size: 16px; line-height: 2; }
+        .cs-body h4 {
+          font-family: 'Barlow Condensed', sans-serif;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 1.15;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+          margin: 0.4em 0 -0.2em;
+        }
+        .cs-body ul, .cs-body ol {
+          margin: 0;
+          padding-left: 1.25em;
+        }
+        .cs-body li + li { margin-top: 0.35em; }
+        .cs-body p { margin: 0; }
+      `}</style>
       {showPattern && (
         <div
           aria-hidden="true"
@@ -148,14 +220,18 @@ export function ContentSectionCentered({
           ) : null}
 
           {lead && (
-            <p className="text-lg leading-relaxed" style={{ color: leadColor }}>
-              {lead}
-            </p>
+            <div className="cs-lead text-lg leading-relaxed" style={{ color: leadColor }}>
+              {isPortableText(lead) ? (
+                <PortableText value={lead} components={ptComponents} />
+              ) : (
+                <p>{lead as string}</p>
+              )}
+            </div>
           )}
         </div>
 
         {/* Divider */}
-        {paragraphs.length > 0 && (
+        {hasBody && (
           <div
             className="mx-auto mb-12"
             style={{
@@ -167,24 +243,36 @@ export function ContentSectionCentered({
         )}
 
         {/* Body copy */}
-        {paragraphs.length > 0 && (
+        {hasBody && (
           columns === 1 ? (
-            <div className="mx-auto max-w-2xl flex flex-col gap-6">
-              {paragraphs.map((p, i) => (
-                <p key={i} className="text-base leading-8" style={{ color: bodyColor }}>{p}</p>
-              ))}
+            <div className="cs-body mx-auto max-w-2xl flex flex-col gap-6" style={{ color: bodyColor }}>
+              {paragraphsIsPT ? (
+                <PortableText value={pArray as PortableTextBlock[]} components={ptComponents} />
+              ) : (
+                (pArray as string[]).map((p, i) => (
+                  <p key={i} className="text-base leading-8">{p}</p>
+                ))
+              )}
             </div>
           ) : (
             <div className="mx-auto max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-10">
-              <div className="flex flex-col gap-6">
-                {col1.map((p, i) => (
-                  <p key={i} className="text-base leading-8" style={{ color: bodyColor }}>{p}</p>
-                ))}
+              <div className="cs-body flex flex-col gap-6" style={{ color: bodyColor }}>
+                {paragraphsIsPT ? (
+                  <PortableText value={col1 as PortableTextBlock[]} components={ptComponents} />
+                ) : (
+                  (col1 as string[]).map((p, i) => (
+                    <p key={i} className="text-base leading-8">{p}</p>
+                  ))
+                )}
               </div>
-              <div className="flex flex-col gap-6">
-                {col2.map((p, i) => (
-                  <p key={i} className="text-base leading-8" style={{ color: bodyColor }}>{p}</p>
-                ))}
+              <div className="cs-body flex flex-col gap-6" style={{ color: bodyColor }}>
+                {paragraphsIsPT ? (
+                  <PortableText value={col2 as PortableTextBlock[]} components={ptComponents} />
+                ) : (
+                  (col2 as string[]).map((p, i) => (
+                    <p key={i} className="text-base leading-8">{p}</p>
+                  ))
+                )}
               </div>
             </div>
           )
