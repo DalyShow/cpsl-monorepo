@@ -57,7 +57,11 @@ function PortableLink({
       href={href}
       target={newWindow ? "_blank" : undefined}
       rel={newWindow ? "noopener noreferrer" : undefined}
-      style={{ color: "currentColor", textDecoration: "underline", textUnderlineOffset: "3px" }}
+      style={{
+        color:                "var(--cs-link, currentColor)",
+        textDecoration:       "underline",
+        textUnderlineOffset:  "3px",
+      }}
     >
       {children}
     </a>
@@ -97,12 +101,17 @@ export function ContentSectionCentered({
   const headColor = background === "navy" ? "#F4EFE6"
                   : background === "gold" ? "#3D2400"
                   : "var(--fg-primary)";
-  const leadColor = background === "navy" ? "#94A3B8"
+  const leadColor = background === "navy" ? "#F4EFE6"           // cream on navy
                   : background === "gold" ? "#3D2400"
                   : "var(--fg-secondary)";
-  const bodyColor = background === "navy" ? "#64748B"
+  const bodyColor = background === "navy" ? "#F4EFE6"           // cream on navy
                   : background === "gold" ? "#4A2E00"
                   : "var(--fg-secondary)";
+  /** Text-link colour scoped to the section — CPSL gold everywhere it
+   *  reads legibly (dark bgs + light bgs), and navy on the gold surface
+   *  where a gold link would disappear. Consumed by `PortableLink` via
+   *  the `--cs-link` CSS variable set on the outer <section>. */
+  const linkColor = background === "gold" ? "#041124" : "#D4B949";
 
   const imageUrl       = enhanceImageUrl(image?.asset?.url);
   const bottomImageUrl = enhanceImageUrl(bottomImage?.asset?.url);
@@ -124,7 +133,15 @@ export function ContentSectionCentered({
   const showPattern = false; // TODO: re-enable when ready — background !== "gold"
 
   return (
-    <section style={{ backgroundColor: bgColor, position: "relative", overflow: "hidden" }}>
+    <section
+      style={{
+        backgroundColor: bgColor,
+        position: "relative",
+        overflow: "hidden",
+        // Scoped var so PortableLink resolves to the right accent per bg.
+        ["--cs-link" as string]: linkColor,
+      }}
+    >
       <style>{`
         /* Portable Text output inside the lead + body panels */
         .cs-lead p { margin: 0 0 0.6em; }
@@ -209,11 +226,10 @@ export function ContentSectionCentered({
             <img
               src={imageUrl}
               alt={image?.alt ?? ""}
-              className="max-h-[250px] lg:max-h-[450px]"
               style={{
                 display: "block",
-                width: "auto",
-                maxWidth: "100%",
+                width: "100%",
+                height: "auto",
                 margin: "0 auto 32px",
               }}
             />
