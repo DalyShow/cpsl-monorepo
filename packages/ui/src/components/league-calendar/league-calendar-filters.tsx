@@ -1,46 +1,56 @@
 "use client";
 
-import type { AgeGroup, CalendarClub, Competition } from "./types";
+import type { AgeGroup, CalendarClub } from "./types";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type DateScope = "this-weekend" | "next-30" | "season";
-
 export interface LeagueCalendarFilterValue {
-  conference:  string | null;
-  clubId:      string | null;
-  competition: Competition | null;
-  ageGroup:    AgeGroup | null;
-  dateScope:   DateScope;
+  /** ISO date (YYYY-MM-DD). Always populated. */
+  date:     string;
+  clubId:   string | null;
+  ageGroup: AgeGroup | null;
 }
 
+/** Compute the next upcoming Saturday (today, if today is Saturday). */
+export function upcomingSaturdayISO(from: Date = new Date()): string {
+  const d = new Date(from);
+  d.setHours(0, 0, 0, 0);
+  const day = d.getDay(); // 0=Sun … 6=Sat
+  const delta = (6 - day + 7) % 7;
+  d.setDate(d.getDate() + delta);
+  // Local YYYY-MM-DD (avoid UTC drift from .toISOString()).
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day2 = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day2}`;
+}
+
+export function defaultFilterValue(): LeagueCalendarFilterValue {
+  return {
+    date:     upcomingSaturdayISO(),
+    clubId:   null,
+    ageGroup: null,
+  };
+}
+
+/** @deprecated use `defaultFilterValue()` — kept for backwards imports. */
 export const DEFAULT_FILTER_VALUE: LeagueCalendarFilterValue = {
-  conference:  null,
-  clubId:      null,
-  competition: null,
-  ageGroup:    null,
-  dateScope:   "season",
+  date:     "",
+  clubId:   null,
+  ageGroup: null,
 };
 
 export interface LeagueCalendarFiltersProps {
-  conferences:  string[];              // e.g. ["Northwest", "West", …]
   clubs:        CalendarClub[];
   value:        LeagueCalendarFilterValue;
   onChange:     (next: LeagueCalendarFilterValue) => void;
 }
 
-const COMPETITIONS: Competition[] = ["Premiership", "Cup", "Development"];
-const AGE_GROUPS:   AgeGroup[]    = ["U13", "U14", "U15", "U16", "U17", "U19"];
-const DATE_SCOPES: { value: DateScope; label: string }[] = [
-  { value: "this-weekend", label: "This weekend" },
-  { value: "next-30",      label: "Next 30 days" },
-  { value: "season",       label: "Full season" },
-];
+const AGE_GROUPS: AgeGroup[] = ["U13", "U14", "U15", "U16", "U17", "U19"];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function LeagueCalendarFilters({
-  conferences,
   clubs,
   value,
   onChange,
@@ -51,54 +61,36 @@ export function LeagueCalendarFilters({
   return (
     <>
       <div className="cpsl-calfilters">
-        {/* ── Row 1: Date scope segmented (always visible) ─────────── */}
-        <div className="cpsl-calfilters__row" style={{ marginBottom: 12 }}>
-          <SegmentedGroup label="View">
-            {DATE_SCOPES.map((ds) => (
-              <SegmentedButton
-                key={ds.value}
-                active={value.dateScope === ds.value}
-                onClick={() => patch({ dateScope: ds.value })}
-              >
-                {ds.label}
-              </SegmentedButton>
-            ))}
-          </SegmentedGroup>
-        </div>
-
-        {/* ── Row 2: dropdowns (conference, club) ────────────────── */}
-        <div className="cpsl-calfilters__row" style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <Selector
-            label="Conference"
-            value={value.conference ?? ""}
-            onChange={(v) => patch({ conference: v || null })}
-            options={[{ value: "", label: "All conferences" }, ...conferences.map((c) => ({ value: c, label: c }))]}
+        {/* ── Row 1: Date + Club ──────────────────────────────────────── */}
+        <div
+          className="cpsl-calfilters__row"
+          style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}
+        >
+          <DateField
+            label="Date"
+            value={value.date}
+            onChange={(v) => patch({ date: v })}
           />
           <Selector
             label="Club"
             value={value.clubId ?? ""}
             onChange={(v) => patch({ clubId: v || null })}
-            options={[{ value: "", label: "All clubs" }, ...clubs.map((c) => ({ value: c.id, label: c.name }))]}
+            options={[
+              { value: "", label: "All clubs" },
+              ...clubs.map((c) => ({ value: c.id, label: c.name })),
+            ]}
           />
         </div>
 
-        {/* ── Row 3: chip toggles (competition, age) ────────────── */}
-        <div className="cpsl-calfilters__row" style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 12 }}>
-          <ChipGroup label="Competition">
-            <Chip active={value.competition === null} onClick={() => patch({ competition: null })}>All</Chip>
-            {COMPETITIONS.map((c) => (
-              <Chip
-                key={c}
-                active={value.competition === c}
-                onClick={() => patch({ competition: c })}
-              >
-                {c}
-              </Chip>
-            ))}
-          </ChipGroup>
-
+        {/* ── Row 2: Age pills ────────────────────────────────────────── */}
+        <div
+          className="cpsl-calfilters__row"
+          style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 12 }}
+        >
           <ChipGroup label="Age">
-            <Chip active={value.ageGroup === null} onClick={() => patch({ ageGroup: null })}>All</Chip>
+            <Chip active={value.ageGroup === null} onClick={() => patch({ ageGroup: null })}>
+              All
+            </Chip>
             {AGE_GROUPS.map((a) => (
               <Chip
                 key={a}
@@ -111,12 +103,12 @@ export function LeagueCalendarFilters({
           </ChipGroup>
         </div>
 
-        {/* ── Reset ─────────────────────────────────────────────── */}
+        {/* ── Reset ─────────────────────────────────────────────────── */}
         {isFiltered(value) && (
           <div style={{ marginTop: 14 }}>
             <button
               type="button"
-              onClick={() => onChange({ ...DEFAULT_FILTER_VALUE, dateScope: value.dateScope })}
+              onClick={() => onChange({ ...defaultFilterValue(), date: value.date })}
               style={{
                 background:     "transparent",
                 border:         "none",
@@ -147,69 +139,52 @@ export function LeagueCalendarFilters({
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
+/** True when any non-date filter is active (club or age). */
 export function isFiltered(v: LeagueCalendarFilterValue): boolean {
-  return !!(v.conference || v.clubId || v.competition || v.ageGroup);
+  return !!(v.clubId || v.ageGroup);
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function SegmentedGroup({
+function DateField({
   label,
-  children,
+  value,
+  onChange,
 }: {
   label:    string;
-  children: React.ReactNode;
+  value:    string;
+  onChange: (v: string) => void;
 }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-      <Label>{label}</Label>
-      <div
-        style={{
-          display:       "inline-flex",
-          border:        "1px solid #1E2D45",
-          background:    "#0A1628",
-          borderRadius:  0,
-          overflow:      "hidden",
-        }}
-      >
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function SegmentedButton({
-  active,
-  onClick,
-  children,
-}: {
-  active:   boolean;
-  onClick:  () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
+    <label
       style={{
-        appearance:     "none",
-        border:         "none",
-        borderRight:    "1px solid #1E2D45",
-        padding:        "8px 14px",
-        background:     active ? "#D4B949" : "transparent",
-        color:          active ? "#041124" : "#F4EFE6",
-        fontFamily:     "'Barlow Condensed', sans-serif",
-        fontWeight:     700,
-        fontSize:       13,
-        letterSpacing:  "0.08em",
-        textTransform:  "uppercase",
-        cursor:         "pointer",
-        transition:     "background 120ms ease, color 120ms ease",
+        display:     "flex",
+        alignItems:  "center",
+        gap:         10,
+        flex:        "1 1 220px",
+        minWidth:    200,
       }}
     >
-      {children}
-    </button>
+      <Label>{label}</Label>
+      <input
+        type="date"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        style={{
+          flex:           "1 1 auto",
+          appearance:     "none",
+          background:     "#0A1628",
+          border:         "1px solid #1E2D45",
+          borderRadius:   0,
+          padding:        "8px 12px",
+          color:          "#F4EFE6",
+          fontFamily:     "Inter, sans-serif",
+          fontSize:       14,
+          cursor:         "pointer",
+          colorScheme:    "dark",
+        }}
+      />
+    </label>
   );
 }
 

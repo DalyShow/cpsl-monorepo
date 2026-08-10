@@ -73,6 +73,8 @@ export {
   WeekendSection,
   LeagueCalendarFilters,
   DEFAULT_FILTER_VALUE,
+  defaultFilterValue,
+  upcomingSaturdayISO,
   isFiltered,
   CalendarEmptyState,
 } from "./components/league-calendar";
@@ -87,5 +89,4 @@ export type {
   CalendarWeekend,
   Competition,
   AgeGroup,
-  DateScope,
 } from "./components/league-calendar";

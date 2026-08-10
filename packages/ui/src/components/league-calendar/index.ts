@@ -7,12 +7,13 @@ export type { WeekendSectionProps } from "./weekend-section";
 export {
   LeagueCalendarFilters,
   DEFAULT_FILTER_VALUE,
+  defaultFilterValue,
+  upcomingSaturdayISO,
   isFiltered,
 } from "./league-calendar-filters";
 export type {
   LeagueCalendarFiltersProps,
   LeagueCalendarFilterValue,
-  DateScope,
 } from "./league-calendar-filters";
 
 export { CalendarEmptyState } from "./empty-state";
