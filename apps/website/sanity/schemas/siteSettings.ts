@@ -68,11 +68,12 @@ export const siteSettings = defineType({
       fields: [
         defineField({
           name: "logos",
-          title: "Logos",
+          title: "Clubs",
           type: "array",
           description:
-            "Drag and drop multiple files at once to bulk-upload. For accessibility, set the asset's alt text from the image details panel after upload.",
+            "Each entry is a club — attach the crest and set the club's name. The same list powers the Match Calendar's club filter. Legacy bare-image entries still render but should be converted to Club items so they carry a name.",
           of: [
+            { type: "clubLogo" },
             {
               type: "image",
               options: {

@@ -2,13 +2,25 @@ import { LogoTicker } from "@cpsl/ui";
 import { sanityFetch } from "@/lib/sanity/client";
 import { enhanceImageUrl } from "@/lib/sanity/image";
 
-interface SanityLogo {
-  _key?: string;
+interface SanityImage {
+  _type?: string;
+  _key?:  string;
   asset?: { url?: string; altText?: string };
 }
 
+interface TickerEntry {
+  _type?: "clubLogo" | "image" | string;
+  _key?:  string;
+  /** Present when _type === "clubLogo". */
+  name?:  string;
+  /** Present when _type === "clubLogo". */
+  logo?:  SanityImage;
+  /** Present when _type === "image" (legacy). */
+  asset?: SanityImage["asset"];
+}
+
 interface LogoTickerSettings {
-  logos?:             SanityLogo[];
+  logos?:             TickerEntry[];
   durationSeconds?:   number;
   reverse?:           boolean;
   pauseOnHover?:      boolean;
@@ -22,7 +34,15 @@ const QUERY = `*[_type == "siteSettings"][0].logoTicker{
   pauseOnHover,
   edgeFade,
   sectionBackground,
-  logos[]{ _key, asset->{ url, altText } }
+  logos[]{
+    _type,
+    _key,
+    // clubLogo shape
+    name,
+    logo{ asset->{ url, altText } },
+    // legacy bare-image shape
+    asset->{ url, altText }
+  }
 }`;
 
 /**
@@ -30,20 +50,29 @@ const QUERY = `*[_type == "siteSettings"][0].logoTicker{
  * it's a placement marker. The actual config lives on the singleton
  * siteSettings document so the ticker is shared across every page
  * that uses the block.
+ *
+ * Accepts BOTH the new `clubLogo` shape ({ name, logo }) and legacy bare
+ * `image` entries so a schema flip doesn't leave old data invisible.
  */
 export async function LogoTickerBlock() {
   const settings = await sanityFetch<LogoTickerSettings>(QUERY);
   if (!settings) return null;
 
   const mapped = (settings.logos ?? [])
-    .filter((l) => !!l?.asset?.url)
-    .map((l) => ({
-      key: l._key,
-      // Logos are mostly flat vector-derived PNGs — sharp=8 keeps edges crisp
-      // without crunching the negative space.
-      url: enhanceImageUrl(l.asset!.url, { sharp: 8 })!,
-      alt: l.asset!.altText,
-    }));
+    .map((entry) => {
+      const asset = entry._type === "clubLogo" ? entry.logo?.asset : entry.asset;
+      const url   = asset?.url;
+      const alt   = entry.name ?? asset?.altText;
+      if (!url) return null;
+      return {
+        key: entry._key,
+        // Logos are mostly flat vector-derived PNGs — sharp=8 keeps edges crisp
+        // without crunching the negative space.
+        url: enhanceImageUrl(url, { sharp: 8 })!,
+        alt,
+      };
+    })
+    .filter((l) => l !== null) as { key?: string; url: string; alt?: string }[];
 
   if (mapped.length === 0) return null;
 
