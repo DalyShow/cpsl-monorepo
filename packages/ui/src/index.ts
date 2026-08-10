@@ -66,3 +66,26 @@ export type {
 
 export { ScrollReveal } from "./components/scroll-reveal";
 export type { ScrollRevealProps } from "./components/scroll-reveal";
+
+// ── League calendar (mockup v1) ──────────────────────────────────────────────
+export {
+  MatchCard,
+  WeekendSection,
+  LeagueCalendarFilters,
+  DEFAULT_FILTER_VALUE,
+  isFiltered,
+  CalendarEmptyState,
+} from "./components/league-calendar";
+export type {
+  MatchCardProps,
+  WeekendSectionProps,
+  LeagueCalendarFiltersProps,
+  LeagueCalendarFilterValue,
+  CalendarEmptyStateProps,
+  CalendarClub,
+  CalendarMatch,
+  CalendarWeekend,
+  Competition,
+  AgeGroup,
+  DateScope,
+} from "./components/league-calendar";
