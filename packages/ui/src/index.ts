@@ -67,6 +67,9 @@ export type {
 export { ScrollReveal } from "./components/scroll-reveal";
 export type { ScrollRevealProps } from "./components/scroll-reveal";
 
+export { AlertBar } from "./components/alert-bar";
+export type { AlertBarProps, AlertBarTone } from "./components/alert-bar";
+
 // ── League calendar (mockup v1) ──────────────────────────────────────────────
 export {
   MatchCard,

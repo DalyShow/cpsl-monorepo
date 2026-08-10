@@ -60,6 +60,7 @@ const components: NavItem[] = [
       { label: "Matchday Block",           href: "/modules/matchday-block" },
       { label: "FAQ Accordion",            href: "/modules/faq-accordion", status: "new" },
       { label: "League Calendar",          href: "/modules/league-calendar", status: "new" },
+      { label: "Alert Bar",                href: "/modules/alert-bar", status: "new" },
     ],
   },
   { label: "Calendar — Day View",  href: "/calendar",     icon: "14" },

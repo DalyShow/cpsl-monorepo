@@ -3,6 +3,7 @@ import { HeroBlock } from "./HeroBlock";
 import { SectionHeader } from "./SectionHeader";
 import { ContentSectionCentered } from "./ContentSectionCentered";
 import { CTABanner } from "./CTABanner";
+import { AlertBarBlock } from "./AlertBarBlock";
 import { ClubDirectoryBlock } from "./ClubDirectoryBlock";
 import { CalendarDayViewBlock } from "./CalendarDayViewBlock";
 import { StandingsBlock } from "./StandingsBlock";
@@ -50,6 +51,10 @@ function renderInner(block: Block, isPrimary: boolean) {
     case "ctaBannerBlock":
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return <CTABanner {...(block as any)} />;
+
+    case "alertBarBlock":
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return <AlertBarBlock {...(block as any)} />;
 
     case "clubDirectoryBlock":
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -12,6 +12,7 @@ import {
 import { heroBlock }            from "./blocks/heroBlock";
 import { contentSectionBlock }  from "./blocks/contentSectionBlock";
 import { ctaBannerBlock }       from "./blocks/ctaBannerBlock";
+import { alertBarBlock }        from "./blocks/alertBarBlock";
 import { clubDirectoryBlock }   from "./blocks/clubDirectoryBlock";
 import { calendarDayViewBlock } from "./blocks/calendarDayViewBlock";
 import { sectionHeaderBlock }  from "./blocks/sectionHeaderBlock";
@@ -50,6 +51,7 @@ export const schemaTypes = [
   sectionHeaderBlock,
   contentSectionBlock,
   ctaBannerBlock,
+  alertBarBlock,
   clubDirectoryBlock,
   calendarDayViewBlock,
   standingsBlock,

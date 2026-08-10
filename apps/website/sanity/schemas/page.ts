@@ -50,6 +50,7 @@ export const page = defineType({
         { type: "sectionHeaderBlock" },
         { type: "contentSectionBlock" },
         { type: "ctaBannerBlock" },
+        { type: "alertBarBlock" },
         { type: "clubDirectoryBlock" },
         { type: "calendarDayViewBlock" },
         { type: "standingsBlock" },
