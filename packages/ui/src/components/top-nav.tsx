@@ -95,10 +95,11 @@ export function TopNav({
       }
       style={{ background: "#041124", borderBottom: "1px solid #1E2D45" }}
     >
-      {/* Mobile: flex/justify-between so the hamburger snaps to the right edge
-          even when the 240-wide logo would otherwise crowd a 1fr grid column.
-          Desktop: 1fr | auto | 1fr keeps the centered nav anchored to the
-          header's true centre, independent of logo width / CTA presence. */}
+      {/* Mobile: flex + justify-between so the hamburger snaps to the right
+          edge even when the 240-wide logo would otherwise crowd a 1fr grid
+          column. Desktop: 1fr | auto | 1fr keeps the centered nav anchored
+          to the header's true centre, independent of logo width or the
+          presence of a CTA / hamburger / nothing at all in the right slot. */}
       <div className="h-full flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between px-4 md:px-[30px]">
 
         {/* Logo */}
