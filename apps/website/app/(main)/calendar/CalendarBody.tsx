@@ -122,9 +122,9 @@ export function CalendarBody({ clubs, matches, usingFallback }: CalendarBodyProp
       ) : (
         <div
           style={{
-            display:              "grid",
-            gridTemplateColumns:  "repeat(auto-fill, minmax(360px, 1fr))",
-            gap:                  16,
+            display:        "flex",
+            flexDirection:  "column",
+            gap:            12,
           }}
         >
           {filtered.map((m) => {

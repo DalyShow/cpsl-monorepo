@@ -57,23 +57,18 @@ function formatKickoff(iso: string): string {
   });
 }
 
-function formatDayLabel(iso: string): string {
-  const d = new Date(iso);
-  // "Sat · Oct 4"
-  const wk = d.toLocaleDateString("en-US", { weekday: "short" });
-  const md = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  return `${wk} · ${md}`;
-}
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
 /**
- * Rich match card — home crest + name, "vs", away crest + name, kickoff,
- * field, plus competition + age-group pills. All decorative, no interactive
- * elements — the card is a link target if the caller wraps it.
+ * Full-width match card, teams stacked vertically:
  *
- * Layout is desktop-oriented (3-column: home | meta | away) and reflows to
- * a single stacked column below 640px.
+ *   [crest] Home Team      U11                          9:00 AM
+ *   [crest] Away Team      U11
+ *   ───────────────────────────────────────────────────────
+ *   📍 Field Name          [Premiership] [U11]
+ *
+ * Time sits vertically centred on the right; date is intentionally omitted
+ * (the day header above the grid already says it).
  */
 export function MatchCard({
   kickoff,
@@ -98,75 +93,46 @@ export function MatchCard({
           border:        "1px solid #1E2D45",
           borderRadius:  0,
           padding:       "18px 20px",
-          display:       "grid",
-          // minmax(0, 1fr) lets the side columns shrink below their intrinsic
-          // width — without it long club names spill out of the card box.
-          gridTemplateColumns: "minmax(0, 1fr) auto minmax(0, 1fr)",
-          gap:           16,
-          alignItems:    "center",
           color:         "#F4EFE6",
           overflow:      "hidden",
+          display:       "grid",
+          gridTemplateColumns: "minmax(0, 1fr) auto",
+          rowGap:        14,
+          columnGap:     20,
+          alignItems:    "center",
         }}
       >
-        {/* ── HOME ────────────────────────── */}
-        <div className="cpsl-match-card__team cpsl-match-card__team--home" style={{ minWidth: 0 }}>
-          <TeamPanel club={home} teamLabel={homeTeamLabel} align="right" />
-        </div>
-
-        {/* ── META (time, day, vs) ───────── */}
+        {/* ── TEAMS (stacked) ───────────────────────────────────── */}
         <div
-          className="cpsl-match-card__meta"
+          className="cpsl-match-card__teams"
           style={{
-            display:        "flex",
-            flexDirection:  "column",
-            alignItems:     "center",
-            gap:            2,
-            minWidth:       120,
+            display:       "flex",
+            flexDirection: "column",
+            gap:           10,
+            minWidth:      0,
           }}
         >
-          <div
-            style={{
-              fontFamily:     "'Barlow Condensed', sans-serif",
-              fontWeight:     700,
-              fontSize:       22,
-              lineHeight:     1,
-              letterSpacing:  "0.02em",
-            }}
-          >
-            {formatKickoff(kickoff)}
-          </div>
-          <div
-            style={{
-              fontSize:       10,
-              fontWeight:     600,
-              letterSpacing:  "0.14em",
-              textTransform:  "uppercase",
-              color:          "#7A9BAA",
-              marginTop:      2,
-            }}
-          >
-            {formatDayLabel(kickoff)}
-          </div>
-          <div
-            aria-hidden
-            style={{
-              marginTop:      6,
-              fontSize:       10,
-              fontWeight:     700,
-              letterSpacing:  "0.2em",
-              color:          "#475569",
-            }}
-          >
-            VS
-          </div>
+          <TeamRow club={home} teamLabel={homeTeamLabel} />
+          <TeamRow club={away} teamLabel={awayTeamLabel} />
         </div>
 
-        {/* ── AWAY ────────────────────────── */}
-        <div className="cpsl-match-card__team cpsl-match-card__team--away" style={{ minWidth: 0 }}>
-          <TeamPanel club={away} teamLabel={awayTeamLabel} align="left" />
+        {/* ── TIME (right, vertically centred) ─────────────────── */}
+        <div
+          className="cpsl-match-card__time"
+          style={{
+            fontFamily:     "'Barlow Condensed', sans-serif",
+            fontWeight:     700,
+            fontSize:       26,
+            lineHeight:     1,
+            letterSpacing:  "0.02em",
+            whiteSpace:     "nowrap",
+            alignSelf:      "center",
+          }}
+        >
+          {formatKickoff(kickoff)}
         </div>
 
-        {/* ── FOOTER (field + competition + age) ─── */}
+        {/* ── FOOTER (field + competition + age) ─────────────── */}
         <footer
           className="cpsl-match-card__footer"
           style={{
@@ -175,22 +141,20 @@ export function MatchCard({
             flexWrap:     "wrap",
             alignItems:   "center",
             gap:          10,
-            paddingTop:   14,
-            marginTop:    4,
+            paddingTop:   12,
             borderTop:    "1px solid #1E2D45",
             fontFamily:   "Inter, sans-serif",
           }}
         >
-          {/* Field */}
           <span
             style={{
-              display:        "inline-flex",
-              alignItems:     "center",
-              gap:            6,
-              fontSize:       12,
-              color:          "#94A3B8",
-              flex:           "1 1 auto",
-              minWidth:       0,
+              display:    "inline-flex",
+              alignItems: "center",
+              gap:        6,
+              fontSize:   12,
+              color:      "#94A3B8",
+              flex:       "1 1 auto",
+              minWidth:   0,
             }}
           >
             <PinIcon />
@@ -199,7 +163,6 @@ export function MatchCard({
             </span>
           </span>
 
-          {/* Competition pill */}
           <span
             style={{
               display:        "inline-flex",
@@ -218,7 +181,6 @@ export function MatchCard({
             {palette.label}
           </span>
 
-          {/* Age group pill */}
           <span
             style={{
               display:        "inline-flex",
@@ -238,13 +200,12 @@ export function MatchCard({
           </span>
         </footer>
 
-        {/* ── OPTIONAL NOTE ────────────────── */}
         {notes && (
           <p
             className="cpsl-match-card__note"
             style={{
               gridColumn:   "1 / -1",
-              margin:       "6px 0 0",
+              margin:       0,
               fontFamily:   "Inter, sans-serif",
               fontSize:     12,
               fontStyle:    "italic",
@@ -257,31 +218,10 @@ export function MatchCard({
         )}
       </article>
 
-      {/* Scoped responsive rules — stack on narrow viewports. */}
+      {/* Narrow viewports: shrink the time so long team names have more room. */}
       <style>{`
-        @media (max-width: 640px) {
-          .cpsl-match-card {
-            grid-template-columns: 1fr !important;
-            text-align: center;
-          }
-          .cpsl-match-card__team--home,
-          .cpsl-match-card__team--away {
-            justify-content: center !important;
-          }
-          .cpsl-match-card__team--home > * ,
-          .cpsl-match-card__team--away > * {
-            flex-direction: column !important;
-            align-items: center !important;
-            text-align: center !important;
-          }
-          .cpsl-match-card__meta {
-            padding: 6px 0;
-            border-top: 1px solid #1E2D45;
-            border-bottom: 1px solid #1E2D45;
-          }
-          .cpsl-match-card__footer {
-            justify-content: center !important;
-          }
+        @media (max-width: 480px) {
+          .cpsl-match-card__time { font-size: 20px !important; }
         }
       `}</style>
     </>
@@ -290,25 +230,21 @@ export function MatchCard({
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function TeamPanel({
+function TeamRow({
   club,
   teamLabel,
-  align,
 }: {
-  club:      CalendarClub;
+  club:       CalendarClub;
   teamLabel?: string;
-  align:     "left" | "right";
 }) {
-  const flexDir = align === "right" ? "row-reverse" : "row";
-  const textAlign = align === "right" ? "right" : "left";
   return (
     <div
+      className="cpsl-match-card__team"
       style={{
-        display:        "flex",
-        flexDirection:  flexDir,
-        alignItems:     "center",
-        gap:            12,
-        justifyContent: align === "right" ? "flex-end" : "flex-start",
+        display:    "flex",
+        alignItems: "center",
+        gap:        12,
+        minWidth:   0,
       }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -316,23 +252,23 @@ function TeamPanel({
         src={club.logoUrl}
         alt=""
         aria-hidden
-        width={44}
-        height={44}
+        width={31}
+        height={31}
         style={{
-          width:       44,
-          height:      44,
+          width:       31,
+          height:      31,
           objectFit:   "contain",
           flexShrink:  0,
           filter:      "drop-shadow(0 1px 2px rgba(0,0,0,0.25)) drop-shadow(0 4px 8px rgba(0,0,0,0.15))",
         }}
       />
-      <div style={{ textAlign, minWidth: 0 }}>
+      <div style={{ minWidth: 0, display: "flex", flexDirection: "column", gap: 2 }}>
         <div
           style={{
             fontFamily:     "'Barlow Condensed', sans-serif",
             fontWeight:     700,
             fontSize:       17,
-            lineHeight:     1.1,
+            lineHeight:     1.15,
             letterSpacing:  "0.02em",
             textTransform:  "uppercase",
             overflow:       "hidden",
@@ -342,18 +278,19 @@ function TeamPanel({
         >
           {club.name}
         </div>
-        <div
-          style={{
-            fontSize:       10,
-            fontWeight:     600,
-            letterSpacing:  "0.14em",
-            textTransform:  "uppercase",
-            color:          "#7A9BAA",
-            marginTop:      3,
-          }}
-        >
-          {teamLabel || club.conference}
-        </div>
+        {(teamLabel || club.conference) && (
+          <div
+            style={{
+              fontSize:       10,
+              fontWeight:     600,
+              letterSpacing:  "0.14em",
+              textTransform:  "uppercase",
+              color:          "#7A9BAA",
+            }}
+          >
+            {teamLabel || club.conference}
+          </div>
+        )}
       </div>
     </div>
   );
