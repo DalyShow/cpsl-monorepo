@@ -102,14 +102,15 @@ export function MatchCard({
           alignItems:    "center",
         }}
       >
-        {/* ── TEAMS: home + VS + away, all left-aligned ──────────── */}
+        {/* ── TEAMS: home over VS. over away, stacked ────────────── */}
         <div
           className="cpsl-match-card__teams"
           style={{
-            display:    "flex",
-            alignItems: "center",
-            gap:        40,
-            minWidth:   0,
+            display:       "flex",
+            flexDirection: "column",
+            alignItems:    "flex-start",
+            gap:           6,
+            minWidth:      0,
           }}
         >
           <TeamPanel club={home} ageLabel={homeAge} />
@@ -118,14 +119,14 @@ export function MatchCard({
             style={{
               fontFamily:     "'Barlow Condensed', sans-serif",
               fontWeight:     900,
-              fontSize:       34,
+              fontSize:       14,
               lineHeight:     1,
-              letterSpacing:  "0.06em",
+              letterSpacing:  "0.24em",
               color:          "#475569",
-              flexShrink:     0,
+              marginLeft:     50, // align with the club name (past the 36px crest + 14px gap)
             }}
           >
-            VS
+            VS.
           </div>
           <TeamPanel club={away} ageLabel={awayAge} />
         </div>
