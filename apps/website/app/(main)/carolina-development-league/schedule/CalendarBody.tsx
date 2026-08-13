@@ -138,6 +138,7 @@ export function CalendarBody({ clubs, matches, ageGroups }: CalendarBodyProps) {
                 competition={m.competition}
                 ageGroup={m.ageGroup}
                 notes={m.notes}
+                hideCompetition
               />
             );
           })}

@@ -42,6 +42,9 @@ export interface MatchCardProps {
   competition:  Competition;
   ageGroup:     AgeGroup;
   notes?:       string;
+  /** When true, skip rendering the competition pill in the footer. Use for
+   *  contexts where every match shares the same competition (e.g. CDL). */
+  hideCompetition?: boolean;
   className?:   string;
 }
 
@@ -80,6 +83,7 @@ export function MatchCard({
   competition,
   ageGroup,
   notes,
+  hideCompetition = false,
   className = "",
 }: MatchCardProps) {
   const palette = COMPETITION_PALETTE[competition];
@@ -163,23 +167,25 @@ export function MatchCard({
             </span>
           </span>
 
-          <span
-            style={{
-              display:        "inline-flex",
-              alignItems:     "center",
-              padding:        "4px 10px",
-              fontSize:       10,
-              fontWeight:     700,
-              letterSpacing:  "0.14em",
-              textTransform:  "uppercase",
-              background:     palette.bg,
-              border:         `1px solid ${palette.border}`,
-              color:          palette.ink,
-              borderRadius:   999,
-            }}
-          >
-            {palette.label}
-          </span>
+          {!hideCompetition && (
+            <span
+              style={{
+                display:        "inline-flex",
+                alignItems:     "center",
+                padding:        "4px 10px",
+                fontSize:       10,
+                fontWeight:     700,
+                letterSpacing:  "0.14em",
+                textTransform:  "uppercase",
+                background:     palette.bg,
+                border:         `1px solid ${palette.border}`,
+                color:          palette.ink,
+                borderRadius:   999,
+              }}
+            >
+              {palette.label}
+            </span>
+          )}
 
           <span
             style={{
