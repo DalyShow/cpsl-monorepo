@@ -61,54 +61,63 @@ CDL_CLUBS = [
         "name":     "Charlotte Soccer Academy",
         "short":    "CSA",
         "aliases":  ["charlotte soccer academy", "csa clt", "csa nh", "csa north", "csa charlotte", "csa"],
+        "sanityNameHints": ["csa", "charlotte soccer academy"],
     },
     {
         "id":       "cisc",
-        "name":     "Carolina Independence",
+        "name":     "Charlotte Independence",
         "short":    "CISC",
         "aliases":  ["cisc north", "cisc south", "cisc east", "cisc", "pre mls", "independence"],
+        "sanityNameHints": ["independence", "cisc", "charlotte independence"],
     },
     {
         "id":       "nc-fusion",
         "name":     "NC Fusion",
         "short":    "NCF",
         "aliases":  ["north carolina fusion", "nc fusion", "ncf pre", "ncf ws", "ncf gso", "ws red", "gso red", "nc fus", "fusion", " ncf "],
+        "sanityNameHints": ["fusion", "nc fusion", "north carolina fusion", "ncf"],
     },
     {
         "id":       "nc-fc-youth",
         "name":     "NC FC Youth",
         "short":    "NCFC",
         "aliases":  ["north carolina fc youth", "ncfc north", "ncfc south", "ncfc", "nc fc"],
+        "sanityNameHints": ["ncfc", "north carolina fc", "nc fc"],
     },
     {
         "id":       "wilmington-hammerheads",
         "name":     "Wilmington Hammerheads Youth",
         "short":    "WHYFC",
         "aliases":  ["wilmington hammerheads youth", "wilmington hammerheads", "hammerheads", "whyfc"],
+        "sanityNameHints": ["hammerheads", "wilmington", "whyfc"],
     },
     {
         "id":       "highland-fc",
         "name":     "Highland FC",
         "short":    "HFC",
         "aliases":  ["highland fc", "highland", "hfc"],
+        "sanityNameHints": ["highland", "hfc"],
     },
     {
         "id":       "sc-surf",
         "name":     "SC Surf",
         "short":    "SCS",
         "aliases":  ["sc surf", "surf"],
+        "sanityNameHints": ["sc surf", "surf"],
     },
     {
         "id":       "wake-fc",
         "name":     "Wake FC",
         "short":    "WFC",
         "aliases":  ["wake fc north", "wake fc south", "wake fc", "wake", "wfc pa", "wfc"],
+        "sanityNameHints": ["wake", "wfc"],
     },
     {
         "id":       "carolina-core-fc",
         "name":     "Carolina Core FC",
         "short":    "CCFC",
         "aliases":  ["carolina core fc youth", "carolina core fc", "carolina core", "ccfc"],
+        "sanityNameHints": ["carolina core", "ccfc", "core"],
     },
 ]
 
@@ -346,16 +355,18 @@ def main() -> None:
                 "division": div_str, "warnings": row_warnings,
             })
 
-    # Emit clubs[] with placeholder crests
+    # Emit clubs[] with placeholder crests + Sanity name hints so the server
+    # component can swap in the real crest at request time.
     clubs_out = []
     for cid, meta in used_clubs.items():
         short = meta.get("short") or cid[:3].upper()
         clubs_out.append({
-            "id":         cid,
-            "name":       meta["name"],
-            "shortName":  short,
-            "conference": "",  # CDL doesn't use conferences; blank so CalendarClub type is happy
-            "logoUrl":    placeholder_svg(cid, short),
+            "id":               cid,
+            "name":             meta["name"],
+            "shortName":        short,
+            "conference":       "",  # CDL doesn't use conferences; blank so CalendarClub type is happy
+            "logoUrl":          placeholder_svg(cid, short),
+            "sanityNameHints":  meta.get("sanityNameHints", []),
         })
     clubs_out.sort(key=lambda c: c["name"])
 

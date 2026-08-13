@@ -99,14 +99,17 @@ export function MatchCard({
           borderRadius:  0,
           padding:       "18px 20px",
           display:       "grid",
-          gridTemplateColumns: "1fr auto 1fr",
+          // minmax(0, 1fr) lets the side columns shrink below their intrinsic
+          // width — without it long club names spill out of the card box.
+          gridTemplateColumns: "minmax(0, 1fr) auto minmax(0, 1fr)",
           gap:           16,
           alignItems:    "center",
           color:         "#F4EFE6",
+          overflow:      "hidden",
         }}
       >
         {/* ── HOME ────────────────────────── */}
-        <div className="cpsl-match-card__team cpsl-match-card__team--home">
+        <div className="cpsl-match-card__team cpsl-match-card__team--home" style={{ minWidth: 0 }}>
           <TeamPanel club={home} teamLabel={homeTeamLabel} align="right" />
         </div>
 
@@ -159,7 +162,7 @@ export function MatchCard({
         </div>
 
         {/* ── AWAY ────────────────────────── */}
-        <div className="cpsl-match-card__team cpsl-match-card__team--away">
+        <div className="cpsl-match-card__team cpsl-match-card__team--away" style={{ minWidth: 0 }}>
           <TeamPanel club={away} teamLabel={awayTeamLabel} align="left" />
         </div>
 

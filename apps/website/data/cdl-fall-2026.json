@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T14:58:27",
+  "generatedAt": "2026-08-13T15:29:14",
   "source": "CDL - Schedules and Contact Sheet Fall 2026.xlsx",
   "clubs": [
     {
@@ -7,63 +7,105 @@
       "name": "Carolina Core FC",
       "shortName": "CCFC",
       "conference": "",
-      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwRTZFNEEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DQ0ZDPC90ZXh0Pjwvc3ZnPg=="
+      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwRTZFNEEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DQ0ZDPC90ZXh0Pjwvc3ZnPg==",
+      "sanityNameHints": [
+        "carolina core",
+        "ccfc",
+        "core"
+      ]
     },
     {
       "id": "cisc",
-      "name": "Carolina Independence",
+      "name": "Charlotte Independence",
       "shortName": "CISC",
       "conference": "",
-      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwMDU4OUMiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DSVNDPC90ZXh0Pjwvc3ZnPg=="
+      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwMDU4OUMiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DSVNDPC90ZXh0Pjwvc3ZnPg==",
+      "sanityNameHints": [
+        "independence",
+        "cisc",
+        "charlotte independence"
+      ]
     },
     {
       "id": "csa",
       "name": "Charlotte Soccer Academy",
       "shortName": "CSA",
       "conference": "",
-      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwQjNEOTEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DU0E8L3RleHQ+PC9zdmc+"
+      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwQjNEOTEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DU0E8L3RleHQ+PC9zdmc+",
+      "sanityNameHints": [
+        "csa",
+        "charlotte soccer academy"
+      ]
     },
     {
       "id": "highland-fc",
       "name": "Highland FC",
       "shortName": "HFC",
       "conference": "",
-      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiM1QTVBNUEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5IRkM8L3RleHQ+PC9zdmc+"
+      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiM1QTVBNUEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5IRkM8L3RleHQ+PC9zdmc+",
+      "sanityNameHints": [
+        "highland",
+        "hfc"
+      ]
     },
     {
       "id": "nc-fc-youth",
       "name": "NC FC Youth",
       "shortName": "NCFC",
       "conference": "",
-      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiNCMzA4MzgiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5OQ0ZDPC90ZXh0Pjwvc3ZnPg=="
+      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiNCMzA4MzgiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5OQ0ZDPC90ZXh0Pjwvc3ZnPg==",
+      "sanityNameHints": [
+        "ncfc",
+        "north carolina fc",
+        "nc fc"
+      ]
     },
     {
       "id": "nc-fusion",
       "name": "NC Fusion",
       "shortName": "NCF",
       "conference": "",
-      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiNDODEwMkUiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5OQ0Y8L3RleHQ+PC9zdmc+"
+      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiNDODEwMkUiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5OQ0Y8L3RleHQ+PC9zdmc+",
+      "sanityNameHints": [
+        "fusion",
+        "nc fusion",
+        "north carolina fusion",
+        "ncf"
+      ]
     },
     {
       "id": "sc-surf",
       "name": "SC Surf",
       "shortName": "SCS",
       "conference": "",
-      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwMDVBOEIiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5TQ1M8L3RleHQ+PC9zdmc+"
+      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwMDVBOEIiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5TQ1M8L3RleHQ+PC9zdmc+",
+      "sanityNameHints": [
+        "sc surf",
+        "surf"
+      ]
     },
     {
       "id": "wake-fc",
       "name": "Wake FC",
       "shortName": "WFC",
       "conference": "",
-      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwMDNDNzEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5XRkM8L3RleHQ+PC9zdmc+"
+      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwMDNDNzEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5XRkM8L3RleHQ+PC9zdmc+",
+      "sanityNameHints": [
+        "wake",
+        "wfc"
+      ]
     },
     {
       "id": "wilmington-hammerheads",
       "name": "Wilmington Hammerheads Youth",
       "shortName": "WHYFC",
       "conference": "",
-      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwMDMwNTciLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiMzRUIxQzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5XSFlGQzwvdGV4dD48L3N2Zz4="
+      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwMDMwNTciLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiMzRUIxQzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5XSFlGQzwvdGV4dD48L3N2Zz4=",
+      "sanityNameHints": [
+        "hammerheads",
+        "wilmington",
+        "whyfc"
+      ]
     }
   ],
   "matches": [
