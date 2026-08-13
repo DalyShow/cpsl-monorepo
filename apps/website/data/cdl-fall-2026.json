@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T15:29:14",
+  "generatedAt": "2026-08-13T16:54:46",
   "source": "CDL - Schedules and Contact Sheet Fall 2026.xlsx",
   "clubs": [
     {
@@ -33,8 +33,10 @@
       "conference": "",
       "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwQjNEOTEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DU0E8L3RleHQ+PC9zdmc+",
       "sanityNameHints": [
-        "csa",
-        "charlotte soccer academy"
+        "charlotte soccer academy",
+        "logo-csa",
+        "-csa.",
+        "/csa"
       ]
     },
     {

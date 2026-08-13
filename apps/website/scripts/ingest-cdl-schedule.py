@@ -61,7 +61,9 @@ CDL_CLUBS = [
         "name":     "Charlotte Soccer Academy",
         "short":    "CSA",
         "aliases":  ["charlotte soccer academy", "csa clt", "csa nh", "csa north", "csa charlotte", "csa"],
-        "sanityNameHints": ["csa", "charlotte soccer academy"],
+        # "csa" alone is too greedy — matches "loco-acsandhills.png" as a
+        # substring. Anchor on filename structure so we only hit real CSA crests.
+        "sanityNameHints": ["charlotte soccer academy", "logo-csa", "-csa.", "/csa"],
     },
     {
         "id":       "cisc",
