@@ -1,22 +1,10 @@
 {
-  "generatedAt": "2026-08-13T16:54:46",
+  "generatedAt": "2026-08-13T16:56:45",
   "source": "CDL - Schedules and Contact Sheet Fall 2026.xlsx",
   "clubs": [
     {
-      "id": "carolina-core-fc",
-      "name": "Carolina Core FC",
-      "shortName": "CCFC",
-      "conference": "",
-      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwRTZFNEEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DQ0ZDPC90ZXh0Pjwvc3ZnPg==",
-      "sanityNameHints": [
-        "carolina core",
-        "ccfc",
-        "core"
-      ]
-    },
-    {
       "id": "cisc",
-      "name": "Charlotte Independence",
+      "name": "CISC",
       "shortName": "CISC",
       "conference": "",
       "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwMDU4OUMiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DSVNDPC90ZXh0Pjwvc3ZnPg==",
@@ -28,7 +16,7 @@
     },
     {
       "id": "csa",
-      "name": "Charlotte Soccer Academy",
+      "name": "CSA",
       "shortName": "CSA",
       "conference": "",
       "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwQjNEOTEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DU0E8L3RleHQ+PC9zdmc+",
@@ -37,6 +25,18 @@
         "logo-csa",
         "-csa.",
         "/csa"
+      ]
+    },
+    {
+      "id": "carolina-core-fc",
+      "name": "Carolina Core FC",
+      "shortName": "CCFC",
+      "conference": "",
+      "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwRTZFNEEiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5DQ0ZDPC90ZXh0Pjwvc3ZnPg==",
+      "sanityNameHints": [
+        "carolina core",
+        "ccfc",
+        "core"
       ]
     },
     {

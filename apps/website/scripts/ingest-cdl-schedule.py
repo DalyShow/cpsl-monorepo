@@ -58,7 +58,7 @@ OUT_WARNINGS = DATA_DIR / "cdl-fall-2026.warnings.json"
 CDL_CLUBS = [
     {
         "id":       "csa",
-        "name":     "Charlotte Soccer Academy",
+        "name":     "CSA",
         "short":    "CSA",
         "aliases":  ["charlotte soccer academy", "csa clt", "csa nh", "csa north", "csa charlotte", "csa"],
         # "csa" alone is too greedy — matches "loco-acsandhills.png" as a
@@ -67,7 +67,7 @@ CDL_CLUBS = [
     },
     {
         "id":       "cisc",
-        "name":     "Charlotte Independence",
+        "name":     "CISC",
         "short":    "CISC",
         "aliases":  ["cisc north", "cisc south", "cisc east", "cisc", "pre mls", "independence"],
         "sanityNameHints": ["independence", "cisc", "charlotte independence"],
