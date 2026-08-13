@@ -34,16 +34,15 @@ export interface MatchCardProps {
   kickoff:      string;      // ISO datetime with offset
   home:         CalendarClub;
   away:         CalendarClub;
-  /** Optional team-specific labels rendered under the club name, e.g. "U12 A".
-   *  Use when one crest represents many teams (multi-tier / multi-age clubs). */
+  /** Optional team-specific labels rendered inline with the club name,
+   *  e.g. "U12 A". Falls back to the match's ageGroup when absent. */
   homeTeamLabel?: string;
   awayTeamLabel?: string;
   field:        string;
   competition:  Competition;
   ageGroup:     AgeGroup;
   notes?:       string;
-  /** When true, skip rendering the competition pill in the footer. Use for
-   *  contexts where every match shares the same competition (e.g. CDL). */
+  /** When true, skip rendering the competition pill in the footer. */
   hideCompetition?: boolean;
   className?:   string;
 }
@@ -52,7 +51,6 @@ export interface MatchCardProps {
 
 function formatKickoff(iso: string): string {
   const d = new Date(iso);
-  // 12-hour local, no seconds, no leading zero on hour.
   return d.toLocaleTimeString("en-US", {
     hour:   "numeric",
     minute: "2-digit",
@@ -63,15 +61,15 @@ function formatKickoff(iso: string): string {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 /**
- * Full-width match card, teams stacked vertically:
+ * Full-width match card. Three-column grid:
  *
- *   [crest] Home Team      U11                          9:00 AM
- *   [crest] Away Team      U11
- *   ───────────────────────────────────────────────────────
- *   📍 Field Name          [Premiership] [U11]
+ *   HOME NAME · U11    ┃  9:00 AM        ┃  U11 · AWAY NAME
+ *   [crest right]      ┃  VS.            ┃  [crest left]
+ *                      ┃  Field, right → ┃
  *
- * Time sits vertically centred on the right; date is intentionally omitted
- * (the day header above the grid already says it).
+ * Meta column stacks kickoff / VS / field. Age lives inline next to
+ * each team name (no footer badge — one place, not two). Footer only
+ * renders when there's something to show (competition pill or notes).
  */
 export function MatchCard({
   kickoff,
@@ -87,6 +85,9 @@ export function MatchCard({
   className = "",
 }: MatchCardProps) {
   const palette = COMPETITION_PALETTE[competition];
+  const homeAge = homeTeamLabel || ageGroup;
+  const awayAge = awayTeamLabel || ageGroup;
+  const showFooter = !hideCompetition || !!notes;
 
   return (
     <>
@@ -96,138 +97,162 @@ export function MatchCard({
           background:    "#0A1628",
           border:        "1px solid #1E2D45",
           borderRadius:  0,
-          padding:       "18px 20px",
+          padding:       "16px 24px",
           color:         "#F4EFE6",
           overflow:      "hidden",
           display:       "grid",
-          gridTemplateColumns: "minmax(0, 1fr) auto",
-          rowGap:        14,
-          columnGap:     20,
+          gridTemplateColumns: "minmax(0, 1fr) auto minmax(0, 1fr)",
+          rowGap:        12,
+          columnGap:     40,
           alignItems:    "center",
         }}
       >
-        {/* ── TEAMS (stacked) ───────────────────────────────────── */}
-        <div
-          className="cpsl-match-card__teams"
-          style={{
-            display:       "flex",
-            flexDirection: "column",
-            gap:           10,
-            minWidth:      0,
-          }}
-        >
-          <TeamRow club={home} teamLabel={homeTeamLabel} />
-          <TeamRow club={away} teamLabel={awayTeamLabel} />
+        {/* ── HOME ─────────────────────────────────────────────── */}
+        <div className="cpsl-match-card__team cpsl-match-card__team--home" style={{ minWidth: 0 }}>
+          <TeamPanel club={home} ageLabel={homeAge} align="right" />
         </div>
 
-        {/* ── TIME (right, vertically centred) ─────────────────── */}
+        {/* ── META (time · VS · location) ──────────────────────── */}
         <div
-          className="cpsl-match-card__time"
+          className="cpsl-match-card__meta"
           style={{
-            fontFamily:     "'Barlow Condensed', sans-serif",
-            fontWeight:     700,
-            fontSize:       26,
-            lineHeight:     1,
-            letterSpacing:  "0.02em",
-            whiteSpace:     "nowrap",
-            alignSelf:      "center",
+            display:        "flex",
+            flexDirection:  "column",
+            alignItems:     "stretch",
+            gap:            4,
+            minWidth:       120,
+            maxWidth:       320,
           }}
         >
-          {formatKickoff(kickoff)}
-        </div>
-
-        {/* ── FOOTER (field + competition + age) ─────────────── */}
-        <footer
-          className="cpsl-match-card__footer"
-          style={{
-            gridColumn:   "1 / -1",
-            display:      "flex",
-            flexWrap:     "wrap",
-            alignItems:   "center",
-            gap:          10,
-            paddingTop:   12,
-            borderTop:    "1px solid #1E2D45",
-            fontFamily:   "Inter, sans-serif",
-          }}
-        >
-          <span
+          <div
+            className="cpsl-match-card__time"
             style={{
-              display:    "inline-flex",
-              alignItems: "center",
-              gap:        6,
-              fontSize:   12,
-              color:      "#94A3B8",
-              flex:       "1 1 auto",
-              minWidth:   0,
+              fontFamily:     "'Barlow Condensed', sans-serif",
+              fontWeight:     700,
+              fontSize:       28,
+              lineHeight:     1,
+              letterSpacing:  "0.02em",
+              whiteSpace:     "nowrap",
+              textAlign:      "center",
+            }}
+          >
+            {formatKickoff(kickoff)}
+          </div>
+          <div
+            aria-hidden
+            style={{
+              fontFamily:     "'Barlow Condensed', sans-serif",
+              fontWeight:     700,
+              fontSize:       11,
+              letterSpacing:  "0.24em",
+              color:          "#475569",
+              textAlign:      "center",
+            }}
+          >
+            VS.
+          </div>
+          <div
+            style={{
+              display:        "inline-flex",
+              alignItems:     "center",
+              justifyContent: "flex-end",
+              gap:            6,
+              fontSize:       12,
+              color:          "#94A3B8",
+              minWidth:       0,
+              marginTop:      2,
             }}
           >
             <PinIcon />
             <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {field}
             </span>
-          </span>
+          </div>
+        </div>
 
-          {!hideCompetition && (
-            <span
-              style={{
-                display:        "inline-flex",
-                alignItems:     "center",
-                padding:        "4px 10px",
-                fontSize:       10,
-                fontWeight:     700,
-                letterSpacing:  "0.14em",
-                textTransform:  "uppercase",
-                background:     palette.bg,
-                border:         `1px solid ${palette.border}`,
-                color:          palette.ink,
-                borderRadius:   999,
-              }}
-            >
-              {palette.label}
-            </span>
-          )}
+        {/* ── AWAY ─────────────────────────────────────────────── */}
+        <div className="cpsl-match-card__team cpsl-match-card__team--away" style={{ minWidth: 0 }}>
+          <TeamPanel club={away} ageLabel={awayAge} align="left" />
+        </div>
 
-          <span
-            style={{
-              display:        "inline-flex",
-              alignItems:     "center",
-              padding:        "4px 10px",
-              fontSize:       10,
-              fontWeight:     700,
-              letterSpacing:  "0.14em",
-              textTransform:  "uppercase",
-              background:     "rgba(148,163,184,0.10)",
-              border:         "1px solid rgba(148,163,184,0.25)",
-              color:          "#CBD5E1",
-              borderRadius:   999,
-            }}
-          >
-            {ageGroup}
-          </span>
-        </footer>
-
-        {notes && (
-          <p
-            className="cpsl-match-card__note"
+        {/* ── FOOTER (competition pill or notes) ───────────────── */}
+        {showFooter && (
+          <footer
+            className="cpsl-match-card__footer"
             style={{
               gridColumn:   "1 / -1",
-              margin:       0,
+              display:      "flex",
+              flexWrap:     "wrap",
+              alignItems:   "center",
+              gap:          10,
+              paddingTop:   10,
+              borderTop:    "1px solid #1E2D45",
               fontFamily:   "Inter, sans-serif",
-              fontSize:     12,
-              fontStyle:    "italic",
-              color:        "#7A9BAA",
-              lineHeight:   1.5,
             }}
           >
-            {notes}
-          </p>
+            {!hideCompetition && (
+              <span
+                style={{
+                  display:        "inline-flex",
+                  alignItems:     "center",
+                  padding:        "4px 10px",
+                  fontSize:       10,
+                  fontWeight:     700,
+                  letterSpacing:  "0.14em",
+                  textTransform:  "uppercase",
+                  background:     palette.bg,
+                  border:         `1px solid ${palette.border}`,
+                  color:          palette.ink,
+                  borderRadius:   999,
+                }}
+              >
+                {palette.label}
+              </span>
+            )}
+            {notes && (
+              <span
+                style={{
+                  fontSize:   12,
+                  fontStyle:  "italic",
+                  color:      "#7A9BAA",
+                  lineHeight: 1.5,
+                  flex:       "1 1 auto",
+                }}
+              >
+                {notes}
+              </span>
+            )}
+          </footer>
         )}
       </article>
 
-      {/* Narrow viewports: shrink the time so long team names have more room. */}
+      {/* Narrow viewports: stack meta between teams. */}
       <style>{`
-        @media (max-width: 480px) {
-          .cpsl-match-card__time { font-size: 20px !important; }
+        @media (max-width: 640px) {
+          .cpsl-match-card {
+            grid-template-columns: 1fr !important;
+            padding: 16px 18px !important;
+            row-gap: 8px !important;
+          }
+          .cpsl-match-card__team--home,
+          .cpsl-match-card__team--away {
+            justify-content: center !important;
+          }
+          .cpsl-match-card__team--home > div,
+          .cpsl-match-card__team--away > div {
+            flex-direction: row !important;
+            justify-content: center !important;
+          }
+          .cpsl-match-card__team--home > div > div,
+          .cpsl-match-card__team--away > div > div {
+            text-align: center !important;
+          }
+          .cpsl-match-card__meta {
+            max-width: none !important;
+          }
+          .cpsl-match-card__time {
+            font-size: 22px !important;
+          }
         }
       `}</style>
     </>
@@ -236,21 +261,25 @@ export function MatchCard({
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function TeamRow({
+function TeamPanel({
   club,
-  teamLabel,
+  ageLabel,
+  align,
 }: {
-  club:       CalendarClub;
-  teamLabel?: string;
+  club:     CalendarClub;
+  ageLabel: string;
+  align:    "left" | "right";
 }) {
+  const flexDir   = align === "right" ? "row-reverse" : "row";
+  const textAlign = align === "right" ? "right" : "left";
   return (
     <div
-      className="cpsl-match-card__team"
       style={{
-        display:    "flex",
-        alignItems: "center",
-        gap:        12,
-        minWidth:   0,
+        display:        "flex",
+        flexDirection:  flexDir,
+        alignItems:     "center",
+        gap:            14,
+        justifyContent: align === "right" ? "flex-end" : "flex-start",
       }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -258,45 +287,41 @@ function TeamRow({
         src={club.logoUrl}
         alt=""
         aria-hidden
-        width={31}
-        height={31}
+        width={36}
+        height={36}
         style={{
-          width:       31,
-          height:      31,
+          width:       36,
+          height:      36,
           objectFit:   "contain",
           flexShrink:  0,
           filter:      "drop-shadow(0 1px 2px rgba(0,0,0,0.25)) drop-shadow(0 4px 8px rgba(0,0,0,0.15))",
         }}
       />
-      <div style={{ minWidth: 0, display: "flex", flexDirection: "column", gap: 2 }}>
-        <div
+      <div
+        style={{
+          textAlign,
+          minWidth:      0,
+          fontFamily:    "'Barlow Condensed', sans-serif",
+          textTransform: "uppercase",
+          lineHeight:    1.1,
+          letterSpacing: "0.02em",
+          overflow:      "hidden",
+          textOverflow:  "ellipsis",
+          whiteSpace:    "nowrap",
+        }}
+      >
+        <span style={{ fontWeight: 700, fontSize: 22 }}>{club.name}</span>
+        <span
           style={{
-            fontFamily:     "'Barlow Condensed', sans-serif",
-            fontWeight:     700,
-            fontSize:       17,
-            lineHeight:     1.15,
-            letterSpacing:  "0.02em",
-            textTransform:  "uppercase",
-            overflow:       "hidden",
-            textOverflow:   "ellipsis",
-            whiteSpace:     "nowrap",
+            fontWeight:  700,
+            fontSize:    22,
+            color:       "#7A9BAA",
+            marginLeft:  10,
+            marginRight: 0,
           }}
         >
-          {club.name}
-        </div>
-        {(teamLabel || club.conference) && (
-          <div
-            style={{
-              fontSize:       10,
-              fontWeight:     600,
-              letterSpacing:  "0.14em",
-              textTransform:  "uppercase",
-              color:          "#7A9BAA",
-            }}
-          >
-            {teamLabel || club.conference}
-          </div>
-        )}
+          {ageLabel}
+        </span>
       </div>
     </div>
   );
