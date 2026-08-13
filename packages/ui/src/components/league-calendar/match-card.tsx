@@ -292,15 +292,35 @@ function TeamPanel({
           textTransform: "uppercase",
           lineHeight:    1.1,
           letterSpacing: "0.02em",
-          overflow:      "hidden",
-          textOverflow:  "ellipsis",
-          whiteSpace:    "nowrap",
         }}
       >
-        <span style={{ fontWeight: 700, fontSize: 22 }}>{club.name}</span>
-        <span style={{ fontWeight: 700, fontSize: 22, color: "#7A9BAA", marginLeft: 10 }}>
-          {ageLabel}
-        </span>
+        <div
+          style={{
+            fontWeight:   700,
+            fontSize:     22,
+            overflow:     "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace:   "nowrap",
+          }}
+        >
+          {club.name}
+        </div>
+        {ageLabel && (
+          <div
+            style={{
+              fontWeight:    700,
+              fontSize:      13,
+              letterSpacing: "0.14em",
+              color:         "#7A9BAA",
+              marginTop:     2,
+              overflow:      "hidden",
+              textOverflow:  "ellipsis",
+              whiteSpace:    "nowrap",
+            }}
+          >
+            {ageLabel}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -64,6 +64,10 @@ CDL_CLUBS = [
         # "csa" alone is too greedy — matches "loco-acsandhills.png" as a
         # substring. Anchor on filename structure so we only hit real CSA crests.
         "sanityNameHints": ["charlotte soccer academy", "logo-csa", "-csa.", "/csa"],
+        # Tokens safe to strip from the team string when deriving the team
+        # label — must identify the CLUB and nothing else (no location or
+        # colour suffixes like "ncf ws" or "wake fc north").
+        "label_strip":     ["charlotte soccer academy", "csa"],
     },
     {
         "id":       "cisc",
@@ -71,6 +75,7 @@ CDL_CLUBS = [
         "short":    "CISC",
         "aliases":  ["cisc north", "cisc south", "cisc east", "cisc", "pre mls", "independence"],
         "sanityNameHints": ["independence", "cisc", "charlotte independence"],
+        "label_strip":     ["charlotte independence", "cisc"],
     },
     {
         "id":       "nc-fusion",
@@ -78,6 +83,7 @@ CDL_CLUBS = [
         "short":    "NCF",
         "aliases":  ["north carolina fusion", "nc fusion", "ncf pre", "ncf ws", "ncf gso", "ws red", "gso red", "nc fus", "fusion", " ncf "],
         "sanityNameHints": ["fusion", "nc fusion", "north carolina fusion", "ncf"],
+        "label_strip":     ["north carolina fusion", "nc fusion", "fusion", "ncf"],
     },
     {
         "id":       "nc-fc-youth",
@@ -85,6 +91,7 @@ CDL_CLUBS = [
         "short":    "NCFC",
         "aliases":  ["north carolina fc youth", "ncfc north", "ncfc south", "ncfc", "nc fc"],
         "sanityNameHints": ["ncfc", "north carolina fc", "nc fc"],
+        "label_strip":     ["north carolina fc youth", "nc fc youth", "ncfc", "nc fc"],
     },
     {
         "id":       "wilmington-hammerheads",
@@ -92,6 +99,7 @@ CDL_CLUBS = [
         "short":    "WHYFC",
         "aliases":  ["wilmington hammerheads youth", "wilmington hammerheads", "hammerheads", "whyfc"],
         "sanityNameHints": ["hammerheads", "wilmington", "whyfc"],
+        "label_strip":     ["wilmington hammerheads youth", "wilmington hammerheads", "hammerheads", "whyfc"],
     },
     {
         "id":       "highland-fc",
@@ -99,6 +107,7 @@ CDL_CLUBS = [
         "short":    "HFC",
         "aliases":  ["highland fc", "highland", "hfc"],
         "sanityNameHints": ["highland", "hfc"],
+        "label_strip":     ["highland fc", "highland", "hfc"],
     },
     {
         "id":       "sc-surf",
@@ -106,6 +115,7 @@ CDL_CLUBS = [
         "short":    "SCS",
         "aliases":  ["sc surf", "surf"],
         "sanityNameHints": ["sc surf", "surf"],
+        "label_strip":     ["sc surf"],
     },
     {
         "id":       "wake-fc",
@@ -113,6 +123,7 @@ CDL_CLUBS = [
         "short":    "WFC",
         "aliases":  ["wake fc north", "wake fc south", "wake fc", "wake", "wfc pa", "wfc"],
         "sanityNameHints": ["wake", "wfc"],
+        "label_strip":     ["wake fc", "wake", "wfc"],
     },
     {
         "id":       "carolina-core-fc",
@@ -120,6 +131,7 @@ CDL_CLUBS = [
         "short":    "CCFC",
         "aliases":  ["carolina core fc youth", "carolina core fc", "carolina core", "ccfc"],
         "sanityNameHints": ["carolina core", "ccfc", "core"],
+        "label_strip":     ["carolina core fc youth", "carolina core fc", "carolina core", "ccfc"],
     },
 ]
 
@@ -216,23 +228,35 @@ def match_club(team_str: str) -> dict | None:
     return best
 
 def derive_team_label(team_str: str, club: dict | None, age: str | None, tier: str | None) -> str:
-    """Build the concise 'U12 A' style suffix rendered under the club name.
+    """Preserve the team-specific suffix (e.g. "CLT Man City 1", "South Red",
+    "WS RED", "CDL 2"). Parents need this to find their child's actual team.
 
-    Priority: the raw team string minus the club name is often most human-friendly,
-    but we prefer the compact `<age> <tier>` form when both are parseable. Falls
-    back to just the age, then just the tier, then the raw string.
+    Algorithm:
+      1. Strip every age token from the raw string (U11 / 11u / 2015 / …).
+      2. Strip the club's canonical label_strip tokens (longest first) so
+         only the team-distinguishing suffix survives.
+      3. Prepend the age, if known, so the label reads "U12 Man City 1".
     """
+    s = normalise_ws(team_str)
+
+    # 1. Age tokens anywhere in the string.
+    s = re.sub(r"\b(U\s?\d{1,2}[Mm]?|\d{1,2}[uU]|20\d{2})\b", "", s, flags=re.I)
+
+    # 2. Club tokens — longest-first so "carolina core fc youth" wins over "ccfc".
+    if club:
+        for token in sorted(club.get("label_strip", [club.get("short", "")]), key=len, reverse=True):
+            if token:
+                s = re.sub(r"\b" + re.escape(token) + r"\b", "", s, flags=re.I)
+
+    # 3. Clean up leftover separators & whitespace.
+    s = re.sub(r"[\s\-_/]+", " ", s).strip(" -–—.,")
+
     parts = []
-    if age:  parts.append(age)
-    if tier: parts.append(tier)
+    if age: parts.append(age)
+    if s:   parts.append(s)
     if parts:
         return " ".join(parts)
-    # Fallback: strip the club name from the raw string
-    if club:
-        stripped = re.sub(re.escape(club["short"]), "", team_str, flags=re.I).strip(" -–—")
-        if stripped:
-            return stripped
-    return team_str.strip()
+    return tier or team_str.strip()
 
 # ─── Placeholder crest (data-uri SVG per club, brand-tinted) ───────────────
 
