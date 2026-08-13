@@ -7,9 +7,9 @@ Reads:
   OR the path passed as arg 1
 
 Writes:
-  apps/cdl-website/data/cdl-fall-2026.json
+  apps/website/data/cdl-fall-2026.json
       { generatedAt, source, clubs[], matches[] }
-  apps/cdl-website/data/cdl-fall-2026.warnings.json
+  apps/website/data/cdl-fall-2026.warnings.json
       { row: {…}, warnings: [...] }
 
 Design notes:
@@ -38,7 +38,7 @@ import openpyxl
 # ─── Paths ──────────────────────────────────────────────────────────────────
 
 REPO_ROOT = Path(__file__).resolve().parents[3]        # cpsl-monorepo/
-APP_DIR   = REPO_ROOT / "apps" / "cdl-website"
+APP_DIR   = REPO_ROOT / "apps" / "website"
 DATA_DIR  = APP_DIR / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
