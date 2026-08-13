@@ -19,15 +19,46 @@ interface RawEntry {
   _type?: "clubLogo" | "image" | string;
   _key?:  string;
   name?:  string;
-  logo?:  { asset?: { url?: string; altText?: string } };
-  asset?: { url?: string; altText?: string };
+  logo?:  { asset?: { url?: string; altText?: string; originalFilename?: string } };
+  asset?: { url?: string; altText?: string; originalFilename?: string };
 }
 
 const QUERY = `*[_type == "siteSettings"][0].logoTicker.logos[]{
   _type, _key, name,
-  logo{ asset->{ url, altText } },
-  asset->{ url, altText }
+  logo{ asset->{ url, altText, originalFilename } },
+  asset->{ url, altText, originalFilename }
 }`;
+
+/**
+ * Broader shape used for name-hint matching: keeps every crest even when
+ * `name` and `altText` are blank, exposing `originalFilename` so callers
+ * can pattern-match on "logo-hammerheads.png" etc.
+ */
+export interface RawClubLogo {
+  logoUrl:          string;
+  name:             string;
+  altText:          string;
+  originalFilename: string;
+}
+
+export async function fetchAllClubLogos(): Promise<RawClubLogo[]> {
+  const raw = await sanityFetch<RawEntry[]>(QUERY);
+  if (!raw || !Array.isArray(raw)) return [];
+
+  const out: RawClubLogo[] = [];
+  for (const entry of raw) {
+    const asset = entry._type === "clubLogo" ? entry.logo?.asset : entry.asset;
+    const url = asset?.url;
+    if (!url) continue;
+    out.push({
+      logoUrl:          enhanceImageUrl(url, { sharp: 8 }) ?? url,
+      name:             (entry.name ?? "").trim(),
+      altText:          (asset?.altText ?? "").trim(),
+      originalFilename: (asset?.originalFilename ?? "").trim(),
+    });
+  }
+  return out;
+}
 
 /** Kebab-case slug — stable across visual renames as long as the name stays. */
 export function slugifyClubName(name: string): string {

@@ -1,6 +1,6 @@
 import type { CalendarClub, CalendarMatch, AgeGroup } from "@cpsl/ui";
 import scheduleData from "@/data/cdl-fall-2026.json";
-import { fetchCalendarClubs } from "@/lib/sanity/calendarClubs";
+import { fetchAllClubLogos } from "@/lib/sanity/calendarClubs";
 
 interface CdlClub {
   id:               string;
@@ -60,34 +60,39 @@ export const CDL_META = {
 /**
  * Server-side: build the CDL club roster with real Sanity crests where
  * available. Falls back to the embedded placeholder SVG when Sanity is
- * offline OR no name-hint matches a Sanity clubLogo entry.
+ * offline OR no name-hint matches a Sanity crest.
  *
- * The match is done case-insensitively against each Sanity club's `name`
- * — any hint being a substring of the Sanity name counts as a match. First
- * match wins. Zero matches → keep the placeholder.
+ * Match strategy: each hint (case-insensitive substring) is checked
+ * against the Sanity entry's `name`, `altText`, AND `originalFilename` —
+ * so a crest whose display name is blank still resolves when its
+ * filename ("logo-hammerheads.png") carries the club identity.
+ * First match wins; zero matches keeps the placeholder.
  */
 export async function getCdlClubs(): Promise<CalendarClub[]> {
-  let sanityClubs: CalendarClub[] = [];
+  let sanityLogos: Awaited<ReturnType<typeof fetchAllClubLogos>> = [];
   try {
-    sanityClubs = await fetchCalendarClubs();
+    sanityLogos = await fetchAllClubLogos();
   } catch {
     // Sanity unavailable at build/request time — placeholders are the fallback.
   }
 
-  const lower = sanityClubs.map((c) => ({ club: c, name: c.name.toLowerCase() }));
+  const searchable = sanityLogos.map((s) => ({
+    logo:  s,
+    blob:  `${s.name} ${s.altText} ${s.originalFilename}`.toLowerCase(),
+  }));
 
   return raw.clubs
     .map((c) => {
       const hints = (c.sanityNameHints ?? []).map((h) => h.toLowerCase());
       const hit = hints.length
-        ? lower.find(({ name }) => hints.some((h) => name.includes(h)))
+        ? searchable.find(({ blob }) => hints.some((h) => blob.includes(h)))
         : undefined;
       return {
         id:         c.id,
         name:       c.name,
         shortName:  c.shortName,
         conference: c.conference,
-        logoUrl:    hit?.club.logoUrl ?? c.logoUrl,
+        logoUrl:    hit?.logo.logoUrl ?? c.logoUrl,
       };
     })
     .sort((a, b) => a.name.localeCompare(b.name));
