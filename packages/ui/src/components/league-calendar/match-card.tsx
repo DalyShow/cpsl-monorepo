@@ -31,11 +31,9 @@ const COMPETITION_PALETTE: Record<
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface MatchCardProps {
-  kickoff:      string;      // ISO datetime with offset
+  kickoff:      string;
   home:         CalendarClub;
   away:         CalendarClub;
-  /** Optional team-specific labels rendered inline with the club name,
-   *  e.g. "U12 A". Falls back to the match's ageGroup when absent. */
   homeTeamLabel?: string;
   awayTeamLabel?: string;
   field:        string;
@@ -61,15 +59,12 @@ function formatKickoff(iso: string): string {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 /**
- * Full-width match card. Three-column grid:
+ * Full-width match card. Left side stacks HOME + big VS + AWAY as a
+ * single row (both teams read left-to-right, crest first). Right side
+ * stacks kickoff over field, both right-aligned within the card.
  *
- *   HOME NAME · U11    ┃  9:00 AM        ┃  U11 · AWAY NAME
- *   [crest right]      ┃  VS.            ┃  [crest left]
- *                      ┃  Field, right → ┃
- *
- * Meta column stacks kickoff / VS / field. Age lives inline next to
- * each team name (no footer badge — one place, not two). Footer only
- * renders when there's something to show (competition pill or notes).
+ *   [crest] HOME · U11    VS    [crest] AWAY · U11          9:00 AM
+ *                                                  Manchester Meadows 6B
  */
 export function MatchCard({
   kickoff,
@@ -101,27 +96,50 @@ export function MatchCard({
           color:         "#F4EFE6",
           overflow:      "hidden",
           display:       "grid",
-          gridTemplateColumns: "minmax(0, 1fr) auto minmax(0, 1fr)",
+          gridTemplateColumns: "minmax(0, 1fr) auto",
           rowGap:        12,
-          columnGap:     40,
+          columnGap:     32,
           alignItems:    "center",
         }}
       >
-        {/* ── HOME ─────────────────────────────────────────────── */}
-        <div className="cpsl-match-card__team cpsl-match-card__team--home" style={{ minWidth: 0 }}>
-          <TeamPanel club={home} ageLabel={homeAge} align="right" />
+        {/* ── TEAMS: home + VS + away, all left-aligned ──────────── */}
+        <div
+          className="cpsl-match-card__teams"
+          style={{
+            display:    "flex",
+            alignItems: "center",
+            gap:        40,
+            minWidth:   0,
+          }}
+        >
+          <TeamPanel club={home} ageLabel={homeAge} />
+          <div
+            aria-hidden
+            style={{
+              fontFamily:     "'Barlow Condensed', sans-serif",
+              fontWeight:     900,
+              fontSize:       34,
+              lineHeight:     1,
+              letterSpacing:  "0.06em",
+              color:          "#475569",
+              flexShrink:     0,
+            }}
+          >
+            VS
+          </div>
+          <TeamPanel club={away} ageLabel={awayAge} />
         </div>
 
-        {/* ── META (time · VS · location) ──────────────────────── */}
+        {/* ── META (kickoff + field, right-aligned) ──────────────── */}
         <div
           className="cpsl-match-card__meta"
           style={{
             display:        "flex",
             flexDirection:  "column",
-            alignItems:     "stretch",
+            alignItems:     "flex-end",
             gap:            4,
-            minWidth:       120,
-            maxWidth:       320,
+            textAlign:      "right",
+            minWidth:       0,
           }}
         >
           <div
@@ -133,34 +151,21 @@ export function MatchCard({
               lineHeight:     1,
               letterSpacing:  "0.02em",
               whiteSpace:     "nowrap",
-              textAlign:      "center",
             }}
           >
             {formatKickoff(kickoff)}
           </div>
           <div
-            aria-hidden
+            className="cpsl-match-card__field"
             style={{
-              fontFamily:     "'Barlow Condensed', sans-serif",
-              fontWeight:     700,
-              fontSize:       11,
-              letterSpacing:  "0.24em",
-              color:          "#475569",
-              textAlign:      "center",
-            }}
-          >
-            VS.
-          </div>
-          <div
-            style={{
-              display:        "inline-flex",
-              alignItems:     "center",
-              justifyContent: "flex-end",
-              gap:            6,
-              fontSize:       12,
-              color:          "#94A3B8",
-              minWidth:       0,
-              marginTop:      2,
+              display:    "inline-flex",
+              alignItems: "center",
+              gap:        6,
+              fontFamily: "Inter, sans-serif",
+              fontSize:   12,
+              color:      "#94A3B8",
+              minWidth:   0,
+              maxWidth:   "100%",
             }}
           >
             <PinIcon />
@@ -168,11 +173,6 @@ export function MatchCard({
               {field}
             </span>
           </div>
-        </div>
-
-        {/* ── AWAY ─────────────────────────────────────────────── */}
-        <div className="cpsl-match-card__team cpsl-match-card__team--away" style={{ minWidth: 0 }}>
-          <TeamPanel club={away} ageLabel={awayAge} align="left" />
         </div>
 
         {/* ── FOOTER (competition pill or notes) ───────────────── */}
@@ -226,29 +226,21 @@ export function MatchCard({
         )}
       </article>
 
-      {/* Narrow viewports: stack meta between teams. */}
+      {/* Narrow viewports: teams cluster wraps, meta stacks below. */}
       <style>{`
         @media (max-width: 640px) {
           .cpsl-match-card {
             grid-template-columns: 1fr !important;
             padding: 16px 18px !important;
-            row-gap: 8px !important;
+            row-gap: 10px !important;
           }
-          .cpsl-match-card__team--home,
-          .cpsl-match-card__team--away {
-            justify-content: center !important;
-          }
-          .cpsl-match-card__team--home > div,
-          .cpsl-match-card__team--away > div {
-            flex-direction: row !important;
-            justify-content: center !important;
-          }
-          .cpsl-match-card__team--home > div > div,
-          .cpsl-match-card__team--away > div > div {
-            text-align: center !important;
+          .cpsl-match-card__teams {
+            gap: 20px !important;
+            flex-wrap: wrap;
           }
           .cpsl-match-card__meta {
-            max-width: none !important;
+            align-items: flex-start !important;
+            text-align: left !important;
           }
           .cpsl-match-card__time {
             font-size: 22px !important;
@@ -264,22 +256,17 @@ export function MatchCard({
 function TeamPanel({
   club,
   ageLabel,
-  align,
 }: {
   club:     CalendarClub;
   ageLabel: string;
-  align:    "left" | "right";
 }) {
-  const flexDir   = align === "right" ? "row-reverse" : "row";
-  const textAlign = align === "right" ? "right" : "left";
   return (
     <div
       style={{
-        display:        "flex",
-        flexDirection:  flexDir,
-        alignItems:     "center",
-        gap:            14,
-        justifyContent: align === "right" ? "flex-end" : "flex-start",
+        display:    "flex",
+        alignItems: "center",
+        gap:        14,
+        minWidth:   0,
       }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -299,7 +286,6 @@ function TeamPanel({
       />
       <div
         style={{
-          textAlign,
           minWidth:      0,
           fontFamily:    "'Barlow Condensed', sans-serif",
           textTransform: "uppercase",
@@ -311,15 +297,7 @@ function TeamPanel({
         }}
       >
         <span style={{ fontWeight: 700, fontSize: 22 }}>{club.name}</span>
-        <span
-          style={{
-            fontWeight:  700,
-            fontSize:    22,
-            color:       "#7A9BAA",
-            marginLeft:  10,
-            marginRight: 0,
-          }}
-        >
+        <span style={{ fontWeight: 700, fontSize: 22, color: "#7A9BAA", marginLeft: 10 }}>
           {ageLabel}
         </span>
       </div>
