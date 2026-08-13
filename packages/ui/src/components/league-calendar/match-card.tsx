@@ -34,6 +34,10 @@ export interface MatchCardProps {
   kickoff:      string;      // ISO datetime with offset
   home:         CalendarClub;
   away:         CalendarClub;
+  /** Optional team-specific labels rendered under the club name, e.g. "U12 A".
+   *  Use when one crest represents many teams (multi-tier / multi-age clubs). */
+  homeTeamLabel?: string;
+  awayTeamLabel?: string;
   field:        string;
   competition:  Competition;
   ageGroup:     AgeGroup;
@@ -75,6 +79,8 @@ export function MatchCard({
   kickoff,
   home,
   away,
+  homeTeamLabel,
+  awayTeamLabel,
   field,
   competition,
   ageGroup,
@@ -101,7 +107,7 @@ export function MatchCard({
       >
         {/* ── HOME ────────────────────────── */}
         <div className="cpsl-match-card__team cpsl-match-card__team--home">
-          <TeamPanel club={home} align="right" />
+          <TeamPanel club={home} teamLabel={homeTeamLabel} align="right" />
         </div>
 
         {/* ── META (time, day, vs) ───────── */}
@@ -154,7 +160,7 @@ export function MatchCard({
 
         {/* ── AWAY ────────────────────────── */}
         <div className="cpsl-match-card__team cpsl-match-card__team--away">
-          <TeamPanel club={away} align="left" />
+          <TeamPanel club={away} teamLabel={awayTeamLabel} align="left" />
         </div>
 
         {/* ── FOOTER (field + competition + age) ─── */}
@@ -283,10 +289,12 @@ export function MatchCard({
 
 function TeamPanel({
   club,
+  teamLabel,
   align,
 }: {
-  club:  CalendarClub;
-  align: "left" | "right";
+  club:      CalendarClub;
+  teamLabel?: string;
+  align:     "left" | "right";
 }) {
   const flexDir = align === "right" ? "row-reverse" : "row";
   const textAlign = align === "right" ? "right" : "left";
@@ -341,7 +349,7 @@ function TeamPanel({
             marginTop:      3,
           }}
         >
-          {club.conference}
+          {teamLabel || club.conference}
         </div>
       </div>
     </div>

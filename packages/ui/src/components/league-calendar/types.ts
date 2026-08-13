@@ -5,7 +5,7 @@
  */
 
 export type Competition = "Premiership" | "Cup" | "Development";
-export type AgeGroup    = "U13" | "U14" | "U15" | "U16" | "U17" | "U19";
+export type AgeGroup    = "U9" | "U10" | "U11" | "U12" | "U13" | "U14" | "U15" | "U16" | "U17" | "U19";
 
 export interface CalendarClub {
   id: string;
@@ -24,6 +24,10 @@ export interface CalendarMatch {
   kickoff: string;
   homeClubId: string;
   awayClubId: string;
+  /** Optional per-side team label ("SC Surf U12 A"). When present, MatchCard
+   *  renders it beneath the club name so one crest can represent many teams. */
+  homeTeamLabel?: string;
+  awayTeamLabel?: string;
   /** Free-form field label, e.g. "Matthews Sportsplex — Field 3". */
   field: string;
   competition: Competition;

@@ -44,9 +44,11 @@ export interface LeagueCalendarFiltersProps {
   clubs:        CalendarClub[];
   value:        LeagueCalendarFilterValue;
   onChange:     (next: LeagueCalendarFilterValue) => void;
+  /** Ordered age groups shown as chips. Defaults to CPSL's U13–U19 range. */
+  ageGroups?:   AgeGroup[];
 }
 
-const AGE_GROUPS: AgeGroup[] = ["U13", "U14", "U15", "U16", "U17", "U19"];
+const DEFAULT_AGE_GROUPS: AgeGroup[] = ["U13", "U14", "U15", "U16", "U17", "U19"];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -54,6 +56,7 @@ export function LeagueCalendarFilters({
   clubs,
   value,
   onChange,
+  ageGroups = DEFAULT_AGE_GROUPS,
 }: LeagueCalendarFiltersProps) {
   const patch = (partial: Partial<LeagueCalendarFilterValue>) =>
     onChange({ ...value, ...partial });
@@ -91,7 +94,7 @@ export function LeagueCalendarFilters({
             <Chip active={value.ageGroup === null} onClick={() => patch({ ageGroup: null })}>
               All
             </Chip>
-            {AGE_GROUPS.map((a) => (
+            {ageGroups.map((a) => (
               <Chip
                 key={a}
                 active={value.ageGroup === a}
