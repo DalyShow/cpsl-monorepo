@@ -59,20 +59,23 @@ export default async function CalendarPage() {
                 whiteSpace:    "nowrap",
               }}
             >
-              CDL — Fall 2026
+              Fall 2026
             </span>
           </div>
           <p
             style={{
               fontFamily: "'Inter', sans-serif",
               fontWeight: 400,
-              fontSize:   13,
+              fontSize:   14,
               color:      "#8899B0",
-              margin:     "6px 0 0",
-              lineHeight: "16px",
+              margin:     "10px 0 0",
+              lineHeight: 1.5,
+              maxWidth:   760,
             }}
           >
-            {CDL_META.matchCount} fixtures across every CDL age group · Pick a date to see that day&apos;s matches
+            The CDL schedule is managed by the leaders of CDL participant clubs. You
+            should always verify your CDL game dates and times with your CDL club
+            director, as games and times are subject to change.
           </p>
         </div>
       </header>
