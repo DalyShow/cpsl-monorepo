@@ -64,10 +64,10 @@ export function LeagueCalendarFilters({
   return (
     <>
       <div className="cpsl-calfilters">
-        {/* ── Row 1: Date + Club ──────────────────────────────────────── */}
+        {/* ── Single row: [Date] [Club] ······················ [Age chips] ── */}
         <div
           className="cpsl-calfilters__row"
-          style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}
+          style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "center" }}
         >
           <DateField
             label="Date"
@@ -83,27 +83,24 @@ export function LeagueCalendarFilters({
               ...clubs.map((c) => ({ value: c.id, label: c.name })),
             ]}
           />
-        </div>
 
-        {/* ── Row 2: Age pills ────────────────────────────────────────── */}
-        <div
-          className="cpsl-calfilters__row"
-          style={{ display: "flex", gap: 20, flexWrap: "wrap", marginTop: 12 }}
-        >
-          <ChipGroup label="Age">
-            <Chip active={value.ageGroup === null} onClick={() => patch({ ageGroup: null })}>
-              All
-            </Chip>
-            {ageGroups.map((a) => (
-              <Chip
-                key={a}
-                active={value.ageGroup === a}
-                onClick={() => patch({ ageGroup: a })}
-              >
-                {a}
+          {/* Age chips pushed to the far right of the same row. */}
+          <div style={{ marginLeft: "auto" }}>
+            <ChipGroup label="Age">
+              <Chip active={value.ageGroup === null} onClick={() => patch({ ageGroup: null })}>
+                All
               </Chip>
-            ))}
-          </ChipGroup>
+              {ageGroups.map((a) => (
+                <Chip
+                  key={a}
+                  active={value.ageGroup === a}
+                  onClick={() => patch({ ageGroup: a })}
+                >
+                  {a}
+                </Chip>
+              ))}
+            </ChipGroup>
+          </div>
         </div>
 
         {/* ── Reset ─────────────────────────────────────────────────── */}
@@ -161,11 +158,9 @@ function DateField({
   return (
     <label
       style={{
-        display:     "flex",
-        alignItems:  "center",
-        gap:         10,
-        flex:        "1 1 220px",
-        minWidth:    200,
+        display:    "inline-flex",
+        alignItems: "center",
+        gap:        10,
       }}
     >
       <Label>{label}</Label>
@@ -174,7 +169,7 @@ function DateField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         style={{
-          flex:           "1 1 auto",
+          width:          170,
           appearance:     "none",
           background:     "#0A1628",
           border:         "1px solid #1E2D45",
@@ -203,13 +198,13 @@ function Selector({
   options:  { value: string; label: string }[];
 }) {
   return (
-    <label style={{ display: "flex", alignItems: "center", gap: 10, flex: "1 1 220px", minWidth: 200 }}>
+    <label style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
       <Label>{label}</Label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
         style={{
-          flex:           "1 1 auto",
+          width:          220,
           appearance:     "none",
           background:     "#0A1628",
           border:         "1px solid #1E2D45",
