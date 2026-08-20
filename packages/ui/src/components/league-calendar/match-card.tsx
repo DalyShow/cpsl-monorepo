@@ -37,6 +37,8 @@ export interface MatchCardProps {
   homeTeamLabel?: string;
   awayTeamLabel?: string;
   field:        string;
+  /** Optional venue address — turns the field label into a directions link. */
+  locationAddress?: string;
   competition:  Competition;
   ageGroup:     AgeGroup;
   notes?:       string;
@@ -73,6 +75,7 @@ export function MatchCard({
   homeTeamLabel,
   awayTeamLabel,
   field,
+  locationAddress,
   competition,
   ageGroup,
   notes,
@@ -156,24 +159,7 @@ export function MatchCard({
           >
             {formatKickoff(kickoff)}
           </div>
-          <div
-            className="cpsl-match-card__field"
-            style={{
-              display:    "inline-flex",
-              alignItems: "center",
-              gap:        6,
-              fontFamily: "Inter, sans-serif",
-              fontSize:   12,
-              color:      "#94A3B8",
-              minWidth:   0,
-              maxWidth:   "100%",
-            }}
-          >
-            <PinIcon />
-            <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-              {field}
-            </span>
-          </div>
+          <FieldLine field={field} locationAddress={locationAddress} />
         </div>
 
         {/* ── FOOTER (competition pill or notes) ───────────────── */}
@@ -253,6 +239,72 @@ export function MatchCard({
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
+
+function FieldLine({
+  field,
+  locationAddress,
+}: {
+  field:            string;
+  locationAddress?: string;
+}) {
+  const baseStyle: React.CSSProperties = {
+    display:    "inline-flex",
+    alignItems: "center",
+    gap:        6,
+    fontFamily: "Inter, sans-serif",
+    fontSize:   12,
+    color:      "#94A3B8",
+    minWidth:   0,
+    maxWidth:   "100%",
+  };
+  const label = (
+    <>
+      <PinIcon />
+      <span
+        style={{
+          overflow:      "hidden",
+          textOverflow:  "ellipsis",
+          whiteSpace:    "nowrap",
+        }}
+      >
+        {field}
+      </span>
+    </>
+  );
+
+  if (!locationAddress) {
+    return <div className="cpsl-match-card__field" style={baseStyle}>{label}</div>;
+  }
+
+  const href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(locationAddress)}`;
+  return (
+    <>
+      <a
+        className="cpsl-match-card__field cpsl-match-card__field--link"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Directions to ${field}`}
+        style={{
+          ...baseStyle,
+          color:          "#C1D0E0",
+          textDecoration: "none",
+          cursor:         "pointer",
+        }}
+      >
+        {label}
+      </a>
+      <style>{`
+        .cpsl-match-card__field--link:hover {
+          color: #F4EFE6 !important;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          text-decoration-color: #7A9BAA;
+        }
+      `}</style>
+    </>
+  );
+}
 
 function TeamPanel({
   club,

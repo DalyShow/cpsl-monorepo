@@ -30,6 +30,9 @@ export interface CalendarMatch {
   awayTeamLabel?: string;
   /** Free-form field label, e.g. "Matthews Sportsplex — Field 3". */
   field: string;
+  /** Optional street address for the venue — when present, the field name
+   *  becomes a tappable link that opens directions in the user's map app. */
+  locationAddress?: string;
   competition: Competition;
   ageGroup: AgeGroup;
   /** Optional editorial note, e.g. "Rescheduled from 9/28". */

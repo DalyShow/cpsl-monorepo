@@ -135,6 +135,7 @@ export function CalendarBody({ clubs, matches, ageGroups }: CalendarBodyProps) {
                 homeTeamLabel={m.homeTeamLabel}
                 awayTeamLabel={m.awayTeamLabel}
                 field={m.field}
+                locationAddress={m.locationAddress}
                 competition={m.competition}
                 ageGroup={m.ageGroup}
                 notes={m.notes}

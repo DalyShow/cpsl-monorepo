@@ -12,17 +12,18 @@ interface CdlClub {
 }
 
 interface CdlMatchRaw {
-  id:            string;
-  kickoff:       string;
-  homeClubId:    string;
-  awayClubId:    string;
-  homeTeamLabel: string;
-  awayTeamLabel: string;
-  field:         string;
-  ageGroup:      string;
-  gender:        string;
-  notes:         string | null;
-  sourceRow:     number;
+  id:              string;
+  kickoff:         string;
+  homeClubId:      string;
+  awayClubId:      string;
+  homeTeamLabel:   string;
+  awayTeamLabel:   string;
+  field:           string;
+  locationAddress?: string;
+  ageGroup:        string;
+  gender:          string;
+  notes:           string | null;
+  sourceRow:       number;
 }
 
 interface CdlSchedule {
@@ -39,16 +40,17 @@ export const CDL_AGE_GROUPS: AgeGroup[] = ["U9", "U10", "U11", "U12"];
 
 /** Match roster in insertion order. Kickoff already local ISO, no offset. */
 export const CDL_MATCHES: CalendarMatch[] = raw.matches.map((m) => ({
-  id:            m.id,
-  kickoff:       m.kickoff,
-  homeClubId:    m.homeClubId,
-  awayClubId:    m.awayClubId,
-  homeTeamLabel: m.homeTeamLabel,
-  awayTeamLabel: m.awayTeamLabel,
-  field:         m.field,
-  ageGroup:      m.ageGroup as AgeGroup,
-  competition:   "Development",
-  notes:         m.notes ?? undefined,
+  id:              m.id,
+  kickoff:         m.kickoff,
+  homeClubId:      m.homeClubId,
+  awayClubId:      m.awayClubId,
+  homeTeamLabel:   m.homeTeamLabel,
+  awayTeamLabel:   m.awayTeamLabel,
+  field:           m.field,
+  locationAddress: m.locationAddress || undefined,
+  ageGroup:        m.ageGroup as AgeGroup,
+  competition:     "Development",
+  notes:           m.notes ?? undefined,
 }));
 
 export const CDL_META = {

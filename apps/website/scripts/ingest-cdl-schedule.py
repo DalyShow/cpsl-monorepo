@@ -298,8 +298,8 @@ def main() -> None:
     skipped      = 0
 
     for r in range(2, ws.max_row + 1):
-        date_v, time_v, field_v, home_v, away_v, div_v = (
-            ws.cell(row=r, column=c).value for c in range(1, 7)
+        date_v, time_v, field_v, home_v, away_v, div_v, loc_v = (
+            ws.cell(row=r, column=c).value for c in range(1, 8)
         )
         if not date_v and not home_v and not away_v:
             continue  # blank row
@@ -369,6 +369,7 @@ def main() -> None:
             "homeTeamLabel":  home_label,
             "awayTeamLabel":  away_label,
             "field":          normalise_ws(str(field_v or "")),
+            "locationAddress": normalise_ws(str(loc_v or "")),
             "ageGroup":       final_age,
             "gender":         gender,
             "notes":          None,
