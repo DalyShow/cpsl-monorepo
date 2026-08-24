@@ -33,6 +33,9 @@ export interface CalendarMatch {
   /** Optional street address for the venue — when present, the field name
    *  becomes a tappable link that opens directions in the user's map app. */
   locationAddress?: string;
+  /** Optional gender marker — "M" boys, "G" girls. Absent when a calendar
+   *  doesn't split by gender (e.g. CPSL /calendar today). */
+  gender?: "M" | "G";
   competition: Competition;
   ageGroup: AgeGroup;
   /** Optional editorial note, e.g. "Rescheduled from 9/28". */

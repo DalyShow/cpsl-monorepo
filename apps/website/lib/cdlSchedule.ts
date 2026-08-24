@@ -21,14 +21,16 @@ interface CdlMatchRaw {
   field:           string;
   locationAddress?: string;
   ageGroup:        string;
-  gender:          string;
+  gender:          "M" | "G" | string;
   notes:           string | null;
   sourceRow:       number;
 }
 
 interface CdlSchedule {
   generatedAt: string;
-  source:      string;
+  /** Older single-source schemas used `source`; multi-source uses `sources`. */
+  source?:     string;
+  sources?:    { path: string; tab: string; gender: string }[];
   clubs:       CdlClub[];
   matches:     CdlMatchRaw[];
 }
@@ -48,6 +50,7 @@ export const CDL_MATCHES: CalendarMatch[] = raw.matches.map((m) => ({
   awayTeamLabel:   m.awayTeamLabel,
   field:           m.field,
   locationAddress: m.locationAddress || undefined,
+  gender:          m.gender === "G" ? "G" : "M",
   ageGroup:        m.ageGroup as AgeGroup,
   competition:     "Development",
   notes:           m.notes ?? undefined,
@@ -55,7 +58,7 @@ export const CDL_MATCHES: CalendarMatch[] = raw.matches.map((m) => ({
 
 export const CDL_META = {
   generatedAt: raw.generatedAt,
-  source:      raw.source,
+  source:      raw.source ?? raw.sources?.map((s) => s.tab).join(" + ") ?? "",
   matchCount:  raw.matches.length,
 };
 

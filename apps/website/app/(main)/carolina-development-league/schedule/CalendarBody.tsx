@@ -14,9 +14,11 @@ import {
 } from "@cpsl/ui";
 
 interface CalendarBodyProps {
-  clubs:      CalendarClub[];
-  matches:    CalendarMatch[];
-  ageGroups?: AgeGroup[];
+  clubs:       CalendarClub[];
+  matches:     CalendarMatch[];
+  ageGroups?:  AgeGroup[];
+  /** When true, render the All / Boys / Girls segmented control. */
+  showGender?: boolean;
 }
 
 function localDateKey(iso: string): string {
@@ -33,6 +35,7 @@ function applyFilters(all: CalendarMatch[], v: LeagueCalendarFilterValue): Calen
       if (v.date && localDateKey(m.kickoff) !== v.date) return false;
       if (v.clubId && m.homeClubId !== v.clubId && m.awayClubId !== v.clubId) return false;
       if (v.ageGroup && m.ageGroup !== v.ageGroup) return false;
+      if (v.gender && m.gender !== v.gender) return false;
       return true;
     })
     .sort((a, b) => a.kickoff.localeCompare(b.kickoff));
@@ -59,7 +62,7 @@ function pickInitialDate(defaultISO: string, all: CalendarMatch[]): string {
   return sorted.find((d) => d >= defaultISO) ?? sorted[0] ?? defaultISO;
 }
 
-export function CalendarBody({ clubs, matches, ageGroups }: CalendarBodyProps) {
+export function CalendarBody({ clubs, matches, ageGroups, showGender }: CalendarBodyProps) {
   const [filters, setFilters] = useState<LeagueCalendarFilterValue>(() => {
     const base = defaultFilterValue();
     return { ...base, date: pickInitialDate(base.date, matches) };
@@ -78,6 +81,7 @@ export function CalendarBody({ clubs, matches, ageGroups }: CalendarBodyProps) {
           value={filters}
           onChange={setFilters}
           ageGroups={ageGroups}
+          showGender={showGender}
         />
       </div>
 

@@ -42,10 +42,29 @@ APP_DIR   = REPO_ROOT / "apps" / "website"
 DATA_DIR  = APP_DIR / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-DEFAULT_SOURCE = Path.home() / "Desktop" / "CDL - Schedules and Contact Sheet Fall 2026.xlsx"
-SOURCE = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_SOURCE
-if not SOURCE.exists():
-    sys.exit(f"Source not found: {SOURCE}")
+BOYS_SOURCE          = Path.home() / "Desktop" / "CDL - Schedules and Contact Sheet Fall 2026.xlsx"
+BOYS_SNAPSHOT_JSON   = DATA_DIR / "cdl-fall-2026-boys-snapshot.json"
+GIRLS_SOURCE         = Path.home() / "Desktop" / "CDL - Schedules and Contact Sheet Fall 2026 (This is going to CDL_CPSL Web person.xlsx"
+
+# One entry per feed. `kind` = "xlsx" or "snapshot" (JSON already parsed).
+# `snapshot_fallback` is used when the live xlsx isn't on disk (see boys).
+FEEDS = [
+    {
+        "kind":             "xlsx",
+        "path":             BOYS_SOURCE,
+        "tab":              "Fall Schedule",
+        "gender":           "M",
+        "has_location":     True,
+        "snapshot_fallback": BOYS_SNAPSHOT_JSON,  # used when the .xlsx is missing
+    },
+    {
+        "kind":             "xlsx",
+        "path":             GIRLS_SOURCE,
+        "tab":              "Girls CDL Fall Schedule",
+        "gender":           "G",
+        "has_location":     False,
+    },
+]
 
 OUT_MATCHES  = DATA_DIR / "cdl-fall-2026.json"
 OUT_WARNINGS = DATA_DIR / "cdl-fall-2026.warnings.json"
@@ -97,9 +116,9 @@ CDL_CLUBS = [
         "id":       "wilmington-hammerheads",
         "name":     "Wilmington Hammerheads Youth",
         "short":    "WHYFC",
-        "aliases":  ["wilmington hammerheads youth", "wilmington hammerheads", "hammerheads", "whyfc"],
+        "aliases":  ["wilmington hammerheads youth", "wilmington hammerheads", "wilmington hh", "hammerheads", "whyfc"],
         "sanityNameHints": ["hammerheads", "wilmington", "whyfc"],
-        "label_strip":     ["wilmington hammerheads youth", "wilmington hammerheads", "hammerheads", "whyfc"],
+        "label_strip":     ["wilmington hammerheads youth", "wilmington hammerheads", "wilmington hh", "hammerheads", "whyfc"],
     },
     {
         "id":       "highland-fc",
@@ -121,9 +140,9 @@ CDL_CLUBS = [
         "id":       "wake-fc",
         "name":     "Wake FC",
         "short":    "WFC",
-        "aliases":  ["wake fc north", "wake fc south", "wake fc", "wake", "wfc pa", "wfc"],
+        "aliases":  ["wake fc north", "wake fc south", "wake fc", "wake", "wfc pa", "wfc", "w fc pag", "w fc"],
         "sanityNameHints": ["wake", "wfc"],
-        "label_strip":     ["wake fc", "wake", "wfc"],
+        "label_strip":     ["wake fc", "wake", "wfc", "w fc"],
     },
     {
         "id":       "carolina-core-fc",
@@ -132,6 +151,17 @@ CDL_CLUBS = [
         "aliases":  ["carolina core fc youth", "carolina core fc", "carolina core", "ccfc"],
         "sanityNameHints": ["carolina core", "ccfc", "core"],
         "label_strip":     ["carolina core fc youth", "carolina core fc", "carolina core", "ccfc"],
+    },
+    # New club that first appears in the girls schedule — placeholder name.
+    # Rename `name` when we learn what NCC actually stands for and upload a
+    # real crest to Sanity.
+    {
+        "id":       "ncc",
+        "name":     "NCC",
+        "short":    "NCC",
+        "aliases":  ["ncc"],
+        "sanityNameHints": [],
+        "label_strip":     ["ncc"],
     },
 ]
 
@@ -148,7 +178,15 @@ BIRTH_YEAR_TO_AGE_FALL_2026 = {
     2011: "U15", 2012: "U14", 2013: "U13", 2014: "U12",
     2015: "U12", 2016: "U11", 2017: "U10", 2018: "U9",
 }
-AGE_RE = re.compile(r"(?:\bU\s?(\d{1,2})(?![\d])|\b(\d{1,2})\s?[uU](?![\w])|\b(20\d{2})\b)", re.I)
+AGE_RE = re.compile(
+    r"(?:"
+    r"\bU\s?(\d{1,2})(?![\d])"        # U11 / U 11 / U11M
+    r"|\b(\d{1,2})\s?[uU](?![\w])"    # 11u / 11U
+    r"|\b(20\d{2})\b"                 # 2015
+    r"|^\s*(1[4-9])\b"                # bare 2-digit birth year at start ("15 CISC N Blue G")
+    r")",
+    re.I,
+)
 
 def parse_age(text: str) -> str | None:
     """Return "U11" / "U12" / etc. from any of: U11 · 11u · 2015. None if unclear."""
@@ -162,6 +200,10 @@ def parse_age(text: str) -> str | None:
         return f"U{n}" if 8 <= n <= 19 else None
     if m.group(3):
         year = int(m.group(3))
+        return BIRTH_YEAR_TO_AGE_FALL_2026.get(year)
+    if m.group(4):
+        # Bare 2-digit birth-year prefix (14–19) → 2014–2019.
+        year = 2000 + int(m.group(4))
         return BIRTH_YEAR_TO_AGE_FALL_2026.get(year)
     return None
 
@@ -177,11 +219,28 @@ def parse_tier(*texts: str) -> str | None:
             return m.group(1).upper()
     return None
 
-# Gender: default M (CDL is boys-only per the sheet's context).
-def parse_gender(division: str | None) -> str:
+# Gender: passed in per-feed since the tab is authoritative — girls tab is all G,
+# boys tab is all M. Kept as a no-op function for future signal-based inference.
+def parse_gender_from_division(division: str | None) -> str | None:
     if division and re.search(r"\bG\b", division):
         return "G"
-    return "M"
+    return None
+
+def parse_date_loose(v):
+    """Accept a datetime OR a string like '12.12.26' (MM.DD.YY) → date. None otherwise."""
+    if isinstance(v, dt.datetime): return v.date()
+    if isinstance(v, dt.date):     return v
+    if not isinstance(v, str):     return None
+    s = v.strip()
+    m = re.match(r"^(\d{1,2})[./-](\d{1,2})[./-](\d{2,4})$", s)
+    if not m: return None
+    a, b, c = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    if c < 100: c += 2000
+    # Assume MM.DD.YY (US convention).
+    try:
+        return dt.date(c, a, b)
+    except ValueError:
+        return None
 
 def parse_time_loose(v) -> tuple[int, int] | None:
     """Accept datetime.time OR strings like '10.30 AM' / '1.00 pm' / '13:30'."""
@@ -239,8 +298,17 @@ def derive_team_label(team_str: str, club: dict | None, age: str | None, tier: s
     """
     s = normalise_ws(team_str)
 
+    # 0. Trailing girls-suffix "G" — appears on nearly every girls team; redundant
+    #    next to the gender filter, so strip it before further parsing.
+    s = re.sub(r"\s+G$", "", s)
+
     # 1. Age tokens anywhere in the string.
-    s = re.sub(r"\b(U\s?\d{1,2}[Mm]?|\d{1,2}[uU]|20\d{2})\b", "", s, flags=re.I)
+    s = re.sub(
+        r"(?:\bU\s?\d{1,2}[Mm]?\b|\b\d{1,2}[uU]\b|\b20\d{2}\b|^\s*1[4-9]\b)",
+        "",
+        s,
+        flags=re.I,
+    )
 
     # 2. Club tokens — longest-first so "carolina core fc youth" wins over "ccfc".
     if club:
@@ -270,6 +338,7 @@ CLUB_TINT = {
     "sc-surf":                 ("#005A8B", "#F2F2F2"),
     "wake-fc":                 ("#003C71", "#F2F2F2"),
     "carolina-core-fc":        ("#0E6E4A", "#F2F2F2"),
+    "ncc":                     ("#7C3AED", "#F2F2F2"),  # purple placeholder
     "unknown":                 ("#1E2D45", "#94A3B8"),
 }
 
@@ -288,50 +357,80 @@ def placeholder_svg(club_id: str, short: str) -> str:
 
 # ─── Main ──────────────────────────────────────────────────────────────────
 
-def main() -> None:
-    wb = openpyxl.load_workbook(SOURCE, data_only=True)
-    ws = wb["Fall Schedule"]
+def ingest_snapshot(snapshot_path: Path, gender: str,
+                    used_clubs: dict, matches: list) -> int:
+    """Load matches + clubs from a pre-baked snapshot JSON (used when the live
+    source .xlsx has been removed from disk). Returns the number of matches added."""
+    data = json.loads(snapshot_path.read_text())
+    for c in data.get("clubs", []):
+        used_clubs.setdefault(c["id"], {
+            "id":              c["id"],
+            "name":            c["name"],
+            "short":           c.get("shortName") or c["id"][:3].upper(),
+            "sanityNameHints": c.get("sanityNameHints", []),
+        })
+    added = 0
+    for m in data.get("matches", []):
+        matches.append({**m, "gender": gender})
+        added += 1
+    return added
 
-    matches      = []
-    warnings     = []
-    used_clubs   = {}
-    skipped      = 0
+
+def ingest_tab(path: Path, tab: str, gender: str, has_location: bool,
+               used_clubs: dict, matches: list, warnings: list) -> tuple[int, int]:
+    """Return (matches_added, rows_skipped) for a single (file, tab, gender)."""
+    if not path.exists():
+        print(f"  ⚠ Source not found, skipping: {path}")
+        return (0, 0)
+    wb = openpyxl.load_workbook(path, data_only=True)
+    if tab not in wb.sheetnames:
+        print(f"  ⚠ Tab '{tab}' not in {path.name}, skipping.")
+        return (0, 0)
+    ws = wb[tab]
+    added = 0
+    skipped = 0
+    row_col_count = 7 if has_location else 6
 
     for r in range(2, ws.max_row + 1):
-        date_v, time_v, field_v, home_v, away_v, div_v, loc_v = (
-            ws.cell(row=r, column=c).value for c in range(1, 8)
-        )
+        cells = [ws.cell(row=r, column=c).value for c in range(1, row_col_count + 1)]
+        date_v, time_v, field_v, home_v, away_v, div_v = cells[:6]
+        loc_v = cells[6] if has_location else None
+
         if not date_v and not home_v and not away_v:
             continue  # blank row
 
         row_warnings: list[str] = []
 
         # Date
-        if not isinstance(date_v, (dt.date, dt.datetime)):
+        date_only = parse_date_loose(date_v)
+        if date_only is None:
             row_warnings.append(f"missing/invalid date: {date_v!r}")
             skipped += 1
-            warnings.append({"row": r, "warnings": row_warnings})
+            warnings.append({"gender": gender, "row": r, "warnings": row_warnings})
             continue
-        date_only = date_v.date() if isinstance(date_v, dt.datetime) else date_v
 
-        # Time
+        # Time — TBD or unparseable → midnight + warn, but still emit the row.
         hm = parse_time_loose(time_v)
         if hm is None:
-            row_warnings.append(f"couldn't parse time: {time_v!r}")
+            if isinstance(time_v, str) and time_v.strip().upper() == "TBD":
+                row_warnings.append("time TBD — showing at 12:00 AM")
+            else:
+                row_warnings.append(f"couldn't parse time: {time_v!r}")
             hm = (0, 0)
         hour, minute = hm
 
         kickoff = dt.datetime(date_only.year, date_only.month, date_only.day, hour, minute).isoformat()
 
-        # Age (division is really age group per the source)
+        # Division = age group (+ optional tier suffix on boys, or "Premier/Championship League" on girls).
         div_str = normalise_ws(str(div_v) if div_v is not None else "")
         age = parse_age(div_str)
-        gender = parse_gender(div_str)
         tier_from_div = parse_tier(div_str)
 
-        # Home / away
         def parse_side(raw):
             raw = normalise_ws(str(raw or ""))
+            # TBD teams stay unmatched — placeholder label, no club identity.
+            if raw.upper() == "TBD":
+                return raw, None, age, tier_from_div, "TBD"
             club = match_club(raw)
             side_age  = age or parse_age(raw)
             side_tier = tier_from_div or parse_tier(raw)
@@ -341,57 +440,90 @@ def main() -> None:
         home_raw, home_club, home_age, home_tier, home_label = parse_side(home_v)
         away_raw, away_club, away_age, away_tier, away_label = parse_side(away_v)
 
-        if not home_club:
+        if not home_club and home_raw.upper() != "TBD":
             row_warnings.append(f"could not identify home club: {home_raw!r}")
-        if not away_club:
+        if not away_club and away_raw.upper() != "TBD":
             row_warnings.append(f"could not identify away club: {away_raw!r}")
 
-        # Pick a final ageGroup — the row's division wins; else fall back to whichever side had one.
         final_age = age or home_age or away_age
         if not final_age:
             row_warnings.append(f"no age group parseable (division={div_str!r}, home={home_raw!r})")
-            final_age = "U11"  # sensible default so the row still renders
+            final_age = "U11"
 
-        # Track club usage so we can emit the clubs[] array
         for c in (home_club, away_club):
             if c and c["id"] not in used_clubs:
                 used_clubs[c["id"]] = c
-        if not home_club:
-            used_clubs.setdefault("unknown", {"id": "unknown", "name": "Unknown Club", "short": "?"})
-        if not away_club:
+        # Only insert the "unknown" bucket for genuinely unresolved (non-TBD) sides.
+        if (not home_club and home_raw.upper() != "TBD") or (not away_club and away_raw.upper() != "TBD"):
             used_clubs.setdefault("unknown", {"id": "unknown", "name": "Unknown Club", "short": "?"})
 
+        def side_id(raw, club):
+            if raw.upper() == "TBD": return "tbd"
+            return (club or {"id": "unknown"})["id"]
+        if home_raw.upper() == "TBD" or away_raw.upper() == "TBD":
+            used_clubs.setdefault("tbd", {"id": "tbd", "name": "TBD", "short": "TBD"})
+
         matches.append({
-            "id":             f"cdl-fall-{r}",
-            "kickoff":        kickoff,
-            "homeClubId":     (home_club or {"id": "unknown"})["id"],
-            "awayClubId":     (away_club or {"id": "unknown"})["id"],
-            "homeTeamLabel":  home_label,
-            "awayTeamLabel":  away_label,
-            "field":          normalise_ws(str(field_v or "")),
-            "locationAddress": normalise_ws(str(loc_v or "")),
-            "ageGroup":       final_age,
-            "gender":         gender,
-            "notes":          None,
-            "sourceRow":      r,
+            "id":              f"cdl-fall-{gender.lower()}-{r}",
+            "kickoff":         kickoff,
+            "homeClubId":      side_id(home_raw, home_club),
+            "awayClubId":      side_id(away_raw, away_club),
+            "homeTeamLabel":   home_label,
+            "awayTeamLabel":   away_label,
+            "field":           normalise_ws(str(field_v or "")),
+            "locationAddress": normalise_ws(str(loc_v or "")) if has_location else "",
+            "ageGroup":        final_age,
+            "gender":          gender,
+            "notes":           None,
+            "sourceRow":       r,
         })
+        added += 1
 
         if row_warnings:
             warnings.append({
-                "row": r, "date": str(date_only), "home": home_raw, "away": away_raw,
-                "division": div_str, "warnings": row_warnings,
+                "gender": gender, "row": r, "date": str(date_only),
+                "home": home_raw, "away": away_raw, "division": div_str,
+                "warnings": row_warnings,
             })
+
+    return (added, skipped)
+
+
+def main() -> None:
+    matches: list = []
+    warnings: list = []
+    used_clubs: dict = {}
+
+    per_feed = []
+    for feed in FEEDS:
+        path = feed["path"]
+        gender = feed["gender"]
+        if not path.exists() and feed.get("snapshot_fallback") and feed["snapshot_fallback"].exists():
+            snap = feed["snapshot_fallback"]
+            print(f"→ Ingesting {gender} from SNAPSHOT {snap.name} (live source {path.name} missing)")
+            added = ingest_snapshot(snap, gender, used_clubs, matches)
+            per_feed.append((gender, added, 0))
+            continue
+        print(f"→ Ingesting {feed['tab']} ({gender}) from {path.name}")
+        added, skipped = ingest_tab(
+            path, feed["tab"], gender, feed["has_location"],
+            used_clubs, matches, warnings,
+        )
+        per_feed.append((gender, added, skipped))
 
     # Emit clubs[] with placeholder crests + Sanity name hints so the server
     # component can swap in the real crest at request time.
     clubs_out = []
     for cid, meta in used_clubs.items():
+        if cid == "tbd":
+            # No crest — the loader/component treats this as "no crest available".
+            continue
         short = meta.get("short") or cid[:3].upper()
         clubs_out.append({
             "id":               cid,
             "name":             meta["name"],
             "shortName":        short,
-            "conference":       "",  # CDL doesn't use conferences; blank so CalendarClub type is happy
+            "conference":       "",
             "logoUrl":          placeholder_svg(cid, short),
             "sanityNameHints":  meta.get("sanityNameHints", []),
         })
@@ -399,14 +531,17 @@ def main() -> None:
 
     OUT_MATCHES.write_text(json.dumps({
         "generatedAt": dt.datetime.now().isoformat(timespec="seconds"),
-        "source":      SOURCE.name,
+        "sources":     [{"path": str(f["path"]), "tab": f["tab"], "gender": f["gender"]} for f in FEEDS],
         "clubs":       clubs_out,
         "matches":     matches,
     }, indent=2))
 
     OUT_WARNINGS.write_text(json.dumps(warnings, indent=2))
 
-    print(f"✓ {len(matches)} matches ingested, {skipped} skipped, {len(warnings)} rows with warnings")
+    per_feed_summary = ", ".join(f"{g}={a}" for g, a, _ in per_feed)
+    total_skipped = sum(s for _, _, s in per_feed)
+    print(f"\n✓ {len(matches)} matches ingested ({per_feed_summary}), "
+          f"{total_skipped} skipped, {len(warnings)} rows with warnings")
     print(f"  → {OUT_MATCHES.relative_to(REPO_ROOT)}")
     print(f"  → {OUT_WARNINGS.relative_to(REPO_ROOT)} ({len(warnings)} entries)")
     print(f"  → clubs identified: {[c['id'] for c in clubs_out]}")

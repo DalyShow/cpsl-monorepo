@@ -4,11 +4,15 @@ import type { AgeGroup, CalendarClub } from "./types";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
+export type GenderFilter = "M" | "G" | null;
+
 export interface LeagueCalendarFilterValue {
   /** ISO date (YYYY-MM-DD). Always populated. */
   date:     string;
   clubId:   string | null;
   ageGroup: AgeGroup | null;
+  /** null = All, "M" = Boys, "G" = Girls. */
+  gender:   GenderFilter;
 }
 
 /** Compute the next upcoming Saturday (today, if today is Saturday). */
@@ -30,6 +34,7 @@ export function defaultFilterValue(): LeagueCalendarFilterValue {
     date:     upcomingSaturdayISO(),
     clubId:   null,
     ageGroup: null,
+    gender:   null,
   };
 }
 
@@ -38,6 +43,7 @@ export const DEFAULT_FILTER_VALUE: LeagueCalendarFilterValue = {
   date:     "",
   clubId:   null,
   ageGroup: null,
+  gender:   null,
 };
 
 export interface LeagueCalendarFiltersProps {
@@ -46,6 +52,8 @@ export interface LeagueCalendarFiltersProps {
   onChange:     (next: LeagueCalendarFilterValue) => void;
   /** Ordered age groups shown as chips. Defaults to CPSL's U13–U19 range. */
   ageGroups?:   AgeGroup[];
+  /** When true, render the All/Boys/Girls segmented control. Default: false. */
+  showGender?:  boolean;
 }
 
 const DEFAULT_AGE_GROUPS: AgeGroup[] = ["U13", "U14", "U15", "U16", "U17", "U19"];
@@ -57,6 +65,7 @@ export function LeagueCalendarFilters({
   value,
   onChange,
   ageGroups = DEFAULT_AGE_GROUPS,
+  showGender = false,
 }: LeagueCalendarFiltersProps) {
   const patch = (partial: Partial<LeagueCalendarFilterValue>) =>
     onChange({ ...value, ...partial });
@@ -83,6 +92,19 @@ export function LeagueCalendarFilters({
               ...clubs.map((c) => ({ value: c.id, label: c.name })),
             ]}
           />
+
+          {showGender && (
+            <Segmented<GenderFilter>
+              label="Show"
+              value={value.gender}
+              onChange={(g) => patch({ gender: g })}
+              options={[
+                { value: null, label: "All" },
+                { value: "M",  label: "Boys" },
+                { value: "G",  label: "Girls" },
+              ]}
+            />
+          )}
 
           {/* Age chips pushed to the far right of the same row. */}
           <div style={{ marginLeft: "auto" }}>
@@ -139,9 +161,9 @@ export function LeagueCalendarFilters({
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-/** True when any non-date filter is active (club or age). */
+/** True when any non-date filter is active (club or age or gender). */
 export function isFiltered(v: LeagueCalendarFilterValue): boolean {
-  return !!(v.clubId || v.ageGroup);
+  return !!(v.clubId || v.ageGroup || v.gender);
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -228,6 +250,64 @@ function Selector({
         ))}
       </select>
     </label>
+  );
+}
+
+function Segmented<T>({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label:    string;
+  value:    T;
+  onChange: (v: T) => void;
+  options:  { value: T; label: string }[];
+}) {
+  return (
+    <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
+      <Label>{label}</Label>
+      <div
+        role="group"
+        aria-label={label}
+        style={{
+          display:      "inline-flex",
+          border:       "1px solid #1E2D45",
+          borderRadius: 999,
+          overflow:     "hidden",
+          background:   "#0A1628",
+        }}
+      >
+        {options.map((opt, i) => {
+          const active = opt.value === value;
+          return (
+            <button
+              key={String(opt.value)}
+              type="button"
+              onClick={() => onChange(opt.value)}
+              aria-pressed={active}
+              style={{
+                appearance:     "none",
+                border:         "none",
+                borderLeft:     i === 0 ? "none" : "1px solid #1E2D45",
+                padding:        "6px 14px",
+                background:     active ? "rgba(212,185,73,0.15)" : "transparent",
+                color:          active ? "#E5C97A" : "#94A3B8",
+                fontFamily:     "'Barlow Condensed', sans-serif",
+                fontWeight:     700,
+                fontSize:       12,
+                letterSpacing:  "0.14em",
+                textTransform:  "uppercase",
+                cursor:         "pointer",
+                transition:     "all 120ms ease",
+              }}
+            >
+              {opt.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 

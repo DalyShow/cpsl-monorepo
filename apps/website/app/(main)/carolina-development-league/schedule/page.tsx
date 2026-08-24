@@ -79,7 +79,7 @@ export default async function CalendarPage() {
           </p>
         </div>
       </header>
-      <CalendarBody clubs={clubs} matches={CDL_MATCHES} ageGroups={CDL_AGE_GROUPS} />
+      <CalendarBody clubs={clubs} matches={CDL_MATCHES} ageGroups={CDL_AGE_GROUPS} showGender />
     </main>
   );
 }
