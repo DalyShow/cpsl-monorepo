@@ -8,6 +8,10 @@ import type { Metadata } from "next";
  * Static content by design — the RFP is a fixed-term document (proposals
  * due 9/11/26); edits go through code review, not Studio.
  */
+/** Revalidate hourly so layout-level nav edits in Sanity reach this
+ *  otherwise-static page without a redeploy. */
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "RFP: Tournament Series & Team Travel Management — CPSL",
   description:

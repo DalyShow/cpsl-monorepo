@@ -6,6 +6,10 @@ import type { Metadata } from "next";
  * match-day requirements table and pre-match quick check from the
  * printed guide. Static content; unlinked + noindex while under review.
  */
+/** Revalidate hourly so layout-level nav edits in Sanity reach this
+ *  otherwise-static page without a redeploy. */
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Game Day Operations Guide — CPSL N1",
   description:

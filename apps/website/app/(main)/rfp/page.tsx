@@ -8,6 +8,10 @@ import Link from "next/link";
  * Unlinked from nav + noindex: shared directly with prospective
  * proposers, not general site visitors.
  */
+/** Revalidate hourly so layout-level nav edits in Sanity reach this
+ *  otherwise-static page without a redeploy. */
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Request for Proposal — Carolina Premier Soccer League",
   description:
