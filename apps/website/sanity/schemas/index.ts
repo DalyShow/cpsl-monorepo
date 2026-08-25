@@ -28,6 +28,10 @@ import { dualPanelBlock }      from "./blocks/dualPanelBlock";
 import { dualPanelItem }       from "./blocks/dualPanelItem";
 import { faqAccordionBlock }   from "./blocks/faqAccordionBlock";
 import { faqItem }             from "./blocks/faqItem";
+import {
+  weatherGuidelinesBlock,
+  weatherGuidelineRow,
+} from "./blocks/weatherGuidelinesBlock";
 import { heroBentoBlock }      from "./blocks/heroBentoBlock";
 import { heroBentoBadge }      from "./blocks/heroBentoBadge";
 import { photoTile }           from "./blocks/tiles/photoTile";
@@ -66,6 +70,8 @@ export const schemaTypes = [
   dualPanelItem,
   faqAccordionBlock,
   faqItem,
+  weatherGuidelinesBlock,
+  weatherGuidelineRow,
   heroBentoBlock,
   heroBentoBadge,
   photoTile,

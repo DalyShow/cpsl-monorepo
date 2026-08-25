@@ -62,6 +62,7 @@ export const page = defineType({
         { type: "dualPanelBlock" },
         { type: "faqAccordionBlock" },
         { type: "heroBentoBlock" },
+        { type: "weatherGuidelinesBlock" },
       ],
     }),
   ],

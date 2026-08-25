@@ -15,6 +15,7 @@ import { PromoHeroBlock } from "./PromoHeroBlock";
 import { DualPanelBlock } from "./DualPanelBlock";
 import { FAQAccordionBlock } from "./FAQAccordionBlock";
 import { HeroBentoBlock } from "./HeroBentoBlock";
+import { WeatherGuidelinesBlock } from "./WeatherGuidelinesBlock";
 
 // Each block from Sanity has _type, _key, and its own fields
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -99,6 +100,10 @@ function renderInner(block: Block, isPrimary: boolean) {
     case "heroBentoBlock":
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return <HeroBentoBlock {...(block as any)} />;
+
+    case "weatherGuidelinesBlock":
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return <WeatherGuidelinesBlock {...(block as any)} />;
 
     default:
       // Unknown block type — log in dev, render nothing in prod
