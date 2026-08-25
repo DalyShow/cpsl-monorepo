@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 export default function RfpLandingPage() {
   return (
     <main
+      className="rfp-landing"
       style={{
         position:       "relative",
         minHeight:      "calc(100svh - 80px)",
@@ -97,10 +98,11 @@ export default function RfpLandingPage() {
               maxWidth:   560,
             }}
           >
-            CPSL is seeking a qualified partner to manage tournament operations and
-            the official team travel &amp; housing program for the 2026–27 season —
-            five championship events, 380+ participating teams, and thousands of
-            traveling families across North Carolina.
+            {"CPSL is seeking a qualified partner to manage tournament operations and the official team travel & housing program for the 2026–27 season"}
+            <span className="rfp-desc-dot">.</span>
+            <span className="rfp-desc-tail">
+              {" — five championship events, 380+ participating teams, and thousands of traveling families across North Carolina."}
+            </span>
           </p>
 
           <p
@@ -140,6 +142,31 @@ export default function RfpLandingPage() {
           </Link>
         </div>
       </div>
+
+      {/* Mobile: slide the hero photo up behind the (transparent) logo
+          ticker so the whole landing fits one screen. The ticker is 67px
+          tall (30px section padding + 37px tiles) and sits directly above
+          this main in the layout — pull up by exactly that, then raise
+          the ticker so the crests paint over the photo. Also trims the
+          description tail so the copy block stays compact. */}
+      <style>{`
+        .rfp-desc-dot { display: none; }
+        @media (max-width: 767px) {
+          .rfp-landing {
+            margin-top: -67px;
+            min-height: calc(100svh - 80px);
+          }
+          .rfp-landing > div {
+            padding-top: 110px;
+          }
+          div.pt-20 > section:first-child {
+            position: relative;
+            z-index: 2;
+          }
+          .rfp-desc-tail { display: none; }
+          .rfp-desc-dot { display: inline; }
+        }
+      `}</style>
     </main>
   );
 }
