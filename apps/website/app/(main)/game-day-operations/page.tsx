@@ -269,42 +269,16 @@ function QuickCheck({ items, accent }: { items: string[]; accent: string }) {
 export default function GameDayOperationsPage() {
   return (
     <main style={{ background: "#041124", minHeight: "100vh" }}>
-      {/* ── Hero ───────────────────────────────────────────────── */}
+      {/* ── Hero — flat navy, matching the CDL schedule header ──── */}
       <header
         style={{
-          position:  "relative",
-          overflow:  "hidden",
-          minHeight: 380,
-          display:   "flex",
-          alignItems: "flex-end",
+          background:   "#041124",
+          borderBottom: "1px solid #1E2D45",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/gameday/gameday-hero.jpg"
-          alt=""
-          aria-hidden
-          style={{
-            position:       "absolute",
-            inset:          0,
-            width:          "100%",
-            height:         "100%",
-            objectFit:      "cover",
-            objectPosition: "center 65%",
-          }}
-        />
-        <div
-          aria-hidden
-          style={{
-            position:   "absolute",
-            inset:      0,
-            background:
-              "linear-gradient(to top, rgba(4,17,36,0.96) 0%, rgba(4,17,36,0.62) 45%, rgba(4,17,36,0.30) 100%)",
-          }}
-        />
         <div
           className="max-w-7xl mx-auto w-full px-4 sm:px-6"
-          style={{ position: "relative", paddingTop: 90, paddingBottom: 36 }}
+          style={{ paddingTop: 40, paddingBottom: 32 }}
         >
           <div
             style={{
@@ -356,8 +330,8 @@ export default function GameDayOperationsPage() {
                   display:        "inline-flex",
                   alignItems:     "center",
                   gap:            8,
-                  border:         "1px solid rgba(244,239,230,0.35)",
-                  background:     "rgba(4,17,36,0.45)",
+                  border:         "1px solid #1E2D45",
+                  background:     "#0A1628",
                   color:          "#F4EFE6",
                   fontFamily:     "'Barlow Condensed', sans-serif",
                   fontWeight:     700,
