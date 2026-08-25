@@ -519,20 +519,26 @@ def main() -> None:
         per_feed.append((gender, added, skipped))
 
     # Emit clubs[] with placeholder crests + Sanity name hints so the server
-    # component can swap in the real crest at request time.
+    # component can swap in the real crest at request time. CDL_CLUBS is the
+    # canonical source of truth for display name + hints — always prefer it
+    # over anything registered from a snapshot (which may hold stale names).
+    canonical_by_id = {c["id"]: c for c in CDL_CLUBS}
     clubs_out = []
     for cid, meta in used_clubs.items():
         if cid == "tbd":
             # No crest — the loader/component treats this as "no crest available".
             continue
-        short = meta.get("short") or cid[:3].upper()
+        canonical = canonical_by_id.get(cid)
+        name  = canonical["name"]  if canonical else meta["name"]
+        short = canonical["short"] if canonical else (meta.get("short") or cid[:3].upper())
+        hints = canonical.get("sanityNameHints", []) if canonical else meta.get("sanityNameHints", [])
         clubs_out.append({
             "id":               cid,
-            "name":             meta["name"],
+            "name":             name,
             "shortName":        short,
             "conference":       "",
             "logoUrl":          placeholder_svg(cid, short),
-            "sanityNameHints":  meta.get("sanityNameHints", []),
+            "sanityNameHints":  hints,
         })
     clubs_out.sort(key=lambda c: c["name"])
 

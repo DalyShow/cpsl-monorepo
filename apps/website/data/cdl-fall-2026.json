@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T15:43:16",
+  "generatedAt": "2026-08-25T15:46:49",
   "sources": [
     {
       "path": "/Users/dalyshow/Desktop/CDL - Schedules and Contact Sheet Fall 2026.xlsx",
@@ -80,10 +80,10 @@
       "conference": "",
       "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiNDODEwMkUiLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiNGMkYyRjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5OQ0Y8L3RleHQ+PC9zdmc+",
       "sanityNameHints": [
-        "fusion",
         "nc fusion",
         "north carolina fusion",
-        "ncf"
+        "fusion.svg",
+        "fusion.png"
       ]
     },
     {
@@ -118,14 +118,14 @@
     },
     {
       "id": "wilmington-hammerheads",
-      "name": "Wilmington Hammerheads Youth",
+      "name": "Wilmington Hammerheads",
       "shortName": "WHYFC",
       "conference": "",
       "logoUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4OCA4OCI+PGNpcmNsZSBjeD0iNDQiIGN5PSI0NCIgcj0iNDIiIGZpbGw9IiMwMDMwNTciLz48dGV4dCB4PSI0NCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJCYXJsb3cgQ29uZGVuc2VkLCBJbXBhY3QsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI5MDAiIGZvbnQtc2l6ZT0iMzAiIGZpbGw9IiMzRUIxQzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSIyIj5XSFlGQzwvdGV4dD48L3N2Zz4=",
       "sanityNameHints": [
-        "hammerheads",
-        "wilmington",
-        "whyfc"
+        "wilmington hammerheads",
+        "hammerheads.png",
+        "hammerheads.svg"
       ]
     }
   ],
