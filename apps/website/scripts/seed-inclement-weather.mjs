@@ -289,11 +289,19 @@ async function main() {
     linkNewWindow: false,
   });
 
+  // Look up the League Information page id so we can nest under it.
+  const leagueInfoId = await client.fetch(
+    `*[_type == "page" && slug.current == "league-information"][0]._id`
+  );
+
   const doc = {
     _id:      "inclement-weather-page",
     _type:    "page",
     title:    "Inclement Weather Plan",
     slug:     { _type: "slug", current: "inclement-weather" },
+    ...(leagueInfoId
+      ? { parent: { _type: "reference", _ref: leagueInfoId } }
+      : {}),
     sections: [
       heroSection,
       intro,
@@ -312,7 +320,7 @@ async function main() {
 
   console.log("\n✓ Page seeded.");
   console.log(`  → Studio: https://cpsl-website.vercel.app/studio/structure/page;${doc._id}`);
-  console.log(`  → Live:   https://cpsl-website.vercel.app/inclement-weather`);
+  console.log(`  → Live:   https://cpsl-website.vercel.app/league-information/inclement-weather`);
 }
 
 main().catch((err) => { console.error(err); process.exit(1); });
