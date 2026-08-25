@@ -72,6 +72,8 @@ export function TopNav({
   position = "fixed",
 }: TopNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  // Which flyout group is expanded in the mobile menu (by label).
+  const [expanded, setExpanded] = useState<string | null>(null);
   const pathname = usePathname() ?? "/";
 
   useEffect(() => {
@@ -84,6 +86,18 @@ export function TopNav({
     window.addEventListener("resize", close);
     return () => window.removeEventListener("resize", close);
   }, []);
+
+  useEffect(() => {
+    // Full-viewport menu: lock page scroll behind it while open, and
+    // collapse any expanded group when the menu closes.
+    if (!menuOpen) {
+      setExpanded(null);
+      return;
+    }
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, [menuOpen]);
 
   const isFixed = position === "fixed";
   return (
@@ -227,71 +241,109 @@ export function TopNav({
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — full-viewport overlay below the header bar. */}
       {menuOpen && (
         <div
-          className="md:hidden absolute left-0 right-0 top-20 px-4"
-          style={{
-            background: "#041124",
-            borderBottom: "1px solid #1E2D45",
-          }}
+          className="md:hidden fixed inset-x-0 top-20 bottom-0 z-40 overflow-y-auto px-6"
+          style={{ background: "#041124" }}
         >
-          <nav className="flex flex-col py-4 gap-1">
-            {items.map((item) =>
-              isFlyoutItem(item) ? (
-                <div key={item.label} className="py-2">
-                  <div
-                    className="px-3 pt-2 pb-1"
-                    style={{
-                      color: "#7A9BAA",
-                      fontFamily: "'Barlow Condensed', sans-serif",
-                      fontWeight: 600,
-                      fontSize: "12px",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.12em",
-                      opacity: 0.7,
-                    }}
-                  >
-                    {item.label}
-                  </div>
-                  {item.flyout.items.map((sub) => (
-                    <Link
-                      key={sub.label}
-                      href={sub.href || "#"}
-                      onClick={() => setMenuOpen(false)}
-                      className="block px-3 py-2.5"
+          <nav className="flex flex-col pt-4 pb-10 min-h-full">
+            {items.map((item) => {
+              if (isFlyoutItem(item)) {
+                const isExpanded = expanded === item.label;
+                return (
+                  <div key={item.label} style={{ borderBottom: "1px solid #1E2D45" }}>
+                    <button
+                      type="button"
+                      onClick={() => setExpanded(isExpanded ? null : item.label)}
+                      aria-expanded={isExpanded}
+                      className="w-full flex items-center justify-between py-5 text-left"
                       style={{
-                        color: "white",
-                        fontFamily: "'Barlow Condensed', sans-serif",
-                        fontWeight: 600,
-                        fontSize: "15px",
+                        background:     "transparent",
+                        border:         "none",
+                        cursor:         "pointer",
+                        color:          isExpanded ? "#D4B949" : "#F4EFE6",
+                        fontFamily:     "'Barlow Condensed', sans-serif",
+                        fontWeight:     700,
+                        fontSize:       "22px",
+                        textTransform:  "uppercase",
+                        letterSpacing:  "0.08em",
+                        lineHeight:     1,
+                        padding:        "20px 0",
                       }}
                     >
-                      {sub.label}
-                    </Link>
-                  ))}
-                </div>
-              ) : (
+                      {item.label}
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
+                        style={{
+                          flexShrink: 0,
+                          transform:  isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                          transition: "transform 180ms ease",
+                        }}
+                      >
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </button>
+                    {isExpanded && (
+                      <div
+                        className="flex flex-col pb-4"
+                        style={{ borderLeft: "2px solid #1E2D45", marginLeft: 2, paddingLeft: 18 }}
+                      >
+                        {item.flyout.items.map((sub) => (
+                          <Link
+                            key={sub.label}
+                            href={sub.href || "#"}
+                            onClick={() => setMenuOpen(false)}
+                            className="py-3"
+                            style={{
+                              color:         isActiveHref(pathname, sub.href || "") ? "#D4B949" : "#C8D2DF",
+                              fontFamily:    "'Barlow Condensed', sans-serif",
+                              fontWeight:    600,
+                              fontSize:      "18px",
+                              textTransform: "uppercase",
+                              letterSpacing: "0.07em",
+                              lineHeight:    1,
+                            }}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              return (
                 <Link
                   key={item.label}
                   href={item.href || "#"}
                   onClick={() => setMenuOpen(false)}
-                  className="px-3 py-3"
+                  className="block py-5"
                   style={{
-                    color: isActiveHref(pathname, item.href || "") ? "#D4B949" : "#F4EFE6",
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontWeight: 600,
-                    fontSize: "14px",
+                    color:         isActiveHref(pathname, item.href || "") ? "#D4B949" : "#F4EFE6",
+                    fontFamily:    "'Barlow Condensed', sans-serif",
+                    fontWeight:    700,
+                    fontSize:      "22px",
                     textTransform: "uppercase",
-                    letterSpacing: "0.11em",
+                    letterSpacing: "0.08em",
+                    lineHeight:    1,
+                    borderBottom:  "1px solid #1E2D45",
                   }}
                 >
                   {item.label}
                 </Link>
-              ),
-            )}
+              );
+            })}
             {ctaLabel && (
-              <div className="mt-2">
+              <div className="mt-8">
                 <ArrowPillButton
                   href={ctaHref || "#"}
                   newWindow={ctaNewWindow}
