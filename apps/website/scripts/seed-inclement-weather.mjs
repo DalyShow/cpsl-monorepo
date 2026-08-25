@@ -247,24 +247,12 @@ async function main() {
     heading: "Safe shelter and the 30-minute rule",
     lead: pt(
       "If thunder is heard or lightning is observed, play must be suspended immediately. There is no requirement to see lightning before suspending play — hearing thunder is sufficient reason to clear the field. The referee will suspend the match and all players, coaches, referees and spectators should immediately seek appropriate shelter.",
+      "[[b]]Preferred shelter:[[/b]] a substantial, fully enclosed building; or a fully enclosed vehicle with a solid metal roof and windows closed.",
+      "[[b]]Not safe shelter:[[/b]] team tents or canopies, dugouts, covered benches, pavilions or picnic shelters, trees, open-sided buildings, or remaining on/near the playing field.",
+      "[[b]]30-minute rule.[[/b]] Play may not resume until 30 minutes have passed since the [[b]]last[[/b]] sound of thunder or [[b]]last[[/b]] observed lightning. Every additional occurrence of thunder or lightning restarts the 30-minute clock.",
+      "[[b]]Example.[[/b]] Thunder heard at 4:10 PM → earliest restart 4:40 PM. Additional thunder at 4:25 PM → clock resets → earliest restart 4:55 PM.",
+      "[[b]]Responsibility.[[/b]] The referee has authority over the match once the game is under their jurisdiction. Facility management, tournament staff or CPSL officials may also suspend or close fields because of dangerous weather. No coach, team official or parent may pressure a referee to continue or restart a match when the referee believes conditions are unsafe.",
     ),
-    paragraphs: [
-      ...pt(
-        "[[b]]Preferred shelter:[[/b]] a substantial, fully enclosed building; or a fully enclosed vehicle with a solid metal roof and windows closed.",
-      ),
-      ...pt(
-        "[[b]]Not safe shelter:[[/b]] team tents or canopies, dugouts, covered benches, pavilions or picnic shelters, trees, open-sided buildings, or remaining on/near the playing field.",
-      ),
-      ...pt(
-        "[[b]]30-minute rule.[[/b]] Play may not resume until 30 minutes have passed since the [[b]]last[[/b]] sound of thunder or [[b]]last[[/b]] observed lightning. Every additional occurrence of thunder or lightning restarts the 30-minute clock.",
-      ),
-      ...pt(
-        "[[b]]Example.[[/b]] Thunder heard at 4:10 PM → earliest restart 4:40 PM. Additional thunder at 4:25 PM → clock resets → earliest restart 4:55 PM.",
-      ),
-      ...pt(
-        "[[b]]Responsibility.[[/b]] The referee has authority over the match once the game is under their jurisdiction. Facility management, tournament staff or CPSL officials may also suspend or close fields because of dangerous weather. No coach, team official or parent may pressure a referee to continue or restart a match when the referee believes conditions are unsafe.",
-      ),
-    ],
   });
 
   const severeWeather = block("contentSectionBlock", {
@@ -280,8 +268,6 @@ async function main() {
     heading: "Resuming — or reporting — a suspended match",
     lead: pt(
       "When weather causes a match to be suspended, the referee and home club should make reasonable efforts to allow conditions to improve. Consider remaining daylight, field availability, facility closing times, subsequent scheduled matches, travel considerations, continuing weather threats and overall participant safety.",
-    ),
-    paragraphs: pt(
       "If conditions do not allow the match to safely resume, the referee may abandon the match. The match should be reported to CPSL, and the [[b]]League will determine whether the match is considered complete, resumed at a later date or replayed[[/b]] in accordance with CPSL competition rules.",
     ),
   });
