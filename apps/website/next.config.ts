@@ -53,3 +53,5 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+// Redeploy marker: nav-icons-2026-08-25
