@@ -273,40 +273,85 @@ function QuickCheck({ items, accent }: { items: string[]; accent: string }) {
 export default function GameDayOperationsPage() {
   return (
     <main style={{ background: "#041124", minHeight: "100vh" }}>
-      {/* ── Hero — flat navy, matching the CDL schedule header ──── */}
+      {/* ── Hero — fullscreen photo, matching the Inclement Weather
+             page's HeroBlock recipe: pulls up behind the transparent
+             logo ticker, scrim + 0.55 image opacity, bottom blend into
+             navy, centered copy. ─────────────────────────────────── */}
       <header
         style={{
-          background:   "#041124",
-          borderBottom: "1px solid #1E2D45",
+          position:       "relative",
+          marginTop:      "-78px",
+          minHeight:      "100svh",
+          paddingTop:     "clamp(96px, 18vh, 174px)",
+          paddingRight:   "clamp(16px, 5vw, 24px)",
+          paddingBottom:  "calc(clamp(56px, 10vh, 96px) + env(safe-area-inset-bottom))",
+          paddingLeft:    "clamp(16px, 5vw, 24px)",
+          display:        "flex",
+          alignItems:     "center",
+          justifyContent: "center",
+          zIndex:         0,
+          background:     "#041124",
+          overflow:       "hidden",
         }}
       >
         <div
-          className="max-w-7xl mx-auto w-full px-4 sm:px-6"
-          style={{ paddingTop: 40, paddingBottom: 32 }}
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset:    0,
+            background:
+              "linear-gradient(to bottom, rgba(9,22,40,0.72) 0%, rgba(9,22,40,0.50) 55%, rgba(9,22,40,0.20) 100%), url(/gameday/gameday-hero.jpg) center/cover no-repeat",
+            opacity:       0.55,
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            left:     0,
+            right:    0,
+            bottom:   0,
+            height:   "35%",
+            background:
+              "linear-gradient(to bottom, rgba(4,17,36,0) 0%, rgba(4,17,36,1) 100%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div
+          style={{
+            position:  "relative",
+            zIndex:    1,
+            maxWidth:  "860px",
+            margin:    "0 auto",
+            padding:   "0 24px",
+            textAlign: "center",
+          }}
         >
-          <div
+          <p
             style={{
-              fontFamily:     "'Barlow Condensed', sans-serif",
-              fontWeight:     700,
-              fontSize:       13,
-              letterSpacing:  "0.28em",
-              textTransform:  "uppercase",
-              color:          "#D4B949",
-              marginBottom:   12,
+              fontFamily:    "'Barlow Condensed', sans-serif",
+              fontWeight:    600,
+              fontSize:      "13px",
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              color:         "#D4B949",
+              marginBottom:  "20px",
             }}
           >
             CPSL N1
-          </div>
+          </p>
           <h1
             style={{
-              fontFamily:     "'Barlow Condensed', sans-serif",
-              fontWeight:     900,
-              fontSize:       "clamp(38px, 5.4vw, 60px)",
-              lineHeight:     0.98,
-              letterSpacing:  "0.02em",
-              textTransform:  "uppercase",
-              color:          "#F4EFE6",
-              margin:         "0 0 14px",
+              fontFamily:    "'Barlow Condensed', sans-serif",
+              fontWeight:    900,
+              fontSize:      "clamp(48px, 8vw, 88px)",
+              lineHeight:    1.0,
+              letterSpacing: "-0.02em",
+              textTransform: "uppercase",
+              color:         "#F4EFE6",
+              margin:        "0 0 24px",
             }}
           >
             Game Day Operations Guide
@@ -314,18 +359,19 @@ export default function GameDayOperationsPage() {
           <p
             style={{
               fontFamily: "Inter, sans-serif",
-              fontSize:   15,
-              lineHeight: 1.6,
-              color:      "#C8D2DF",
-              margin:     "0 0 24px",
-              maxWidth:   560,
+              fontWeight: 400,
+              fontSize:   "clamp(16px, 2vw, 20px)",
+              lineHeight: 1.65,
+              color:      "#D7DEE8",
+              margin:     "0 auto 32px",
+              maxWidth:   620,
             }}
           >
             {"Match day requirements and pre-match checklists for every CPSL N1 division. Home clubs should have all standards in place prior to kickoff."}
           </p>
 
           {/* Division jump chips */}
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
             {DIVISIONS.map((d) => (
               <a
                 key={d.id}
@@ -334,8 +380,8 @@ export default function GameDayOperationsPage() {
                   display:        "inline-flex",
                   alignItems:     "center",
                   gap:            8,
-                  border:         "1px solid #1E2D45",
-                  background:     "#0A1628",
+                  border:         "1px solid rgba(244,239,230,0.35)",
+                  background:     "rgba(4,17,36,0.45)",
                   color:          "#F4EFE6",
                   fontFamily:     "'Barlow Condensed', sans-serif",
                   fontWeight:     700,
