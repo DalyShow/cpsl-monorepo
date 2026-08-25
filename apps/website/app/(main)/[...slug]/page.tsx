@@ -4,6 +4,11 @@ import { SubNav } from "@cpsl/ui";
 import { BlockRenderer, NO_REVEAL } from "@/components/blocks/BlockRenderer";
 import { sanityFetch } from "@/lib/sanity/client";
 
+/** ISR — cache the rendered page at Vercel's edge for 60s. Editor updates
+ *  land within one minute; visitors get instant renders in between and
+ *  don't have to refresh past Sanity CDN staleness. */
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {
