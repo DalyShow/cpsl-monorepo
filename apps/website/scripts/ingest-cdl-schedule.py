@@ -45,9 +45,10 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 BOYS_SOURCE          = Path.home() / "Desktop" / "CDL - Schedules and Contact Sheet Fall 2026.xlsx"
 BOYS_SNAPSHOT_JSON   = DATA_DIR / "cdl-fall-2026-boys-snapshot.json"
 GIRLS_SOURCE         = Path.home() / "Desktop" / "CDL - Schedules and Contact Sheet Fall 2026 (This is going to CDL_CPSL Web person.xlsx"
+GIRLS_SNAPSHOT_JSON  = DATA_DIR / "cdl-fall-2026-girls-snapshot.json"
 
 # One entry per feed. `kind` = "xlsx" or "snapshot" (JSON already parsed).
-# `snapshot_fallback` is used when the live xlsx isn't on disk (see boys).
+# `snapshot_fallback` is used when the live xlsx isn't on disk.
 FEEDS = [
     {
         "kind":             "xlsx",
@@ -55,7 +56,7 @@ FEEDS = [
         "tab":              "Fall Schedule",
         "gender":           "M",
         "has_location":     True,
-        "snapshot_fallback": BOYS_SNAPSHOT_JSON,  # used when the .xlsx is missing
+        "snapshot_fallback": BOYS_SNAPSHOT_JSON,
     },
     {
         "kind":             "xlsx",
@@ -63,6 +64,7 @@ FEEDS = [
         "tab":              "Girls CDL Fall Schedule",
         "gender":           "G",
         "has_location":     False,
+        "snapshot_fallback": GIRLS_SNAPSHOT_JSON,
     },
 ]
 
@@ -101,7 +103,9 @@ CDL_CLUBS = [
         "name":     "NC Fusion",
         "short":    "NCF",
         "aliases":  ["north carolina fusion", "nc fusion", "ncf pre", "ncf ws", "ncf gso", "ws red", "gso red", "nc fus", "fusion", " ncf "],
-        "sanityNameHints": ["fusion", "nc fusion", "north carolina fusion", "ncf"],
+        # "ncf" is intentionally excluded — it's a substring of "NCFC" and
+        # would pull the NC FC Youth crest onto NC Fusion cards.
+        "sanityNameHints": ["nc fusion", "north carolina fusion", "fusion.svg", "fusion.png"],
         "label_strip":     ["north carolina fusion", "nc fusion", "fusion", "ncf"],
     },
     {
@@ -114,10 +118,13 @@ CDL_CLUBS = [
     },
     {
         "id":       "wilmington-hammerheads",
-        "name":     "Wilmington Hammerheads Youth",
+        "name":     "Wilmington Hammerheads",
         "short":    "WHYFC",
         "aliases":  ["wilmington hammerheads youth", "wilmington hammerheads", "wilmington hh", "hammerheads", "whyfc"],
-        "sanityNameHints": ["hammerheads", "wilmington", "whyfc"],
+        # Prefer the "Wilmington Hammerheads" Sanity entry over the older
+        # "Hammerheads Soccer Club" one still in the ticker — using the
+        # more specific name first ensures the newer crest wins.
+        "sanityNameHints": ["wilmington hammerheads", "hammerheads.png", "hammerheads.svg"],
         "label_strip":     ["wilmington hammerheads youth", "wilmington hammerheads", "wilmington hh", "hammerheads", "whyfc"],
     },
     {
