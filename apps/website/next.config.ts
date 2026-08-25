@@ -40,6 +40,16 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        // Original review URL — the guide now lives under League Standards.
+        source: "/game-day-operations",
+        destination: "/league-standards/game-day-operations",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
