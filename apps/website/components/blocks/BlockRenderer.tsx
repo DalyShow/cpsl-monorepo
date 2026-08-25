@@ -33,10 +33,11 @@ export const NO_REVEAL = new Set([
   "logoTickerBlock",
   "heroBlock",
   "promoHeroBlock",
-  // Informational blocks — reveal wipe hides content that should be
-  // immediately readable (policy tables, safety callouts).
+  // Informational / prose blocks — reveal wipe hides content that should
+  // be immediately readable (policy tables, safety callouts, body copy).
   "weatherGuidelinesBlock",
   "alertBarBlock",
+  "contentSectionBlock",
 ]);
 
 function renderInner(block: Block, isPrimary: boolean) {
