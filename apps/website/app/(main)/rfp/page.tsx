@@ -25,6 +25,10 @@ export default function RfpLandingPage() {
       className="rfp-landing"
       style={{
         position:       "relative",
+        // Pull up behind the transparent logo ticker (67px: 30px section
+        // padding + 37px tiles) so the photo extends under the crests at
+        // every viewport. min-height then spans nav-bottom → viewport-bottom.
+        marginTop:      "-67px",
         minHeight:      "calc(100svh - 80px)",
         display:        "flex",
         alignItems:     "center",
@@ -147,25 +151,22 @@ export default function RfpLandingPage() {
         </div>
       </div>
 
-      {/* Mobile: slide the hero photo up behind the (transparent) logo
-          ticker so the whole landing fits one screen. The ticker is 67px
-          tall (30px section padding + 37px tiles) and sits directly above
-          this main in the layout — pull up by exactly that, then raise
-          the ticker so the crests paint over the photo. Also trims the
-          description tail so the copy block stays compact. */}
+      {/* The hero pulls up behind the transparent ticker at every width
+          (see main's marginTop) — raise the ticker so its crests paint
+          over the photo. On mobile, pad the copy below the crest row and
+          trim the description tail so the block stays compact. */}
       <style>{`
         .rfp-desc-dot { display: none; }
+        div.pt-20 > section:first-child {
+          position: relative;
+          z-index: 2;
+        }
+        .rfp-landing > div {
+          padding-top: 100px;
+        }
         @media (max-width: 767px) {
-          .rfp-landing {
-            margin-top: -67px;
-            min-height: calc(100svh - 80px);
-          }
           .rfp-landing > div {
             padding-top: 110px;
-          }
-          div.pt-20 > section:first-child {
-            position: relative;
-            z-index: 2;
           }
           .rfp-desc-tail { display: none; }
           .rfp-desc-dot { display: inline; }
