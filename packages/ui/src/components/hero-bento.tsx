@@ -46,6 +46,9 @@ export interface HeroBentoProps {
    * "navy". "none" makes it transparent so the page background shows through.
    */
   sectionBackground?: HeroBentoSectionBackground;
+  /** Flip the desktop layout: photo column on the left, text tile on the
+   *  right. Mobile stacking order flips to photo-first as well. */
+  reverse?: boolean;
 }
 
 const SECTION_BG: Record<HeroBentoSectionBackground, string> = {
@@ -81,6 +84,7 @@ export function HeroBento({
   subImage,
   badges,
   sectionBackground = "navy",
+  reverse = false,
 }: HeroBentoProps) {
   // No fallback: when the editor leaves badges empty, render none at all.
   const visibleBadges = (badges ?? []).slice(0, MAX_BADGES);
@@ -146,6 +150,13 @@ export function HeroBento({
           grid-row:    span 1;
           background:  #0A1628;
         }
+
+        /* Reversed variant: photo column left, text tile right. Order
+           re-sorts grid auto-placement, so the photo tiles claim columns
+           1–7 and the text tile lands on 8–12. */
+        .${id}__grid.is-reversed .${id}__tile--photo-main { order: 1; }
+        .${id}__grid.is-reversed .${id}__tile--photo-sub  { order: 2; }
+        .${id}__grid.is-reversed .${id}__tile--text       { order: 3; }
 
         .${id}__photo {
           position:    absolute;
@@ -290,7 +301,7 @@ export function HeroBento({
         }
       `}</style>
 
-      <div className={`${id}__grid`}>
+      <div className={`${id}__grid${reverse ? " is-reversed" : ""}`}>
         {/* Left text tile */}
         <div className={`${id}__tile ${id}__tile--text`}>
           <p className={`${id}__eyebrow`}>{eyebrow}</p>

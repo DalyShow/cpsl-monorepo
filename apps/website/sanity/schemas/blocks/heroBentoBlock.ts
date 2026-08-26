@@ -42,6 +42,14 @@ export const heroBentoBlock = defineType({
       initialValue: "/showcases",
     }),
     defineField({
+      name: "ctaDocument",
+      title: "CTA — Linked Document",
+      type: "reference",
+      to: [{ type: "documentAsset" }],
+      description:
+        "Optional. If set, the CTA downloads this file (e.g. PDF) and the URL above is ignored.",
+    }),
+    defineField({
       name: "ctaNewWindow",
       title: "Open CTA in new window",
       type: "boolean",
@@ -73,6 +81,14 @@ export const heroBentoBlock = defineType({
         "Optional. Up to 3 proof-point badges anchored top-right of the hero photo. On mobile they reflow into a full-width grid strip across the bottom of the photo. Leave empty for no badges.",
       of: [{ type: "heroBentoBadge" }],
       validation: (R) => R.max(3),
+    }),
+    defineField({
+      name: "reverse",
+      title: "Image on left",
+      type: "boolean",
+      initialValue: false,
+      description:
+        "Flip the layout — photo column on the left, text tile on the right.",
     }),
     defineField({
       name: "sectionBackground",

@@ -115,6 +115,7 @@ export default async function DynamicPage({
             logos[]{ ..., asset->{ url } },
             primaryCtaDocument->{ "fileUrl": file.asset->url, "filename": file.asset->originalFilename },
             secondaryCtaDocument->{ "fileUrl": file.asset->url, "filename": file.asset->originalFilename },
+            ctaDocument->{ "fileUrl": file.asset->url, "filename": file.asset->originalFilename },
             tiles[]{
               ...,
               image{ ..., asset->{ url }, "alt": asset->altText },
