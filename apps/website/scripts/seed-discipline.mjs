@@ -90,10 +90,31 @@ function matrixRow(offense, cells, tier = "normal", detail) {
   };
 }
 
+// ── Optional hero image upload (assistant-referee flag photo) ───────────────
+
+async function maybeUploadHero() {
+  const candidates = [
+    process.env.HERO_IMAGE,
+    `${process.env.HOME}/Desktop/referee.jpg`,
+  ].filter(Boolean);
+  const path = candidates.find((p) => existsSync(p));
+  if (!path) {
+    console.log("  ℹ No hero image on disk — hero renders on plain navy.");
+    return undefined;
+  }
+  console.log(`  ↑ uploading hero image: ${path}`);
+  const asset = await client.assets.upload("image", readFileSync(path), {
+    filename: "discipline-hero.jpg",
+  });
+  return asset._id;
+}
+
 // ── Page body ───────────────────────────────────────────────────────────────
 
 async function main() {
   console.log(`Seeding discipline-page → project ${PROJECT_ID} / dataset ${DATASET}`);
+
+  const heroAssetRef = await maybeUploadHero();
 
   const hero = block("heroBlock", {
     eyebrow:      "LEAGUE STANDARDS",
@@ -102,6 +123,15 @@ async function main() {
     ctaLabel:     "",
     ctaHref:      "",
     ctaNewWindow: false,
+    ...(heroAssetRef
+      ? {
+          backgroundImage: {
+            _type: "image",
+            asset: { _type: "reference", _ref: heroAssetRef },
+          },
+          backgroundOpacity: 0.55,
+        }
+      : {}),
   });
 
   const policyBanner = block("alertBarBlock", {
