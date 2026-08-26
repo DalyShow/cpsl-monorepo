@@ -16,6 +16,7 @@ import { DualPanelBlock } from "./DualPanelBlock";
 import { FAQAccordionBlock } from "./FAQAccordionBlock";
 import { HeroBentoBlock } from "./HeroBentoBlock";
 import { WeatherGuidelinesBlock } from "./WeatherGuidelinesBlock";
+import { PenaltyMatrixBlock } from "./PenaltyMatrixBlock";
 
 // Each block from Sanity has _type, _key, and its own fields
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,6 +37,7 @@ export const NO_REVEAL = new Set([
   // Informational / prose blocks — reveal wipe hides content that should
   // be immediately readable (policy tables, safety callouts, body copy).
   "weatherGuidelinesBlock",
+  "penaltyMatrixBlock",
   "alertBarBlock",
   "contentSectionBlock",
 ]);
@@ -109,6 +111,10 @@ function renderInner(block: Block, isPrimary: boolean) {
     case "weatherGuidelinesBlock":
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return <WeatherGuidelinesBlock {...(block as any)} />;
+
+    case "penaltyMatrixBlock":
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return <PenaltyMatrixBlock {...(block as any)} />;
 
     default:
       // Unknown block type — log in dev, render nothing in prod

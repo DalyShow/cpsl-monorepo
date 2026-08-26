@@ -63,6 +63,7 @@ export const page = defineType({
         { type: "faqAccordionBlock" },
         { type: "heroBentoBlock" },
         { type: "weatherGuidelinesBlock" },
+        { type: "penaltyMatrixBlock" },
       ],
     }),
   ],

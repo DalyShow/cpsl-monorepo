@@ -160,6 +160,10 @@ export function ContentSectionCentered({
           margin: 0;
           padding-left: 1.25em;
         }
+        /* Tailwind preflight strips markers — restore them for rich-text lists. */
+        .cs-body ul { list-style: disc; }
+        .cs-body ol { list-style: decimal; }
+        .cs-body li { line-height: 1.8; }
         .cs-body li + li { margin-top: 0.35em; }
         .cs-body p { margin: 0; }
       `}</style>

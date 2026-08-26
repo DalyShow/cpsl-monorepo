@@ -32,6 +32,10 @@ import {
   weatherGuidelinesBlock,
   weatherGuidelineRow,
 } from "./blocks/weatherGuidelinesBlock";
+import {
+  penaltyMatrixBlock,
+  penaltyMatrixRow,
+} from "./blocks/penaltyMatrixBlock";
 import { heroBentoBlock }      from "./blocks/heroBentoBlock";
 import { heroBentoBadge }      from "./blocks/heroBentoBadge";
 import { photoTile }           from "./blocks/tiles/photoTile";
@@ -72,6 +76,8 @@ export const schemaTypes = [
   faqItem,
   weatherGuidelinesBlock,
   weatherGuidelineRow,
+  penaltyMatrixBlock,
+  penaltyMatrixRow,
   heroBentoBlock,
   heroBentoBadge,
   photoTile,
