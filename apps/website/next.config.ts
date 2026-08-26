@@ -48,6 +48,12 @@ const nextConfig: NextConfig = {
         destination: "/league-standards/game-day-operations",
         permanent: true,
       },
+      {
+        // Original review URL — the page now lives under League Standards.
+        source: "/discipline",
+        destination: "/league-standards/discipline",
+        permanent: true,
+      },
     ];
   },
 };

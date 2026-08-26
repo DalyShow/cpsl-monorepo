@@ -300,11 +300,24 @@ async function main() {
     linkNewWindow: true,
   });
 
+  // Nested under League Standards → /league-standards/discipline.
+  // (createOrReplace would silently orphan the page if this were left out.)
+  const leagueStandards = await client.fetch(
+    `*[_type == "page" && slug.current == "league-standards"][0]{_id}`
+  );
+
   const doc = {
     _id:   "discipline-page",
     _type: "page",
     title: "Discipline",
     slug:  { _type: "slug", current: "discipline" },
+    ...(leagueStandards
+      ? {
+          parent:   { _type: "reference", _ref: leagueStandards._id },
+          navLabel: "Discipline and Conduct",
+          navOrder: 30,
+        }
+      : {}),
     seoDescription:
       "CPSL discipline and conduct standards: U.S. Soccer Policy 531-9 referee abuse prevention, the penalties matrix for offenses against referees, and the US Club Soccer discipline matrix.",
     sections: [
