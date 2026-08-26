@@ -182,7 +182,7 @@ export function DualPanel({ left, right, rightSecondary, headingLevel = "h2" }: 
           max-width: 640px;
         }
         .cpsl-dual-panel > .cpsl-panel:first-child .cpsl-panel__headline {
-          font-size: clamp(44px, 5.2vw, 76px);
+          font-size: clamp(52px, 6.6vw, 96px);
         }
         .cpsl-dual-panel > .cpsl-panel:first-child .cpsl-panel__subheadline {
           font-size: clamp(15px, 1.25vw, 18px);
@@ -240,9 +240,9 @@ export function DualPanel({ left, right, rightSecondary, headingLevel = "h2" }: 
         .cpsl-dual-panel__stack .cpsl-panel__scrim {
           background: linear-gradient(
             180deg,
-            rgba(9,22,40,0.10) 0%,
-            rgba(9,22,40,0.45) 45%,
-            rgba(9,22,40,0.88) 100%
+            rgba(9,22,40,0.18) 0%,
+            rgba(9,22,40,0.62) 30%,
+            rgba(9,22,40,0.97) 100%
           );
         }
         .cpsl-dual-panel__stack .cpsl-panel__content {
