@@ -98,6 +98,19 @@ export function HeroBento({
           padding: clamp(16px, 4vw, 30px);
         }
 
+        /* Stacked bento modules: collapse the shared edge so the vertical
+           space between two adjacent modules equals the grid's internal
+           column gap — the stack reads as one continuous bento. Handles
+           both bare sections and sections inside a reveal-wrapper div. */
+        .${id}__section + .${id}__section,
+        div:has(> .${id}__section) + div:has(> .${id}__section) > .${id}__section {
+          padding-top: 0;
+        }
+        .${id}__section:has(+ .${id}__section),
+        div:has(> .${id}__section):has(+ div > .${id}__section) > .${id}__section {
+          padding-bottom: clamp(12px, 2vw, 20px);
+        }
+
         .${id}__grid {
           display: grid;
           gap: clamp(12px, 2vw, 20px);
