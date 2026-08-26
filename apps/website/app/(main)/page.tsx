@@ -34,6 +34,11 @@ export default async function Home() {
           image{ ..., asset->{ url } },
           video{ ..., asset->{ url } }
         },
+        rightPanelSecondary{
+          ...,
+          image{ ..., asset->{ url } },
+          video{ ..., asset->{ url } }
+        },
         image{ ..., asset->{ url } },
         bottomImage{ ..., asset->{ url } },
         lottie{ ..., asset->{ url } },

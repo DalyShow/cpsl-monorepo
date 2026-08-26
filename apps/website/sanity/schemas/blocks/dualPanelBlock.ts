@@ -37,6 +37,13 @@ export const dualPanelBlock = defineType({
         ctaHref:     "/league-information",
       },
     }),
+    defineField({
+      name: "rightPanelSecondary",
+      title: "Right Panel — Second (stacked below)",
+      type: "dualPanelItem",
+      description:
+        "Optional. When set, the right column splits into two equal stacked panels with matching gutters.",
+    }),
   ],
   preview: {
     select: {

@@ -34,6 +34,12 @@ export interface DualPanelProps {
   left: DualPanelItem;
   right: DualPanelItem;
   /**
+   * Optional second panel for the right column. When present, the right
+   * column splits into two equal stacked panels separated by the same
+   * 30px gutter the grid uses, so the trio reads as one bento.
+   */
+  rightSecondary?: DualPanelItem;
+  /**
    * Heading level for the LEFT panel's headline. Set to "h1" on the
    * page's primary hero so the document has a single, semantic top-level
    * heading; defaults to "h2" elsewhere.
@@ -84,7 +90,7 @@ function Panel({ item, headingTag: HeadingTag = "h2" }: { item: DualPanelItem; h
   );
 }
 
-export function DualPanel({ left, right, headingLevel = "h2" }: DualPanelProps) {
+export function DualPanel({ left, right, rightSecondary, headingLevel = "h2" }: DualPanelProps) {
   return (
     <>
       <style>{`
@@ -202,15 +208,47 @@ export function DualPanel({ left, right, headingLevel = "h2" }: DualPanelProps) 
         .cpsl-panel__subheadline { animation-delay: 200ms; }
         .cpsl-panel__cta         { animation-delay: 300ms; }
 
+        /* Right column split into two equal stacked panels — the gap
+           matches the grid gutter so the trio reads as one bento. */
+        .cpsl-dual-panel__stack {
+          display:        flex;
+          flex-direction: column;
+          gap:            30px;
+          min-height:     0;
+        }
+        .cpsl-dual-panel__stack > .cpsl-panel {
+          flex:       1 1 0;
+          height:     auto;
+          min-height: 0;
+        }
+        /* Half-height panels get tighter type + content inset. */
+        .cpsl-dual-panel__stack .cpsl-panel__content {
+          bottom: 28px;
+        }
+        .cpsl-dual-panel__stack .cpsl-panel__headline {
+          font-size: clamp(24px, 2.2vw, 34px);
+          margin-bottom: 12px;
+        }
+        .cpsl-dual-panel__stack .cpsl-panel__subheadline {
+          margin-bottom: 16px;
+        }
+
         .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__img,
         .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__video,
-        .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__scrim {
+        .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__scrim,
+        .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__img,
+        .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__video,
+        .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__scrim {
           animation-delay: 1600ms;
         }
-        .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__eyebrow     { animation-delay: 1600ms; }
-        .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__headline    { animation-delay: 1700ms; }
-        .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__subheadline { animation-delay: 1800ms; }
-        .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__cta         { animation-delay: 1900ms; }
+        .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__eyebrow,
+        .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__eyebrow     { animation-delay: 1600ms; }
+        .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__headline,
+        .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__headline    { animation-delay: 1700ms; }
+        .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__subheadline,
+        .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__subheadline { animation-delay: 1800ms; }
+        .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__cta,
+        .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__cta         { animation-delay: 1900ms; }
 
         /* Mobile: stack panels, content drops below the image on the
            page background so it reads without needing a scrim. */
@@ -245,6 +283,12 @@ export function DualPanel({ left, right, headingLevel = "h2" }: DualPanelProps) 
             padding: 24px 24px 28px;
             z-index: auto;
           }
+          .cpsl-dual-panel__stack {
+            gap: 16px;
+          }
+          .cpsl-dual-panel__stack .cpsl-panel__content {
+            bottom: auto;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -265,7 +309,14 @@ export function DualPanel({ left, right, headingLevel = "h2" }: DualPanelProps) 
 
       <section className="cpsl-dual-panel">
         <Panel item={left} headingTag={headingLevel} />
-        <Panel item={right} />
+        {rightSecondary ? (
+          <div className="cpsl-dual-panel__stack">
+            <Panel item={right} />
+            <Panel item={rightSecondary} />
+          </div>
+        ) : (
+          <Panel item={right} />
+        )}
       </section>
     </>
   );
