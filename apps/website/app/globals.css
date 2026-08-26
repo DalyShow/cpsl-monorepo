@@ -118,7 +118,8 @@ html {
 /* ── Base ───────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* No global smooth scrolling — pages with anchor navs (RFP document,
+   Game Day guide) opt in with their own html { scroll-behavior } rule. */
 
 body {
   background-color: var(--bg-page);

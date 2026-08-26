@@ -26,8 +26,9 @@ export interface ScrollRevealProps {
  * visible even before JS hydrates. After mount we measure the
  * wrapper's position — sections already inside the viewport stay
  * visible (no clip), sections below the fold get clipped and then
- * uncliped via IntersectionObserver as the user scrolls them into
- * view. This avoids the "blank page until JS loads" failure mode.
+ * unclipped as the user scrolls them into view, via an
+ * IntersectionObserver AND a plain scroll-position fallback so a
+ * missed observer callback can never leave content hidden.
  *
  * Respects prefers-reduced-motion: skips the wipe entirely.
  */
@@ -58,33 +59,62 @@ export function ScrollReveal({
     if (animateOnMount) {
       // Initial state is already hidden — just open on the next frame so
       // the browser commits the closed paint before the transition starts.
+      // The timeout backstops rAF, which background tabs throttle — the
+      // section must never sit hidden waiting on a frame that isn't coming.
       const raf = requestAnimationFrame(() => setHidden(false));
-      return () => cancelAnimationFrame(raf);
+      const timer = setTimeout(() => setHidden(false), 150);
+      return () => {
+        cancelAnimationFrame(raf);
+        clearTimeout(timer);
+      };
     }
 
-    if (typeof IntersectionObserver === "undefined") return;
-
-    const rect = ref.current.getBoundingClientRect();
-    const initiallyInView = rect.top < window.innerHeight - 80;
+    const el = ref.current;
+    const inView = () => el.getBoundingClientRect().top < window.innerHeight - 80;
 
     // If the section is already on screen at mount, leave it visible —
     // an instant wipe over content the user is staring at is jarring.
-    if (initiallyInView) return;
+    if (inView()) return;
 
     setHidden(true);
 
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHidden(false);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" },
-    );
+    // Fail-open by design: a section may only ever be hidden while BOTH
+    // triggers below are armed. Relying on IntersectionObserver alone
+    // left content permanently clipped whenever the observer didn't
+    // fire — the plain scroll-position check guarantees a reveal.
+    let obs: IntersectionObserver | undefined;
+    const cleanup = () => {
+      obs?.disconnect();
+      document.removeEventListener("scroll", check, true);
+      window.removeEventListener("resize", check);
+    };
+    const reveal = () => {
+      setHidden(false);
+      cleanup();
+    };
+    function check() {
+      if (inView()) reveal();
+    }
 
-    obs.observe(ref.current);
-    return () => obs.disconnect();
+    if (typeof IntersectionObserver !== "undefined") {
+      obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) reveal();
+        },
+        // threshold 0 — any visible pixel reveals; a ratio threshold can
+        // be unreachable for tall sections and strands them hidden.
+        { threshold: 0, rootMargin: "0px 0px -80px 0px" },
+      );
+      obs.observe(el);
+    }
+
+    // Capture-phase document listener also hears nested scroll
+    // containers, which never bubble a scroll event to window.
+    document.addEventListener("scroll", check, { capture: true, passive: true });
+    window.addEventListener("resize", check);
+    check(); // user may have scrolled between SSR paint and hydration
+
+    return cleanup;
   }, [disabled, animateOnMount]);
 
   return (
