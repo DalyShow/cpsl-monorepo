@@ -176,6 +176,19 @@ export function DualPanel({ left, right, rightSecondary, headingLevel = "h2" }: 
           text-wrap: pretty;
         }
 
+        /* Primary (left, 2/3-width) panel: larger type establishes the
+           hierarchy over the right-column panel(s). */
+        .cpsl-dual-panel > .cpsl-panel:first-child .cpsl-panel__content {
+          max-width: 640px;
+        }
+        .cpsl-dual-panel > .cpsl-panel:first-child .cpsl-panel__headline {
+          font-size: clamp(44px, 5.2vw, 76px);
+        }
+        .cpsl-dual-panel > .cpsl-panel:first-child .cpsl-panel__subheadline {
+          font-size: clamp(15px, 1.25vw, 18px);
+          max-width: 500px;
+        }
+
         /* Reveal choreography — sequential: left panel fully, then
            right. Text rises alongside each panel's wipe. */
         @keyframes cpsl-dp-wipe {
@@ -221,7 +234,17 @@ export function DualPanel({ left, right, rightSecondary, headingLevel = "h2" }: 
           height:     auto;
           min-height: 0;
         }
-        /* Half-height panels get tighter type + content inset. */
+        /* Half-height panels get tighter type + content inset, and a
+           heavier scrim — with less image to breathe, text sits directly
+           over busy areas and needs the extra contrast. */
+        .cpsl-dual-panel__stack .cpsl-panel__scrim {
+          background: linear-gradient(
+            180deg,
+            rgba(9,22,40,0.10) 0%,
+            rgba(9,22,40,0.45) 45%,
+            rgba(9,22,40,0.88) 100%
+          );
+        }
         .cpsl-dual-panel__stack .cpsl-panel__content {
           bottom: 28px;
         }
