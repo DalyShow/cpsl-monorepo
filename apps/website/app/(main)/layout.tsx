@@ -1,4 +1,4 @@
-import { TopNav } from "@cpsl/ui";
+import { TopNavSliding } from "@cpsl/ui";
 import { LogoTickerBlock } from "@/components/blocks/LogoTickerBlock";
 import { sanityFetch } from "@/lib/sanity/client";
 import {
@@ -31,7 +31,7 @@ export default async function MainLayout({
 
   return (
     <>
-      <TopNav
+      <TopNavSliding
         items={resolveTopNavItems(settings?.navItems)}
         // Pass siteSettings values through verbatim. Empty values mean the
         // editor deliberately removed the CTA — render no button.

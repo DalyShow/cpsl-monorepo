@@ -1,29 +1,45 @@
 import { defineField, defineType } from "sanity";
 
+function textBlock(text: string) {
+  return [
+    {
+      _type: "block" as const,
+      _key: text.slice(0, 12).replace(/\W/g, ""),
+      style: "normal" as const,
+      markDefs: [],
+      children: [{ _type: "span" as const, _key: "s", text, marks: [] }],
+    },
+  ];
+}
+
 const DEFAULT_ITEMS = [
   {
     _type: "faqItem",
     question: "What is the National 1 League?",
-    answer:
+    answer: textBlock(
       "The National 1 League is the top tier of the US Club Soccer National League program — a coast-to-coast competition designed to deliver the most demanding, college-relevant fixture list outside MLS Next and ECNL. CPSL operates the league for the Carolinas territory.",
+    ),
   },
   {
     _type: "faqItem",
     question: "How does my club apply for admission?",
-    answer:
+    answer: textBlock(
       "Admission runs through the CPSL application portal. Submit your club's competitive history, coaching credentials, and facility profile via GotSport. The competition committee reviews applications quarterly and notifies clubs within 30 days.",
+    ),
   },
   {
     _type: "faqItem",
     question: "When does the 2026-2027 season begin?",
-    answer:
+    answer: textBlock(
       "Fall fixtures open the weekend of September 5, 2026 and run through early November. The spring half resumes mid-March 2027 with regional finals in late May and the National Championship the second week of June.",
+    ),
   },
   {
     _type: "faqItem",
     question: "What age groups are eligible?",
-    answer:
+    answer: textBlock(
       "U13 through U19 boys and girls. Each age group plays a 14-game regular-season schedule plus playoffs. U19 receives a condensed fall-only format to align with college recruiting calendars.",
+    ),
   },
 ];
 
