@@ -83,11 +83,14 @@ function isPortableText(value: unknown): value is PortableTextBlock[] {
 }
 
 export function ContentSectionCentered({
-  eyebrow    = "About the League",
-  heading    = "Competitive Soccer Across the Carolinas",
+  // No copy defaults — Studio prunes cleared fields on publish, and a
+  // component-side fallback then shows marketing copy the editor never
+  // wrote on that page. Render only what the CMS sends.
+  eyebrow,
+  heading,
   image,
   lottie,
-  lead       = "From the Piedmont to the coast, CPSL brings together the best clubs in North and South Carolina under one banner — raising the standard for competitive soccer at every level.",
+  lead,
   paragraphs = [],
   background = "cream",
   columns    = 2,
@@ -200,20 +203,22 @@ export function ContentSectionCentered({
               {eyebrow}
             </p>
           )}
-          <h2
-            className="uppercase"
-            style={{
-              fontFamily: "'Barlow Condensed', sans-serif",
-              fontWeight: 900,
-              fontSize: "clamp(36px, 5vw, 52px)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.02em",
-              color: headColor,
-              marginBottom: hasTopMedia ? "32px" : "24px",
-            }}
-          >
-            {heading}
-          </h2>
+          {heading && (
+            <h2
+              className="uppercase"
+              style={{
+                fontFamily: "'Barlow Condensed', sans-serif",
+                fontWeight: 900,
+                fontSize: "clamp(36px, 5vw, 52px)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.02em",
+                color: headColor,
+                marginBottom: hasTopMedia ? "32px" : "24px",
+              }}
+            >
+              {heading}
+            </h2>
+          )}
 
           {/* Optional media — between heading and lead. Lottie takes precedence. */}
           {lottieUrl ? (

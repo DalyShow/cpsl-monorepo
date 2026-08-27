@@ -39,11 +39,14 @@ interface HeroBlockProps {
 }
 
 export function HeroBlock({
-  eyebrow    = "The Carolinas' Premier League",
-  heading    = "Elevating Soccer Across Two States",
-  subheading = "Competitive soccer for clubs and players across North and South Carolina — professionally run, community driven.",
-  ctaLabel   = "Join Our League",
-  ctaHref    = "#contact",
+  // No copy defaults — Studio prunes cleared fields on publish, and a
+  // component-side fallback then invents content the editor never wrote
+  // (a phantom "Join Our League" CTA). Render only what the CMS sends.
+  eyebrow,
+  heading,
+  subheading,
+  ctaLabel,
+  ctaHref,
   ctaNewWindow,
   backgroundImage,
   backgroundImages,
