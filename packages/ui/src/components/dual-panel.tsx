@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ArrowPillButton } from "./arrow-pill-button";
 
 /**
@@ -91,6 +92,17 @@ function Panel({ item, headingTag: HeadingTag = "h2" }: { item: DualPanelItem; h
 }
 
 export function DualPanel({ left, right, rightSecondary, headingLevel = "h2" }: DualPanelProps) {
+  // Fail-open backstop: the reveal relies on delayed CSS animations with
+  // `both` fill, whose starting state is invisible. Browsers can defer or
+  // drop delayed animations on offscreen elements (iOS Safari especially),
+  // stranding panels blank. Once the choreography window has passed, force
+  // every element to its finished state — a no-op when the animations ran.
+  const [settled, setSettled] = useState(false);
+  useEffect(() => {
+    const t = window.setTimeout(() => setSettled(true), 2800);
+    return () => window.clearTimeout(t);
+  }, []);
+
   return (
     <>
       <style>{`
@@ -273,6 +285,20 @@ export function DualPanel({ left, right, rightSecondary, headingLevel = "h2" }: 
         .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__cta,
         .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__cta         { animation-delay: 1900ms; }
 
+        /* Post-choreography settle — see the settled state above. */
+        .cpsl-dual-panel.is-settled .cpsl-panel__img,
+        .cpsl-dual-panel.is-settled .cpsl-panel__video,
+        .cpsl-dual-panel.is-settled .cpsl-panel__scrim,
+        .cpsl-dual-panel.is-settled .cpsl-panel__eyebrow,
+        .cpsl-dual-panel.is-settled .cpsl-panel__headline,
+        .cpsl-dual-panel.is-settled .cpsl-panel__subheadline,
+        .cpsl-dual-panel.is-settled .cpsl-panel__cta {
+          animation: none !important;
+          clip-path: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+        }
+
         /* Mobile: stack panels, content drops below the image on the
            page background so it reads without needing a scrim. */
         @media (max-width: 767px) {
@@ -312,6 +338,25 @@ export function DualPanel({ left, right, rightSecondary, headingLevel = "h2" }: 
           .cpsl-dual-panel__stack .cpsl-panel__content {
             bottom: auto;
           }
+
+          /* Stacked panels sit below the fold on phones — the desktop
+             1600ms sequential beat is invisible there, and iOS Safari can
+             refuse to start long-delayed animations on offscreen elements
+             entirely. Tighten every right-column delay to a short stagger. */
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__img,
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__video,
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__scrim,
+          .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__img,
+          .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__video,
+          .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__scrim,
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__eyebrow,
+          .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__eyebrow     { animation-delay: 200ms; }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__headline,
+          .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__headline    { animation-delay: 300ms; }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__subheadline,
+          .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__subheadline { animation-delay: 400ms; }
+          .cpsl-dual-panel > .cpsl-panel:nth-child(2) .cpsl-panel__cta,
+          .cpsl-dual-panel > .cpsl-dual-panel__stack .cpsl-panel__cta         { animation-delay: 500ms; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -330,7 +375,7 @@ export function DualPanel({ left, right, rightSecondary, headingLevel = "h2" }: 
         }
       `}</style>
 
-      <section className="cpsl-dual-panel">
+      <section className={`cpsl-dual-panel${settled ? " is-settled" : ""}`}>
         <Panel item={left} headingTag={headingLevel} />
         {rightSecondary ? (
           <div className="cpsl-dual-panel__stack">
