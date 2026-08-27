@@ -54,6 +54,13 @@ const nextConfig: NextConfig = {
         destination: "/league-standards/discipline",
         permanent: true,
       },
+      {
+        // CDL landing content moved to its Welcome child page; the bare
+        // parent URL forwards there so nothing 404s or renders empty.
+        source: "/carolina-development-league",
+        destination: "/carolina-development-league/welcome",
+        permanent: true,
+      },
     ];
   },
 };

@@ -13,6 +13,7 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
   { url: SITE_URL,                         changeFrequency: "weekly",  priority: 1.0 },
   { url: `${SITE_URL}/clubs`,              changeFrequency: "weekly",  priority: 0.8 },
   { url: `${SITE_URL}/schedule`,           changeFrequency: "daily",   priority: 0.8 },
+  { url: `${SITE_URL}/carolina-development-league/schedule`, changeFrequency: "daily", priority: 0.7 },
   { url: `${SITE_URL}/brand`,              changeFrequency: "monthly", priority: 0.5 },
 ];
 

@@ -5,15 +5,10 @@ import { CalendarBody } from "./CalendarBody";
 /** Revalidate hourly — newly renamed / added Sanity crests pick up fast. */
 export const revalidate = 3600;
 
-/**
- * Hidden page while we validate the schedule ingestion end-to-end.
- * `noindex` + no nav link = discoverable only by direct URL until the
- * Carolina Development League nav item exposes it as a child.
- */
 export const metadata: Metadata = {
   title: "Match Calendar — Carolina Development League",
   description: "Fall 2026 CDL fixtures across every age group. Pick a date to see that day's matches.",
-  robots: { index: false, follow: false, googleBot: { index: false, follow: false } },
+  alternates: { canonical: "/carolina-development-league/schedule" },
 };
 
 export default async function CalendarPage() {
