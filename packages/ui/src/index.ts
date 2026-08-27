@@ -7,6 +7,7 @@ export { Input } from "./components/input";
 
 export { TopNav } from "./components/top-nav";
 export type { TopNavProps, TopNavItem } from "./components/top-nav";
+export { TopNavSliding } from "./components/top-nav-sliding";
 
 export { SubNav } from "./components/sub-nav";
 export type { SubNavProps, SubNavItem } from "./components/sub-nav";
