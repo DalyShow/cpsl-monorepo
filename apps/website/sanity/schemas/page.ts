@@ -20,6 +20,14 @@ export const page = defineType({
       description: "The URL segment for this page (auto-generated from title).",
     }),
     defineField({
+      name: "seoDescription",
+      title: "SEO Description",
+      type: "text",
+      rows: 2,
+      description:
+        "Meta description for search engines and link previews. One or two sentences.",
+    }),
+    defineField({
       name: "parent",
       title: "Parent Page",
       type: "reference",
