@@ -335,6 +335,13 @@ export function DualPanel({ left, right, rightSecondary, headingLevel = "h2" }: 
           .cpsl-dual-panel__stack {
             gap: 16px;
           }
+          /* Desktop's equal-split sizing (flex: 1 1 0) collapses to ZERO
+             height in this auto-height mobile stack, and the panel's
+             overflow:hidden then swallows the content entirely. Size the
+             stacked panels to their content like every other mobile panel. */
+          .cpsl-dual-panel__stack > .cpsl-panel {
+            flex: none;
+          }
           .cpsl-dual-panel__stack .cpsl-panel__content {
             bottom: auto;
           }
