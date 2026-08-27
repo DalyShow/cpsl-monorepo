@@ -167,6 +167,16 @@ export function ContentSectionCentered({
         .cs-body ul { list-style: disc; }
         .cs-body ol { list-style: decimal; }
         .cs-body li { line-height: 1.8; }
+        /* Mobile: centered copy is hard to read at narrow widths — the
+           header block and its accent rule anchor left instead. */
+        @media (max-width: 640px) {
+          .cs-header {
+            text-align: left;
+            margin-left: 0;
+            margin-bottom: 40px !important;
+          }
+          .cs-divider { margin-left: 0; }
+        }
         .cs-body li + li { margin-top: 0.35em; }
         .cs-body p { margin: 0; }
       `}</style>
@@ -187,7 +197,7 @@ export function ContentSectionCentered({
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24" style={{ position: "relative", zIndex: 1 }}>
 
         {/* Centered header */}
-        <div className="mx-auto max-w-2xl text-center" style={{ marginBottom: "64px" }}>
+        <div className="cs-header mx-auto max-w-2xl text-center" style={{ marginBottom: "64px" }}>
           {eyebrow && (
             <p
               className="text-sm tracking-widest uppercase mb-4"
@@ -258,7 +268,7 @@ export function ContentSectionCentered({
         {/* Divider */}
         {hasBody && (
           <div
-            className="mx-auto mb-12"
+            className="cs-divider mx-auto mb-12"
             style={{
               width: "48px",
               height: "3px",
