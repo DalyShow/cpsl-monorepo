@@ -213,24 +213,35 @@ export function MatchCard({
         )}
       </article>
 
-      {/* Narrow viewports: teams cluster wraps, meta stacks below. */}
+      {/* Narrow viewports: meta becomes the card's top line — time left,
+          field right — separated from the teams by a hairline divider. */}
       <style>{`
         @media (max-width: 640px) {
           .cpsl-match-card {
             grid-template-columns: 1fr !important;
-            padding: 16px 18px !important;
-            row-gap: 10px !important;
+            padding: 14px 18px 16px !important;
+            row-gap: 12px !important;
           }
           .cpsl-match-card__teams {
             gap: 20px !important;
             flex-wrap: wrap;
           }
           .cpsl-match-card__meta {
-            align-items: flex-start !important;
-            text-align: left !important;
+            order: -1;
+            flex-direction: row !important;
+            justify-content: space-between;
+            align-items: center !important;
+            gap: 12px !important;
+            width: 100%;
+            text-align: right !important;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #1E2D45;
           }
           .cpsl-match-card__time {
             font-size: 22px !important;
+          }
+          .cpsl-match-card__field {
+            justify-content: flex-end;
           }
         }
       `}</style>

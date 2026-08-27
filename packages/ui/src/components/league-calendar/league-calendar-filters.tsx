@@ -106,8 +106,9 @@ export function LeagueCalendarFilters({
             />
           )}
 
-          {/* Age chips pushed to the far right of the same row. */}
-          <div style={{ marginLeft: "auto" }}>
+          {/* Age chips pushed to the far right of the same row (desktop);
+              left-aligned with the stacked controls on mobile. */}
+          <div className="cpsl-calfilters__age" style={{ marginLeft: "auto" }}>
             <ChipGroup label="Age">
               <Chip active={value.ageGroup === null} onClick={() => patch({ ageGroup: null })}>
                 All
@@ -153,6 +154,8 @@ export function LeagueCalendarFilters({
       <style>{`
         @media (max-width: 640px) {
           .cpsl-calfilters__row { row-gap: 12px; }
+          .cpsl-calfilters__age { margin-left: 0 !important; }
+          .cpsl-calfilters__age .cpsl-chipgroup__chips { gap: 12px !important; }
         }
       `}</style>
     </>
@@ -321,7 +324,7 @@ function ChipGroup({
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
       <Label>{label}</Label>
-      <div style={{ display: "inline-flex", flexWrap: "wrap", gap: 6 }}>
+      <div className="cpsl-chipgroup__chips" style={{ display: "inline-flex", flexWrap: "wrap", gap: 6 }}>
         {children}
       </div>
     </div>
