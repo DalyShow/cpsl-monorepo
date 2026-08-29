@@ -144,6 +144,184 @@ const DIVISIONS = [
   },
 ];
 
+// ─── Coaches & Team Managers guide (from the printed Game Day Guide) ────────
+
+const GUIDE_STEPS: {
+  title:  string;
+  timing: string;
+  items:  React.ReactNode[];
+  note?:  React.ReactNode;
+}[] = [
+  {
+    title:  "Print Game Card + Roster",
+    timing: "24–48 hrs before kickoff",
+    items: [
+      <>In <B>system.gotsport.com</B>, open <B>Team Management</B> → your team → the <B>N1 | Mid-Atlantic District 3 (CPSL)</B> event → <B>Schedule</B>, and print the <B>Game Card</B> — <B>two copies</B>.</>,
+      <>Print your <B>official team roster</B> too, and check the card header: Game #, age group, division, both team names.</>,
+    ],
+    note: (
+      <>A game card is a snapshot — players approved after printing only appear on the roster. <B>Never hand-write onto the card.</B></>
+    ),
+  },
+  {
+    title:  "Pack the Match Bag",
+    timing: "night before",
+    items: [
+      <><B>Game card</B> — two printed copies</>,
+      <><B>Official team roster</B> — printed</>,
+      <><B>Passes for everyone</B> on the field or in the technical area</>,
+      <><B>Match Day Addendum</B> — printed, for the referee</>,
+      <><B>A pen</B> for signatures</>,
+    ],
+  },
+  {
+    title:  "At the Field",
+    timing: "30 min before kickoff",
+    items: [
+      <>Hand the referee your <B>game card, roster, Match Day Addendum, and everyone's passes</B>.</>,
+      <>Check in at the halfway line — players in jersey-number order, then non-dressing players and staff.</>,
+      <>On your roster but not the card? <B>Say so during check-in</B> — the referee adds them.</>,
+      <>Passes are returned before kickoff; the referee keeps the card and addendum.</>,
+    ],
+    note: <><B>Not dressing still means checking in.</B> No pass, no technical area.</>,
+  },
+  {
+    title:  "After the Final Whistle",
+    timing: "before you leave",
+    items: [
+      <><B>Read the card before you sign</B> — final score, goals by jersey # and minute, every caution and send-off.</>,
+      <>Disagree with something? Have it recorded in <B>Instructions/Notes</B> before signatures.</>,
+      <>The referee submits the report online and files a Match Day Addendum — keep your copy of the card.</>,
+    ],
+    note: (
+      <><B>You are being rated.</B> Every match records a sportsmanship rating for players, staff and spectators, plus tent &amp; bench compliance.</>
+    ),
+  },
+];
+
+const GUIDE_FAQS: { q: string; a: React.ReactNode }[] = [
+  { q: "A player isn't on the game card.", a: <>They can still play if they're on your printed roster — flag it during check-in and the referee adds them.</> },
+  { q: "Our roster changed after I printed.", a: <>Reprint both the game card and the roster. Nothing may be hand-written onto the card.</> },
+  { q: "The result online looks wrong.", a: <>Contact the league admin with the Game # and match date. Do not alter the signed paper card.</> },
+  { q: "I lost my copy of the card.", a: <>Reprint the blank card from GotSport for your records, and ask the league admin for the submitted result.</> },
+];
+
+function StepCard({
+  n,
+  title,
+  timing,
+  items,
+  note,
+}: {
+  n:      number;
+  title:  string;
+  timing: string;
+  items:  React.ReactNode[];
+  note?:  React.ReactNode;
+}) {
+  return (
+    <div style={{ border: "1px solid #1E2D45", background: "#0A1628", display: "flex", flexDirection: "column" }}>
+      <div
+        style={{
+          display:    "flex",
+          alignItems: "baseline",
+          gap:        12,
+          background: "#1A2438",
+          borderTop:  "2px solid #D4B949",
+          padding:    "11px 16px",
+        }}
+      >
+        <span
+          aria-hidden
+          style={{
+            fontFamily: "'Barlow Condensed', sans-serif",
+            fontWeight: 900,
+            fontSize:   22,
+            lineHeight: 1,
+            color:      "#D4B949",
+          }}
+        >
+          {n}
+        </span>
+        <span
+          style={{
+            fontFamily:    "'Barlow Condensed', sans-serif",
+            fontWeight:    700,
+            fontSize:      15,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color:         "#F4EFE6",
+          }}
+        >
+          {title}
+        </span>
+        <span
+          style={{
+            marginLeft:    "auto",
+            fontFamily:    "'Barlow Condensed', sans-serif",
+            fontWeight:    600,
+            fontSize:      12,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color:         "#7A9BAA",
+            whiteSpace:    "nowrap",
+          }}
+        >
+          {timing}
+        </span>
+      </div>
+      <ol
+        style={{
+          listStyle:     "none",
+          margin:        0,
+          padding:       "14px 16px 16px",
+          display:       "flex",
+          flexDirection: "column",
+          gap:           9,
+          counterReset:  "step",
+        }}
+      >
+        {items.map((item, i) => (
+          <li
+            key={i}
+            style={{
+              display:    "flex",
+              alignItems: "flex-start",
+              gap:        10,
+              fontFamily: "Inter, sans-serif",
+              fontSize:   14,
+              lineHeight: 1.55,
+              color:      "#C8D2DF",
+            }}
+          >
+            <span
+              aria-hidden
+              style={{ width: 5, height: 5, borderRadius: 999, background: "#7A9BAA", flexShrink: 0, marginTop: 8 }}
+            />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ol>
+      {note && (
+        <div
+          style={{
+            margin:      "auto 16px 16px",
+            padding:     "10px 14px",
+            borderLeft:  "3px solid #D4B949",
+            background:  "rgba(212,185,73,0.07)",
+            fontFamily:  "Inter, sans-serif",
+            fontSize:    13,
+            lineHeight:  1.55,
+            color:       "#B8C4D4",
+          }}
+        >
+          {note}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Components ─────────────────────────────────────────────────────────────
 
 function RequirementsTable({ rows, accent }: { rows: Row[]; accent: string }) {
@@ -372,6 +550,31 @@ export default function GameDayOperationsPage() {
 
           {/* Division jump chips */}
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "center" }}>
+            <a
+              href="#gameday-guide"
+              style={{
+                display:        "inline-flex",
+                alignItems:     "center",
+                gap:            8,
+                border:         "1px solid rgba(212,185,73,0.55)",
+                background:     "rgba(4,17,36,0.45)",
+                color:          "#F4EFE6",
+                fontFamily:     "'Barlow Condensed', sans-serif",
+                fontWeight:     700,
+                fontSize:       13,
+                letterSpacing:  "0.12em",
+                textTransform:  "uppercase",
+                padding:        "9px 16px",
+                borderRadius:   999,
+                textDecoration: "none",
+              }}
+            >
+              <span
+                aria-hidden
+                style={{ width: 8, height: 8, borderRadius: 999, background: "#D4B949", flexShrink: 0 }}
+              />
+              Coaches &amp; Managers Guide
+            </a>
             {DIVISIONS.map((d) => (
               <a
                 key={d.id}
@@ -404,10 +607,100 @@ export default function GameDayOperationsPage() {
         </div>
       </header>
 
+      {/* ── Coaches & Team Managers guide ──────────────────────── */}
+      <div
+        className="max-w-7xl mx-auto w-full px-4 sm:px-6"
+        style={{ paddingTop: 56 }}
+      >
+        <section id="gameday-guide" style={{ scrollMarginTop: 110, marginBottom: 72 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 10 }}>
+            <span
+              aria-hidden
+              style={{ width: 12, height: 12, borderRadius: 999, background: "#D4B949", flexShrink: 0 }}
+            />
+            <h2
+              style={{
+                fontFamily:    "'Barlow Condensed', sans-serif",
+                fontWeight:    900,
+                fontSize:      "clamp(26px, 3.4vw, 36px)",
+                letterSpacing: "0.03em",
+                textTransform: "uppercase",
+                color:         "#F4EFE6",
+                lineHeight:    1,
+                margin:        0,
+              }}
+            >
+              Game Day Guide — Coaches &amp; Team Managers
+            </h2>
+          </div>
+          <p
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize:   14,
+              lineHeight: 1.65,
+              color:      "#94A3B8",
+              margin:     "0 0 24px",
+              maxWidth:   720,
+            }}
+          >
+            Four steps carry every N1 match day, from printing the game card to signing it after the final whistle.
+          </p>
+
+          <div
+            className="gdo-guide-grid"
+            style={{
+              display:             "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap:                 20,
+              marginBottom:        20,
+            }}
+          >
+            {GUIDE_STEPS.map((step, i) => (
+              <StepCard key={i} n={i + 1} {...step} />
+            ))}
+          </div>
+
+          {/* Common questions */}
+          <div style={{ border: "1px solid #1E2D45", background: "#0A1628" }}>
+            <div
+              style={{
+                background:    "#1A2438",
+                borderTop:     "2px solid #D4B949",
+                padding:       "11px 16px",
+                fontFamily:    "'Barlow Condensed', sans-serif",
+                fontWeight:    700,
+                fontSize:      13,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color:         "#F4EFE6",
+              }}
+            >
+              Common Questions
+            </div>
+            <div
+              className="gdo-guide-grid"
+              style={{
+                display:             "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap:                 "16px 32px",
+                padding:             "16px 16px 20px",
+              }}
+            >
+              {GUIDE_FAQS.map((faq, i) => (
+                <div key={i} style={{ fontFamily: "Inter, sans-serif", fontSize: 14, lineHeight: 1.55 }}>
+                  <p style={{ margin: "0 0 4px", fontWeight: 600, color: "#F4EFE6" }}>{faq.q}</p>
+                  <p style={{ margin: 0, color: "#94A3B8" }}>{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+
       {/* ── Division sections ──────────────────────────────────── */}
       <div
         className="max-w-7xl mx-auto w-full px-4 sm:px-6"
-        style={{ paddingTop: 56, paddingBottom: 80 }}
+        style={{ paddingBottom: 80 }}
       >
         {DIVISIONS.map((d, i) => (
           <section
@@ -459,6 +752,11 @@ export default function GameDayOperationsPage() {
 
       <style>{`
         html { scroll-behavior: smooth; }
+        @media (max-width: 860px) {
+          .gdo-guide-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
         @media (max-width: 640px) {
           .gdo-table__row {
             grid-template-columns: 1fr !important;
