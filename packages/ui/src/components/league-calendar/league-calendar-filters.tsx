@@ -137,7 +137,7 @@ export function LeagueCalendarFilters({
         label="Club"
         value={value.clubId ?? ""}
         onChange={(v) => patch({ clubId: v || null })}
-        width={fullWidth ? "100%" : 216}
+        width={fullWidth ? "100%" : 262}
         options={[
           { value: "", label: "All clubs" },
           ...clubs.map((c) => ({ value: c.id, label: c.name })),
@@ -192,7 +192,6 @@ export function LeagueCalendarFilters({
             style={{
               display:       "none",
               alignItems:    "center",
-              justifyContent:"space-between",
               gap:           10,
               width:         "100%",
               height:        46,
@@ -210,7 +209,7 @@ export function LeagueCalendarFilters({
             }}
           >
             <span style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-              <FunnelIcon />
+              <SlidersIcon />
               Filters
               {activeCount > 0 && (
                 <span
@@ -231,9 +230,6 @@ export function LeagueCalendarFilters({
                   {activeCount}
                 </span>
               )}
-            </span>
-            <span style={{ color: "#7A9BAA", fontSize: 12 }}>
-              {view === "season" ? "Season" : "Day"} view
             </span>
           </button>
         )}
@@ -395,7 +391,7 @@ function Field({
         height:       52,
         background:   "#041124",
         border:       "1px solid #1E2D45",
-        borderRadius: 999,
+        borderRadius: 0,
         cursor:       "pointer",
       }}
     >
@@ -426,12 +422,21 @@ const CONTROL_STYLE: React.CSSProperties = {
   appearance: "none",
   background: "transparent",
   border:     "none",
-  padding:    "17px 34px 0 18px",
+  padding:    "16px 34px 0 17px",
   color:      "#F4EFE6",
-  fontFamily: "Inter, sans-serif",
-  fontSize:   14,
-  cursor:     "pointer",
-  outline:    "none",
+  // The site loads Inter through next/font under --font-body — a literal
+  // "Inter" family name doesn't exist, and form controls don't inherit,
+  // so without the variable the value text renders in generic sans.
+  fontFamily: "var(--font-body, Inter), Inter, sans-serif",
+  // 16px matches the rendered body scale AND keeps iOS Safari from
+  // auto-zooming form controls (its threshold is 16).
+  fontSize:     16,
+  lineHeight:   1.3,
+  textOverflow: "ellipsis",
+  whiteSpace:   "nowrap",
+  overflow:     "hidden",
+  cursor:       "pointer",
+  outline:      "none",
 };
 
 function DateField({
@@ -482,7 +487,7 @@ function Selector({
           backgroundImage:
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237A9BAA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>\")",
           backgroundRepeat:   "no-repeat",
-          backgroundPosition: "right 16px center",
+          backgroundPosition: "right 15px bottom 15px",
           backgroundSize:     "12px 12px",
         }}
       >
@@ -520,11 +525,11 @@ function ResetButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-function FunnelIcon() {
+function SlidersIcon() {
   return (
     <svg
-      width="14"
-      height="14"
+      width="15"
+      height="15"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -534,7 +539,15 @@ function FunnelIcon() {
       aria-hidden
       style={{ flexShrink: 0 }}
     >
-      <polygon points="22 3 2 3 10 12.5 10 19 14 21 14 12.5 22 3" />
+      <line x1="21" y1="5" x2="14" y2="5" />
+      <line x1="10" y1="5" x2="3" y2="5" />
+      <line x1="21" y1="12" x2="12" y2="12" />
+      <line x1="8" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="19" x2="16" y2="19" />
+      <line x1="12" y1="19" x2="3" y2="19" />
+      <line x1="14" y1="3" x2="14" y2="7" />
+      <line x1="8" y1="10" x2="8" y2="14" />
+      <line x1="16" y1="17" x2="16" y2="21" />
     </svg>
   );
 }
