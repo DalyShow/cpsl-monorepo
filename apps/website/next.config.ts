@@ -61,6 +61,13 @@ const nextConfig: NextConfig = {
         destination: "/carolina-development-league/welcome",
         permanent: true,
       },
+      {
+        // Schedule v2 review page, promoted to the live schedule — keep
+        // any shared preview links working.
+        source: "/carolina-development-league/schedule-preview",
+        destination: "/carolina-development-league/schedule",
+        permanent: true,
+      },
     ];
   },
 };

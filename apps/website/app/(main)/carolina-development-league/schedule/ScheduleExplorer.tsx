@@ -20,7 +20,6 @@ import { filterCdlMatches } from "@/lib/cdlFilter";
  * CDL schedule v2 — day view (classic) + full-season view grouped by
  * date, with shareable filter URLs.
  *
- * Successor to CalendarBody; the live page swaps over once approved.
  * The ./calendar.ics feed route still exists and works, but its
  * Add-to-Calendar UI was removed pending a later decision — restore it
  * from git history (ScheduleExplorer @ eb49a9d) when wanted.

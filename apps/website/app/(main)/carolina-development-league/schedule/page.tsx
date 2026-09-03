@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getCdlClubs, CDL_MATCHES, CDL_META, CDL_AGE_GROUPS } from "@/lib/cdlSchedule";
-import { CalendarBody } from "./CalendarBody";
+import { ScheduleExplorer } from "./ScheduleExplorer";
 
 /** Revalidate hourly — newly renamed / added Sanity crests pick up fast. */
 export const revalidate = 3600;
@@ -74,7 +74,7 @@ export default async function CalendarPage() {
           </p>
         </div>
       </header>
-      <CalendarBody clubs={clubs} matches={CDL_MATCHES} ageGroups={CDL_AGE_GROUPS} showGender />
+      <ScheduleExplorer clubs={clubs} matches={CDL_MATCHES} ageGroups={CDL_AGE_GROUPS} showGender />
     </main>
   );
 }
