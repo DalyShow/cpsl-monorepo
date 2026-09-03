@@ -383,6 +383,7 @@ export function ScheduleExplorer({ clubs, matches, ageGroups, showGender }: Sche
             showGender={showGender}
             view={view}
             onViewChange={setView}
+            mobileSheet
           />
         </div>
       </div>
