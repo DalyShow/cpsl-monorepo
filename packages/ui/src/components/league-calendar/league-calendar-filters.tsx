@@ -1,5 +1,6 @@
 "use client";
 
+import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import type { AgeGroup, CalendarClub } from "./types";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -56,11 +57,13 @@ export interface LeagueCalendarFiltersProps {
   ageGroups?:   AgeGroup[];
   /** When true, render the All/Boys/Girls segmented control. Default: false. */
   showGender?:  boolean;
-  /** Presentation mode. When provided (with onViewChange), a Day|Season
-   *  toggle renders and the date picker hides in season view. Undefined
-   *  keeps the classic date-only behavior. */
+  /** Presentation mode. When provided (with onViewChange), a View
+   *  dropdown renders (Day default) and the date picker hides in season
+   *  view. Undefined keeps the classic date-only behavior. */
   view?:         CalendarView;
   onViewChange?: (view: CalendarView) => void;
+  /** Render the filter row on a subtle card fill. Default: false. */
+  panel?:        boolean;
 }
 
 const DEFAULT_AGE_GROUPS: AgeGroup[] = ["U13", "U14", "U15", "U16", "U17", "U19"];
@@ -75,6 +78,7 @@ export function LeagueCalendarFilters({
   showGender = false,
   view,
   onViewChange,
+  panel = false,
 }: LeagueCalendarFiltersProps) {
   const patch = (partial: Partial<LeagueCalendarFilterValue>) =>
     onChange({ ...value, ...partial });
@@ -83,17 +87,30 @@ export function LeagueCalendarFilters({
 
   return (
     <>
-      <div className="cpsl-calfilters">
+      <div
+        className="cpsl-calfilters"
+        style={
+          panel
+            ? {
+                background:   "#0A1628",
+                border:       "1px solid #1E2D45",
+                borderRadius: 16,
+                padding:      "18px 20px",
+              }
+            : undefined
+        }
+      >
         {/* ── Single row: [View] [Date] [Club] ··············· [Age chips] ── */}
         <div
           className="cpsl-calfilters__row"
           style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "center" }}
         >
           {hasViewToggle && (
-            <Segmented<CalendarView>
+            <Selector
               label="View"
               value={view!}
-              onChange={(v) => onViewChange!(v)}
+              onChange={(v) => onViewChange!((v === "season" ? "season" : "day") as CalendarView)}
+              width={130}
               options={[
                 { value: "day",    label: "Day" },
                 { value: "season", label: "Season" },
@@ -118,15 +135,9 @@ export function LeagueCalendarFilters({
           />
 
           {showGender && (
-            <Segmented<GenderFilter>
-              label="Show"
+            <GenderToggle
               value={value.gender}
               onChange={(g) => patch({ gender: g })}
-              options={[
-                { value: null, label: "All" },
-                { value: "M",  label: "Boys" },
-                { value: "G",  label: "Girls" },
-              ]}
             />
           )}
 
@@ -218,12 +229,13 @@ function DateField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         style={{
-          width:          170,
+          width:          172,
+          height:         38,
           appearance:     "none",
-          background:     "#0A1628",
+          background:     "#041124",
           border:         "1px solid #1E2D45",
-          borderRadius:   0,
-          padding:        "8px 12px",
+          borderRadius:   999,
+          padding:        "0 16px",
           color:          "#F4EFE6",
           fontFamily:     "Inter, sans-serif",
           fontSize:       14,
@@ -240,11 +252,13 @@ function Selector({
   value,
   onChange,
   options,
+  width = 220,
 }: {
   label:    string;
   value:    string;
   onChange: (v: string) => void;
   options:  { value: string; label: string }[];
+  width?:   number;
 }) {
   return (
     <label style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
@@ -253,12 +267,13 @@ function Selector({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         style={{
-          width:          220,
+          width,
+          height:         38,
           appearance:     "none",
-          background:     "#0A1628",
+          background:     "#041124",
           border:         "1px solid #1E2D45",
-          borderRadius:   0,
-          padding:        "8px 32px 8px 12px",
+          borderRadius:   999,
+          padding:        "0 36px 0 16px",
           color:          "#F4EFE6",
           fontFamily:     "Inter, sans-serif",
           fontSize:       14,
@@ -266,7 +281,7 @@ function Selector({
           backgroundImage:
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237A9BAA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>\")",
           backgroundRepeat:   "no-repeat",
-          backgroundPosition: "right 10px center",
+          backgroundPosition: "right 14px center",
           backgroundSize:     "12px 12px",
         }}
       >
@@ -280,60 +295,81 @@ function Selector({
   );
 }
 
-function Segmented<T>({
-  label,
+/**
+ * All / Boys / Girls single-select — shadcn-style, built on the Radix
+ * ToggleGroup primitive (roving focus, arrow keys, aria for free) and
+ * skinned to match the pill controls around it.
+ */
+function GenderToggle({
   value,
   onChange,
-  options,
 }: {
-  label:    string;
-  value:    T;
-  onChange: (v: T) => void;
-  options:  { value: T; label: string }[];
+  value:    GenderFilter;
+  onChange: (v: GenderFilter) => void;
 }) {
   return (
     <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-      <Label>{label}</Label>
-      <div
-        role="group"
-        aria-label={label}
+      <Label>Show</Label>
+      <RadixToggleGroup.Root
+        type="single"
+        value={value ?? "all"}
+        onValueChange={(v) => {
+          // Radix emits "" when the active item is re-clicked — keep the
+          // current selection instead of allowing an empty state.
+          if (v) onChange(v === "all" ? null : (v as "M" | "G"));
+        }}
+        aria-label="Show"
+        className="cpsl-gender-toggle"
         style={{
           display:      "inline-flex",
+          height:       38,
+          alignItems:   "stretch",
           border:       "1px solid #1E2D45",
           borderRadius: 999,
           overflow:     "hidden",
-          background:   "#0A1628",
+          background:   "#041124",
         }}
       >
-        {options.map((opt, i) => {
-          const active = opt.value === value;
-          return (
-            <button
-              key={String(opt.value)}
-              type="button"
-              onClick={() => onChange(opt.value)}
-              aria-pressed={active}
-              style={{
-                appearance:     "none",
-                border:         "none",
-                borderLeft:     i === 0 ? "none" : "1px solid #1E2D45",
-                padding:        "6px 14px",
-                background:     active ? "rgba(212,185,73,0.15)" : "transparent",
-                color:          active ? "#E5C97A" : "#94A3B8",
-                fontFamily:     "'Barlow Condensed', sans-serif",
-                fontWeight:     700,
-                fontSize:       12,
-                letterSpacing:  "0.14em",
-                textTransform:  "uppercase",
-                cursor:         "pointer",
-                transition:     "all 120ms ease",
-              }}
-            >
-              {opt.label}
-            </button>
-          );
-        })}
-      </div>
+        {(
+          [
+            { value: "all", label: "All" },
+            { value: "M",   label: "Boys" },
+            { value: "G",   label: "Girls" },
+          ] as const
+        ).map((opt, i) => (
+          <RadixToggleGroup.Item
+            key={opt.value}
+            value={opt.value}
+            style={{
+              appearance:    "none",
+              border:        "none",
+              borderLeft:    i === 0 ? "none" : "1px solid #1E2D45",
+              padding:       "0 16px",
+              background:    "transparent",
+              color:         "#94A3B8",
+              fontFamily:    "'Barlow Condensed', sans-serif",
+              fontWeight:    700,
+              fontSize:      12,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              cursor:        "pointer",
+              transition:    "all 120ms ease",
+            }}
+          >
+            {opt.label}
+          </RadixToggleGroup.Item>
+        ))}
+      </RadixToggleGroup.Root>
+      <style>{`
+        .cpsl-gender-toggle [data-state="on"] {
+          background: rgba(212,185,73,0.15) !important;
+          color: #E5C97A !important;
+        }
+        .cpsl-gender-toggle button:focus-visible {
+          outline: 2px solid #D4B949;
+          outline-offset: -2px;
+        }
+      `}</style>
     </div>
   );
 }
@@ -371,7 +407,10 @@ function Chip({
       aria-pressed={active}
       style={{
         appearance:     "none",
-        padding:        "5px 12px",
+        display:        "inline-flex",
+        alignItems:     "center",
+        height:         32,
+        padding:        "0 14px",
         border:         active ? "1px solid #D4B949" : "1px solid #1E2D45",
         background:     active ? "rgba(212,185,73,0.15)" : "transparent",
         color:          active ? "#E5C97A" : "#94A3B8",

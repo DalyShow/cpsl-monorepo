@@ -366,7 +366,7 @@ export function ScheduleExplorer({ clubs, matches, ageGroups, showGender }: Sche
       className="max-w-7xl mx-auto w-full px-4 sm:px-6"
       style={{ paddingTop: 30, paddingBottom: 30 }}
     >
-      <div style={{ marginBottom: 30 }}>
+      <div style={{ marginBottom: 44 }}>
         <LeagueCalendarFilters
           clubs={clubs}
           value={filters}
@@ -375,6 +375,7 @@ export function ScheduleExplorer({ clubs, matches, ageGroups, showGender }: Sche
           showGender={showGender}
           view={view}
           onViewChange={setView}
+          panel
         />
       </div>
 
@@ -386,7 +387,7 @@ export function ScheduleExplorer({ clubs, matches, ageGroups, showGender }: Sche
           justifyContent:"space-between",
           gap:           16,
           flexWrap:      "wrap",
-          marginBottom:  20,
+          marginBottom:  24,
         }}
       >
         <div>
