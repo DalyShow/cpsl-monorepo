@@ -10,6 +10,9 @@ export interface WeekendSectionProps {
   defaultOpen?: boolean;
   /** Sub-label shown right of the count, e.g. "Sat & Sun · 10 matches". */
   meta?:        string;
+  /** Panel layout — "grid" (default, responsive columns) or "list"
+   *  (single column of full-width rows, matching the day view). */
+  layout?:      "grid" | "list";
   children:     React.ReactNode;
 }
 
@@ -25,6 +28,7 @@ export function WeekendSection({
   matchCount,
   defaultOpen = false,
   meta,
+  layout = "grid",
   children,
 }: WeekendSectionProps) {
   const [open, setOpen] = useState(defaultOpen);
@@ -93,12 +97,21 @@ export function WeekendSection({
 
         <div
           className="cpsl-weekend__panel"
-          style={{
-            display:              "grid",
-            gridTemplateColumns:  "repeat(auto-fill, minmax(360px, 1fr))",
-            gap:                  16,
-            paddingBottom:        30,
-          }}
+          style={
+            layout === "list"
+              ? {
+                  display:       "flex",
+                  flexDirection: "column",
+                  gap:           12,
+                  paddingBottom: 30,
+                }
+              : {
+                  display:             "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))",
+                  gap:                 16,
+                  paddingBottom:       30,
+                }
+          }
         >
           {children}
         </div>

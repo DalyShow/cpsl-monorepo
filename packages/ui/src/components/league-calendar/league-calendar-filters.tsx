@@ -46,6 +46,8 @@ export const DEFAULT_FILTER_VALUE: LeagueCalendarFilterValue = {
   gender:   null,
 };
 
+export type CalendarView = "day" | "season";
+
 export interface LeagueCalendarFiltersProps {
   clubs:        CalendarClub[];
   value:        LeagueCalendarFilterValue;
@@ -54,6 +56,11 @@ export interface LeagueCalendarFiltersProps {
   ageGroups?:   AgeGroup[];
   /** When true, render the All/Boys/Girls segmented control. Default: false. */
   showGender?:  boolean;
+  /** Presentation mode. When provided (with onViewChange), a Day|Season
+   *  toggle renders and the date picker hides in season view. Undefined
+   *  keeps the classic date-only behavior. */
+  view?:         CalendarView;
+  onViewChange?: (view: CalendarView) => void;
 }
 
 const DEFAULT_AGE_GROUPS: AgeGroup[] = ["U13", "U14", "U15", "U16", "U17", "U19"];
@@ -66,23 +73,40 @@ export function LeagueCalendarFilters({
   onChange,
   ageGroups = DEFAULT_AGE_GROUPS,
   showGender = false,
+  view,
+  onViewChange,
 }: LeagueCalendarFiltersProps) {
   const patch = (partial: Partial<LeagueCalendarFilterValue>) =>
     onChange({ ...value, ...partial });
 
+  const hasViewToggle = view !== undefined && !!onViewChange;
+
   return (
     <>
       <div className="cpsl-calfilters">
-        {/* ── Single row: [Date] [Club] ······················ [Age chips] ── */}
+        {/* ── Single row: [View] [Date] [Club] ··············· [Age chips] ── */}
         <div
           className="cpsl-calfilters__row"
           style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "center" }}
         >
-          <DateField
-            label="Date"
-            value={value.date}
-            onChange={(v) => patch({ date: v })}
-          />
+          {hasViewToggle && (
+            <Segmented<CalendarView>
+              label="View"
+              value={view!}
+              onChange={(v) => onViewChange!(v)}
+              options={[
+                { value: "day",    label: "Day" },
+                { value: "season", label: "Season" },
+              ]}
+            />
+          )}
+          {!(hasViewToggle && view === "season") && (
+            <DateField
+              label="Date"
+              value={value.date}
+              onChange={(v) => patch({ date: v })}
+            />
+          )}
           <Selector
             label="Club"
             value={value.clubId ?? ""}

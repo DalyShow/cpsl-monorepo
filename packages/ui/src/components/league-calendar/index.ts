@@ -14,6 +14,7 @@ export {
 export type {
   LeagueCalendarFiltersProps,
   LeagueCalendarFilterValue,
+  CalendarView,
 } from "./league-calendar-filters";
 
 export { CalendarEmptyState } from "./empty-state";

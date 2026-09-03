@@ -87,6 +87,7 @@ export type {
   WeekendSectionProps,
   LeagueCalendarFiltersProps,
   LeagueCalendarFilterValue,
+  CalendarView,
   CalendarEmptyStateProps,
   CalendarClub,
   CalendarMatch,

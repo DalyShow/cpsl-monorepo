@@ -62,6 +62,12 @@ export const CDL_META = {
   matchCount:  raw.matches.length,
 };
 
+/** Sync club-name lookup for feed titles etc. — no Sanity round-trip. */
+export const CDL_CLUBS_BY_ID: ReadonlyMap<string, { name: string; shortName: string }> =
+  new Map(raw.clubs.map((c) => [c.id, { name: c.name, shortName: c.shortName }]));
+
+export { filterCdlMatches, type CdlMatchFilter } from "./cdlFilter";
+
 /**
  * Server-side: build the CDL club roster with real Sanity crests where
  * available. Falls back to the embedded placeholder SVG when Sanity is
