@@ -1,6 +1,5 @@
 "use client";
 
-import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import type { AgeGroup, CalendarClub } from "./types";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -53,17 +52,15 @@ export interface LeagueCalendarFiltersProps {
   clubs:        CalendarClub[];
   value:        LeagueCalendarFilterValue;
   onChange:     (next: LeagueCalendarFilterValue) => void;
-  /** Ordered age groups shown as chips. Defaults to CPSL's U13–U19 range. */
+  /** Ordered age groups in the Age dropdown. Defaults to CPSL's U13–U19 range. */
   ageGroups?:   AgeGroup[];
-  /** When true, render the All/Boys/Girls segmented control. Default: false. */
+  /** When true, render the All/Boys/Girls dropdown. Default: false. */
   showGender?:  boolean;
   /** Presentation mode. When provided (with onViewChange), a View
    *  dropdown renders (Day default) and the date picker hides in season
    *  view. Undefined keeps the classic date-only behavior. */
   view?:         CalendarView;
   onViewChange?: (view: CalendarView) => void;
-  /** Render the filter row on a subtle card fill. Default: false. */
-  panel?:        boolean;
 }
 
 const DEFAULT_AGE_GROUPS: AgeGroup[] = ["U13", "U14", "U15", "U16", "U17", "U19"];
@@ -78,7 +75,6 @@ export function LeagueCalendarFilters({
   showGender = false,
   view,
   onViewChange,
-  panel = false,
 }: LeagueCalendarFiltersProps) {
   const patch = (partial: Partial<LeagueCalendarFilterValue>) =>
     onChange({ ...value, ...partial });
@@ -87,20 +83,8 @@ export function LeagueCalendarFilters({
 
   return (
     <>
-      <div
-        className="cpsl-calfilters"
-        style={
-          panel
-            ? {
-                background:   "#0A1628",
-                border:       "1px solid #1E2D45",
-                borderRadius: 16,
-                padding:      "18px 20px",
-              }
-            : undefined
-        }
-      >
-        {/* ── Single row: [View] [Date] [Club] ··············· [Age chips] ── */}
+      <div className="cpsl-calfilters">
+        {/* ── Single row of matching dropdowns ─────────────────────── */}
         <div
           className="cpsl-calfilters__row"
           style={{ display: "flex", gap: 20, flexWrap: "wrap", alignItems: "center" }}
@@ -135,30 +119,29 @@ export function LeagueCalendarFilters({
           />
 
           {showGender && (
-            <GenderToggle
-              value={value.gender}
-              onChange={(g) => patch({ gender: g })}
+            <Selector
+              label="Show"
+              value={value.gender ?? ""}
+              onChange={(v) => patch({ gender: v === "M" || v === "G" ? v : null })}
+              width={130}
+              options={[
+                { value: "",  label: "All" },
+                { value: "M", label: "Boys" },
+                { value: "G", label: "Girls" },
+              ]}
             />
           )}
 
-          {/* Age chips pushed to the far right of the same row (desktop);
-              left-aligned with the stacked controls on mobile. */}
-          <div className="cpsl-calfilters__age" style={{ marginLeft: "auto" }}>
-            <ChipGroup label="Age">
-              <Chip active={value.ageGroup === null} onClick={() => patch({ ageGroup: null })}>
-                All
-              </Chip>
-              {ageGroups.map((a) => (
-                <Chip
-                  key={a}
-                  active={value.ageGroup === a}
-                  onClick={() => patch({ ageGroup: a })}
-                >
-                  {a}
-                </Chip>
-              ))}
-            </ChipGroup>
-          </div>
+          <Selector
+            label="Age"
+            value={value.ageGroup ?? ""}
+            onChange={(v) => patch({ ageGroup: (v || null) as AgeGroup | null })}
+            width={140}
+            options={[
+              { value: "", label: "All ages" },
+              ...ageGroups.map((a) => ({ value: a, label: a })),
+            ]}
+          />
         </div>
 
         {/* ── Reset ─────────────────────────────────────────────────── */}
@@ -189,8 +172,6 @@ export function LeagueCalendarFilters({
       <style>{`
         @media (max-width: 640px) {
           .cpsl-calfilters__row { row-gap: 12px; }
-          .cpsl-calfilters__age { margin-left: 0 !important; }
-          .cpsl-calfilters__age .cpsl-chipgroup__chips { gap: 12px !important; }
         }
       `}</style>
     </>
@@ -292,139 +273,6 @@ function Selector({
         ))}
       </select>
     </label>
-  );
-}
-
-/**
- * All / Boys / Girls single-select — shadcn-style, built on the Radix
- * ToggleGroup primitive (roving focus, arrow keys, aria for free) and
- * skinned to match the pill controls around it.
- */
-function GenderToggle({
-  value,
-  onChange,
-}: {
-  value:    GenderFilter;
-  onChange: (v: GenderFilter) => void;
-}) {
-  return (
-    <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-      <Label>Show</Label>
-      <RadixToggleGroup.Root
-        type="single"
-        value={value ?? "all"}
-        onValueChange={(v) => {
-          // Radix emits "" when the active item is re-clicked — keep the
-          // current selection instead of allowing an empty state.
-          if (v) onChange(v === "all" ? null : (v as "M" | "G"));
-        }}
-        aria-label="Show"
-        className="cpsl-gender-toggle"
-        style={{
-          display:      "inline-flex",
-          height:       38,
-          alignItems:   "stretch",
-          border:       "1px solid #1E2D45",
-          borderRadius: 999,
-          overflow:     "hidden",
-          background:   "#041124",
-        }}
-      >
-        {(
-          [
-            { value: "all", label: "All" },
-            { value: "M",   label: "Boys" },
-            { value: "G",   label: "Girls" },
-          ] as const
-        ).map((opt, i) => (
-          <RadixToggleGroup.Item
-            key={opt.value}
-            value={opt.value}
-            style={{
-              appearance:    "none",
-              border:        "none",
-              borderLeft:    i === 0 ? "none" : "1px solid #1E2D45",
-              padding:       "0 16px",
-              background:    "transparent",
-              color:         "#94A3B8",
-              fontFamily:    "'Barlow Condensed', sans-serif",
-              fontWeight:    700,
-              fontSize:      12,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              cursor:        "pointer",
-              transition:    "all 120ms ease",
-            }}
-          >
-            {opt.label}
-          </RadixToggleGroup.Item>
-        ))}
-      </RadixToggleGroup.Root>
-      <style>{`
-        .cpsl-gender-toggle [data-state="on"] {
-          background: rgba(212,185,73,0.15) !important;
-          color: #E5C97A !important;
-        }
-        .cpsl-gender-toggle button:focus-visible {
-          outline: 2px solid #D4B949;
-          outline-offset: -2px;
-        }
-      `}</style>
-    </div>
-  );
-}
-
-function ChipGroup({
-  label,
-  children,
-}: {
-  label:    string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-      <Label>{label}</Label>
-      <div className="cpsl-chipgroup__chips" style={{ display: "inline-flex", flexWrap: "wrap", gap: 6 }}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function Chip({
-  active,
-  onClick,
-  children,
-}: {
-  active:   boolean;
-  onClick:  () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      style={{
-        appearance:     "none",
-        display:        "inline-flex",
-        alignItems:     "center",
-        height:         32,
-        padding:        "0 14px",
-        border:         active ? "1px solid #D4B949" : "1px solid #1E2D45",
-        background:     active ? "rgba(212,185,73,0.15)" : "transparent",
-        color:          active ? "#E5C97A" : "#94A3B8",
-        fontFamily:     "Inter, sans-serif",
-        fontSize:       12,
-        fontWeight:     600,
-        letterSpacing:  "0.04em",
-        borderRadius:   999,
-        cursor:         "pointer",
-        transition:     "all 120ms ease",
-      }}
-    >
-      {children}
-    </button>
   );
 }
 

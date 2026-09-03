@@ -362,22 +362,35 @@ export function ScheduleExplorer({ clubs, matches, ageGroups, showGender }: Sche
   };
 
   return (
-    <div
-      className="max-w-7xl mx-auto w-full px-4 sm:px-6"
-      style={{ paddingTop: 30, paddingBottom: 30 }}
-    >
-      <div style={{ marginBottom: 44 }}>
-        <LeagueCalendarFilters
-          clubs={clubs}
-          value={filters}
-          onChange={setFilters}
-          ageGroups={ageGroups}
-          showGender={showGender}
-          view={view}
-          onViewChange={setView}
-          panel
-        />
+    <div>
+      {/* ── Filter band — full-bleed fill, closed by a hairline like the
+             one under the hero. Controls stay in the content column. ── */}
+      <div
+        style={{
+          background:   "#0A1628",
+          borderBottom: "1px solid #1E2D45",
+        }}
+      >
+        <div
+          className="max-w-7xl mx-auto w-full px-4 sm:px-6"
+          style={{ paddingTop: 22, paddingBottom: 22 }}
+        >
+          <LeagueCalendarFilters
+            clubs={clubs}
+            value={filters}
+            onChange={setFilters}
+            ageGroups={ageGroups}
+            showGender={showGender}
+            view={view}
+            onViewChange={setView}
+          />
+        </div>
       </div>
+
+      <div
+        className="max-w-7xl mx-auto w-full px-4 sm:px-6"
+        style={{ paddingTop: 44, paddingBottom: 30 }}
+      >
 
       {/* ── Header row: title + count on the left, calendar CTA right ── */}
       <div
@@ -450,6 +463,7 @@ export function ScheduleExplorer({ clubs, matches, ageGroups, showGender }: Sche
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 }
