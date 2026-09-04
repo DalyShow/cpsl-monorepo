@@ -13,6 +13,9 @@ export interface WeekendSectionProps {
   /** Panel layout — "grid" (default, responsive columns) or "list"
    *  (single column of full-width rows, matching the day view). */
   layout?:      "grid" | "list";
+  /** Renders the header row smaller and faded — for dates already played,
+   *  so upcoming sections carry the visual weight. Default: false. */
+  dimmed?:      boolean;
   children:     React.ReactNode;
 }
 
@@ -29,6 +32,7 @@ export function WeekendSection({
   defaultOpen = false,
   meta,
   layout = "grid",
+  dimmed = false,
   children,
 }: WeekendSectionProps) {
   const [open, setOpen] = useState(defaultOpen);
@@ -70,11 +74,12 @@ export function WeekendSection({
               style={{
                 fontFamily:     "'Barlow Condensed', sans-serif",
                 fontWeight:     700,
-                fontSize:       24,
+                fontSize:       dimmed ? 20 : 28,
                 lineHeight:     1,
                 letterSpacing:  "0.02em",
                 textTransform:  "uppercase",
-                color:          "#F4EFE6",
+                color:          dimmed ? "#5B6B7E" : "#F4EFE6",
+                transition:     "color 160ms ease",
               }}
             >
               {label}
@@ -85,14 +90,16 @@ export function WeekendSection({
                 fontWeight:     600,
                 letterSpacing:  "0.14em",
                 textTransform:  "uppercase",
-                color:          "#7A9BAA",
+                color:          dimmed ? "#42526B" : "#7A9BAA",
               }}
             >
               {meta ?? `${matchCount} match${matchCount === 1 ? "" : "es"}`}
             </span>
           </div>
 
-          <Chevron open={open} />
+          <span style={{ opacity: dimmed ? 0.5 : 1, display: "inline-flex" }}>
+            <Chevron open={open} />
+          </span>
         </summary>
 
         <div

@@ -306,6 +306,7 @@ export function ScheduleExplorer({ clubs, matches, ageGroups, showGender }: Sche
               matchCount={group.length}
               defaultOpen={key === firstUpcomingKey}
               layout="list"
+              dimmed={key < anchorDay}
             >
               {group.map(renderCard)}
             </WeekendSection>
