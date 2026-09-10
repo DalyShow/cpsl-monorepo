@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-24T14:28:49",
-  "source": "girls snapshot",
+  "generatedAt": "2026-09-03T13:58:09",
+  "source": "regenerated from cdl-fall-2026.json (girls feed) after 2026-09-03 update",
   "clubs": [
     {
       "id": "cisc",
@@ -541,7 +541,7 @@
     },
     {
       "id": "cdl-fall-g-32",
-      "kickoff": "2026-09-12T13:30:00",
+      "kickoff": "2026-09-12T14:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
       "homeTeamLabel": "U12 Pre Courage Navy",
@@ -555,7 +555,7 @@
     },
     {
       "id": "cdl-fall-g-33",
-      "kickoff": "2026-09-12T13:30:00",
+      "kickoff": "2026-09-12T15:45:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
       "homeTeamLabel": "U12 Pre Courage White",
@@ -1144,6 +1144,34 @@
     {
       "id": "cdl-fall-g-75",
       "kickoff": "2026-09-27T12:00:00",
+      "homeClubId": "wake-fc",
+      "awayClubId": "wilmington-hammerheads",
+      "homeTeamLabel": "U11 PAG Blue",
+      "awayTeamLabel": "U11 1",
+      "field": "MC 2A",
+      "locationAddress": "",
+      "ageGroup": "U11",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 75
+    },
+    {
+      "id": "cdl-fall-g-76",
+      "kickoff": "2026-09-27T12:00:00",
+      "homeClubId": "wake-fc",
+      "awayClubId": "wilmington-hammerheads",
+      "homeTeamLabel": "U12 PAG White",
+      "awayTeamLabel": "U12 2",
+      "field": "MC 2B",
+      "locationAddress": "",
+      "ageGroup": "U12",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 76
+    },
+    {
+      "id": "cdl-fall-g-77",
+      "kickoff": "2026-09-27T12:00:00",
       "homeClubId": "cisc",
       "awayClubId": "highland-fc",
       "homeTeamLabel": "U12 Pre GA North Blue",
@@ -1153,10 +1181,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 75
+      "sourceRow": 77
     },
     {
-      "id": "cdl-fall-g-76",
+      "id": "cdl-fall-g-78",
       "kickoff": "2026-09-27T12:00:00",
       "homeClubId": "cisc",
       "awayClubId": "highland-fc",
@@ -1167,10 +1195,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 76
+      "sourceRow": 78
     },
     {
-      "id": "cdl-fall-g-77",
+      "id": "cdl-fall-g-79",
       "kickoff": "2026-09-27T12:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "carolina-core-fc",
@@ -1181,10 +1209,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 77
+      "sourceRow": 79
     },
     {
-      "id": "cdl-fall-g-78",
+      "id": "cdl-fall-g-80",
       "kickoff": "2026-09-27T12:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "carolina-core-fc",
@@ -1195,10 +1223,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 78
+      "sourceRow": 80
     },
     {
-      "id": "cdl-fall-g-79",
+      "id": "cdl-fall-g-81",
       "kickoff": "2026-09-27T12:45:00",
       "homeClubId": "sc-surf",
       "awayClubId": "csa",
@@ -1209,10 +1237,38 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 79
+      "sourceRow": 81
     },
     {
-      "id": "cdl-fall-g-80",
+      "id": "cdl-fall-g-82",
+      "kickoff": "2026-09-27T13:30:00",
+      "homeClubId": "wake-fc",
+      "awayClubId": "wilmington-hammerheads",
+      "homeTeamLabel": "U12 PAG Blue",
+      "awayTeamLabel": "U12 1",
+      "field": "MC 2A",
+      "locationAddress": "",
+      "ageGroup": "U12",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 82
+    },
+    {
+      "id": "cdl-fall-g-83",
+      "kickoff": "2026-09-27T13:30:00",
+      "homeClubId": "wake-fc",
+      "awayClubId": "wilmington-hammerheads",
+      "homeTeamLabel": "U11 PAG White",
+      "awayTeamLabel": "U11 2",
+      "field": "MC 2B",
+      "locationAddress": "",
+      "ageGroup": "U11",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 83
+    },
+    {
+      "id": "cdl-fall-g-84",
       "kickoff": "2026-09-27T13:30:00",
       "homeClubId": "cisc",
       "awayClubId": "highland-fc",
@@ -1223,10 +1279,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 80
+      "sourceRow": 84
     },
     {
-      "id": "cdl-fall-g-81",
+      "id": "cdl-fall-g-85",
       "kickoff": "2026-09-27T13:30:00",
       "homeClubId": "cisc",
       "awayClubId": "highland-fc",
@@ -1237,10 +1293,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 81
+      "sourceRow": 85
     },
     {
-      "id": "cdl-fall-g-82",
+      "id": "cdl-fall-g-86",
       "kickoff": "2026-09-27T13:45:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "carolina-core-fc",
@@ -1251,10 +1307,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 82
+      "sourceRow": 86
     },
     {
-      "id": "cdl-fall-g-83",
+      "id": "cdl-fall-g-87",
       "kickoff": "2026-09-27T13:45:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "carolina-core-fc",
@@ -1265,10 +1321,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 83
+      "sourceRow": 87
     },
     {
-      "id": "cdl-fall-g-84",
+      "id": "cdl-fall-g-88",
       "kickoff": "2026-09-27T15:00:00",
       "homeClubId": "cisc",
       "awayClubId": "highland-fc",
@@ -1279,10 +1335,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 84
+      "sourceRow": 88
     },
     {
-      "id": "cdl-fall-g-85",
+      "id": "cdl-fall-g-89",
       "kickoff": "2026-09-27T15:00:00",
       "homeClubId": "cisc",
       "awayClubId": "highland-fc",
@@ -1293,10 +1349,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 85
+      "sourceRow": 89
     },
     {
-      "id": "cdl-fall-g-86",
+      "id": "cdl-fall-g-90",
       "kickoff": "2026-10-03T10:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1307,10 +1363,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 86
+      "sourceRow": 90
     },
     {
-      "id": "cdl-fall-g-87",
+      "id": "cdl-fall-g-91",
       "kickoff": "2026-10-03T11:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1321,10 +1377,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 87
+      "sourceRow": 91
     },
     {
-      "id": "cdl-fall-g-88",
+      "id": "cdl-fall-g-92",
       "kickoff": "2026-10-03T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -1335,10 +1391,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 88
+      "sourceRow": 92
     },
     {
-      "id": "cdl-fall-g-89",
+      "id": "cdl-fall-g-93",
       "kickoff": "2026-10-03T13:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1349,10 +1405,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 89
+      "sourceRow": 93
     },
     {
-      "id": "cdl-fall-g-90",
+      "id": "cdl-fall-g-94",
       "kickoff": "2026-10-03T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -1363,10 +1419,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 90
+      "sourceRow": 94
     },
     {
-      "id": "cdl-fall-g-91",
+      "id": "cdl-fall-g-95",
       "kickoff": "2026-10-03T14:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1377,10 +1433,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 91
+      "sourceRow": 95
     },
     {
-      "id": "cdl-fall-g-92",
+      "id": "cdl-fall-g-96",
       "kickoff": "2026-10-03T16:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -1391,10 +1447,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 92
+      "sourceRow": 96
     },
     {
-      "id": "cdl-fall-g-93",
+      "id": "cdl-fall-g-97",
       "kickoff": "2026-10-03T16:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -1405,10 +1461,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 93
+      "sourceRow": 97
     },
     {
-      "id": "cdl-fall-g-94",
+      "id": "cdl-fall-g-98",
       "kickoff": "2026-10-04T11:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "wake-fc",
@@ -1419,10 +1475,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 94
+      "sourceRow": 98
     },
     {
-      "id": "cdl-fall-g-95",
+      "id": "cdl-fall-g-99",
       "kickoff": "2026-10-04T11:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "wake-fc",
@@ -1433,10 +1489,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 95
+      "sourceRow": 99
     },
     {
-      "id": "cdl-fall-g-96",
+      "id": "cdl-fall-g-100",
       "kickoff": "2026-10-04T11:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "wake-fc",
@@ -1447,10 +1503,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 96
+      "sourceRow": 100
     },
     {
-      "id": "cdl-fall-g-97",
+      "id": "cdl-fall-g-101",
       "kickoff": "2026-10-04T12:45:00",
       "homeClubId": "sc-surf",
       "awayClubId": "wake-fc",
@@ -1461,10 +1517,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 97
+      "sourceRow": 101
     },
     {
-      "id": "cdl-fall-g-98",
+      "id": "cdl-fall-g-102",
       "kickoff": "2026-10-04T14:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "wake-fc",
@@ -1475,10 +1531,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 98
+      "sourceRow": 102
     },
     {
-      "id": "cdl-fall-g-99",
+      "id": "cdl-fall-g-103",
       "kickoff": "2026-10-04T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -1489,10 +1545,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 99
+      "sourceRow": 103
     },
     {
-      "id": "cdl-fall-g-100",
+      "id": "cdl-fall-g-104",
       "kickoff": "2026-10-04T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -1503,10 +1559,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 100
+      "sourceRow": 104
     },
     {
-      "id": "cdl-fall-g-101",
+      "id": "cdl-fall-g-105",
       "kickoff": "2026-10-04T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -1517,10 +1573,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 101
+      "sourceRow": 105
     },
     {
-      "id": "cdl-fall-g-102",
+      "id": "cdl-fall-g-106",
       "kickoff": "2026-10-04T15:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "wake-fc",
@@ -1531,10 +1587,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 102
+      "sourceRow": 106
     },
     {
-      "id": "cdl-fall-g-103",
+      "id": "cdl-fall-g-107",
       "kickoff": "2026-10-04T15:30:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -1545,10 +1601,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 103
+      "sourceRow": 107
     },
     {
-      "id": "cdl-fall-g-104",
+      "id": "cdl-fall-g-108",
       "kickoff": "2026-10-11T12:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "cisc",
@@ -1559,10 +1615,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 104
+      "sourceRow": 108
     },
     {
-      "id": "cdl-fall-g-105",
+      "id": "cdl-fall-g-109",
       "kickoff": "2026-10-11T13:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "cisc",
@@ -1573,10 +1629,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 105
+      "sourceRow": 109
     },
     {
-      "id": "cdl-fall-g-106",
+      "id": "cdl-fall-g-110",
       "kickoff": "2026-10-11T14:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "cisc",
@@ -1587,10 +1643,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 106
+      "sourceRow": 110
     },
     {
-      "id": "cdl-fall-g-107",
+      "id": "cdl-fall-g-111",
       "kickoff": "2026-10-11T15:45:00",
       "homeClubId": "sc-surf",
       "awayClubId": "cisc",
@@ -1601,10 +1657,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 107
+      "sourceRow": 111
     },
     {
-      "id": "cdl-fall-g-108",
+      "id": "cdl-fall-g-112",
       "kickoff": "2026-10-17T11:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -1615,10 +1671,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 108
+      "sourceRow": 112
     },
     {
-      "id": "cdl-fall-g-109",
+      "id": "cdl-fall-g-113",
       "kickoff": "2026-10-17T11:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -1629,10 +1685,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 109
+      "sourceRow": 113
     },
     {
-      "id": "cdl-fall-g-110",
+      "id": "cdl-fall-g-114",
       "kickoff": "2026-10-17T14:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -1643,10 +1699,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 110
+      "sourceRow": 114
     },
     {
-      "id": "cdl-fall-g-111",
+      "id": "cdl-fall-g-115",
       "kickoff": "2026-10-17T14:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -1657,10 +1713,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 111
+      "sourceRow": 115
     },
     {
-      "id": "cdl-fall-g-112",
+      "id": "cdl-fall-g-116",
       "kickoff": "2026-10-18T11:00:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1671,10 +1727,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 112
+      "sourceRow": 116
     },
     {
-      "id": "cdl-fall-g-113",
+      "id": "cdl-fall-g-117",
       "kickoff": "2026-10-18T11:00:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1685,10 +1741,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 113
+      "sourceRow": 117
     },
     {
-      "id": "cdl-fall-g-114",
+      "id": "cdl-fall-g-118",
       "kickoff": "2026-10-18T11:00:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1699,10 +1755,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 114
+      "sourceRow": 118
     },
     {
-      "id": "cdl-fall-g-115",
+      "id": "cdl-fall-g-119",
       "kickoff": "2026-10-18T11:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "sc-surf",
@@ -1713,10 +1769,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 115
+      "sourceRow": 119
     },
     {
-      "id": "cdl-fall-g-116",
+      "id": "cdl-fall-g-120",
       "kickoff": "2026-10-18T12:30:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1727,10 +1783,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 116
+      "sourceRow": 120
     },
     {
-      "id": "cdl-fall-g-117",
+      "id": "cdl-fall-g-121",
       "kickoff": "2026-10-18T12:30:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1741,10 +1797,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 117
+      "sourceRow": 121
     },
     {
-      "id": "cdl-fall-g-118",
+      "id": "cdl-fall-g-122",
       "kickoff": "2026-10-18T12:30:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1755,10 +1811,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 118
+      "sourceRow": 122
     },
     {
-      "id": "cdl-fall-g-119",
+      "id": "cdl-fall-g-123",
       "kickoff": "2026-10-18T12:45:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "sc-surf",
@@ -1769,10 +1825,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 119
+      "sourceRow": 123
     },
     {
-      "id": "cdl-fall-g-120",
+      "id": "cdl-fall-g-124",
       "kickoff": "2026-10-18T14:00:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "sc-surf",
@@ -1783,10 +1839,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 120
+      "sourceRow": 124
     },
     {
-      "id": "cdl-fall-g-121",
+      "id": "cdl-fall-g-125",
       "kickoff": "2026-10-18T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1797,10 +1853,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 121
+      "sourceRow": 125
     },
     {
-      "id": "cdl-fall-g-122",
+      "id": "cdl-fall-g-126",
       "kickoff": "2026-10-18T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1811,10 +1867,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 122
+      "sourceRow": 126
     },
     {
-      "id": "cdl-fall-g-123",
+      "id": "cdl-fall-g-127",
       "kickoff": "2026-10-18T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1825,10 +1881,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 123
+      "sourceRow": 127
     },
     {
-      "id": "cdl-fall-g-124",
+      "id": "cdl-fall-g-128",
       "kickoff": "2026-10-18T15:15:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "sc-surf",
@@ -1839,10 +1895,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 124
+      "sourceRow": 128
     },
     {
-      "id": "cdl-fall-g-125",
+      "id": "cdl-fall-g-129",
       "kickoff": "2026-10-18T15:30:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1853,10 +1909,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 125
+      "sourceRow": 129
     },
     {
-      "id": "cdl-fall-g-126",
+      "id": "cdl-fall-g-130",
       "kickoff": "2026-10-18T15:30:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1867,10 +1923,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 126
+      "sourceRow": 130
     },
     {
-      "id": "cdl-fall-g-127",
+      "id": "cdl-fall-g-131",
       "kickoff": "2026-10-18T15:30:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fusion",
@@ -1881,10 +1937,66 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 127
+      "sourceRow": 131
     },
     {
-      "id": "cdl-fall-g-128",
+      "id": "cdl-fall-g-132",
+      "kickoff": "2026-10-23T18:15:00",
+      "homeClubId": "wake-fc",
+      "awayClubId": "ncc",
+      "homeTeamLabel": "U11 PAG Blue",
+      "awayTeamLabel": "U11 Navy",
+      "field": "MC 2A",
+      "locationAddress": "",
+      "ageGroup": "U11",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 132
+    },
+    {
+      "id": "cdl-fall-g-133",
+      "kickoff": "2026-10-23T18:15:00",
+      "homeClubId": "wake-fc",
+      "awayClubId": "ncc",
+      "homeTeamLabel": "U12 PAG White",
+      "awayTeamLabel": "U12 White",
+      "field": "MC 2B",
+      "locationAddress": "",
+      "ageGroup": "U12",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 133
+    },
+    {
+      "id": "cdl-fall-g-134",
+      "kickoff": "2026-10-23T19:30:00",
+      "homeClubId": "wake-fc",
+      "awayClubId": "ncc",
+      "homeTeamLabel": "U12 PAG Blue",
+      "awayTeamLabel": "U12 Navy",
+      "field": "MC 2A",
+      "locationAddress": "",
+      "ageGroup": "U12",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 134
+    },
+    {
+      "id": "cdl-fall-g-135",
+      "kickoff": "2026-10-23T19:30:00",
+      "homeClubId": "wake-fc",
+      "awayClubId": "ncc",
+      "homeTeamLabel": "U11 White",
+      "awayTeamLabel": "U11 White",
+      "field": "MC 2B",
+      "locationAddress": "",
+      "ageGroup": "U11",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 135
+    },
+    {
+      "id": "cdl-fall-g-136",
       "kickoff": "2026-10-24T09:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fusion",
@@ -1895,10 +2007,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 128
+      "sourceRow": 136
     },
     {
-      "id": "cdl-fall-g-129",
+      "id": "cdl-fall-g-137",
       "kickoff": "2026-10-24T10:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fusion",
@@ -1909,10 +2021,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 129
+      "sourceRow": 137
     },
     {
-      "id": "cdl-fall-g-130",
+      "id": "cdl-fall-g-138",
       "kickoff": "2026-10-24T12:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fusion",
@@ -1923,10 +2035,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 130
+      "sourceRow": 138
     },
     {
-      "id": "cdl-fall-g-131",
+      "id": "cdl-fall-g-139",
       "kickoff": "2026-10-24T13:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fusion",
@@ -1937,10 +2049,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 131
+      "sourceRow": 139
     },
     {
-      "id": "cdl-fall-g-132",
+      "id": "cdl-fall-g-140",
       "kickoff": "2026-10-24T15:00:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -1951,10 +2063,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 132
+      "sourceRow": 140
     },
     {
-      "id": "cdl-fall-g-133",
+      "id": "cdl-fall-g-141",
       "kickoff": "2026-10-24T15:00:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -1965,10 +2077,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 133
+      "sourceRow": 141
     },
     {
-      "id": "cdl-fall-g-134",
+      "id": "cdl-fall-g-142",
       "kickoff": "2026-10-24T17:30:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -1979,10 +2091,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 134
+      "sourceRow": 142
     },
     {
-      "id": "cdl-fall-g-135",
+      "id": "cdl-fall-g-143",
       "kickoff": "2026-10-24T17:30:00",
       "homeClubId": "tbd",
       "awayClubId": "highland-fc",
@@ -1993,10 +2105,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 135
+      "sourceRow": 143
     },
     {
-      "id": "cdl-fall-g-136",
+      "id": "cdl-fall-g-144",
       "kickoff": "2026-10-25T10:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "wake-fc",
@@ -2007,10 +2119,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 136
+      "sourceRow": 144
     },
     {
-      "id": "cdl-fall-g-137",
+      "id": "cdl-fall-g-145",
       "kickoff": "2026-10-25T11:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "wake-fc",
@@ -2021,10 +2133,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 137
+      "sourceRow": 145
     },
     {
-      "id": "cdl-fall-g-138",
+      "id": "cdl-fall-g-146",
       "kickoff": "2026-10-25T13:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "wake-fc",
@@ -2035,10 +2147,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 138
+      "sourceRow": 146
     },
     {
-      "id": "cdl-fall-g-139",
+      "id": "cdl-fall-g-147",
       "kickoff": "2026-10-25T14:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "wake-fc",
@@ -2049,10 +2161,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 139
+      "sourceRow": 147
     },
     {
-      "id": "cdl-fall-g-140",
+      "id": "cdl-fall-g-148",
       "kickoff": "2026-11-01T10:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -2063,10 +2175,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 140
+      "sourceRow": 148
     },
     {
-      "id": "cdl-fall-g-141",
+      "id": "cdl-fall-g-149",
       "kickoff": "2026-11-01T10:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -2077,10 +2189,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 141
+      "sourceRow": 149
     },
     {
-      "id": "cdl-fall-g-142",
+      "id": "cdl-fall-g-150",
       "kickoff": "2026-11-01T11:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -2091,10 +2203,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 142
+      "sourceRow": 150
     },
     {
-      "id": "cdl-fall-g-143",
+      "id": "cdl-fall-g-151",
       "kickoff": "2026-11-01T11:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -2105,10 +2217,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 143
+      "sourceRow": 151
     },
     {
-      "id": "cdl-fall-g-144",
+      "id": "cdl-fall-g-152",
       "kickoff": "2026-11-01T12:00:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -2119,10 +2231,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 144
+      "sourceRow": 152
     },
     {
-      "id": "cdl-fall-g-145",
+      "id": "cdl-fall-g-153",
       "kickoff": "2026-11-01T13:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -2133,10 +2245,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 145
+      "sourceRow": 153
     },
     {
-      "id": "cdl-fall-g-146",
+      "id": "cdl-fall-g-154",
       "kickoff": "2026-11-01T13:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -2147,10 +2259,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 146
+      "sourceRow": 154
     },
     {
-      "id": "cdl-fall-g-147",
+      "id": "cdl-fall-g-155",
       "kickoff": "2026-11-01T13:30:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -2161,10 +2273,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 147
+      "sourceRow": 155
     },
     {
-      "id": "cdl-fall-g-148",
+      "id": "cdl-fall-g-156",
       "kickoff": "2026-11-01T15:00:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -2175,10 +2287,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 148
+      "sourceRow": 156
     },
     {
-      "id": "cdl-fall-g-149",
+      "id": "cdl-fall-g-157",
       "kickoff": "2026-11-01T14:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -2189,10 +2301,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 149
+      "sourceRow": 157
     },
     {
-      "id": "cdl-fall-g-150",
+      "id": "cdl-fall-g-158",
       "kickoff": "2026-11-01T14:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -2203,10 +2315,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 150
+      "sourceRow": 158
     },
     {
-      "id": "cdl-fall-g-151",
+      "id": "cdl-fall-g-159",
       "kickoff": "2026-11-01T16:30:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -2217,10 +2329,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 151
+      "sourceRow": 159
     },
     {
-      "id": "cdl-fall-g-152",
+      "id": "cdl-fall-g-160",
       "kickoff": "2026-11-14T10:30:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fc-youth",
@@ -2231,10 +2343,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 152
+      "sourceRow": 160
     },
     {
-      "id": "cdl-fall-g-153",
+      "id": "cdl-fall-g-161",
       "kickoff": "2026-11-14T10:30:00",
       "homeClubId": "csa",
       "awayClubId": "nc-fc-youth",
@@ -2245,10 +2357,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 153
+      "sourceRow": 161
     },
     {
-      "id": "cdl-fall-g-154",
+      "id": "cdl-fall-g-162",
       "kickoff": "2026-11-14T13:00:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -2259,10 +2371,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 154
+      "sourceRow": 162
     },
     {
-      "id": "cdl-fall-g-155",
+      "id": "cdl-fall-g-163",
       "kickoff": "2026-11-14T13:00:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -2273,10 +2385,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 155
+      "sourceRow": 163
     },
     {
-      "id": "cdl-fall-g-156",
+      "id": "cdl-fall-g-164",
       "kickoff": "2026-11-14T15:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "nc-fc-youth",
@@ -2287,10 +2399,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 156
+      "sourceRow": 164
     },
     {
-      "id": "cdl-fall-g-157",
+      "id": "cdl-fall-g-165",
       "kickoff": "2026-11-14T15:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "nc-fc-youth",
@@ -2301,10 +2413,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 157
+      "sourceRow": 165
     },
     {
-      "id": "cdl-fall-g-158",
+      "id": "cdl-fall-g-166",
       "kickoff": "2026-11-15T09:00:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -2315,10 +2427,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 158
+      "sourceRow": 166
     },
     {
-      "id": "cdl-fall-g-159",
+      "id": "cdl-fall-g-167",
       "kickoff": "2026-11-15T09:00:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -2329,10 +2441,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 159
+      "sourceRow": 167
     },
     {
-      "id": "cdl-fall-g-160",
+      "id": "cdl-fall-g-168",
       "kickoff": "2026-11-15T10:30:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -2343,10 +2455,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 160
+      "sourceRow": 168
     },
     {
-      "id": "cdl-fall-g-161",
+      "id": "cdl-fall-g-169",
       "kickoff": "2026-11-15T10:30:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -2357,10 +2469,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 161
+      "sourceRow": 169
     },
     {
-      "id": "cdl-fall-g-162",
+      "id": "cdl-fall-g-170",
       "kickoff": "2026-11-15T12:00:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -2371,10 +2483,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 162
+      "sourceRow": 170
     },
     {
-      "id": "cdl-fall-g-163",
+      "id": "cdl-fall-g-171",
       "kickoff": "2026-11-15T12:00:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -2385,10 +2497,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 163
+      "sourceRow": 171
     },
     {
-      "id": "cdl-fall-g-164",
+      "id": "cdl-fall-g-172",
       "kickoff": "2026-11-15T13:30:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -2399,10 +2511,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 164
+      "sourceRow": 172
     },
     {
-      "id": "cdl-fall-g-165",
+      "id": "cdl-fall-g-173",
       "kickoff": "2026-11-15T13:30:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -2413,10 +2525,66 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 165
+      "sourceRow": 173
     },
     {
-      "id": "cdl-fall-g-166",
+      "id": "cdl-fall-g-174",
+      "kickoff": "2026-11-21T09:00:00",
+      "homeClubId": "nc-fusion",
+      "awayClubId": "wake-fc",
+      "homeTeamLabel": "U11 Pre Black",
+      "awayTeamLabel": "U11 PAG Blue",
+      "field": "3A Truist",
+      "locationAddress": "",
+      "ageGroup": "U11",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 174
+    },
+    {
+      "id": "cdl-fall-g-175",
+      "kickoff": "2026-11-21T09:00:00",
+      "homeClubId": "nc-fusion",
+      "awayClubId": "wake-fc",
+      "homeTeamLabel": "U12 Pre Black",
+      "awayTeamLabel": "U12 PAG Blue",
+      "field": "3B Truist",
+      "locationAddress": "",
+      "ageGroup": "U12",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 175
+    },
+    {
+      "id": "cdl-fall-g-176",
+      "kickoff": "2026-11-21T10:30:00",
+      "homeClubId": "nc-fusion",
+      "awayClubId": "wake-fc",
+      "homeTeamLabel": "U11 Pre Red",
+      "awayTeamLabel": "U11 PAG White",
+      "field": "3A Truist",
+      "locationAddress": "",
+      "ageGroup": "U11",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 176
+    },
+    {
+      "id": "cdl-fall-g-177",
+      "kickoff": "2026-11-21T10:30:00",
+      "homeClubId": "nc-fusion",
+      "awayClubId": "wake-fc",
+      "homeTeamLabel": "U12 Pre Red",
+      "awayTeamLabel": "U12 PAG White",
+      "field": "3B Truist",
+      "locationAddress": "",
+      "ageGroup": "U12",
+      "gender": "G",
+      "notes": null,
+      "sourceRow": 177
+    },
+    {
+      "id": "cdl-fall-g-178",
       "kickoff": "2026-12-05T00:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "ncc",
@@ -2427,10 +2595,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 166
+      "sourceRow": 178
     },
     {
-      "id": "cdl-fall-g-167",
+      "id": "cdl-fall-g-179",
       "kickoff": "2026-12-05T00:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "ncc",
@@ -2441,10 +2609,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 167
+      "sourceRow": 179
     },
     {
-      "id": "cdl-fall-g-168",
+      "id": "cdl-fall-g-180",
       "kickoff": "2026-12-05T00:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "ncc",
@@ -2455,10 +2623,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 168
+      "sourceRow": 180
     },
     {
-      "id": "cdl-fall-g-169",
+      "id": "cdl-fall-g-181",
       "kickoff": "2026-12-05T00:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "ncc",
@@ -2469,10 +2637,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 169
+      "sourceRow": 181
     },
     {
-      "id": "cdl-fall-g-170",
+      "id": "cdl-fall-g-182",
       "kickoff": "2026-12-12T11:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -2483,10 +2651,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 170
+      "sourceRow": 182
     },
     {
-      "id": "cdl-fall-g-171",
+      "id": "cdl-fall-g-183",
       "kickoff": "2026-12-12T11:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -2497,10 +2665,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 171
+      "sourceRow": 183
     },
     {
-      "id": "cdl-fall-g-172",
+      "id": "cdl-fall-g-184",
       "kickoff": "2026-12-12T13:00:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -2511,10 +2679,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 172
+      "sourceRow": 184
     },
     {
-      "id": "cdl-fall-g-173",
+      "id": "cdl-fall-g-185",
       "kickoff": "2026-12-12T13:00:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -2525,10 +2693,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 173
+      "sourceRow": 185
     },
     {
-      "id": "cdl-fall-g-174",
+      "id": "cdl-fall-g-186",
       "kickoff": "2026-12-12T16:00:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -2539,10 +2707,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 174
+      "sourceRow": 186
     },
     {
-      "id": "cdl-fall-g-175",
+      "id": "cdl-fall-g-187",
       "kickoff": "2026-12-12T16:00:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -2553,10 +2721,10 @@
       "ageGroup": "U12",
       "gender": "G",
       "notes": null,
-      "sourceRow": 175
+      "sourceRow": 187
     },
     {
-      "id": "cdl-fall-g-176",
+      "id": "cdl-fall-g-188",
       "kickoff": "2026-12-12T17:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -2567,10 +2735,10 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 176
+      "sourceRow": 188
     },
     {
-      "id": "cdl-fall-g-177",
+      "id": "cdl-fall-g-189",
       "kickoff": "2026-12-12T17:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -2581,7 +2749,7 @@
       "ageGroup": "U11",
       "gender": "G",
       "notes": null,
-      "sourceRow": 177
+      "sourceRow": 189
     }
   ]
 }
