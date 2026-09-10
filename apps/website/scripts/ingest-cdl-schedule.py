@@ -428,10 +428,30 @@ def ingest_tab(path: Path, tab: str, gender: str, has_location: bool,
 
         kickoff = dt.datetime(date_only.year, date_only.month, date_only.day, hour, minute).isoformat()
 
-        # Division = age group (+ optional tier suffix on boys, or "Premier/Championship League" on girls).
+        # Age group: the TEAM LABELS are the authority on who plays in this
+        # kickoff slot — directors move teams between times by editing the
+        # Home/Away cells and routinely leave the DivisionName cell stale.
+        # The division column is the fallback when neither label carries an
+        # age (and the tie-breaker if the two labels disagree).
         div_str = normalise_ws(str(div_v) if div_v is not None else "")
-        age = parse_age(div_str)
+        div_age = parse_age(div_str)
         tier_from_div = parse_tier(div_str)
+
+        home_label_age = parse_age(normalise_ws(str(home_v or "")))
+        away_label_age = parse_age(normalise_ws(str(away_v or "")))
+        if home_label_age and away_label_age and home_label_age != away_label_age:
+            label_age = None
+            row_warnings.append(
+                f"home/away label ages disagree ({home_label_age} vs {away_label_age}) — using division {div_age!r}"
+            )
+        else:
+            label_age = home_label_age or away_label_age
+
+        age = label_age or div_age
+        if label_age and div_age and label_age != div_age:
+            row_warnings.append(
+                f"labels say {label_age} but division says {div_age} — trusting labels (kickoff-slot authority)"
+            )
 
         def parse_side(raw):
             raw = normalise_ws(str(raw or ""))
