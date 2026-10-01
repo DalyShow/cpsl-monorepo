@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-20T12:28:42",
-  "source": "CDL - Schedules and Contact Sheet Fall 2026.xlsx",
+  "generatedAt": "2026-09-25T09:07:22",
+  "source": "regenerated from cdl-fall-2026.json (boys feed) after 2026-09-25 update",
   "clubs": [
     {
       "id": "cisc",
@@ -112,7 +112,7 @@
   ],
   "matches": [
     {
-      "id": "cdl-fall-2",
+      "id": "cdl-fall-m-2",
       "kickoff": "2026-08-29T09:00:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -126,7 +126,7 @@
       "sourceRow": 2
     },
     {
-      "id": "cdl-fall-3",
+      "id": "cdl-fall-m-3",
       "kickoff": "2026-08-29T09:00:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -140,7 +140,7 @@
       "sourceRow": 3
     },
     {
-      "id": "cdl-fall-4",
+      "id": "cdl-fall-m-4",
       "kickoff": "2026-08-29T10:30:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -154,7 +154,7 @@
       "sourceRow": 4
     },
     {
-      "id": "cdl-fall-5",
+      "id": "cdl-fall-m-5",
       "kickoff": "2026-08-29T10:30:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -168,35 +168,35 @@
       "sourceRow": 5
     },
     {
-      "id": "cdl-fall-6",
+      "id": "cdl-fall-m-6",
       "kickoff": "2026-08-29T12:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "cisc",
-      "homeTeamLabel": "U11 A",
-      "awayTeamLabel": "U11 North Pre MLS Blue",
+      "homeTeamLabel": "U12 A",
+      "awayTeamLabel": "U12 North Pre MLS Blue",
       "field": "Shea Field 3A",
       "locationAddress": "5050 N Hwy 17, Awendaw, SC 29429",
-      "ageGroup": "U11",
+      "ageGroup": "U12",
       "gender": "M",
       "notes": null,
       "sourceRow": 6
     },
     {
-      "id": "cdl-fall-7",
+      "id": "cdl-fall-m-7",
       "kickoff": "2026-08-29T12:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "cisc",
-      "homeTeamLabel": "U11 B",
-      "awayTeamLabel": "U11 North Pre MLS Tan",
+      "homeTeamLabel": "U12 B",
+      "awayTeamLabel": "U12 North Pre MLS Tan",
       "field": "Shea Field 3B",
       "locationAddress": "5050 N Hwy 17, Awendaw, SC 29429",
-      "ageGroup": "U11",
+      "ageGroup": "U12",
       "gender": "M",
       "notes": null,
       "sourceRow": 7
     },
     {
-      "id": "cdl-fall-8",
+      "id": "cdl-fall-m-8",
       "kickoff": "2026-08-29T12:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -210,7 +210,7 @@
       "sourceRow": 8
     },
     {
-      "id": "cdl-fall-9",
+      "id": "cdl-fall-m-9",
       "kickoff": "2026-08-29T12:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -224,35 +224,35 @@
       "sourceRow": 9
     },
     {
-      "id": "cdl-fall-10",
+      "id": "cdl-fall-m-10",
       "kickoff": "2026-08-29T13:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "cisc",
-      "homeTeamLabel": "U12 A",
-      "awayTeamLabel": "U12 North Pre MLS Blue",
+      "homeTeamLabel": "U11 A",
+      "awayTeamLabel": "U11 North Pre MLS Blue",
       "field": "Shea Field 3A",
       "locationAddress": "5050 N Hwy 17, Awendaw, SC 29429",
-      "ageGroup": "U12",
+      "ageGroup": "U11",
       "gender": "M",
       "notes": null,
       "sourceRow": 10
     },
     {
-      "id": "cdl-fall-11",
+      "id": "cdl-fall-m-11",
       "kickoff": "2026-08-29T13:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "cisc",
-      "homeTeamLabel": "U12 B",
-      "awayTeamLabel": "U12 North Pre MLS Tan",
+      "homeTeamLabel": "U11 B",
+      "awayTeamLabel": "U11 North Pre MLS Tan",
       "field": "Shea Field 3B",
       "locationAddress": "5050 N Hwy 17, Awendaw, SC 29429",
-      "ageGroup": "U12",
+      "ageGroup": "U11",
       "gender": "M",
       "notes": null,
       "sourceRow": 11
     },
     {
-      "id": "cdl-fall-12",
+      "id": "cdl-fall-m-12",
       "kickoff": "2026-08-29T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -266,7 +266,7 @@
       "sourceRow": 12
     },
     {
-      "id": "cdl-fall-13",
+      "id": "cdl-fall-m-13",
       "kickoff": "2026-08-29T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -280,7 +280,7 @@
       "sourceRow": 13
     },
     {
-      "id": "cdl-fall-14",
+      "id": "cdl-fall-m-14",
       "kickoff": "2026-08-29T14:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -294,7 +294,7 @@
       "sourceRow": 14
     },
     {
-      "id": "cdl-fall-15",
+      "id": "cdl-fall-m-15",
       "kickoff": "2026-08-29T14:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "csa",
@@ -308,7 +308,7 @@
       "sourceRow": 15
     },
     {
-      "id": "cdl-fall-16",
+      "id": "cdl-fall-m-16",
       "kickoff": "2026-08-29T15:30:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -322,7 +322,7 @@
       "sourceRow": 16
     },
     {
-      "id": "cdl-fall-17",
+      "id": "cdl-fall-m-17",
       "kickoff": "2026-08-29T15:30:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -336,7 +336,7 @@
       "sourceRow": 17
     },
     {
-      "id": "cdl-fall-18",
+      "id": "cdl-fall-m-18",
       "kickoff": "2026-08-30T09:00:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -350,7 +350,7 @@
       "sourceRow": 18
     },
     {
-      "id": "cdl-fall-19",
+      "id": "cdl-fall-m-19",
       "kickoff": "2026-08-30T09:00:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -364,7 +364,7 @@
       "sourceRow": 19
     },
     {
-      "id": "cdl-fall-20",
+      "id": "cdl-fall-m-20",
       "kickoff": "2026-08-30T10:30:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -378,7 +378,7 @@
       "sourceRow": 20
     },
     {
-      "id": "cdl-fall-21",
+      "id": "cdl-fall-m-21",
       "kickoff": "2026-08-30T10:30:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -392,7 +392,7 @@
       "sourceRow": 21
     },
     {
-      "id": "cdl-fall-22",
+      "id": "cdl-fall-m-22",
       "kickoff": "2026-08-30T11:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "wake-fc",
@@ -406,7 +406,7 @@
       "sourceRow": 22
     },
     {
-      "id": "cdl-fall-23",
+      "id": "cdl-fall-m-23",
       "kickoff": "2026-08-30T11:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "wake-fc",
@@ -420,7 +420,7 @@
       "sourceRow": 23
     },
     {
-      "id": "cdl-fall-24",
+      "id": "cdl-fall-m-24",
       "kickoff": "2026-08-30T12:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "wake-fc",
@@ -434,7 +434,7 @@
       "sourceRow": 24
     },
     {
-      "id": "cdl-fall-25",
+      "id": "cdl-fall-m-25",
       "kickoff": "2026-08-30T12:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "wake-fc",
@@ -448,7 +448,7 @@
       "sourceRow": 25
     },
     {
-      "id": "cdl-fall-26",
+      "id": "cdl-fall-m-26",
       "kickoff": "2026-09-12T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -462,7 +462,7 @@
       "sourceRow": 26
     },
     {
-      "id": "cdl-fall-27",
+      "id": "cdl-fall-m-27",
       "kickoff": "2026-09-12T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -476,21 +476,21 @@
       "sourceRow": 27
     },
     {
-      "id": "cdl-fall-28",
+      "id": "cdl-fall-m-28",
       "kickoff": "2026-09-12T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
-      "homeTeamLabel": "U9 1",
-      "awayTeamLabel": "U9 Green",
+      "homeTeamLabel": "U10 1",
+      "awayTeamLabel": "U10 Green",
       "field": "BP 18 A",
       "locationAddress": "6105 Townsend Rd, Browns Summit, NC 27214",
-      "ageGroup": "U9",
+      "ageGroup": "U10",
       "gender": "M",
       "notes": null,
       "sourceRow": 28
     },
     {
-      "id": "cdl-fall-29",
+      "id": "cdl-fall-m-29",
       "kickoff": "2026-09-12T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -504,7 +504,7 @@
       "sourceRow": 29
     },
     {
-      "id": "cdl-fall-30",
+      "id": "cdl-fall-m-30",
       "kickoff": "2026-09-12T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
@@ -518,7 +518,7 @@
       "sourceRow": 30
     },
     {
-      "id": "cdl-fall-31",
+      "id": "cdl-fall-m-31",
       "kickoff": "2026-09-12T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
@@ -532,7 +532,7 @@
       "sourceRow": 31
     },
     {
-      "id": "cdl-fall-32",
+      "id": "cdl-fall-m-32",
       "kickoff": "2026-09-12T11:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wilmington-hammerheads",
@@ -546,7 +546,7 @@
       "sourceRow": 32
     },
     {
-      "id": "cdl-fall-33",
+      "id": "cdl-fall-m-33",
       "kickoff": "2026-09-12T11:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wilmington-hammerheads",
@@ -560,7 +560,7 @@
       "sourceRow": 33
     },
     {
-      "id": "cdl-fall-34",
+      "id": "cdl-fall-m-34",
       "kickoff": "2026-09-12T11:15:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -574,7 +574,7 @@
       "sourceRow": 34
     },
     {
-      "id": "cdl-fall-35",
+      "id": "cdl-fall-m-35",
       "kickoff": "2026-09-12T11:15:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -588,7 +588,7 @@
       "sourceRow": 35
     },
     {
-      "id": "cdl-fall-36",
+      "id": "cdl-fall-m-36",
       "kickoff": "2026-09-12T11:15:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -602,7 +602,7 @@
       "sourceRow": 36
     },
     {
-      "id": "cdl-fall-37",
+      "id": "cdl-fall-m-37",
       "kickoff": "2026-09-12T11:15:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
@@ -616,7 +616,7 @@
       "sourceRow": 37
     },
     {
-      "id": "cdl-fall-38",
+      "id": "cdl-fall-m-38",
       "kickoff": "2026-09-12T11:15:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
@@ -630,7 +630,7 @@
       "sourceRow": 38
     },
     {
-      "id": "cdl-fall-39",
+      "id": "cdl-fall-m-39",
       "kickoff": "2026-09-12T11:15:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
@@ -644,21 +644,21 @@
       "sourceRow": 39
     },
     {
-      "id": "cdl-fall-40",
+      "id": "cdl-fall-m-40",
       "kickoff": "2026-09-12T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
-      "homeTeamLabel": "U12 CLT Man City 1",
-      "awayTeamLabel": "U12 North A",
+      "homeTeamLabel": "U11 CLT Man City 1",
+      "awayTeamLabel": "U11 North A",
       "field": "Ortho 1A",
       "locationAddress": "13333 Dorman Rd, Pineville, NC 28134",
-      "ageGroup": "U12",
+      "ageGroup": "U11",
       "gender": "M",
       "notes": null,
       "sourceRow": 40
     },
     {
-      "id": "cdl-fall-41",
+      "id": "cdl-fall-m-41",
       "kickoff": "2026-09-12T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -672,7 +672,7 @@
       "sourceRow": 41
     },
     {
-      "id": "cdl-fall-42",
+      "id": "cdl-fall-m-42",
       "kickoff": "2026-09-12T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -686,7 +686,7 @@
       "sourceRow": 42
     },
     {
-      "id": "cdl-fall-43",
+      "id": "cdl-fall-m-43",
       "kickoff": "2026-09-12T12:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -700,7 +700,7 @@
       "sourceRow": 43
     },
     {
-      "id": "cdl-fall-44",
+      "id": "cdl-fall-m-44",
       "kickoff": "2026-09-12T12:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -714,7 +714,7 @@
       "sourceRow": 44
     },
     {
-      "id": "cdl-fall-45",
+      "id": "cdl-fall-m-45",
       "kickoff": "2026-09-12T12:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -728,7 +728,7 @@
       "sourceRow": 45
     },
     {
-      "id": "cdl-fall-46",
+      "id": "cdl-fall-m-46",
       "kickoff": "2026-09-12T12:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
@@ -742,7 +742,7 @@
       "sourceRow": 46
     },
     {
-      "id": "cdl-fall-47",
+      "id": "cdl-fall-m-47",
       "kickoff": "2026-09-12T12:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "carolina-core-fc",
@@ -756,7 +756,7 @@
       "sourceRow": 47
     },
     {
-      "id": "cdl-fall-48",
+      "id": "cdl-fall-m-48",
       "kickoff": "2026-09-12T12:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -770,7 +770,7 @@
       "sourceRow": 48
     },
     {
-      "id": "cdl-fall-49",
+      "id": "cdl-fall-m-49",
       "kickoff": "2026-09-12T12:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "carolina-core-fc",
@@ -784,7 +784,7 @@
       "sourceRow": 49
     },
     {
-      "id": "cdl-fall-50",
+      "id": "cdl-fall-m-50",
       "kickoff": "2026-09-12T12:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wilmington-hammerheads",
@@ -798,7 +798,7 @@
       "sourceRow": 50
     },
     {
-      "id": "cdl-fall-51",
+      "id": "cdl-fall-m-51",
       "kickoff": "2026-09-12T12:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wilmington-hammerheads",
@@ -812,21 +812,21 @@
       "sourceRow": 51
     },
     {
-      "id": "cdl-fall-52",
+      "id": "cdl-fall-m-52",
       "kickoff": "2026-09-12T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
-      "homeTeamLabel": "U11 CLT Man City 1",
-      "awayTeamLabel": "U11 North A",
+      "homeTeamLabel": "U12 CLT Man City 1",
+      "awayTeamLabel": "U12 North A",
       "field": "Ortho 1A",
       "locationAddress": "13333 Dorman Rd, Pineville, NC 28134",
-      "ageGroup": "U11",
+      "ageGroup": "U12",
       "gender": "M",
       "notes": null,
       "sourceRow": 52
     },
     {
-      "id": "cdl-fall-53",
+      "id": "cdl-fall-m-53",
       "kickoff": "2026-09-12T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -840,7 +840,7 @@
       "sourceRow": 53
     },
     {
-      "id": "cdl-fall-54",
+      "id": "cdl-fall-m-54",
       "kickoff": "2026-09-12T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -854,7 +854,7 @@
       "sourceRow": 54
     },
     {
-      "id": "cdl-fall-55",
+      "id": "cdl-fall-m-55",
       "kickoff": "2026-09-12T13:45:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -868,7 +868,7 @@
       "sourceRow": 55
     },
     {
-      "id": "cdl-fall-56",
+      "id": "cdl-fall-m-56",
       "kickoff": "2026-09-12T13:45:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -882,7 +882,7 @@
       "sourceRow": 56
     },
     {
-      "id": "cdl-fall-57",
+      "id": "cdl-fall-m-57",
       "kickoff": "2026-09-12T13:45:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "carolina-core-fc",
@@ -896,7 +896,7 @@
       "sourceRow": 57
     },
     {
-      "id": "cdl-fall-58",
+      "id": "cdl-fall-m-58",
       "kickoff": "2026-09-12T13:45:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -910,7 +910,7 @@
       "sourceRow": 58
     },
     {
-      "id": "cdl-fall-59",
+      "id": "cdl-fall-m-59",
       "kickoff": "2026-09-12T13:45:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -924,21 +924,21 @@
       "sourceRow": 59
     },
     {
-      "id": "cdl-fall-60",
+      "id": "cdl-fall-m-60",
       "kickoff": "2026-09-12T13:45:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
-      "homeTeamLabel": "U11 Pre White",
-      "awayTeamLabel": "U11 North Navy",
+      "homeTeamLabel": "U12 Pre White",
+      "awayTeamLabel": "U12 North Navy",
       "field": "BP 20 B",
       "locationAddress": "6105 Townsend Rd, Browns Summit, NC 27214",
-      "ageGroup": "U11",
+      "ageGroup": "U12",
       "gender": "M",
       "notes": null,
       "sourceRow": 60
     },
     {
-      "id": "cdl-fall-61",
+      "id": "cdl-fall-m-61",
       "kickoff": "2026-09-12T15:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -952,7 +952,7 @@
       "sourceRow": 61
     },
     {
-      "id": "cdl-fall-62",
+      "id": "cdl-fall-m-62",
       "kickoff": "2026-09-12T15:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "carolina-core-fc",
@@ -966,7 +966,7 @@
       "sourceRow": 62
     },
     {
-      "id": "cdl-fall-63",
+      "id": "cdl-fall-m-63",
       "kickoff": "2026-09-12T15:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "carolina-core-fc",
@@ -980,21 +980,21 @@
       "sourceRow": 63
     },
     {
-      "id": "cdl-fall-64",
+      "id": "cdl-fall-m-64",
       "kickoff": "2026-09-12T15:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
-      "homeTeamLabel": "U11 Pre White",
-      "awayTeamLabel": "U11 North Navy",
+      "homeTeamLabel": "U12 Pre White",
+      "awayTeamLabel": "U12 North Navy",
       "field": "BP 20 B",
       "locationAddress": "6105 Townsend Rd, Browns Summit, NC 27214",
-      "ageGroup": "U11",
+      "ageGroup": "U12",
       "gender": "M",
       "notes": null,
       "sourceRow": 64
     },
     {
-      "id": "cdl-fall-65",
+      "id": "cdl-fall-m-65",
       "kickoff": "2026-09-12T15:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "nc-fc-youth",
@@ -1008,7 +1008,7 @@
       "sourceRow": 65
     },
     {
-      "id": "cdl-fall-66",
+      "id": "cdl-fall-m-66",
       "kickoff": "2026-09-13T10:30:00",
       "homeClubId": "csa",
       "awayClubId": "carolina-core-fc",
@@ -1022,7 +1022,7 @@
       "sourceRow": 66
     },
     {
-      "id": "cdl-fall-67",
+      "id": "cdl-fall-m-67",
       "kickoff": "2026-09-13T10:30:00",
       "homeClubId": "csa",
       "awayClubId": "carolina-core-fc",
@@ -1036,7 +1036,7 @@
       "sourceRow": 67
     },
     {
-      "id": "cdl-fall-68",
+      "id": "cdl-fall-m-68",
       "kickoff": "2026-09-13T10:30:00",
       "homeClubId": "csa",
       "awayClubId": "carolina-core-fc",
@@ -1050,7 +1050,7 @@
       "sourceRow": 68
     },
     {
-      "id": "cdl-fall-69",
+      "id": "cdl-fall-m-69",
       "kickoff": "2026-09-13T11:00:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "wake-fc",
@@ -1064,7 +1064,7 @@
       "sourceRow": 69
     },
     {
-      "id": "cdl-fall-70",
+      "id": "cdl-fall-m-70",
       "kickoff": "2026-09-13T11:00:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "wake-fc",
@@ -1078,7 +1078,7 @@
       "sourceRow": 70
     },
     {
-      "id": "cdl-fall-71",
+      "id": "cdl-fall-m-71",
       "kickoff": "2026-09-13T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "carolina-core-fc",
@@ -1092,7 +1092,7 @@
       "sourceRow": 71
     },
     {
-      "id": "cdl-fall-72",
+      "id": "cdl-fall-m-72",
       "kickoff": "2026-09-13T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "carolina-core-fc",
@@ -1106,7 +1106,7 @@
       "sourceRow": 72
     },
     {
-      "id": "cdl-fall-73",
+      "id": "cdl-fall-m-73",
       "kickoff": "2026-09-13T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "carolina-core-fc",
@@ -1120,11 +1120,11 @@
       "sourceRow": 73
     },
     {
-      "id": "cdl-fall-74",
+      "id": "cdl-fall-m-74",
       "kickoff": "2026-09-13T12:30:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "wake-fc",
-      "homeTeamLabel": "U11 CDL 1",
+      "homeTeamLabel": "U11 CDL 2",
       "awayTeamLabel": "U11 South A",
       "field": "NCino Sports Park",
       "locationAddress": "205 Sutton Steam Plant Rd, Wilmington, NC 28401",
@@ -1134,11 +1134,11 @@
       "sourceRow": 74
     },
     {
-      "id": "cdl-fall-75",
+      "id": "cdl-fall-m-75",
       "kickoff": "2026-09-13T12:30:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "wake-fc",
-      "homeTeamLabel": "U11 CDL 2",
+      "homeTeamLabel": "U11 CDL 1",
       "awayTeamLabel": "U11 South B",
       "field": "NCino Sports Park",
       "locationAddress": "205 Sutton Steam Plant Rd, Wilmington, NC 28401",
@@ -1148,7 +1148,7 @@
       "sourceRow": 75
     },
     {
-      "id": "cdl-fall-76",
+      "id": "cdl-fall-m-76",
       "kickoff": "2026-09-19T11:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1162,7 +1162,7 @@
       "sourceRow": 76
     },
     {
-      "id": "cdl-fall-77",
+      "id": "cdl-fall-m-77",
       "kickoff": "2026-09-19T11:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1176,7 +1176,7 @@
       "sourceRow": 77
     },
     {
-      "id": "cdl-fall-78",
+      "id": "cdl-fall-m-78",
       "kickoff": "2026-09-19T12:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1190,7 +1190,7 @@
       "sourceRow": 78
     },
     {
-      "id": "cdl-fall-79",
+      "id": "cdl-fall-m-79",
       "kickoff": "2026-09-19T12:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1204,7 +1204,7 @@
       "sourceRow": 79
     },
     {
-      "id": "cdl-fall-80",
+      "id": "cdl-fall-m-80",
       "kickoff": "2026-09-19T12:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1218,7 +1218,7 @@
       "sourceRow": 80
     },
     {
-      "id": "cdl-fall-81",
+      "id": "cdl-fall-m-81",
       "kickoff": "2026-09-19T12:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1232,7 +1232,7 @@
       "sourceRow": 81
     },
     {
-      "id": "cdl-fall-82",
+      "id": "cdl-fall-m-82",
       "kickoff": "2026-09-19T13:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1246,7 +1246,7 @@
       "sourceRow": 82
     },
     {
-      "id": "cdl-fall-83",
+      "id": "cdl-fall-m-83",
       "kickoff": "2026-09-19T13:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1260,7 +1260,7 @@
       "sourceRow": 83
     },
     {
-      "id": "cdl-fall-84",
+      "id": "cdl-fall-m-84",
       "kickoff": "2026-09-19T15:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1274,7 +1274,7 @@
       "sourceRow": 84
     },
     {
-      "id": "cdl-fall-85",
+      "id": "cdl-fall-m-85",
       "kickoff": "2026-09-19T15:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1288,7 +1288,7 @@
       "sourceRow": 85
     },
     {
-      "id": "cdl-fall-86",
+      "id": "cdl-fall-m-86",
       "kickoff": "2026-09-19T16:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1302,7 +1302,7 @@
       "sourceRow": 86
     },
     {
-      "id": "cdl-fall-87",
+      "id": "cdl-fall-m-87",
       "kickoff": "2026-09-19T16:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1316,7 +1316,7 @@
       "sourceRow": 87
     },
     {
-      "id": "cdl-fall-88",
+      "id": "cdl-fall-m-88",
       "kickoff": "2026-09-20T08:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1330,7 +1330,7 @@
       "sourceRow": 88
     },
     {
-      "id": "cdl-fall-89",
+      "id": "cdl-fall-m-89",
       "kickoff": "2026-09-20T08:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1344,7 +1344,7 @@
       "sourceRow": 89
     },
     {
-      "id": "cdl-fall-90",
+      "id": "cdl-fall-m-90",
       "kickoff": "2026-09-20T09:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1358,7 +1358,7 @@
       "sourceRow": 90
     },
     {
-      "id": "cdl-fall-91",
+      "id": "cdl-fall-m-91",
       "kickoff": "2026-09-20T09:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1372,7 +1372,7 @@
       "sourceRow": 91
     },
     {
-      "id": "cdl-fall-92",
+      "id": "cdl-fall-m-92",
       "kickoff": "2026-09-20T10:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fusion",
@@ -1386,7 +1386,7 @@
       "sourceRow": 92
     },
     {
-      "id": "cdl-fall-93",
+      "id": "cdl-fall-m-93",
       "kickoff": "2026-09-20T10:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fusion",
@@ -1400,7 +1400,7 @@
       "sourceRow": 93
     },
     {
-      "id": "cdl-fall-94",
+      "id": "cdl-fall-m-94",
       "kickoff": "2026-09-20T11:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1414,7 +1414,7 @@
       "sourceRow": 94
     },
     {
-      "id": "cdl-fall-95",
+      "id": "cdl-fall-m-95",
       "kickoff": "2026-09-20T11:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1428,7 +1428,7 @@
       "sourceRow": 95
     },
     {
-      "id": "cdl-fall-96",
+      "id": "cdl-fall-m-96",
       "kickoff": "2026-09-20T11:15:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fusion",
@@ -1442,7 +1442,7 @@
       "sourceRow": 96
     },
     {
-      "id": "cdl-fall-97",
+      "id": "cdl-fall-m-97",
       "kickoff": "2026-09-20T11:15:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fusion",
@@ -1456,7 +1456,7 @@
       "sourceRow": 97
     },
     {
-      "id": "cdl-fall-98",
+      "id": "cdl-fall-m-98",
       "kickoff": "2026-09-20T12:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fusion",
@@ -1470,7 +1470,7 @@
       "sourceRow": 98
     },
     {
-      "id": "cdl-fall-99",
+      "id": "cdl-fall-m-99",
       "kickoff": "2026-09-20T12:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fusion",
@@ -1484,7 +1484,7 @@
       "sourceRow": 99
     },
     {
-      "id": "cdl-fall-100",
+      "id": "cdl-fall-m-100",
       "kickoff": "2026-09-20T12:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1498,7 +1498,7 @@
       "sourceRow": 100
     },
     {
-      "id": "cdl-fall-101",
+      "id": "cdl-fall-m-101",
       "kickoff": "2026-09-20T12:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "csa",
@@ -1512,7 +1512,7 @@
       "sourceRow": 101
     },
     {
-      "id": "cdl-fall-102",
+      "id": "cdl-fall-m-102",
       "kickoff": "2026-09-20T13:45:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fusion",
@@ -1526,7 +1526,7 @@
       "sourceRow": 102
     },
     {
-      "id": "cdl-fall-103",
+      "id": "cdl-fall-m-103",
       "kickoff": "2026-09-20T13:45:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fusion",
@@ -1540,7 +1540,7 @@
       "sourceRow": 103
     },
     {
-      "id": "cdl-fall-104",
+      "id": "cdl-fall-m-104",
       "kickoff": "2026-09-26T11:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1554,7 +1554,7 @@
       "sourceRow": 104
     },
     {
-      "id": "cdl-fall-105",
+      "id": "cdl-fall-m-105",
       "kickoff": "2026-09-26T11:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1568,7 +1568,7 @@
       "sourceRow": 105
     },
     {
-      "id": "cdl-fall-106",
+      "id": "cdl-fall-m-106",
       "kickoff": "2026-09-26T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -1582,7 +1582,7 @@
       "sourceRow": 106
     },
     {
-      "id": "cdl-fall-107",
+      "id": "cdl-fall-m-107",
       "kickoff": "2026-09-26T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -1596,7 +1596,7 @@
       "sourceRow": 107
     },
     {
-      "id": "cdl-fall-108",
+      "id": "cdl-fall-m-108",
       "kickoff": "2026-09-26T12:00:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "cisc",
@@ -1610,7 +1610,7 @@
       "sourceRow": 108
     },
     {
-      "id": "cdl-fall-109",
+      "id": "cdl-fall-m-109",
       "kickoff": "2026-09-26T12:00:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "cisc",
@@ -1624,7 +1624,7 @@
       "sourceRow": 109
     },
     {
-      "id": "cdl-fall-110",
+      "id": "cdl-fall-m-110",
       "kickoff": "2026-09-26T12:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1638,7 +1638,7 @@
       "sourceRow": 110
     },
     {
-      "id": "cdl-fall-111",
+      "id": "cdl-fall-m-111",
       "kickoff": "2026-09-26T12:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "cisc",
@@ -1652,7 +1652,7 @@
       "sourceRow": 111
     },
     {
-      "id": "cdl-fall-112",
+      "id": "cdl-fall-m-112",
       "kickoff": "2026-09-26T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -1666,7 +1666,7 @@
       "sourceRow": 112
     },
     {
-      "id": "cdl-fall-113",
+      "id": "cdl-fall-m-113",
       "kickoff": "2026-09-26T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -1680,7 +1680,7 @@
       "sourceRow": 113
     },
     {
-      "id": "cdl-fall-114",
+      "id": "cdl-fall-m-114",
       "kickoff": "2026-09-26T13:30:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "cisc",
@@ -1694,7 +1694,7 @@
       "sourceRow": 114
     },
     {
-      "id": "cdl-fall-115",
+      "id": "cdl-fall-m-115",
       "kickoff": "2026-09-26T13:30:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "cisc",
@@ -1708,7 +1708,7 @@
       "sourceRow": 115
     },
     {
-      "id": "cdl-fall-116",
+      "id": "cdl-fall-m-116",
       "kickoff": "2026-09-26T15:00:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -1722,7 +1722,7 @@
       "sourceRow": 116
     },
     {
-      "id": "cdl-fall-117",
+      "id": "cdl-fall-m-117",
       "kickoff": "2026-09-26T15:00:00",
       "homeClubId": "csa",
       "awayClubId": "wake-fc",
@@ -1736,7 +1736,7 @@
       "sourceRow": 117
     },
     {
-      "id": "cdl-fall-118",
+      "id": "cdl-fall-m-118",
       "kickoff": "2026-09-26T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -1750,7 +1750,7 @@
       "sourceRow": 118
     },
     {
-      "id": "cdl-fall-119",
+      "id": "cdl-fall-m-119",
       "kickoff": "2026-09-26T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -1764,7 +1764,7 @@
       "sourceRow": 119
     },
     {
-      "id": "cdl-fall-120",
+      "id": "cdl-fall-m-120",
       "kickoff": "2026-09-26T14:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -1778,7 +1778,7 @@
       "sourceRow": 120
     },
     {
-      "id": "cdl-fall-121",
+      "id": "cdl-fall-m-121",
       "kickoff": "2026-09-26T14:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -1792,12 +1792,12 @@
       "sourceRow": 121
     },
     {
-      "id": "cdl-fall-122",
+      "id": "cdl-fall-m-122",
       "kickoff": "2026-09-27T09:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fc-youth",
       "homeTeamLabel": "U12 14 PA South",
-      "awayTeamLabel": "U12 South Navy",
+      "awayTeamLabel": "U12 North pre academy Red",
       "field": "Middle Creek 2A",
       "locationAddress": "151 Middle Creek Park Ave, Apex, NC 27539",
       "ageGroup": "U12",
@@ -1806,12 +1806,12 @@
       "sourceRow": 122
     },
     {
-      "id": "cdl-fall-123",
+      "id": "cdl-fall-m-123",
       "kickoff": "2026-09-27T09:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fc-youth",
-      "homeTeamLabel": "U11 15 PA South",
-      "awayTeamLabel": "U11 South Navy",
+      "homeTeamLabel": "U11 15 PA Blue",
+      "awayTeamLabel": "U11 North pre academy Navy",
       "field": "Middle Creek 2B",
       "locationAddress": "151 Middle Creek Park Ave, Apex, NC 27539",
       "ageGroup": "U11",
@@ -1820,7 +1820,7 @@
       "sourceRow": 123
     },
     {
-      "id": "cdl-fall-124",
+      "id": "cdl-fall-m-124",
       "kickoff": "2026-09-27T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "nc-fusion",
@@ -1834,7 +1834,7 @@
       "sourceRow": 124
     },
     {
-      "id": "cdl-fall-125",
+      "id": "cdl-fall-m-125",
       "kickoff": "2026-09-27T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "nc-fusion",
@@ -1848,7 +1848,7 @@
       "sourceRow": 125
     },
     {
-      "id": "cdl-fall-126",
+      "id": "cdl-fall-m-126",
       "kickoff": "2026-09-27T11:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "nc-fusion",
@@ -1862,7 +1862,7 @@
       "sourceRow": 126
     },
     {
-      "id": "cdl-fall-127",
+      "id": "cdl-fall-m-127",
       "kickoff": "2026-09-27T11:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "nc-fusion",
@@ -1876,7 +1876,7 @@
       "sourceRow": 127
     },
     {
-      "id": "cdl-fall-128",
+      "id": "cdl-fall-m-128",
       "kickoff": "2026-09-27T12:00:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "cisc",
@@ -1890,7 +1890,7 @@
       "sourceRow": 128
     },
     {
-      "id": "cdl-fall-129",
+      "id": "cdl-fall-m-129",
       "kickoff": "2026-09-27T12:00:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "cisc",
@@ -1904,7 +1904,7 @@
       "sourceRow": 129
     },
     {
-      "id": "cdl-fall-130",
+      "id": "cdl-fall-m-130",
       "kickoff": "2026-09-27T13:00:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -1918,7 +1918,7 @@
       "sourceRow": 130
     },
     {
-      "id": "cdl-fall-131",
+      "id": "cdl-fall-m-131",
       "kickoff": "2026-09-27T13:00:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -1932,7 +1932,7 @@
       "sourceRow": 131
     },
     {
-      "id": "cdl-fall-132",
+      "id": "cdl-fall-m-132",
       "kickoff": "2026-09-27T13:30:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "cisc",
@@ -1946,7 +1946,7 @@
       "sourceRow": 132
     },
     {
-      "id": "cdl-fall-133",
+      "id": "cdl-fall-m-133",
       "kickoff": "2026-09-27T13:30:00",
       "homeClubId": "wilmington-hammerheads",
       "awayClubId": "cisc",
@@ -1960,7 +1960,7 @@
       "sourceRow": 133
     },
     {
-      "id": "cdl-fall-134",
+      "id": "cdl-fall-m-134",
       "kickoff": "2026-09-27T14:30:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -1974,7 +1974,7 @@
       "sourceRow": 134
     },
     {
-      "id": "cdl-fall-135",
+      "id": "cdl-fall-m-135",
       "kickoff": "2026-09-27T14:30:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -1988,7 +1988,7 @@
       "sourceRow": 135
     },
     {
-      "id": "cdl-fall-136",
+      "id": "cdl-fall-m-136",
       "kickoff": "2026-09-27T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -2002,7 +2002,7 @@
       "sourceRow": 136
     },
     {
-      "id": "cdl-fall-137",
+      "id": "cdl-fall-m-137",
       "kickoff": "2026-09-27T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -2016,12 +2016,12 @@
       "sourceRow": 137
     },
     {
-      "id": "cdl-fall-138",
+      "id": "cdl-fall-m-138",
       "kickoff": "2026-09-27T10:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fc-youth",
       "homeTeamLabel": "U12 14 PA Blue",
-      "awayTeamLabel": "U12 North Red",
+      "awayTeamLabel": "U12 North pre academy Navy",
       "field": "Middle Creek 2A",
       "locationAddress": "151 Middle Creek Park Ave, Apex, NC 27539",
       "ageGroup": "U12",
@@ -2030,12 +2030,12 @@
       "sourceRow": 138
     },
     {
-      "id": "cdl-fall-139",
+      "id": "cdl-fall-m-139",
       "kickoff": "2026-09-27T10:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "nc-fc-youth",
-      "homeTeamLabel": "U11 15 PA Blue",
-      "awayTeamLabel": "U11 North Red",
+      "homeTeamLabel": "U11 15 PA South",
+      "awayTeamLabel": "U11 North pre academy Red",
       "field": "Middle Creek 2B",
       "locationAddress": "151 Middle Creek Park Ave, Apex, NC 27539",
       "ageGroup": "U11",
@@ -2044,7 +2044,7 @@
       "sourceRow": 139
     },
     {
-      "id": "cdl-fall-140",
+      "id": "cdl-fall-m-140",
       "kickoff": "2026-09-27T14:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -2058,7 +2058,7 @@
       "sourceRow": 140
     },
     {
-      "id": "cdl-fall-141",
+      "id": "cdl-fall-m-141",
       "kickoff": "2026-09-27T14:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "csa",
@@ -2072,7 +2072,7 @@
       "sourceRow": 141
     },
     {
-      "id": "cdl-fall-142",
+      "id": "cdl-fall-m-142",
       "kickoff": "2026-10-03T10:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -2086,7 +2086,7 @@
       "sourceRow": 142
     },
     {
-      "id": "cdl-fall-143",
+      "id": "cdl-fall-m-143",
       "kickoff": "2026-10-03T10:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -2100,7 +2100,7 @@
       "sourceRow": 143
     },
     {
-      "id": "cdl-fall-144",
+      "id": "cdl-fall-m-144",
       "kickoff": "2026-10-03T11:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "cisc",
@@ -2114,7 +2114,7 @@
       "sourceRow": 144
     },
     {
-      "id": "cdl-fall-145",
+      "id": "cdl-fall-m-145",
       "kickoff": "2026-10-03T11:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "cisc",
@@ -2128,7 +2128,7 @@
       "sourceRow": 145
     },
     {
-      "id": "cdl-fall-146",
+      "id": "cdl-fall-m-146",
       "kickoff": "2026-10-03T12:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "cisc",
@@ -2142,7 +2142,7 @@
       "sourceRow": 146
     },
     {
-      "id": "cdl-fall-147",
+      "id": "cdl-fall-m-147",
       "kickoff": "2026-10-03T12:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "cisc",
@@ -2156,7 +2156,7 @@
       "sourceRow": 147
     },
     {
-      "id": "cdl-fall-148",
+      "id": "cdl-fall-m-148",
       "kickoff": "2026-10-03T13:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -2170,7 +2170,7 @@
       "sourceRow": 148
     },
     {
-      "id": "cdl-fall-149",
+      "id": "cdl-fall-m-149",
       "kickoff": "2026-10-03T13:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -2184,7 +2184,7 @@
       "sourceRow": 149
     },
     {
-      "id": "cdl-fall-150",
+      "id": "cdl-fall-m-150",
       "kickoff": "2026-10-03T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -2198,7 +2198,7 @@
       "sourceRow": 150
     },
     {
-      "id": "cdl-fall-151",
+      "id": "cdl-fall-m-151",
       "kickoff": "2026-10-03T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -2212,7 +2212,7 @@
       "sourceRow": 151
     },
     {
-      "id": "cdl-fall-152",
+      "id": "cdl-fall-m-152",
       "kickoff": "2026-10-03T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -2226,7 +2226,7 @@
       "sourceRow": 152
     },
     {
-      "id": "cdl-fall-153",
+      "id": "cdl-fall-m-153",
       "kickoff": "2026-10-03T14:00:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -2240,7 +2240,7 @@
       "sourceRow": 153
     },
     {
-      "id": "cdl-fall-154",
+      "id": "cdl-fall-m-154",
       "kickoff": "2026-10-03T14:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -2254,7 +2254,7 @@
       "sourceRow": 154
     },
     {
-      "id": "cdl-fall-155",
+      "id": "cdl-fall-m-155",
       "kickoff": "2026-10-03T14:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -2268,7 +2268,7 @@
       "sourceRow": 155
     },
     {
-      "id": "cdl-fall-156",
+      "id": "cdl-fall-m-156",
       "kickoff": "2026-10-03T15:30:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -2282,7 +2282,7 @@
       "sourceRow": 156
     },
     {
-      "id": "cdl-fall-157",
+      "id": "cdl-fall-m-157",
       "kickoff": "2026-10-03T15:30:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -2296,7 +2296,7 @@
       "sourceRow": 157
     },
     {
-      "id": "cdl-fall-158",
+      "id": "cdl-fall-m-158",
       "kickoff": "2026-10-03T15:30:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -2310,7 +2310,7 @@
       "sourceRow": 158
     },
     {
-      "id": "cdl-fall-159",
+      "id": "cdl-fall-m-159",
       "kickoff": "2026-10-03T15:30:00",
       "homeClubId": "csa",
       "awayClubId": "wilmington-hammerheads",
@@ -2324,7 +2324,7 @@
       "sourceRow": 159
     },
     {
-      "id": "cdl-fall-160",
+      "id": "cdl-fall-m-160",
       "kickoff": "2026-10-03T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "carolina-core-fc",
@@ -2338,7 +2338,7 @@
       "sourceRow": 160
     },
     {
-      "id": "cdl-fall-161",
+      "id": "cdl-fall-m-161",
       "kickoff": "2026-10-03T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "carolina-core-fc",
@@ -2352,7 +2352,7 @@
       "sourceRow": 161
     },
     {
-      "id": "cdl-fall-162",
+      "id": "cdl-fall-m-162",
       "kickoff": "2026-10-03T11:45:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -2366,7 +2366,7 @@
       "sourceRow": 162
     },
     {
-      "id": "cdl-fall-163",
+      "id": "cdl-fall-m-163",
       "kickoff": "2026-10-03T11:45:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -2380,7 +2380,7 @@
       "sourceRow": 163
     },
     {
-      "id": "cdl-fall-164",
+      "id": "cdl-fall-m-164",
       "kickoff": "2026-10-03T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "carolina-core-fc",
@@ -2394,7 +2394,7 @@
       "sourceRow": 164
     },
     {
-      "id": "cdl-fall-165",
+      "id": "cdl-fall-m-165",
       "kickoff": "2026-10-03T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "carolina-core-fc",
@@ -2408,7 +2408,7 @@
       "sourceRow": 165
     },
     {
-      "id": "cdl-fall-166",
+      "id": "cdl-fall-m-166",
       "kickoff": "2026-10-04T09:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -2422,7 +2422,7 @@
       "sourceRow": 166
     },
     {
-      "id": "cdl-fall-167",
+      "id": "cdl-fall-m-167",
       "kickoff": "2026-10-04T09:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -2436,7 +2436,7 @@
       "sourceRow": 167
     },
     {
-      "id": "cdl-fall-168",
+      "id": "cdl-fall-m-168",
       "kickoff": "2026-10-04T10:15:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "highland-fc",
@@ -2450,7 +2450,7 @@
       "sourceRow": 168
     },
     {
-      "id": "cdl-fall-169",
+      "id": "cdl-fall-m-169",
       "kickoff": "2026-10-04T10:15:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "highland-fc",
@@ -2464,7 +2464,7 @@
       "sourceRow": 169
     },
     {
-      "id": "cdl-fall-170",
+      "id": "cdl-fall-m-170",
       "kickoff": "2026-10-04T13:00:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -2478,7 +2478,7 @@
       "sourceRow": 170
     },
     {
-      "id": "cdl-fall-171",
+      "id": "cdl-fall-m-171",
       "kickoff": "2026-10-04T13:00:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -2492,7 +2492,7 @@
       "sourceRow": 171
     },
     {
-      "id": "cdl-fall-172",
+      "id": "cdl-fall-m-172",
       "kickoff": "2026-10-04T14:30:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -2506,7 +2506,7 @@
       "sourceRow": 172
     },
     {
-      "id": "cdl-fall-173",
+      "id": "cdl-fall-m-173",
       "kickoff": "2026-10-04T14:30:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -2520,7 +2520,7 @@
       "sourceRow": 173
     },
     {
-      "id": "cdl-fall-174",
+      "id": "cdl-fall-m-174",
       "kickoff": "2026-10-10T11:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "carolina-core-fc",
@@ -2534,7 +2534,7 @@
       "sourceRow": 174
     },
     {
-      "id": "cdl-fall-175",
+      "id": "cdl-fall-m-175",
       "kickoff": "2026-10-10T11:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "carolina-core-fc",
@@ -2548,7 +2548,7 @@
       "sourceRow": 175
     },
     {
-      "id": "cdl-fall-176",
+      "id": "cdl-fall-m-176",
       "kickoff": "2026-10-10T12:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "carolina-core-fc",
@@ -2562,7 +2562,7 @@
       "sourceRow": 176
     },
     {
-      "id": "cdl-fall-177",
+      "id": "cdl-fall-m-177",
       "kickoff": "2026-10-10T12:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "carolina-core-fc",
@@ -2576,7 +2576,7 @@
       "sourceRow": 177
     },
     {
-      "id": "cdl-fall-178",
+      "id": "cdl-fall-m-178",
       "kickoff": "2026-10-10T13:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "csa",
@@ -2590,7 +2590,7 @@
       "sourceRow": 178
     },
     {
-      "id": "cdl-fall-179",
+      "id": "cdl-fall-m-179",
       "kickoff": "2026-10-10T13:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "csa",
@@ -2604,7 +2604,7 @@
       "sourceRow": 179
     },
     {
-      "id": "cdl-fall-180",
+      "id": "cdl-fall-m-180",
       "kickoff": "2026-10-10T14:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "carolina-core-fc",
@@ -2618,7 +2618,7 @@
       "sourceRow": 180
     },
     {
-      "id": "cdl-fall-181",
+      "id": "cdl-fall-m-181",
       "kickoff": "2026-10-10T14:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "carolina-core-fc",
@@ -2632,7 +2632,7 @@
       "sourceRow": 181
     },
     {
-      "id": "cdl-fall-182",
+      "id": "cdl-fall-m-182",
       "kickoff": "2026-10-10T14:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "csa",
@@ -2646,7 +2646,7 @@
       "sourceRow": 182
     },
     {
-      "id": "cdl-fall-183",
+      "id": "cdl-fall-m-183",
       "kickoff": "2026-10-10T15:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "carolina-core-fc",
@@ -2660,7 +2660,7 @@
       "sourceRow": 183
     },
     {
-      "id": "cdl-fall-184",
+      "id": "cdl-fall-m-184",
       "kickoff": "2026-10-10T15:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "carolina-core-fc",
@@ -2674,7 +2674,7 @@
       "sourceRow": 184
     },
     {
-      "id": "cdl-fall-185",
+      "id": "cdl-fall-m-185",
       "kickoff": "2026-10-10T16:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "csa",
@@ -2688,7 +2688,7 @@
       "sourceRow": 185
     },
     {
-      "id": "cdl-fall-186",
+      "id": "cdl-fall-m-186",
       "kickoff": "2026-10-10T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -2702,7 +2702,7 @@
       "sourceRow": 186
     },
     {
-      "id": "cdl-fall-187",
+      "id": "cdl-fall-m-187",
       "kickoff": "2026-10-10T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -2716,7 +2716,7 @@
       "sourceRow": 187
     },
     {
-      "id": "cdl-fall-188",
+      "id": "cdl-fall-m-188",
       "kickoff": "2026-10-10T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fusion",
@@ -2730,7 +2730,7 @@
       "sourceRow": 188
     },
     {
-      "id": "cdl-fall-189",
+      "id": "cdl-fall-m-189",
       "kickoff": "2026-10-10T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fusion",
@@ -2744,7 +2744,7 @@
       "sourceRow": 189
     },
     {
-      "id": "cdl-fall-190",
+      "id": "cdl-fall-m-190",
       "kickoff": "2026-10-10T11:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -2758,7 +2758,7 @@
       "sourceRow": 190
     },
     {
-      "id": "cdl-fall-191",
+      "id": "cdl-fall-m-191",
       "kickoff": "2026-10-10T11:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -2772,7 +2772,7 @@
       "sourceRow": 191
     },
     {
-      "id": "cdl-fall-192",
+      "id": "cdl-fall-m-192",
       "kickoff": "2026-10-10T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fusion",
@@ -2786,7 +2786,7 @@
       "sourceRow": 192
     },
     {
-      "id": "cdl-fall-193",
+      "id": "cdl-fall-m-193",
       "kickoff": "2026-10-10T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fusion",
@@ -2800,7 +2800,7 @@
       "sourceRow": 193
     },
     {
-      "id": "cdl-fall-194",
+      "id": "cdl-fall-m-194",
       "kickoff": "2026-10-11T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -2814,7 +2814,7 @@
       "sourceRow": 194
     },
     {
-      "id": "cdl-fall-195",
+      "id": "cdl-fall-m-195",
       "kickoff": "2026-10-11T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -2828,7 +2828,7 @@
       "sourceRow": 195
     },
     {
-      "id": "cdl-fall-196",
+      "id": "cdl-fall-m-196",
       "kickoff": "2026-10-11T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -2842,7 +2842,7 @@
       "sourceRow": 196
     },
     {
-      "id": "cdl-fall-197",
+      "id": "cdl-fall-m-197",
       "kickoff": "2026-10-11T11:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "csa",
@@ -2856,7 +2856,7 @@
       "sourceRow": 197
     },
     {
-      "id": "cdl-fall-198",
+      "id": "cdl-fall-m-198",
       "kickoff": "2026-10-11T11:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -2870,7 +2870,7 @@
       "sourceRow": 198
     },
     {
-      "id": "cdl-fall-199",
+      "id": "cdl-fall-m-199",
       "kickoff": "2026-10-11T11:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -2884,7 +2884,7 @@
       "sourceRow": 199
     },
     {
-      "id": "cdl-fall-200",
+      "id": "cdl-fall-m-200",
       "kickoff": "2026-10-11T11:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -2898,7 +2898,7 @@
       "sourceRow": 200
     },
     {
-      "id": "cdl-fall-201",
+      "id": "cdl-fall-m-201",
       "kickoff": "2026-10-11T12:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "csa",
@@ -2912,7 +2912,7 @@
       "sourceRow": 201
     },
     {
-      "id": "cdl-fall-202",
+      "id": "cdl-fall-m-202",
       "kickoff": "2026-10-11T13:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -2926,7 +2926,7 @@
       "sourceRow": 202
     },
     {
-      "id": "cdl-fall-203",
+      "id": "cdl-fall-m-203",
       "kickoff": "2026-10-11T14:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "csa",
@@ -2940,7 +2940,7 @@
       "sourceRow": 203
     },
     {
-      "id": "cdl-fall-204",
+      "id": "cdl-fall-m-204",
       "kickoff": "2026-10-11T14:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "csa",
@@ -2954,7 +2954,7 @@
       "sourceRow": 204
     },
     {
-      "id": "cdl-fall-205",
+      "id": "cdl-fall-m-205",
       "kickoff": "2026-10-11T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "highland-fc",
@@ -2968,7 +2968,7 @@
       "sourceRow": 205
     },
     {
-      "id": "cdl-fall-206",
+      "id": "cdl-fall-m-206",
       "kickoff": "2026-10-11T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "highland-fc",
@@ -2982,7 +2982,7 @@
       "sourceRow": 206
     },
     {
-      "id": "cdl-fall-207",
+      "id": "cdl-fall-m-207",
       "kickoff": "2026-10-11T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "highland-fc",
@@ -2996,7 +2996,7 @@
       "sourceRow": 207
     },
     {
-      "id": "cdl-fall-208",
+      "id": "cdl-fall-m-208",
       "kickoff": "2026-10-11T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "highland-fc",
@@ -3010,7 +3010,7 @@
       "sourceRow": 208
     },
     {
-      "id": "cdl-fall-209",
+      "id": "cdl-fall-m-209",
       "kickoff": "2026-10-16T18:00:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3024,7 +3024,7 @@
       "sourceRow": 209
     },
     {
-      "id": "cdl-fall-210",
+      "id": "cdl-fall-m-210",
       "kickoff": "2026-10-16T18:00:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3038,7 +3038,7 @@
       "sourceRow": 210
     },
     {
-      "id": "cdl-fall-211",
+      "id": "cdl-fall-m-211",
       "kickoff": "2026-10-16T18:00:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3052,7 +3052,7 @@
       "sourceRow": 211
     },
     {
-      "id": "cdl-fall-212",
+      "id": "cdl-fall-m-212",
       "kickoff": "2026-10-16T18:00:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3066,7 +3066,7 @@
       "sourceRow": 212
     },
     {
-      "id": "cdl-fall-213",
+      "id": "cdl-fall-m-213",
       "kickoff": "2026-10-16T19:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3080,7 +3080,7 @@
       "sourceRow": 213
     },
     {
-      "id": "cdl-fall-214",
+      "id": "cdl-fall-m-214",
       "kickoff": "2026-10-16T19:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3094,7 +3094,7 @@
       "sourceRow": 214
     },
     {
-      "id": "cdl-fall-215",
+      "id": "cdl-fall-m-215",
       "kickoff": "2026-10-16T19:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3108,7 +3108,7 @@
       "sourceRow": 215
     },
     {
-      "id": "cdl-fall-216",
+      "id": "cdl-fall-m-216",
       "kickoff": "2026-10-16T19:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3122,7 +3122,7 @@
       "sourceRow": 216
     },
     {
-      "id": "cdl-fall-217",
+      "id": "cdl-fall-m-217",
       "kickoff": "2026-10-16T19:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3136,7 +3136,7 @@
       "sourceRow": 217
     },
     {
-      "id": "cdl-fall-218",
+      "id": "cdl-fall-m-218",
       "kickoff": "2026-10-16T19:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3150,7 +3150,7 @@
       "sourceRow": 218
     },
     {
-      "id": "cdl-fall-219",
+      "id": "cdl-fall-m-219",
       "kickoff": "2026-10-16T19:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3164,7 +3164,7 @@
       "sourceRow": 219
     },
     {
-      "id": "cdl-fall-220",
+      "id": "cdl-fall-m-220",
       "kickoff": "2026-10-16T19:30:00",
       "homeClubId": "csa",
       "awayClubId": "csa",
@@ -3178,7 +3178,7 @@
       "sourceRow": 220
     },
     {
-      "id": "cdl-fall-221",
+      "id": "cdl-fall-m-221",
       "kickoff": "2026-10-17T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3192,7 +3192,7 @@
       "sourceRow": 221
     },
     {
-      "id": "cdl-fall-222",
+      "id": "cdl-fall-m-222",
       "kickoff": "2026-10-17T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3206,7 +3206,7 @@
       "sourceRow": 222
     },
     {
-      "id": "cdl-fall-223",
+      "id": "cdl-fall-m-223",
       "kickoff": "2026-10-17T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3220,7 +3220,7 @@
       "sourceRow": 223
     },
     {
-      "id": "cdl-fall-224",
+      "id": "cdl-fall-m-224",
       "kickoff": "2026-10-17T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3234,7 +3234,7 @@
       "sourceRow": 224
     },
     {
-      "id": "cdl-fall-225",
+      "id": "cdl-fall-m-225",
       "kickoff": "2026-10-17T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3248,7 +3248,7 @@
       "sourceRow": 225
     },
     {
-      "id": "cdl-fall-226",
+      "id": "cdl-fall-m-226",
       "kickoff": "2026-10-17T10:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3262,7 +3262,7 @@
       "sourceRow": 226
     },
     {
-      "id": "cdl-fall-227",
+      "id": "cdl-fall-m-227",
       "kickoff": "2026-10-17T11:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "highland-fc",
@@ -3276,7 +3276,7 @@
       "sourceRow": 227
     },
     {
-      "id": "cdl-fall-228",
+      "id": "cdl-fall-m-228",
       "kickoff": "2026-10-17T11:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "highland-fc",
@@ -3290,7 +3290,7 @@
       "sourceRow": 228
     },
     {
-      "id": "cdl-fall-229",
+      "id": "cdl-fall-m-229",
       "kickoff": "2026-10-17T12:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "wilmington-hammerheads",
@@ -3304,7 +3304,7 @@
       "sourceRow": 229
     },
     {
-      "id": "cdl-fall-230",
+      "id": "cdl-fall-m-230",
       "kickoff": "2026-10-17T12:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "highland-fc",
@@ -3318,7 +3318,7 @@
       "sourceRow": 230
     },
     {
-      "id": "cdl-fall-231",
+      "id": "cdl-fall-m-231",
       "kickoff": "2026-10-17T12:30:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "highland-fc",
@@ -3332,7 +3332,7 @@
       "sourceRow": 231
     },
     {
-      "id": "cdl-fall-232",
+      "id": "cdl-fall-m-232",
       "kickoff": "2026-10-17T13:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3346,7 +3346,7 @@
       "sourceRow": 232
     },
     {
-      "id": "cdl-fall-233",
+      "id": "cdl-fall-m-233",
       "kickoff": "2026-10-17T13:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3360,7 +3360,7 @@
       "sourceRow": 233
     },
     {
-      "id": "cdl-fall-234",
+      "id": "cdl-fall-m-234",
       "kickoff": "2026-10-17T13:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3374,7 +3374,7 @@
       "sourceRow": 234
     },
     {
-      "id": "cdl-fall-235",
+      "id": "cdl-fall-m-235",
       "kickoff": "2026-10-17T13:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3388,7 +3388,7 @@
       "sourceRow": 235
     },
     {
-      "id": "cdl-fall-236",
+      "id": "cdl-fall-m-236",
       "kickoff": "2026-10-17T13:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3402,7 +3402,7 @@
       "sourceRow": 236
     },
     {
-      "id": "cdl-fall-237",
+      "id": "cdl-fall-m-237",
       "kickoff": "2026-10-17T13:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3416,7 +3416,7 @@
       "sourceRow": 237
     },
     {
-      "id": "cdl-fall-238",
+      "id": "cdl-fall-m-238",
       "kickoff": "2026-10-17T13:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "wilmington-hammerheads",
@@ -3430,7 +3430,7 @@
       "sourceRow": 238
     },
     {
-      "id": "cdl-fall-239",
+      "id": "cdl-fall-m-239",
       "kickoff": "2026-10-17T14:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "highland-fc",
@@ -3444,7 +3444,7 @@
       "sourceRow": 239
     },
     {
-      "id": "cdl-fall-240",
+      "id": "cdl-fall-m-240",
       "kickoff": "2026-10-17T14:00:00",
       "homeClubId": "carolina-core-fc",
       "awayClubId": "highland-fc",
@@ -3458,7 +3458,7 @@
       "sourceRow": 240
     },
     {
-      "id": "cdl-fall-241",
+      "id": "cdl-fall-m-241",
       "kickoff": "2026-10-17T14:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3472,7 +3472,7 @@
       "sourceRow": 241
     },
     {
-      "id": "cdl-fall-242",
+      "id": "cdl-fall-m-242",
       "kickoff": "2026-10-17T14:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3486,7 +3486,7 @@
       "sourceRow": 242
     },
     {
-      "id": "cdl-fall-243",
+      "id": "cdl-fall-m-243",
       "kickoff": "2026-10-17T14:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3500,7 +3500,7 @@
       "sourceRow": 243
     },
     {
-      "id": "cdl-fall-244",
+      "id": "cdl-fall-m-244",
       "kickoff": "2026-10-17T14:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3514,7 +3514,7 @@
       "sourceRow": 244
     },
     {
-      "id": "cdl-fall-245",
+      "id": "cdl-fall-m-245",
       "kickoff": "2026-10-17T14:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3528,7 +3528,7 @@
       "sourceRow": 245
     },
     {
-      "id": "cdl-fall-246",
+      "id": "cdl-fall-m-246",
       "kickoff": "2026-10-17T14:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3542,7 +3542,7 @@
       "sourceRow": 246
     },
     {
-      "id": "cdl-fall-247",
+      "id": "cdl-fall-m-247",
       "kickoff": "2026-10-17T14:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "wilmington-hammerheads",
@@ -3556,7 +3556,7 @@
       "sourceRow": 247
     },
     {
-      "id": "cdl-fall-248",
+      "id": "cdl-fall-m-248",
       "kickoff": "2026-10-17T15:45:00",
       "homeClubId": "sc-surf",
       "awayClubId": "wilmington-hammerheads",
@@ -3570,7 +3570,7 @@
       "sourceRow": 248
     },
     {
-      "id": "cdl-fall-249",
+      "id": "cdl-fall-m-249",
       "kickoff": "2026-10-17T23:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3584,7 +3584,7 @@
       "sourceRow": 249
     },
     {
-      "id": "cdl-fall-250",
+      "id": "cdl-fall-m-250",
       "kickoff": "2026-10-17T23:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3598,7 +3598,7 @@
       "sourceRow": 250
     },
     {
-      "id": "cdl-fall-251",
+      "id": "cdl-fall-m-251",
       "kickoff": "2026-10-17T23:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3612,7 +3612,7 @@
       "sourceRow": 251
     },
     {
-      "id": "cdl-fall-252",
+      "id": "cdl-fall-m-252",
       "kickoff": "2026-10-17T23:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3626,7 +3626,7 @@
       "sourceRow": 252
     },
     {
-      "id": "cdl-fall-253",
+      "id": "cdl-fall-m-253",
       "kickoff": "2026-10-17T23:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3640,7 +3640,7 @@
       "sourceRow": 253
     },
     {
-      "id": "cdl-fall-254",
+      "id": "cdl-fall-m-254",
       "kickoff": "2026-10-17T23:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "wake-fc",
@@ -3654,7 +3654,7 @@
       "sourceRow": 254
     },
     {
-      "id": "cdl-fall-255",
+      "id": "cdl-fall-m-255",
       "kickoff": "2026-10-18T11:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "cisc",
@@ -3668,7 +3668,7 @@
       "sourceRow": 255
     },
     {
-      "id": "cdl-fall-256",
+      "id": "cdl-fall-m-256",
       "kickoff": "2026-10-18T11:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "cisc",
@@ -3682,7 +3682,7 @@
       "sourceRow": 256
     },
     {
-      "id": "cdl-fall-257",
+      "id": "cdl-fall-m-257",
       "kickoff": "2026-10-18T12:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "cisc",
@@ -3696,7 +3696,7 @@
       "sourceRow": 257
     },
     {
-      "id": "cdl-fall-258",
+      "id": "cdl-fall-m-258",
       "kickoff": "2026-10-18T12:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "cisc",
@@ -3710,7 +3710,7 @@
       "sourceRow": 258
     },
     {
-      "id": "cdl-fall-259",
+      "id": "cdl-fall-m-259",
       "kickoff": "2026-10-18T14:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "cisc",
@@ -3724,7 +3724,7 @@
       "sourceRow": 259
     },
     {
-      "id": "cdl-fall-260",
+      "id": "cdl-fall-m-260",
       "kickoff": "2026-10-18T14:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "cisc",
@@ -3738,7 +3738,7 @@
       "sourceRow": 260
     },
     {
-      "id": "cdl-fall-261",
+      "id": "cdl-fall-m-261",
       "kickoff": "2026-10-18T15:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "cisc",
@@ -3752,7 +3752,7 @@
       "sourceRow": 261
     },
     {
-      "id": "cdl-fall-262",
+      "id": "cdl-fall-m-262",
       "kickoff": "2026-10-18T15:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "cisc",
@@ -3766,7 +3766,7 @@
       "sourceRow": 262
     },
     {
-      "id": "cdl-fall-263",
+      "id": "cdl-fall-m-263",
       "kickoff": "2026-10-18T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "nc-fusion",
@@ -3780,7 +3780,7 @@
       "sourceRow": 263
     },
     {
-      "id": "cdl-fall-264",
+      "id": "cdl-fall-m-264",
       "kickoff": "2026-10-18T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "nc-fusion",
@@ -3794,7 +3794,7 @@
       "sourceRow": 264
     },
     {
-      "id": "cdl-fall-265",
+      "id": "cdl-fall-m-265",
       "kickoff": "2026-10-18T11:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "nc-fusion",
@@ -3808,7 +3808,7 @@
       "sourceRow": 265
     },
     {
-      "id": "cdl-fall-266",
+      "id": "cdl-fall-m-266",
       "kickoff": "2026-10-18T11:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "nc-fusion",
@@ -3822,7 +3822,7 @@
       "sourceRow": 266
     },
     {
-      "id": "cdl-fall-267",
+      "id": "cdl-fall-m-267",
       "kickoff": "2026-10-24T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wake-fc",
@@ -3836,7 +3836,7 @@
       "sourceRow": 267
     },
     {
-      "id": "cdl-fall-268",
+      "id": "cdl-fall-m-268",
       "kickoff": "2026-10-24T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wake-fc",
@@ -3850,7 +3850,7 @@
       "sourceRow": 268
     },
     {
-      "id": "cdl-fall-269",
+      "id": "cdl-fall-m-269",
       "kickoff": "2026-10-24T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wilmington-hammerheads",
@@ -3864,7 +3864,7 @@
       "sourceRow": 269
     },
     {
-      "id": "cdl-fall-270",
+      "id": "cdl-fall-m-270",
       "kickoff": "2026-10-24T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wilmington-hammerheads",
@@ -3878,7 +3878,7 @@
       "sourceRow": 270
     },
     {
-      "id": "cdl-fall-271",
+      "id": "cdl-fall-m-271",
       "kickoff": "2026-10-24T10:30:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -3892,7 +3892,7 @@
       "sourceRow": 271
     },
     {
-      "id": "cdl-fall-272",
+      "id": "cdl-fall-m-272",
       "kickoff": "2026-10-24T10:30:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -3906,7 +3906,7 @@
       "sourceRow": 272
     },
     {
-      "id": "cdl-fall-273",
+      "id": "cdl-fall-m-273",
       "kickoff": "2026-10-24T11:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wake-fc",
@@ -3920,7 +3920,7 @@
       "sourceRow": 273
     },
     {
-      "id": "cdl-fall-274",
+      "id": "cdl-fall-m-274",
       "kickoff": "2026-10-24T11:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wake-fc",
@@ -3934,7 +3934,7 @@
       "sourceRow": 274
     },
     {
-      "id": "cdl-fall-275",
+      "id": "cdl-fall-m-275",
       "kickoff": "2026-10-24T11:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wilmington-hammerheads",
@@ -3948,7 +3948,7 @@
       "sourceRow": 275
     },
     {
-      "id": "cdl-fall-276",
+      "id": "cdl-fall-m-276",
       "kickoff": "2026-10-24T11:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "wilmington-hammerheads",
@@ -3962,7 +3962,7 @@
       "sourceRow": 276
     },
     {
-      "id": "cdl-fall-277",
+      "id": "cdl-fall-m-277",
       "kickoff": "2026-10-24T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "sc-surf",
@@ -3976,7 +3976,7 @@
       "sourceRow": 277
     },
     {
-      "id": "cdl-fall-278",
+      "id": "cdl-fall-m-278",
       "kickoff": "2026-10-24T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "sc-surf",
@@ -3990,7 +3990,7 @@
       "sourceRow": 278
     },
     {
-      "id": "cdl-fall-279",
+      "id": "cdl-fall-m-279",
       "kickoff": "2026-10-24T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -4004,7 +4004,7 @@
       "sourceRow": 279
     },
     {
-      "id": "cdl-fall-280",
+      "id": "cdl-fall-m-280",
       "kickoff": "2026-10-24T12:00:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -4018,7 +4018,7 @@
       "sourceRow": 280
     },
     {
-      "id": "cdl-fall-281",
+      "id": "cdl-fall-m-281",
       "kickoff": "2026-10-24T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "sc-surf",
@@ -4032,7 +4032,7 @@
       "sourceRow": 281
     },
     {
-      "id": "cdl-fall-282",
+      "id": "cdl-fall-m-282",
       "kickoff": "2026-10-24T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "sc-surf",
@@ -4046,7 +4046,7 @@
       "sourceRow": 282
     },
     {
-      "id": "cdl-fall-283",
+      "id": "cdl-fall-m-283",
       "kickoff": "2026-10-24T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "sc-surf",
@@ -4060,7 +4060,7 @@
       "sourceRow": 283
     },
     {
-      "id": "cdl-fall-284",
+      "id": "cdl-fall-m-284",
       "kickoff": "2026-10-24T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "sc-surf",
@@ -4074,7 +4074,7 @@
       "sourceRow": 284
     },
     {
-      "id": "cdl-fall-285",
+      "id": "cdl-fall-m-285",
       "kickoff": "2026-10-24T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -4088,7 +4088,7 @@
       "sourceRow": 285
     },
     {
-      "id": "cdl-fall-286",
+      "id": "cdl-fall-m-286",
       "kickoff": "2026-10-24T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -4102,7 +4102,7 @@
       "sourceRow": 286
     },
     {
-      "id": "cdl-fall-287",
+      "id": "cdl-fall-m-287",
       "kickoff": "2026-10-24T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -4116,7 +4116,7 @@
       "sourceRow": 287
     },
     {
-      "id": "cdl-fall-288",
+      "id": "cdl-fall-m-288",
       "kickoff": "2026-10-24T13:30:00",
       "homeClubId": "csa",
       "awayClubId": "highland-fc",
@@ -4130,7 +4130,7 @@
       "sourceRow": 288
     },
     {
-      "id": "cdl-fall-289",
+      "id": "cdl-fall-m-289",
       "kickoff": "2026-10-24T15:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -4144,7 +4144,7 @@
       "sourceRow": 289
     },
     {
-      "id": "cdl-fall-290",
+      "id": "cdl-fall-m-290",
       "kickoff": "2026-10-24T15:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -4158,7 +4158,7 @@
       "sourceRow": 290
     },
     {
-      "id": "cdl-fall-291",
+      "id": "cdl-fall-m-291",
       "kickoff": "2026-10-24T16:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -4172,7 +4172,7 @@
       "sourceRow": 291
     },
     {
-      "id": "cdl-fall-292",
+      "id": "cdl-fall-m-292",
       "kickoff": "2026-10-24T16:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "highland-fc",
@@ -4186,7 +4186,7 @@
       "sourceRow": 292
     },
     {
-      "id": "cdl-fall-293",
+      "id": "cdl-fall-m-293",
       "kickoff": "2026-10-24T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -4200,7 +4200,7 @@
       "sourceRow": 293
     },
     {
-      "id": "cdl-fall-294",
+      "id": "cdl-fall-m-294",
       "kickoff": "2026-10-24T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -4214,7 +4214,7 @@
       "sourceRow": 294
     },
     {
-      "id": "cdl-fall-295",
+      "id": "cdl-fall-m-295",
       "kickoff": "2026-10-24T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -4228,7 +4228,7 @@
       "sourceRow": 295
     },
     {
-      "id": "cdl-fall-296",
+      "id": "cdl-fall-m-296",
       "kickoff": "2026-10-24T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "cisc",
@@ -4242,7 +4242,7 @@
       "sourceRow": 296
     },
     {
-      "id": "cdl-fall-297",
+      "id": "cdl-fall-m-297",
       "kickoff": "2026-10-25T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "nc-fc-youth",
@@ -4256,7 +4256,7 @@
       "sourceRow": 297
     },
     {
-      "id": "cdl-fall-298",
+      "id": "cdl-fall-m-298",
       "kickoff": "2026-10-25T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "nc-fc-youth",
@@ -4270,7 +4270,7 @@
       "sourceRow": 298
     },
     {
-      "id": "cdl-fall-299",
+      "id": "cdl-fall-m-299",
       "kickoff": "2026-10-25T11:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "nc-fc-youth",
@@ -4284,7 +4284,7 @@
       "sourceRow": 299
     },
     {
-      "id": "cdl-fall-300",
+      "id": "cdl-fall-m-300",
       "kickoff": "2026-10-25T11:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "nc-fc-youth",
@@ -4298,7 +4298,7 @@
       "sourceRow": 300
     },
     {
-      "id": "cdl-fall-301",
+      "id": "cdl-fall-m-301",
       "kickoff": "2026-10-25T13:30:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -4312,7 +4312,7 @@
       "sourceRow": 301
     },
     {
-      "id": "cdl-fall-302",
+      "id": "cdl-fall-m-302",
       "kickoff": "2026-10-25T13:30:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -4326,7 +4326,7 @@
       "sourceRow": 302
     },
     {
-      "id": "cdl-fall-303",
+      "id": "cdl-fall-m-303",
       "kickoff": "2026-10-25T10:30:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -4340,7 +4340,7 @@
       "sourceRow": 303
     },
     {
-      "id": "cdl-fall-304",
+      "id": "cdl-fall-m-304",
       "kickoff": "2026-10-25T10:30:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -4354,7 +4354,7 @@
       "sourceRow": 304
     },
     {
-      "id": "cdl-fall-305",
+      "id": "cdl-fall-m-305",
       "kickoff": "2026-10-25T10:15:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4368,7 +4368,7 @@
       "sourceRow": 305
     },
     {
-      "id": "cdl-fall-306",
+      "id": "cdl-fall-m-306",
       "kickoff": "2026-10-25T10:15:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4382,7 +4382,7 @@
       "sourceRow": 306
     },
     {
-      "id": "cdl-fall-307",
+      "id": "cdl-fall-m-307",
       "kickoff": "2026-10-25T10:15:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4396,7 +4396,7 @@
       "sourceRow": 307
     },
     {
-      "id": "cdl-fall-308",
+      "id": "cdl-fall-m-308",
       "kickoff": "2026-10-25T11:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4410,7 +4410,7 @@
       "sourceRow": 308
     },
     {
-      "id": "cdl-fall-309",
+      "id": "cdl-fall-m-309",
       "kickoff": "2026-10-25T11:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4424,7 +4424,7 @@
       "sourceRow": 309
     },
     {
-      "id": "cdl-fall-310",
+      "id": "cdl-fall-m-310",
       "kickoff": "2026-10-25T11:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4438,7 +4438,7 @@
       "sourceRow": 310
     },
     {
-      "id": "cdl-fall-311",
+      "id": "cdl-fall-m-311",
       "kickoff": "2026-10-25T11:30:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4452,7 +4452,7 @@
       "sourceRow": 311
     },
     {
-      "id": "cdl-fall-312",
+      "id": "cdl-fall-m-312",
       "kickoff": "2026-10-25T12:00:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -4466,7 +4466,7 @@
       "sourceRow": 312
     },
     {
-      "id": "cdl-fall-313",
+      "id": "cdl-fall-m-313",
       "kickoff": "2026-10-25T12:00:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -4480,7 +4480,7 @@
       "sourceRow": 313
     },
     {
-      "id": "cdl-fall-314",
+      "id": "cdl-fall-m-314",
       "kickoff": "2026-10-25T09:00:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -4494,7 +4494,7 @@
       "sourceRow": 314
     },
     {
-      "id": "cdl-fall-315",
+      "id": "cdl-fall-m-315",
       "kickoff": "2026-10-25T09:00:00",
       "homeClubId": "cisc",
       "awayClubId": "sc-surf",
@@ -4508,7 +4508,7 @@
       "sourceRow": 315
     },
     {
-      "id": "cdl-fall-316",
+      "id": "cdl-fall-m-316",
       "kickoff": "2026-10-25T09:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4522,7 +4522,7 @@
       "sourceRow": 316
     },
     {
-      "id": "cdl-fall-317",
+      "id": "cdl-fall-m-317",
       "kickoff": "2026-10-25T09:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4536,7 +4536,7 @@
       "sourceRow": 317
     },
     {
-      "id": "cdl-fall-318",
+      "id": "cdl-fall-m-318",
       "kickoff": "2026-10-25T09:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4550,7 +4550,7 @@
       "sourceRow": 318
     },
     {
-      "id": "cdl-fall-319",
+      "id": "cdl-fall-m-319",
       "kickoff": "2026-10-25T09:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4564,7 +4564,7 @@
       "sourceRow": 319
     },
     {
-      "id": "cdl-fall-320",
+      "id": "cdl-fall-m-320",
       "kickoff": "2026-10-25T09:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4578,7 +4578,7 @@
       "sourceRow": 320
     },
     {
-      "id": "cdl-fall-321",
+      "id": "cdl-fall-m-321",
       "kickoff": "2026-10-25T09:00:00",
       "homeClubId": "nc-fusion",
       "awayClubId": "csa",
@@ -4592,7 +4592,7 @@
       "sourceRow": 321
     },
     {
-      "id": "cdl-fall-322",
+      "id": "cdl-fall-m-322",
       "kickoff": "2026-10-31T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
@@ -4606,7 +4606,7 @@
       "sourceRow": 322
     },
     {
-      "id": "cdl-fall-323",
+      "id": "cdl-fall-m-323",
       "kickoff": "2026-10-31T10:00:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
@@ -4620,7 +4620,7 @@
       "sourceRow": 323
     },
     {
-      "id": "cdl-fall-324",
+      "id": "cdl-fall-m-324",
       "kickoff": "2026-10-31T11:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
@@ -4634,7 +4634,7 @@
       "sourceRow": 324
     },
     {
-      "id": "cdl-fall-325",
+      "id": "cdl-fall-m-325",
       "kickoff": "2026-10-31T11:30:00",
       "homeClubId": "nc-fc-youth",
       "awayClubId": "carolina-core-fc",
@@ -4648,7 +4648,7 @@
       "sourceRow": 325
     },
     {
-      "id": "cdl-fall-326",
+      "id": "cdl-fall-m-326",
       "kickoff": "2026-11-01T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -4662,7 +4662,7 @@
       "sourceRow": 326
     },
     {
-      "id": "cdl-fall-327",
+      "id": "cdl-fall-m-327",
       "kickoff": "2026-11-01T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -4676,7 +4676,7 @@
       "sourceRow": 327
     },
     {
-      "id": "cdl-fall-328",
+      "id": "cdl-fall-m-328",
       "kickoff": "2026-11-01T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4690,7 +4690,7 @@
       "sourceRow": 328
     },
     {
-      "id": "cdl-fall-329",
+      "id": "cdl-fall-m-329",
       "kickoff": "2026-11-01T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4704,7 +4704,7 @@
       "sourceRow": 329
     },
     {
-      "id": "cdl-fall-330",
+      "id": "cdl-fall-m-330",
       "kickoff": "2026-11-01T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4718,7 +4718,7 @@
       "sourceRow": 330
     },
     {
-      "id": "cdl-fall-331",
+      "id": "cdl-fall-m-331",
       "kickoff": "2026-11-01T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4732,7 +4732,7 @@
       "sourceRow": 331
     },
     {
-      "id": "cdl-fall-332",
+      "id": "cdl-fall-m-332",
       "kickoff": "2026-11-01T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -4746,7 +4746,7 @@
       "sourceRow": 332
     },
     {
-      "id": "cdl-fall-333",
+      "id": "cdl-fall-m-333",
       "kickoff": "2026-11-01T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -4760,7 +4760,7 @@
       "sourceRow": 333
     },
     {
-      "id": "cdl-fall-334",
+      "id": "cdl-fall-m-334",
       "kickoff": "2026-11-01T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4774,7 +4774,7 @@
       "sourceRow": 334
     },
     {
-      "id": "cdl-fall-335",
+      "id": "cdl-fall-m-335",
       "kickoff": "2026-11-01T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4788,7 +4788,7 @@
       "sourceRow": 335
     },
     {
-      "id": "cdl-fall-336",
+      "id": "cdl-fall-m-336",
       "kickoff": "2026-11-01T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4802,7 +4802,7 @@
       "sourceRow": 336
     },
     {
-      "id": "cdl-fall-337",
+      "id": "cdl-fall-m-337",
       "kickoff": "2026-11-01T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4816,7 +4816,7 @@
       "sourceRow": 337
     },
     {
-      "id": "cdl-fall-338",
+      "id": "cdl-fall-m-338",
       "kickoff": "2026-11-01T14:00:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4830,7 +4830,7 @@
       "sourceRow": 338
     },
     {
-      "id": "cdl-fall-339",
+      "id": "cdl-fall-m-339",
       "kickoff": "2026-11-01T14:00:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4844,7 +4844,7 @@
       "sourceRow": 339
     },
     {
-      "id": "cdl-fall-340",
+      "id": "cdl-fall-m-340",
       "kickoff": "2026-11-01T14:00:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4858,7 +4858,7 @@
       "sourceRow": 340
     },
     {
-      "id": "cdl-fall-341",
+      "id": "cdl-fall-m-341",
       "kickoff": "2026-11-01T14:00:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4872,7 +4872,7 @@
       "sourceRow": 341
     },
     {
-      "id": "cdl-fall-342",
+      "id": "cdl-fall-m-342",
       "kickoff": "2026-11-01T15:30:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4886,7 +4886,7 @@
       "sourceRow": 342
     },
     {
-      "id": "cdl-fall-343",
+      "id": "cdl-fall-m-343",
       "kickoff": "2026-11-01T15:30:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4900,7 +4900,7 @@
       "sourceRow": 343
     },
     {
-      "id": "cdl-fall-344",
+      "id": "cdl-fall-m-344",
       "kickoff": "2026-11-01T15:30:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4914,7 +4914,7 @@
       "sourceRow": 344
     },
     {
-      "id": "cdl-fall-345",
+      "id": "cdl-fall-m-345",
       "kickoff": "2026-11-01T15:30:00",
       "homeClubId": "cisc",
       "awayClubId": "wake-fc",
@@ -4928,7 +4928,7 @@
       "sourceRow": 345
     },
     {
-      "id": "cdl-fall-346",
+      "id": "cdl-fall-m-346",
       "kickoff": "2026-11-07T10:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "carolina-core-fc",
@@ -4942,7 +4942,7 @@
       "sourceRow": 346
     },
     {
-      "id": "cdl-fall-347",
+      "id": "cdl-fall-m-347",
       "kickoff": "2026-11-07T10:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "carolina-core-fc",
@@ -4956,7 +4956,7 @@
       "sourceRow": 347
     },
     {
-      "id": "cdl-fall-348",
+      "id": "cdl-fall-m-348",
       "kickoff": "2026-11-07T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -4970,7 +4970,7 @@
       "sourceRow": 348
     },
     {
-      "id": "cdl-fall-349",
+      "id": "cdl-fall-m-349",
       "kickoff": "2026-11-07T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -4984,7 +4984,7 @@
       "sourceRow": 349
     },
     {
-      "id": "cdl-fall-350",
+      "id": "cdl-fall-m-350",
       "kickoff": "2026-11-07T11:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "carolina-core-fc",
@@ -4998,7 +4998,7 @@
       "sourceRow": 350
     },
     {
-      "id": "cdl-fall-351",
+      "id": "cdl-fall-m-351",
       "kickoff": "2026-11-07T11:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "carolina-core-fc",
@@ -5012,7 +5012,7 @@
       "sourceRow": 351
     },
     {
-      "id": "cdl-fall-352",
+      "id": "cdl-fall-m-352",
       "kickoff": "2026-11-07T12:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "csa",
@@ -5026,7 +5026,7 @@
       "sourceRow": 352
     },
     {
-      "id": "cdl-fall-353",
+      "id": "cdl-fall-m-353",
       "kickoff": "2026-11-07T12:00:00",
       "homeClubId": "sc-surf",
       "awayClubId": "csa",
@@ -5040,7 +5040,7 @@
       "sourceRow": 353
     },
     {
-      "id": "cdl-fall-354",
+      "id": "cdl-fall-m-354",
       "kickoff": "2026-11-07T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5054,7 +5054,7 @@
       "sourceRow": 354
     },
     {
-      "id": "cdl-fall-355",
+      "id": "cdl-fall-m-355",
       "kickoff": "2026-11-07T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5068,7 +5068,7 @@
       "sourceRow": 355
     },
     {
-      "id": "cdl-fall-356",
+      "id": "cdl-fall-m-356",
       "kickoff": "2026-11-07T13:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "csa",
@@ -5082,7 +5082,7 @@
       "sourceRow": 356
     },
     {
-      "id": "cdl-fall-357",
+      "id": "cdl-fall-m-357",
       "kickoff": "2026-11-07T13:15:00",
       "homeClubId": "sc-surf",
       "awayClubId": "csa",
@@ -5096,7 +5096,7 @@
       "sourceRow": 357
     },
     {
-      "id": "cdl-fall-358",
+      "id": "cdl-fall-m-358",
       "kickoff": "2026-11-07T14:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5110,7 +5110,7 @@
       "sourceRow": 358
     },
     {
-      "id": "cdl-fall-359",
+      "id": "cdl-fall-m-359",
       "kickoff": "2026-11-07T14:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5124,7 +5124,7 @@
       "sourceRow": 359
     },
     {
-      "id": "cdl-fall-360",
+      "id": "cdl-fall-m-360",
       "kickoff": "2026-11-07T14:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "csa",
@@ -5138,7 +5138,7 @@
       "sourceRow": 360
     },
     {
-      "id": "cdl-fall-361",
+      "id": "cdl-fall-m-361",
       "kickoff": "2026-11-07T14:30:00",
       "homeClubId": "sc-surf",
       "awayClubId": "csa",
@@ -5152,7 +5152,7 @@
       "sourceRow": 361
     },
     {
-      "id": "cdl-fall-362",
+      "id": "cdl-fall-m-362",
       "kickoff": "2026-11-07T15:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5166,7 +5166,7 @@
       "sourceRow": 362
     },
     {
-      "id": "cdl-fall-363",
+      "id": "cdl-fall-m-363",
       "kickoff": "2026-11-07T15:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5180,7 +5180,7 @@
       "sourceRow": 363
     },
     {
-      "id": "cdl-fall-364",
+      "id": "cdl-fall-m-364",
       "kickoff": "2026-11-07T15:45:00",
       "homeClubId": "sc-surf",
       "awayClubId": "csa",
@@ -5194,7 +5194,7 @@
       "sourceRow": 364
     },
     {
-      "id": "cdl-fall-365",
+      "id": "cdl-fall-m-365",
       "kickoff": "2026-11-07T15:45:00",
       "homeClubId": "sc-surf",
       "awayClubId": "csa",
@@ -5208,7 +5208,7 @@
       "sourceRow": 365
     },
     {
-      "id": "cdl-fall-366",
+      "id": "cdl-fall-m-366",
       "kickoff": "2026-11-08T13:00:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -5222,7 +5222,7 @@
       "sourceRow": 366
     },
     {
-      "id": "cdl-fall-367",
+      "id": "cdl-fall-m-367",
       "kickoff": "2026-11-08T13:00:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -5236,7 +5236,7 @@
       "sourceRow": 367
     },
     {
-      "id": "cdl-fall-368",
+      "id": "cdl-fall-m-368",
       "kickoff": "2026-11-08T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5250,7 +5250,7 @@
       "sourceRow": 368
     },
     {
-      "id": "cdl-fall-369",
+      "id": "cdl-fall-m-369",
       "kickoff": "2026-11-08T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5264,7 +5264,7 @@
       "sourceRow": 369
     },
     {
-      "id": "cdl-fall-370",
+      "id": "cdl-fall-m-370",
       "kickoff": "2026-11-08T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5278,7 +5278,7 @@
       "sourceRow": 370
     },
     {
-      "id": "cdl-fall-371",
+      "id": "cdl-fall-m-371",
       "kickoff": "2026-11-08T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5292,7 +5292,7 @@
       "sourceRow": 371
     },
     {
-      "id": "cdl-fall-372",
+      "id": "cdl-fall-m-372",
       "kickoff": "2026-11-08T14:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5306,7 +5306,7 @@
       "sourceRow": 372
     },
     {
-      "id": "cdl-fall-373",
+      "id": "cdl-fall-m-373",
       "kickoff": "2026-11-08T14:00:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5320,7 +5320,7 @@
       "sourceRow": 373
     },
     {
-      "id": "cdl-fall-374",
+      "id": "cdl-fall-m-374",
       "kickoff": "2026-11-08T14:30:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -5334,7 +5334,7 @@
       "sourceRow": 374
     },
     {
-      "id": "cdl-fall-375",
+      "id": "cdl-fall-m-375",
       "kickoff": "2026-11-08T14:30:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -5348,7 +5348,7 @@
       "sourceRow": 375
     },
     {
-      "id": "cdl-fall-376",
+      "id": "cdl-fall-m-376",
       "kickoff": "2026-11-08T15:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5362,7 +5362,7 @@
       "sourceRow": 376
     },
     {
-      "id": "cdl-fall-377",
+      "id": "cdl-fall-m-377",
       "kickoff": "2026-11-08T15:30:00",
       "homeClubId": "cisc",
       "awayClubId": "nc-fc-youth",
@@ -5376,7 +5376,7 @@
       "sourceRow": 377
     },
     {
-      "id": "cdl-fall-378",
+      "id": "cdl-fall-m-378",
       "kickoff": "2026-11-14T11:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "wilmington-hammerheads",
@@ -5390,7 +5390,7 @@
       "sourceRow": 378
     },
     {
-      "id": "cdl-fall-379",
+      "id": "cdl-fall-m-379",
       "kickoff": "2026-11-14T11:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "wilmington-hammerheads",
@@ -5404,7 +5404,7 @@
       "sourceRow": 379
     },
     {
-      "id": "cdl-fall-380",
+      "id": "cdl-fall-m-380",
       "kickoff": "2026-11-14T12:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "wilmington-hammerheads",
@@ -5418,7 +5418,7 @@
       "sourceRow": 380
     },
     {
-      "id": "cdl-fall-381",
+      "id": "cdl-fall-m-381",
       "kickoff": "2026-11-14T12:30:00",
       "homeClubId": "wake-fc",
       "awayClubId": "wilmington-hammerheads",
@@ -5432,7 +5432,7 @@
       "sourceRow": 381
     },
     {
-      "id": "cdl-fall-382",
+      "id": "cdl-fall-m-382",
       "kickoff": "2026-11-14T14:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "wilmington-hammerheads",
@@ -5446,7 +5446,7 @@
       "sourceRow": 382
     },
     {
-      "id": "cdl-fall-383",
+      "id": "cdl-fall-m-383",
       "kickoff": "2026-11-14T14:00:00",
       "homeClubId": "wake-fc",
       "awayClubId": "wilmington-hammerheads",
@@ -5460,7 +5460,7 @@
       "sourceRow": 383
     },
     {
-      "id": "cdl-fall-384",
+      "id": "cdl-fall-m-384",
       "kickoff": "2026-11-21T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -5474,7 +5474,7 @@
       "sourceRow": 384
     },
     {
-      "id": "cdl-fall-385",
+      "id": "cdl-fall-m-385",
       "kickoff": "2026-11-21T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -5488,7 +5488,7 @@
       "sourceRow": 385
     },
     {
-      "id": "cdl-fall-386",
+      "id": "cdl-fall-m-386",
       "kickoff": "2026-11-21T14:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -5502,7 +5502,7 @@
       "sourceRow": 386
     },
     {
-      "id": "cdl-fall-387",
+      "id": "cdl-fall-m-387",
       "kickoff": "2026-11-21T14:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "cisc",
@@ -5516,7 +5516,7 @@
       "sourceRow": 387
     },
     {
-      "id": "cdl-fall-388",
+      "id": "cdl-fall-m-388",
       "kickoff": "2026-11-22T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "carolina-core-fc",
@@ -5530,7 +5530,7 @@
       "sourceRow": 388
     },
     {
-      "id": "cdl-fall-389",
+      "id": "cdl-fall-m-389",
       "kickoff": "2026-11-22T13:00:00",
       "homeClubId": "highland-fc",
       "awayClubId": "carolina-core-fc",
@@ -5544,7 +5544,7 @@
       "sourceRow": 389
     },
     {
-      "id": "cdl-fall-390",
+      "id": "cdl-fall-m-390",
       "kickoff": "2026-11-22T14:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "carolina-core-fc",
@@ -5558,7 +5558,7 @@
       "sourceRow": 390
     },
     {
-      "id": "cdl-fall-391",
+      "id": "cdl-fall-m-391",
       "kickoff": "2026-11-22T14:30:00",
       "homeClubId": "highland-fc",
       "awayClubId": "carolina-core-fc",
@@ -5572,7 +5572,7 @@
       "sourceRow": 391
     },
     {
-      "id": "cdl-fall-392",
+      "id": "cdl-fall-m-392",
       "kickoff": "2026-12-05T13:30:00",
       "homeClubId": "cisc",
       "awayClubId": "wilmington-hammerheads",
@@ -5586,7 +5586,7 @@
       "sourceRow": 392
     },
     {
-      "id": "cdl-fall-393",
+      "id": "cdl-fall-m-393",
       "kickoff": "2026-12-05T13:30:00",
       "homeClubId": "cisc",
       "awayClubId": "wilmington-hammerheads",
@@ -5600,7 +5600,7 @@
       "sourceRow": 393
     },
     {
-      "id": "cdl-fall-394",
+      "id": "cdl-fall-m-394",
       "kickoff": "2026-12-05T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -5614,7 +5614,7 @@
       "sourceRow": 394
     },
     {
-      "id": "cdl-fall-395",
+      "id": "cdl-fall-m-395",
       "kickoff": "2026-12-05T11:00:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -5628,7 +5628,7 @@
       "sourceRow": 395
     },
     {
-      "id": "cdl-fall-396",
+      "id": "cdl-fall-m-396",
       "kickoff": "2026-12-05T12:00:00",
       "homeClubId": "cisc",
       "awayClubId": "wilmington-hammerheads",
@@ -5642,7 +5642,7 @@
       "sourceRow": 396
     },
     {
-      "id": "cdl-fall-397",
+      "id": "cdl-fall-m-397",
       "kickoff": "2026-12-05T12:00:00",
       "homeClubId": "cisc",
       "awayClubId": "wilmington-hammerheads",
@@ -5656,7 +5656,7 @@
       "sourceRow": 397
     },
     {
-      "id": "cdl-fall-398",
+      "id": "cdl-fall-m-398",
       "kickoff": "2026-12-05T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -5670,7 +5670,7 @@
       "sourceRow": 398
     },
     {
-      "id": "cdl-fall-399",
+      "id": "cdl-fall-m-399",
       "kickoff": "2026-12-05T12:30:00",
       "homeClubId": "cisc",
       "awayClubId": "csa",
@@ -5684,7 +5684,7 @@
       "sourceRow": 399
     },
     {
-      "id": "cdl-fall-400",
+      "id": "cdl-fall-m-400",
       "kickoff": "2026-12-06T11:00:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -5698,7 +5698,7 @@
       "sourceRow": 400
     },
     {
-      "id": "cdl-fall-401",
+      "id": "cdl-fall-m-401",
       "kickoff": "2026-12-06T11:00:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -5712,7 +5712,7 @@
       "sourceRow": 401
     },
     {
-      "id": "cdl-fall-402",
+      "id": "cdl-fall-m-402",
       "kickoff": "2026-12-06T12:30:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -5726,7 +5726,7 @@
       "sourceRow": 402
     },
     {
-      "id": "cdl-fall-403",
+      "id": "cdl-fall-m-403",
       "kickoff": "2026-12-06T12:30:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -5740,7 +5740,7 @@
       "sourceRow": 403
     },
     {
-      "id": "cdl-fall-404",
+      "id": "cdl-fall-m-404",
       "kickoff": "2026-12-06T13:00:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -5754,7 +5754,7 @@
       "sourceRow": 404
     },
     {
-      "id": "cdl-fall-405",
+      "id": "cdl-fall-m-405",
       "kickoff": "2026-12-06T14:30:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -5768,7 +5768,7 @@
       "sourceRow": 405
     },
     {
-      "id": "cdl-fall-406",
+      "id": "cdl-fall-m-406",
       "kickoff": "2026-12-06T14:30:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
@@ -5782,7 +5782,7 @@
       "sourceRow": 406
     },
     {
-      "id": "cdl-fall-407",
+      "id": "cdl-fall-m-407",
       "kickoff": "2026-12-06T13:00:00",
       "homeClubId": "csa",
       "awayClubId": "cisc",
