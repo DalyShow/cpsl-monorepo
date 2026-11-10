@@ -3,7 +3,9 @@
 Ingest the CDL Fall 2026 schedule from an Excel file into normalised JSON.
 
 Reads:
-  ~/Desktop/CDL - Schedules and Contact Sheet Fall 2026.xlsx  (default)
+  CDL - Schedules and Contact Sheet Fall 2026.xlsx  (default) from the first of
+  $CDL_SOURCE_DIR, ~/Downloads, ~/Desktop that holds it (the directors send the
+  file; save it in Downloads on the new Mac)
   OR the path passed as arg 1
 
 Writes:
@@ -42,9 +44,15 @@ APP_DIR   = REPO_ROOT / "apps" / "website"
 DATA_DIR  = APP_DIR / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-BOYS_SOURCE          = Path.home() / "Desktop" / "CDL - Schedules and Contact Sheet Fall 2026.xlsx"
+def _source(name: str) -> Path:
+    """The directors' spreadsheet, wherever it was saved; first match wins."""
+    dirs = [Path(os.environ["CDL_SOURCE_DIR"])] if os.environ.get("CDL_SOURCE_DIR") else []
+    dirs += [Path.home() / "Downloads", Path.home() / "Desktop"]
+    return next((d / name for d in dirs if (d / name).exists()), dirs[0] / name)
+
+BOYS_SOURCE          = _source("CDL - Schedules and Contact Sheet Fall 2026.xlsx")
 BOYS_SNAPSHOT_JSON   = DATA_DIR / "cdl-fall-2026-boys-snapshot.json"
-GIRLS_SOURCE         = Path.home() / "Desktop" / "CDL - Schedules and Contact Sheet Fall 2026 (This is going to CDL_CPSL Web person.xlsx"
+GIRLS_SOURCE         = _source("CDL - Schedules and Contact Sheet Fall 2026 (This is going to CDL_CPSL Web person.xlsx")
 GIRLS_SNAPSHOT_JSON  = DATA_DIR / "cdl-fall-2026-girls-snapshot.json"
 
 # One entry per feed. `kind` = "xlsx" or "snapshot" (JSON already parsed).
