@@ -17,6 +17,7 @@ interface FormBlockSectionProps {
   /** Parent document id, added in the page GROQ projection. */
   _docId?:         string;
   background?:     FormBlockBackground;
+  fillScreen?:     boolean;
   eyebrow?:        string;
   headline?:       string;
   intro?:          string;
@@ -35,6 +36,7 @@ export function FormBlockSection({
   _key,
   _docId,
   background = "cream",
+  fillScreen = false,
   eyebrow,
   headline,
   intro,
@@ -61,6 +63,7 @@ export function FormBlockSection({
   return (
     <FormBlock
       background={background}
+      fillScreen={fillScreen}
       eyebrow={eyebrow ?? ""}
       headline={headline ?? ""}
       intro={intro ?? ""}

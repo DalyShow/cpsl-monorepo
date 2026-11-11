@@ -10,7 +10,7 @@ import CodeBlock from "@/components/CodeBlock"
 import { generateJSX } from "@/components/docs/generate-code"
 import type { Control, ControlsState, PropDoc } from "@/components/docs/types"
 
-const BACKGROUNDS = ["cream", "white", "surface", "navy", "gold"] as const
+const BACKGROUNDS = ["cream", "white", "surface", "navy", "gold", "none"] as const
 
 const CONTROLS: Control[] = [
   {
@@ -20,6 +20,13 @@ const CONTROLS: Control[] = [
     options: BACKGROUNDS,
     default: "cream",
     description: "Surface tone — also drives field and text contrast.",
+  },
+  {
+    type:    "switch",
+    prop:    "fillScreen",
+    label:   "Fill Screen",
+    default: false,
+    description: "Fill the viewport below nav + ticker and centre the form vertically.",
   },
   { type: "text",     prop: "eyebrow",        label: "Eyebrow",         default: "Get in touch" },
   { type: "text",     prop: "headline",       label: "Headline",        default: "CONTACT THE LEAGUE" },
@@ -35,7 +42,8 @@ const CONTROLS: Control[] = [
 ]
 
 const PROP_DOCS: PropDoc[] = [
-  { name: "background",     type: '"cream" | "white" | "surface" | "navy" | "gold"', default: '"cream"', description: "Surface tone. Drives text, field and focus colours." },
+  { name: "background",     type: '"cream" | "white" | "surface" | "navy" | "gold" | "none"', default: '"cream"', description: "Surface tone. Drives text, field and focus colours. `none` is transparent and sits on the (dark) site background." },
+  { name: "fillScreen",     type: "boolean",     default: "false", description: "Section is at least the viewport height minus nav + ticker (147px), with the form centred vertically." },
   { name: "eyebrow",        type: "string",      default: '"Get in touch"', description: "Small uppercase label above the headline. Empty string hides it." },
   { name: "headline",       type: "string",      default: '"CONTACT THE LEAGUE"', description: "Section headline in Barlow Condensed." },
   { name: "intro",          type: "string",      default: "—", description: "Optional paragraph below the headline." },
@@ -82,10 +90,11 @@ export default function FormDocs() {
       <div className="px-12 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6 mb-10">
           <div className="flex flex-col gap-6">
-            <PreviewPane label="Live Preview" canvas={values.background === "navy" ? "navy" : "surface"}>
+            <PreviewPane label="Live Preview" canvas={values.background === "navy" || values.background === "none" ? "navy" : "surface"}>
               <FormBlock
                 key={instance}
                 background={values.background as FormBlockBackground}
+                fillScreen={values.fillScreen as boolean}
                 eyebrow={values.eyebrow as string}
                 headline={values.headline as string}
                 intro={values.intro as string}

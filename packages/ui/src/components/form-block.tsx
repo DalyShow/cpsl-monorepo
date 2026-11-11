@@ -4,7 +4,7 @@ import * as React from "react"
 import { startTransition, useActionState, useId } from "react"
 import { ArrowPillButton } from "./arrow-pill-button"
 
-export type FormBlockBackground = "white" | "cream" | "surface" | "navy" | "gold"
+export type FormBlockBackground = "white" | "cream" | "surface" | "navy" | "gold" | "none"
 export type FormFieldType = "text" | "email" | "tel" | "textarea" | "select" | "checkbox"
 
 export interface FormField {
@@ -38,7 +38,11 @@ export interface FormBlockProps {
   submitLabel?:    string
   successTitle?:   string
   successMessage?: string
+  /** `none` = transparent, sits on the site background (light text). */
   background?:     FormBlockBackground
+  /** Fill the viewport below the nav + logo ticker and centre the form
+   *  vertically. Content taller than the screen just grows the section. */
+  fillScreen?:     boolean
   /** Identifies this form to the server action (sent as hidden `_formKey`). */
   formKey?:        string
   /** Server action that delivers the submission. When omitted (docs preview)
@@ -63,11 +67,12 @@ const outerBgMap: Record<FormBlockBackground, string> = {
   surface: "#F4F6FA",
   navy:    "#091628",
   gold:    "#C9A74C",
+  none:    "transparent",
 }
 
 type Tone = "dark" | "light"
 const toneMap: Record<FormBlockBackground, Tone> = {
-  white: "dark", cream: "dark", surface: "dark", navy: "light", gold: "dark",
+  white: "dark", cream: "dark", surface: "dark", navy: "light", gold: "dark", none: "light",
 }
 
 const palette: Record<Tone, {
@@ -110,6 +115,7 @@ export function FormBlock({
   successTitle   = "Message sent",
   successMessage = "Thanks — we've got it and will be in touch soon.",
   background     = "cream",
+  fillScreen     = false,
   formKey,
   action,
 }: FormBlockProps) {
@@ -142,14 +148,30 @@ export function FormBlock({
     background:            outerBgMap[background],
     // 30px top matches the site gutter rule: the LogoTicker has 0 bottom
     // padding and relies on the next module's 30px top for equal spacing.
-    padding:               "30px clamp(20px, 5vw, 30px) clamp(56px, 8vw, 88px)",
+    // Centred mode uses equal top/bottom so the form sits truly mid-screen.
+    padding: fillScreen
+      ? "30px clamp(20px, 5vw, 30px)"
+      : "30px clamp(20px, 5vw, 30px) clamp(56px, 8vw, 88px)",
   } as React.CSSProperties
 
   return (
-    <section style={cssVars}>
+    <section style={cssVars} className={fillScreen ? `${id}--fill` : undefined}>
       <style>{`
         /* Container queries: the form reflows by its own width, so it also
            stacks correctly when dropped into a narrow column or preview. */
+        /* Fill the screen under the fixed nav (80px) + logo ticker (67px)
+           and centre the form vertically. svh so mobile browser chrome
+           doesn't push the form off-centre. */
+        .${id}--fill {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-height: calc(100vh - 147px);
+        }
+        @supports (height: 100svh) {
+          .${id}--fill { min-height: calc(100svh - 147px); }
+        }
+        .${id}--fill .${id}__wrap { width: 100%; }
         .${id}__wrap { max-width: 720px; margin: 0 auto; container-type: inline-size; }
         .${id}__header { margin-bottom: clamp(28px, 5vw, 48px); }
         .${id}__eyebrow {
