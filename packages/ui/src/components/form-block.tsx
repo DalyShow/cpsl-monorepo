@@ -140,7 +140,9 @@ export function FormBlock({
     "--form-focus":        c.focus,
     "--form-error":        c.error,
     background:            outerBgMap[background],
-    padding:               "clamp(28px, 4vw, 48px) clamp(20px, 5vw, 30px) clamp(56px, 8vw, 88px)",
+    // 30px top matches the site gutter rule: the LogoTicker has 0 bottom
+    // padding and relies on the next module's 30px top for equal spacing.
+    padding:               "30px clamp(20px, 5vw, 30px) clamp(56px, 8vw, 88px)",
   } as React.CSSProperties
 
   return (
