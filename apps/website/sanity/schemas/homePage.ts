@@ -23,6 +23,7 @@ export const homePage = defineType({
         { type: "promoGridBlock" },
         { type: "dualPanelBlock" },
         { type: "faqAccordionBlock" },
+        { type: "formBlock" },
         { type: "heroBentoBlock" },
       ],
     }),

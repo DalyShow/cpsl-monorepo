@@ -87,6 +87,7 @@ export default async function DynamicPage({
           },
           sections[]{
             ...,
+            "_docId": ^._id,
             backgroundImage{ ..., asset->{ url } },
             backgroundVideo{ ..., asset->{ url } },
             backgroundImages[]{ ..., asset->{ url } },

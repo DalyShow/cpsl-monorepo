@@ -59,6 +59,7 @@ const components: NavItem[] = [
       { label: "Content Section: Centered", href: "/modules/content-section-centered" },
       { label: "Matchday Block",           href: "/modules/matchday-block" },
       { label: "FAQ Accordion",            href: "/modules/faq-accordion", status: "new" },
+      { label: "Form",                     href: "/modules/form", status: "new" },
       { label: "League Calendar",          href: "/modules/league-calendar", status: "new" },
       { label: "Alert Bar",                href: "/modules/alert-bar", status: "new" },
     ],

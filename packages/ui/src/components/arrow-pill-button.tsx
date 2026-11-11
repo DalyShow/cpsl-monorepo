@@ -26,6 +26,11 @@ export interface ArrowPillButtonProps {
   icon?:     React.ReactNode;
   onClick?:  React.MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
   className?: string;
+  /** Button type when rendered as `<button>` (no `href`). Default `"button"`;
+   *  pass `"submit"` to use the pill as a form's submit control. */
+  type?:     "button" | "submit";
+  /** Disable the `<button>` (e.g. while a form is submitting). Ignored for links. */
+  disabled?: boolean;
   /** ARIA label override. Falls back to the visible children text. */
   "aria-label"?: string;
 }
@@ -95,6 +100,8 @@ export function ArrowPillButton({
   icon     = ARROW_ICON,
   onClick,
   className,
+  type     = "button",
+  disabled,
   ...rest
 }: ArrowPillButtonProps) {
   const s = sizeMap[size];
@@ -185,8 +192,10 @@ export function ArrowPillButton({
 
   return (
     <button
-      type="button"
-      style={style}
+      type={type}
+      disabled={disabled}
+      aria-disabled={disabled || undefined}
+      style={disabled ? { ...style, opacity: 0.55, cursor: "not-allowed" } : style}
       onClick={onClick as React.MouseEventHandler<HTMLButtonElement>}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

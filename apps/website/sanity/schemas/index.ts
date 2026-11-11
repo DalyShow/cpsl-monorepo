@@ -28,6 +28,8 @@ import { dualPanelBlock }      from "./blocks/dualPanelBlock";
 import { dualPanelItem }       from "./blocks/dualPanelItem";
 import { faqAccordionBlock }   from "./blocks/faqAccordionBlock";
 import { faqItem }             from "./blocks/faqItem";
+import { formBlock }           from "./blocks/formBlock";
+import { formField }           from "./blocks/formField";
 import {
   weatherGuidelinesBlock,
   weatherGuidelineRow,
@@ -74,6 +76,8 @@ export const schemaTypes = [
   dualPanelItem,
   faqAccordionBlock,
   faqItem,
+  formBlock,
+  formField,
   weatherGuidelinesBlock,
   weatherGuidelineRow,
   penaltyMatrixBlock,

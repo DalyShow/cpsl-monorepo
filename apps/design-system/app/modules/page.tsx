@@ -24,6 +24,7 @@ const MODULES: ModuleCard[] = [
   { slug: "content-section-centered", title: "Content Section: Centered", description: "Full-width centered editorial section." },
   { slug: "matchday-block",           title: "Matchday Block",            description: "Conference-scoped matchday view with live indicators." },
   { slug: "faq-accordion",            title: "FAQ Accordion",             description: "Question/answer accordion with five background variants.", isNew: true },
+  { slug: "form",                     title: "Form",                      description: "Editor-built form; submissions emailed via Resend.", isNew: true },
 ]
 
 export default function ModulesIndex() {

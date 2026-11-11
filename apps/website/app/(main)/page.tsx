@@ -13,6 +13,7 @@ export default async function Home() {
     `*[_type == "homePage"][0]{
       sections[]{
         ...,
+        "_docId": ^._id,
         backgroundImage{ ..., asset->{ url } },
         backgroundVideo{ ..., asset->{ url } },
         backgroundImages[]{ ..., asset->{ url } },

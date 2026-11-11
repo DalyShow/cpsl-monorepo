@@ -17,6 +17,7 @@ import { FAQAccordionBlock } from "./FAQAccordionBlock";
 import { HeroBentoBlock } from "./HeroBentoBlock";
 import { WeatherGuidelinesBlock } from "./WeatherGuidelinesBlock";
 import { PenaltyMatrixBlock } from "./PenaltyMatrixBlock";
+import { FormBlockSection } from "./FormBlockSection";
 
 // Each block from Sanity has _type, _key, and its own fields
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -40,6 +41,8 @@ export const NO_REVEAL = new Set([
   "penaltyMatrixBlock",
   "alertBarBlock",
   "contentSectionBlock",
+  // Interactive — fields should be usable immediately, not mid-wipe.
+  "formBlock",
 ]);
 
 function renderInner(block: Block, isPrimary: boolean) {
@@ -115,6 +118,10 @@ function renderInner(block: Block, isPrimary: boolean) {
     case "penaltyMatrixBlock":
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return <PenaltyMatrixBlock {...(block as any)} />;
+
+    case "formBlock":
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return <FormBlockSection {...(block as any)} />;
 
     default:
       // Unknown block type — log in dev, render nothing in prod

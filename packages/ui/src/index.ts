@@ -68,6 +68,16 @@ export type {
 export { ScrollReveal } from "./components/scroll-reveal";
 export type { ScrollRevealProps } from "./components/scroll-reveal";
 
+export { FormBlock, FORM_HONEYPOT_NAME } from "./components/form-block";
+export type {
+  FormBlockProps,
+  FormBlockBackground,
+  FormBlockState,
+  FormBlockAction,
+  FormField,
+  FormFieldType,
+} from "./components/form-block";
+
 export { AlertBar } from "./components/alert-bar";
 export type { AlertBarProps, AlertBarTone } from "./components/alert-bar";
 
