@@ -148,7 +148,7 @@ export function FormBlock({
       <style>{`
         /* Container queries: the form reflows by its own width, so it also
            stacks correctly when dropped into a narrow column or preview. */
-        .${id}__wrap { max-width: 980px; margin: 0 auto; container-type: inline-size; }
+        .${id}__wrap { max-width: 720px; margin: 0 auto; container-type: inline-size; }
         .${id}__header { margin-bottom: clamp(28px, 5vw, 48px); }
         .${id}__eyebrow {
           color: #E74552;

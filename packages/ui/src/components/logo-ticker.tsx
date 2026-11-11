@@ -33,30 +33,35 @@ export function LogoTicker({
   const items = (logos ?? []).filter((l) => !!l?.url);
 
   const viewportRef = useRef<HTMLDivElement>(null);
-  const [shouldScroll, setShouldScroll] = useState(false);
+  // Always scroll at a fixed 30 px gap. On screens wider than one set of
+  // logos, repeat the set enough times that the track never runs out —
+  // previously the row stopped scrolling and spread logos edge-to-edge
+  // with oversized gaps on wide monitors.
+  const [copies, setCopies] = useState(2);
+  const shouldScroll = items.length > 0;
+  const setWidth = items.length * (TILE_SIZE + GAP);
 
   useEffect(() => {
     if (items.length === 0) return;
     const vp = viewportRef.current;
     if (!vp) return;
 
-    const contentWidth =
-      items.length * TILE_SIZE + Math.max(0, items.length - 1) * GAP;
-
     const check = () => {
-      setShouldScroll(contentWidth > vp.clientWidth);
+      // The track slides left by one set; it must still cover the
+      // viewport at the end of each loop, so we need ceil(vp / set) + 1.
+      setCopies(Math.max(2, Math.ceil(vp.clientWidth / setWidth) + 1));
     };
     check();
 
     const ro = new ResizeObserver(check);
     ro.observe(vp);
     return () => ro.disconnect();
-  }, [items.length]);
+  }, [items.length, setWidth]);
 
   if (items.length === 0) return null;
 
-  const rendered = shouldScroll ? [...items, ...items] : items;
-  const repeatOffset = `${items.length * TILE_SIZE + items.length * GAP}px`;
+  const rendered = Array.from({ length: copies }, () => items).flat();
+  const repeatOffset = `${setWidth}px`;
 
   const fadeColor =
     !sectionBackground || sectionBackground === "transparent"
@@ -110,24 +115,19 @@ export function LogoTicker({
             style={{
               display: "flex",
               flexDirection: "row",
-              // When the logos don't fill the viewport yet, spread
-              // them edge-to-edge (no fixed gap) so the row feels
-              // deliberately sized to the container. Once there are
-              // enough to overflow, fall back to a fixed gap and
-              // marquee scroll.
-              justifyContent: shouldScroll ? "flex-start" : "space-between",
-              gap: shouldScroll ? GAP : 0,
-              width: shouldScroll ? "max-content" : "100%",
-              animationName: shouldScroll ? "cpsl-ticker-scroll" : "none",
-              animationDuration: shouldScroll ? `${durationSeconds}s` : undefined,
-              animationTimingFunction: shouldScroll ? "linear" : undefined,
-              animationIterationCount: shouldScroll ? "infinite" : undefined,
+              justifyContent: "flex-start",
+              gap: GAP,
+              width: "max-content",
+              animationName: "cpsl-ticker-scroll",
+              animationDuration: `${durationSeconds}s`,
+              animationTimingFunction: "linear",
+              animationIterationCount: "infinite",
               animationDirection: reverse ? "reverse" : "normal",
               ["--cpsl-ticker-repeat" as string]: repeatOffset,
             }}
           >
             {rendered.map((logo, i) => {
-              const isClone = shouldScroll && i >= items.length;
+              const isClone = i >= items.length;
               return (
                 <div
                   key={`${logo.key ?? i}-${i}`}
