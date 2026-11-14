@@ -12,6 +12,13 @@ export const topNavLink = defineType({
       validation: (R) => R.required(),
     }),
     defineField({
+      name: "highlight",
+      title: "Highlight in gold",
+      type: "boolean",
+      initialValue: false,
+      description: "Shows this item in gold so it stands out from the rest of the nav (e.g. Shop).",
+    }),
+    defineField({
       name: "href",
       title: "Link",
       type: "string",

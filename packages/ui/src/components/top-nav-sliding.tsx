@@ -30,6 +30,16 @@ function isFlyoutItem(item: TopNavItem): item is TopNavFlyoutItem {
   return "flyout" in item && !!item.flyout;
 }
 
+/** Absolute http(s) links leave the site, so they open in a new tab. */
+function externalProps(href?: string) {
+  return href && /^https?:\/\//i.test(href)
+    ? { target: "_blank", rel: "noopener noreferrer" }
+    : {};
+}
+
+const GOLD = "#D4B949";
+const GOLD_HOVER = "#E6CD6A";
+
 const PANEL_W = { sm: 288, md: 448, lg: 576 } as const;
 const CLOSE_DELAY = 180;
 const EDGE_GUTTER = 16;
@@ -38,6 +48,7 @@ function FlyoutCard({ item, onNavigate }: { item: FlyoutItem; onNavigate: () => 
   return (
     <a
       href={item.href ?? "#"}
+      {...externalProps(item.href)}
       role="menuitem"
       className="group relative flex gap-4 rounded-xl p-3.5 transition-colors hover:bg-[rgba(201,167,76,0.06)]"
       style={{ textDecoration: "none" }}
@@ -301,7 +312,9 @@ export function TopNavSliding({
                 aria-haspopup="true"
                 className="inline-flex items-center gap-1.5 px-4 py-4 transition-colors"
                 style={{
-                  color: active === idx ? "#C9A74C" : "#F4EFE6",
+                  color: item.highlight
+                    ? active === idx ? GOLD_HOVER : GOLD
+                    : active === idx ? "#C9A74C" : "#F4EFE6",
                   fontFamily: "'Barlow Condensed', sans-serif",
                   fontWeight: 600,
                   fontSize: "14px",
@@ -325,7 +338,9 @@ export function TopNavSliding({
                     width: 16,
                     height: 16,
                     transform: active === idx ? "rotate(180deg)" : "rotate(0deg)",
-                    color: active === idx ? "#C9A74C" : "#7A9BAA",
+                    color: item.highlight
+                      ? active === idx ? GOLD_HOVER : GOLD
+                      : active === idx ? "#C9A74C" : "#7A9BAA",
                   }}
                 >
                   <path
@@ -342,7 +357,12 @@ export function TopNavSliding({
                   <Link
                     key={item.label}
                     href={item.href || "#"}
-                    className="px-4 py-4 transition-colors text-[#F4EFE6] hover:text-[#7A9BAA]"
+                    {...externalProps(item.href)}
+                    className={
+                      item.highlight
+                        ? "px-4 py-4 transition-colors text-[#D4B949] hover:text-[#E6CD6A]"
+                        : "px-4 py-4 transition-colors text-[#F4EFE6] hover:text-[#7A9BAA]"
+                    }
                     style={{
                       fontFamily: "'Barlow Condensed', sans-serif",
                       fontWeight: 600,
@@ -531,7 +551,7 @@ export function TopNavSliding({
                         background: "transparent",
                         border: "none",
                         cursor: "pointer",
-                        color: isExpanded ? "#D4B949" : "#F4EFE6",
+                        color: isExpanded || item.highlight ? GOLD : "#F4EFE6",
                         fontFamily: "'Barlow Condensed', sans-serif",
                         fontWeight: 700,
                         fontSize: "22px",
@@ -570,6 +590,7 @@ export function TopNavSliding({
                           <Link
                             key={sub.label}
                             href={sub.href || "#"}
+                            {...externalProps(sub.href)}
                             onClick={() => setMenuOpen(false)}
                             className="py-3"
                             style={{
@@ -594,10 +615,11 @@ export function TopNavSliding({
                 <Link
                   key={item.label}
                   href={item.href || "#"}
+                  {...externalProps(item.href)}
                   onClick={() => setMenuOpen(false)}
                   className="block py-5"
                   style={{
-                    color: isActiveHref(pathname, item.href || "") ? "#D4B949" : "#F4EFE6",
+                    color: item.highlight || isActiveHref(pathname, item.href || "") ? GOLD : "#F4EFE6",
                     fontFamily: "'Barlow Condensed', sans-serif",
                     fontWeight: 700,
                     fontSize: "22px",

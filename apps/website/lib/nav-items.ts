@@ -8,6 +8,7 @@ export const NAV_ITEMS_GROQ = `
   navItems[]{
     _type,
     label,
+    highlight,
     // Simple link
     _type == "topNavLink" => { href },
     // Flyout
@@ -32,11 +33,13 @@ type RawNavItem =
   | {
       _type: "topNavLink";
       label: string;
+      highlight?: boolean;
       href?: string;
     }
   | {
       _type: "topNavFlyout";
       label: string;
+      highlight?: boolean;
       size?: "sm" | "md" | "lg";
       items?: Array<{
         label: string;
@@ -75,7 +78,7 @@ export function resolveTopNavItems(
     if (!item?.label) continue;
 
     if (item._type === "topNavLink") {
-      resolved.push({ label: item.label, href: item.href ?? "#" });
+      resolved.push({ label: item.label, href: item.href ?? "#", highlight: !!item.highlight });
       continue;
     }
 
@@ -101,6 +104,7 @@ export function resolveTopNavItems(
 
       resolved.push({
         label: item.label,
+        highlight: !!item.highlight,
         flyout: {
           size: item.size ?? "md",
           items: flyoutItems,

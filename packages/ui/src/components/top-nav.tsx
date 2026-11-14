@@ -22,10 +22,14 @@ function isActiveHref(pathname: string, href: string): boolean {
 export interface TopNavLinkItem {
   label: string;
   href: string;
+  /** Render the label in gold so it stands out from the rest of the nav. */
+  highlight?: boolean;
 }
 
 export interface TopNavFlyoutItem {
   label: string;
+  /** Render the trigger in gold so it stands out from the rest of the nav. */
+  highlight?: boolean;
   flyout: {
     size?: "sm" | "md" | "lg";
     items: FlyoutItem[];
